@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101819">
+  <meta name="description" content="A personal quiz game for number bases 2–12, practical electronics, electrical engineering, and international fire safety.">
+  <title>Radix — Quiz Lab</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23d9fc72'/%3E%3Ctext x='7' y='24' font-family='monospace' font-size='25' font-weight='bold' fill='%23101819'%3E2%3C/text%3E%3C/svg%3E">
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root{--background:#101819;--surface:#182224;--surface-raised:#1e2a2c;--border:#344144;--text:#f1f5ee;--muted:#a7b4b5;--accent:#d9fc72;--positive:#c5ef92;--negative:#ffb09f;font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var(--background);font-synthesis:none;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background-image:radial-gradient(ellipse at 20% 0%,#22313666,transparent 50%)}button,input,select{font:inherit}button,a,input,select,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:5px}button{border:0}a{color:inherit}p{line-height:1.65}h1,h2{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:500;letter-spacing:-.045em}h1:focus,h2:focus,main:focus{outline:none}[hidden]{display:none!important}.site-shell{max-width:1152px;padding:0 44px;margin:0 auto}.site-header{height:105px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:24px}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:31px;font-weight:700;letter-spacing:-.06em}.brand-mark{width:42px;height:42px;display:flex;justify-content:center;align-items:center;background:#d9fc72;color:#142017;border-radius:9px;font-family:monospace;font-size:27px;letter-spacing:-.15em}.brand-mark>span{font-size:18px}.brand-caption{display:block;font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.2em;line-height:1;margin-top:2px;color:var(--muted)}.header-caption{font-size:14px;color:var(--muted);margin-left:auto}.repo-link{text-decoration:none;font-size:14px;border-left:1px solid var(--border);padding-left:24px;color:var(--text)}.repo-link:hover{color:var(--accent)}main{min-height:calc(100vh - 199px)}.setup{padding:42px 0 34px}.eyebrow{font-size:12px;letter-spacing:.16em;font-weight:600;color:var(--accent);margin:0 0 12px}.intro h1{font-size:44px;line-height:1.15;margin:0 0 12px}.intro>p:last-child{color:var(--muted);margin:0 0 27px;font-size:16px}.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.category-card{text-align:left;min-height:216px;padding:18px 18px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;display:flex;flex-direction:column;position:relative;color:var(--text);transition:border-color .15s,background .15s,transform .15s}.category-card:hover{border-color:var(--card-accent);transform:translateY(-2px)}.category-card.is-selected{border-color:var(--card-accent);background:linear-gradient(140deg,color-mix(in srgb,var(--card-accent) 8%,var(--surface)),var(--surface))}.category-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}.category-index{font-family:'Space Grotesk',sans-serif;font-size:16px;color:var(--card-accent);letter-spacing:.06em}.selection-dot{border:1px solid var(--border);border-radius:100%;width:21px;height:21px;font-size:13px;display:grid;place-items:center}.is-selected .selection-dot{background:var(--card-accent);border-color:var(--card-accent);color:#121b16}.category-name{font-family:'Space Grotesk',sans-serif;font-size:20px;letter-spacing:-.035em;line-height:1.2;min-height:48px;font-weight:500}.category-description{font-size:14px;line-height:1.5;color:var(--muted);margin-top:4px}.category-foot{font-family:monospace;font-size:10px;line-height:1.4;letter-spacing:.015em;margin-top:auto;padding-top:20px;color:var(--card-accent)}.mixed-toggle{margin:16px 0 22px;display:flex;gap:10px;align-items:center;background:transparent;color:var(--muted);font-size:14px;width:100%;padding:0 3px;text-align:left}.mixed-toggle>span:first-child{font-size:20px;line-height:1;color:var(--accent)}.mixed-toggle:hover,.mixed-toggle.active{color:var(--text)}.mixed-check{margin-left:auto;color:var(--accent);font-size:18px}.setup-panel{border:1px solid var(--border);border-radius:12px;background:var(--surface);padding:22px 24px}.panel-label{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:19px}.panel-label .eyebrow{color:var(--muted);margin:0;font-size:11px}.panel-note{font-size:13px;color:var(--muted)}.controls-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px}.controls-row label{display:flex;flex-direction:column;gap:9px;font-size:14px;color:var(--muted)}select{appearance:auto;display:block;width:100%;height:44px;padding:0 9px;background:var(--background);color:var(--text);border:1px solid var(--border);border-radius:7px;font-size:14px;cursor:pointer}select:hover{border-color:#79898c}.scope-note{font-size:13px;color:var(--muted);margin:15px 0 19px;line-height:1.5}.scope-note strong{color:var(--text);font-weight:500}.start-row{border-top:1px solid var(--border);padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:16px}.start-description{font-size:16px;position:relative;padding-left:17px;font-weight:500}.round-marker{height:6px;width:6px;background:var(--accent);position:absolute;left:0;top:7px;border-radius:50%}.start-description small{display:block;font-size:13px;color:var(--muted);font-weight:400;margin-top:5px}.primary-button{background:var(--accent);color:#142018;border-radius:8px;padding:14px 22px;min-height:48px;font-size:15px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:20px;transition:filter .15s,transform .15s}.primary-button:hover{filter:brightness(1.06);transform:translateY(-1px)}.primary-button:disabled{opacity:.45;transform:none}.primary-button>span{font-size:11px}.primary-button kbd{color:inherit;border:1px solid #14201844;background:#1420180c}.home-foot{display:flex;gap:12px;justify-content:space-between;margin-top:20px;font-size:12px;line-height:1.5;color:var(--muted)}.home-foot strong{color:var(--text);font-weight:500}kbd{font-family:inherit;font-size:11px;padding:2px 5px;border:1px solid var(--border);background:#ffffff05;border-radius:4px;margin-left:3px}.site-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:75px;border-top:1px solid var(--border);color:var(--muted);font-size:12px}.footer-slash{margin:0 10px;color:#607376}.quiz{max-width:850px;margin:auto;padding:34px 0 40px}.round-top{display:flex;justify-content:space-between;align-items:center;gap:15px}.text-button{background:transparent;color:var(--muted);padding:10px 0;font-size:14px;text-underline-offset:4px}.text-button:hover{color:var(--text);text-decoration:underline}.text-button:disabled{opacity:.45;text-decoration:none}.round-position{font-size:12px;letter-spacing:.12em;color:var(--muted)}.round-position strong{font-size:16px;color:var(--text);margin-left:7px;font-weight:500}.round-position>span{margin-left:6px;font-size:14px;letter-spacing:0}.round-score{font-family:'Space Grotesk',sans-serif;font-size:20px}.round-score .muted{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.08em}.progress-track,.endless-rule{height:3px;background:var(--border);margin-top:16px;border-radius:4px;overflow:hidden}.progress-track>div{background:var(--accent);height:100%;transition:width .2s}.question-meta{display:flex;align-items:center;gap:12px;margin:28px 0 16px;color:var(--muted);font-size:13px;flex-wrap:wrap}.topic-chip{background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);padding:5px 10px;border-radius:5px;font-weight:500}.jurisdiction{background:#ffffff05;border:1px solid var(--border);border-radius:5px;padding:5px 8px;color:var(--text);font-size:12px}.streak{margin-left:auto;font-size:13px;color:var(--accent)}.question-card{padding:32px;border-radius:14px;background:var(--surface);border:1px solid var(--border)}.question-title{font-size:26px;line-height:1.42;letter-spacing:-.025em;margin:0 0 28px;max-width:750px}.number-display{font-family:'Space Grotesk',monospace;text-align:center;font-size:clamp(24px,4.3vw,44px);letter-spacing:.02em;line-height:1.5;color:var(--accent);padding:28px 15px;margin-bottom:26px;background:linear-gradient(0deg,#101819dd,#101819dd),repeating-linear-gradient(90deg,transparent 0 23px,#526b7040 24px);border:1px solid var(--border);border-radius:9px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}.givens{display:flex;gap:0;padding:18px 20px;border:1px solid var(--border);background:var(--background);border-radius:9px;margin-bottom:25px;flex-wrap:wrap;row-gap:14px}.givens>div{flex:1;min-width:125px;padding:0 16px;border-right:1px solid var(--border)}.givens>div:first-child{padding-left:0}.givens>div:last-child{border:0}.givens span{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.givens strong{font-family:'Space Grotesk',sans-serif;font-size:22px;color:var(--accent);font-weight:500}.answer-choices{padding:0;margin:0;display:grid;gap:10px;border:0}.answer-choice{display:flex;align-items:center;gap:14px;position:relative;border:1px solid var(--border);background:#10181940;padding:14px 16px;min-height:59px;border-radius:8px;font-size:16px;line-height:1.5;cursor:pointer;transition:background .15s,border-color .15s}.answer-choice:hover{background:var(--surface-raised)}.answer-choice:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:3px}.answer-choice input{position:absolute;opacity:0;width:1px;height:1px}.choice-key{color:var(--muted);font-size:13px;width:24px;height:27px;display:grid;place-items:center;border:1px solid var(--border);border-radius:4px;flex-shrink:0;font-family:monospace}.answer-choice.selected{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--surface))}.answer-choice.selected .choice-key{border-color:var(--accent);color:var(--accent)}.choice-status{margin-left:auto;font-size:20px}.answer-choice.correct{border-color:var(--positive);background:#b8e7860c}.answer-choice.correct .choice-status{color:var(--positive)}.answer-choice.incorrect{border-color:var(--negative);background:#ff95800b}.answer-choice.incorrect .choice-status{color:var(--negative)}.answer-choice:has(input:disabled){cursor:default}.input-area>label{font-size:14px;color:var(--text);display:block;margin-bottom:10px}.answer-input-wrap{display:flex;align-items:center;border:1px solid #5c7175;border-radius:8px;background:var(--background);min-height:66px}.answer-input-wrap:focus-within{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}.answer-input-wrap input{background:transparent;border:0;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:27px;letter-spacing:.02em;width:100%;min-width:0;padding:15px 18px;outline:none}.answer-input-wrap input::placeholder{font-family:'DM Sans',sans-serif;font-size:17px;letter-spacing:0;color:#7e9194}.answer-input-wrap input:focus-visible{outline:none}.input-unit{font-size:14px;white-space:nowrap;color:var(--accent);padding:0 18px}.input-help{font-size:13px;color:var(--muted);margin:10px 0 0;line-height:1.6}.input-error{margin:10px 0 0;color:var(--negative);font-size:14px;min-height:0}.input-error:empty{display:none}.answer-actions{display:flex;align-items:center;justify-content:space-between;margin-top:24px;gap:16px}.answer-actions>div{display:flex;gap:22px}.hint-panel{padding:16px 18px;margin-top:20px;border-left:2px solid var(--accent);background:var(--background);border-radius:0 6px 6px 0}.hint-panel strong{font-size:14px;color:var(--accent)}.hint-panel p{font-size:15px;line-height:1.65;margin:6px 0 0;color:var(--text)}.feedback{margin-top:24px;padding:22px;border:1px solid var(--border);background:var(--background);border-radius:9px;animation:appear .18s ease-out}.feedback-heading{display:flex;justify-content:space-between;gap:12px;align-items:center}.feedback-heading strong{font-family:'Space Grotesk',sans-serif;font-size:23px;font-weight:500;letter-spacing:-.03em}.feedback-heading>span{font-size:13px;color:var(--muted)}.feedback-correct .feedback-heading strong{color:var(--positive)}.feedback-incorrect .feedback-heading strong{color:var(--negative)}.explanation{margin:12px 0 0;color:#ccd6d6;font-size:16px;line-height:1.7}.correct-answer{margin:12px 0 0;font-size:16px}.source-link{font-size:12px;line-height:1.5;display:block;margin-top:12px;color:var(--muted);text-underline-offset:4px;overflow-wrap:anywhere}.source-link:hover{color:var(--accent)}.next-button{margin-top:22px;min-width:180px}.answer-input-wrap.correct{border-color:var(--positive)}.answer-input-wrap.incorrect{border-color:var(--negative)}.quiz-foot{font-size:12px;color:var(--muted);line-height:1.6;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin:19px 2px 0}.results{max-width:850px;margin:auto;padding:46px 0 42px}.results>h1{font-size:39px;line-height:1.2;margin:10px 0 28px}.result-score{display:flex;align-items:center;gap:30px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:24px 0}.result-score>strong{font-family:'Space Grotesk',sans-serif;font-size:88px;letter-spacing:-.065em;font-weight:500;color:var(--accent);line-height:1}.result-score>strong>span{font-size:35px;margin-left:3px}.result-score>div{font-size:21px}.result-score small{display:block;color:var(--muted);font-size:14px;margin-top:8px}.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:26px 0}.result-stats>div{border:1px solid var(--border);background:var(--surface);padding:20px 22px;border-radius:8px}.result-stats span{display:block;color:var(--muted);font-size:13px;margin-bottom:12px}.result-stats strong{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:500}.result-stats small{font-family:'DM Sans',sans-serif;font-size:13px;color:var(--muted);font-weight:400}.result-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px}.secondary-button{border:1px solid var(--border);color:var(--text);background:var(--surface);border-radius:8px;font-size:14px;font-weight:500;min-height:48px;padding:13px 19px}.secondary-button:hover{border-color:var(--accent)}.result-actions .text-button{margin-left:8px}.review-area{margin-top:38px}.review-area h2{font-size:23px;letter-spacing:-.03em;margin:0 0 17px}.review-area h2>span{font-family:'DM Sans',sans-serif;font-size:12px;color:var(--muted);padding:3px 8px;border:1px solid var(--border);border-radius:4px;vertical-align:middle;margin-left:6px}.review-item{border-top:1px solid var(--border)}.review-item:last-child{border-bottom:1px solid var(--border)}.review-item summary{display:flex;align-items:center;gap:15px;cursor:pointer;font-size:15px;line-height:1.5;padding:18px 4px;list-style:none}.review-item summary::-webkit-details-marker{display:none}.review-number{font-family:monospace;font-size:13px;color:var(--muted)}.review-plus{margin-left:auto;color:var(--accent);font-size:22px;flex-shrink:0}.review-item[open] .review-plus{transform:rotate(45deg)}.review-content{padding:0 18px 18px 36px;font-size:15px;line-height:1.7}.review-content p{margin:12px 0 0}.review-content .jurisdiction{display:inline-block}.muted{color:var(--muted)}.perfect-note{padding:23px 25px;display:flex;align-items:center;gap:16px;border:1px solid var(--border);border-radius:8px;margin-top:32px;background:var(--surface)}.perfect-note>span{color:var(--accent);font-size:26px}.perfect-note p{font-size:15px;margin:0;color:var(--muted)}.skip-link{position:fixed;left:16px;top:-100px;padding:14px;background:var(--accent);color:#142018;border-radius:6px;z-index:20}.skip-link:focus{top:16px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;padding:0;margin:-1px}.noscript{max-width:800px;margin:30px auto;padding:20px}.home-foot kbd{font-size:10px}@keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:1000px){.controls-row:has(label:nth-child(4)){grid-template-columns:.75fr .8fr 1fr 1.65fr}.controls-row:has(label:nth-child(5)){grid-template-columns:repeat(3,1fr)}.controls-row:has(label:nth-child(5)) label:nth-child(4){grid-column:span 2}}
+@media(max-width:950px){.site-shell{padding:0 28px}.category-grid{grid-template-columns:repeat(2,1fr)}.category-card{min-height:190px}.category-name{min-height:unset}.category-top{margin-bottom:16px}.category-description{max-width:280px}.category-foot{font-size:11px}.setup{padding-top:32px}.intro h1{font-size:39px}.controls-row{grid-template-columns:repeat(2,1fr)}.header-caption{display:none}.repo-link{margin-left:auto;border:0}.home-foot{flex-wrap:wrap}.question-card{padding:27px}.quiz-foot{display:block}.quiz-foot>span{display:block;margin-top:5px}}
+@media(max-width:570px){.site-shell{padding:0 18px}.site-header{height:83px}.brand{font-size:29px}.brand-mark{width:37px;height:37px}.repo-link{padding-left:8px;font-size:13px}.setup{padding-top:28px}.intro h1{font-size:32px;line-height:1.2}.intro>p:last-child{font-size:15px;margin-bottom:22px}.category-grid{gap:10px}.category-card{padding:15px 13px;min-height:195px}.category-name{font-size:19px}.category-description{font-size:13px;line-height:1.5;margin-top:7px}.category-foot{font-size:10px;padding-top:16px}.category-top{margin-bottom:20px}.setup-panel{padding:18px 16px}.panel-label{align-items:flex-start;margin-bottom:17px}.panel-note{font-size:12px}.panel-label .eyebrow{font-size:10px}.controls-row{gap:14px 10px}.controls-row label{font-size:13px}.controls-row label:nth-child(4),.controls-row label:has(#fireScope){grid-column:1 / -1}select{font-size:14px}.start-row{align-items:stretch;flex-direction:column}.start-description{font-size:15px}.primary-button{width:100%;justify-content:center}.start-description small{font-size:12px}.scope-note{font-size:12px}.home-foot{gap:10px;font-size:11px}.site-footer{font-size:11px;align-items:flex-start;justify-content:center;flex-direction:column;padding:19px 0;gap:8px}.quiz{padding-top:22px}.round-top{gap:8px}.round-position{font-size:10px;letter-spacing:.09em}.round-score{font-size:18px}.question-meta{gap:9px;margin-top:22px;font-size:12px}.question-card{padding:22px 17px}.question-title{font-size:22px;line-height:1.4;margin-bottom:22px}.answer-choice{padding:12px 11px;gap:10px;font-size:15px;line-height:1.5}.choice-key{width:22px;height:25px}.answer-actions{align-items:stretch;flex-direction:column;gap:15px;margin-top:18px}.answer-actions>div{justify-content:space-between}.text-button{font-size:14px}.number-display{padding:22px 9px;font-size:28px;letter-spacing:0;margin-bottom:22px}.input-unit{font-size:13px;padding:0 12px}.answer-input-wrap input{font-size:25px;padding:15px 13px}.input-help{font-size:12px}.givens{padding:15px 13px;gap:12px}.givens>div{padding:0 8px;min-width:90px}.givens strong{font-size:20px}.givens span{font-size:11px}.feedback{padding:18px 15px}.feedback-heading strong{font-size:22px}.feedback-heading>span{font-size:12px}.explanation{font-size:15px}.source-link{font-size:12px}.results{padding-top:32px}.results>h1{font-size:32px}.result-score{gap:20px}.result-score>strong{font-size:74px}.result-score>div{font-size:17px}.result-score small{font-size:13px}.result-stats{gap:8px}.result-stats>div{padding:15px 10px}.result-stats span{font-size:12px;line-height:1.4;min-height:34px;margin-bottom:6px}.result-stats strong{font-size:24px}.result-stats small{display:block;font-size:11px;margin-top:4px}.result-actions>*{width:100%;text-align:center}.result-actions .text-button{margin:0}.review-item summary{font-size:14px;gap:10px}.review-content{padding-left:24px}.perfect-note{padding:18px}.review-area{margin-top:30px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+</style>
+
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to quiz</a>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="Radix home"><span class="brand-mark" aria-hidden="true">2<span>_</span></span><span>radix<span class="brand-caption">QUIZ LAB</span></span></a>
+      <span class="header-caption">A little practice. A sharper mind.</span>
+      <a class="repo-link" href="https://github.com/Nox1381/Base2-3-...12" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </header>
+    <main id="main" tabindex="-1"></main>
+    <footer class="site-footer"><span>Think it through. Then check your answer.</span><span>Built for practice <span class="footer-slash">/</span> No account needed</span></footer>
+  </div>
+  <noscript><p class="noscript">Enable JavaScript to play this quiz.</p></noscript>
+<script type="module">
+// Correct answers are always options[0] here; the engine shuffles choices for play.
+// Numeric placement guidance is labelled by jurisdiction, never presented as worldwide law.
+const SOURCES = {
+  osha: { name: 'US OSHA · 29 CFR 1910.157', url: 'https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.157' },
+  placement: { name: 'US OSHA · Placement and spacing guidance', url: 'https://www.osha.gov/etools/evacuation-plans-procedures/emergency-standards/portable-extinguishers/placement' },
+  basics: { name: 'US OSHA · Extinguisher basics', url: 'https://www.osha.gov/etools/evacuation-plans-procedures/emergency-standards/portable-extinguishers/about' },
+  usfa: { name: 'US Fire Administration · Fire extinguishers', url: 'https://www.usfa.fema.gov/prevention/home-fires/prepare-for-fire/fire-extinguishers/' },
+  uk: { name: 'UK Home Office · Offices and shops guidance', url: 'https://www.gov.uk/government/publications/fire-safety-risk-assessment-offices-and-shops/fire-safety-risk-assessment-offices-and-shops-accessible' },
+  fluke: { name: 'Fluke · Resistance measurement', url: 'https://www.fluke.com/en-us/learn/blog/digital-multimeters/how-to-measure-resistance' },
+  meter: { name: 'Fluke · 287/289 meter manual', url: 'https://assets.fluke.com/manuals/287_289_umeng0000.pdf' },
+  ti: { name: 'Texas Instruments · Op Amps for Everyone', url: 'https://e2echina.ti.com/cfs-file/__key/communityserver-discussions-components-files/42/OP-amp-for-everyone.pdf' },
+};
+
+const q = (id, category, level, topic, prompt, options, explanation, extra = {}) => ({ id, category, level, topic, prompt, options, explanation, ...extra });
+
+const QUESTIONS = [
+  q('el-led', 'electronics', 1, 'LEDs', 'You connect a bare LED directly to a 9 V battery. What should you add to control its current?', ['A correctly sized resistor in series', 'A resistor in parallel with the battery', 'A bigger battery', 'Only a capacitor across the LED'], 'A series resistor limits LED current. Use R = (supply voltage − LED forward voltage) / desired current.'),
+  q('el-buffer', 'electronics', 2, 'Guitar pedals', 'A passive guitar loses high frequencies when connected to your pedal. Which input change is most likely to help?', ['Use a high-input-impedance buffer', 'Put a 100 Ω resistor across the input', 'Increase the LED brightness', 'Connect the pickup directly to a speaker'], 'A high-impedance input reduces pickup loading. A buffer also provides a lower-impedance signal to the next stage.'),
+  q('el-gain', 'electronics', 2, 'Amplifiers', 'A guitar preamp has enough power-supply headroom. How do you increase the gain of its non-inverting op-amp stage?', ['Increase the feedback-resistor / ground-resistor ratio', 'Make both feedback resistors zero', 'Swap the supply pins', 'Disconnect all feedback'], 'The ideal gain is 1 + Rf/Rg. Real output swing, bandwidth, and stability still limit the result.', { source: 'ti' }),
+  q('el-clip', 'electronics', 2, 'Guitar pedals', 'Your pedal signal is hitting the op-amp supply limits. What will increasing its gain mainly do?', ['Increase clipping rather than clean output amplitude', 'Guarantee a proportionally larger clean signal', 'Make the power rails rise automatically', 'Remove all distortion'], 'An op-amp cannot swing beyond its available output range. More gain pushes more of the signal into saturation.', { source: 'ti' }),
+  q('el-mud', 'electronics', 2, 'Guitar pedals', 'Heavy distortion sounds muddy because low frequencies dominate the clipping stage. Which change directly addresses this?', ['Attenuate some bass before the clipping stage', 'Boost bass before clipping', 'Short the input to ground', 'Remove the volume control'], 'Pre-clipping high-pass filtering reduces the bass driving the nonlinear stage, helping higher-frequency details remain audible.'),
+  q('el-relay', 'electronics', 1, 'Motor drivers', 'A transistor switches a DC relay coil. What protects the transistor when the coil is turned off?', ['A flyback diode across the coil, reverse-biased during normal operation', 'A forward-biased diode that shorts the supply', 'A smaller base resistor alone', 'A second LED in the switch'], 'An inductive coil resists a sudden current change. A correctly oriented flyback diode provides a path for the decay current.'),
+  q('el-gpio', 'electronics', 1, 'Microcontrollers', 'A motor needs 1 A. Your microcontroller GPIO pin can supply only a few milliamps. How should you control the motor?', ['Use a suitable transistor or motor driver with the required protection', 'Connect the motor directly to the GPIO', 'Set the GPIO to input mode', 'Add only a larger capacitor to the GPIO'], 'The GPIO supplies a control signal. A power device switches the motor current; its ratings and protection must suit the motor.'),
+  q('el-ground', 'electronics', 1, 'Troubleshooting', 'Two low-voltage boards communicate over a non-isolated UART link. What reference connection do they normally need?', ['A common signal ground', 'Different ground voltages on purpose', 'Their transmit pins shorted together', 'An AC mains live connection'], 'UART voltages are measured relative to ground. Without a common reference, the receiving board may misread levels.'),
+  q('el-divider-load', 'electronics', 2, 'Power supplies', 'An unloaded resistor divider gives 5 V from 12 V. Why is it usually a poor supply for a changing-load microcontroller?', ['Its voltage changes with load current', 'It always generates unlimited current', 'It automatically regulates to exactly 5 V', 'Resistors cannot be connected to DC'], 'A divider has output resistance. A changing load changes the division ratio; use a suitable regulated supply.'),
+  q('el-decouple', 'electronics', 1, 'Troubleshooting', 'Your digital chip causes short supply-current spikes. Where should its small bypass capacitor go?', ['Very close to the chip’s power and ground pins', 'At the far end of long wires', 'Only in series with the data line', 'Across the on/off switch'], 'Short connections reduce parasitic inductance. A local capacitor helps provide transient current near the chip.'),
+  q('el-resistance', 'electronics', 1, 'Measurement', 'You want to check a resistor with a multimeter in resistance mode. What should you do first?', ['Remove circuit power and safely discharge stored energy', 'Keep the circuit powered so the reading is stronger', 'Connect the probes to mains voltage', 'Move both probes to the current sockets'], 'Resistance mode uses the meter’s own test signal. External power interferes with readings and may damage the meter.', { source: 'fluke' }),
+  q('el-current', 'electronics', 1, 'Measurement', 'You are measuring current through a low-voltage LED branch with a suitable multimeter. How is the meter connected?', ['In series with the branch, using the correct fused current input', 'In parallel across the battery in current mode', 'With both probes in the same socket', 'Only around the plastic insulation'], 'A current input is low impedance. Connecting it across a source can create a short circuit.', { source: 'meter' }),
+  q('el-voltage', 'electronics', 1, 'Measurement', 'You want to measure the voltage across a low-voltage resistor. How should the voltmeter be connected?', ['In parallel across the resistor', 'In series after removing the resistor', 'Across two unrelated grounds only', 'In current mode across the supply'], 'A voltmeter measures the potential difference between two points. Its high input resistance minimizes loading.', { source: 'meter' }),
+  q('el-floating', 'electronics', 1, 'Microcontrollers', 'A button input randomly reads HIGH and LOW when the button is released. What is the likely fix?', ['Add or enable a suitable pull-up or pull-down resistor', 'Leave the input floating', 'Raise the supply beyond the chip rating', 'Remove the ground connection'], 'A pull resistor defines the input state while the switch is open. A floating input can react to interference.'),
+  q('el-adc', 'electronics', 2, 'Microcontrollers', 'A 3.3 V microcontroller ADC input is not 5 V tolerant. Your sensor outputs up to 5 V. What is a suitable approach?', ['Scale or buffer the signal so the ADC input stays within its ratings', 'Connect it directly because both voltages are small', 'Power the microcontroller at 5 V regardless of its rating', 'Reverse the sensor polarity'], 'Design the interface around the ADC input limits, reference voltage, source impedance, and sampling requirements.'),
+  q('el-mosfet', 'electronics', 2, 'Motor drivers', 'You drive a MOSFET from a 3.3 V GPIO. Which datasheet value best indicates whether it will conduct efficiently at that drive voltage?', ['RDS(on) specified at a suitable gate-source voltage', 'Threshold voltage alone', 'Package colour', 'Maximum drain voltage alone'], 'Threshold voltage describes the onset of small current, not full enhancement. Check on-resistance at the actual gate drive.'),
+  q('el-electrolytic', 'electronics', 1, 'Components', 'You install a polarized electrolytic capacitor in a DC supply. What must you check?', ['Correct polarity and a voltage rating suitable for the circuit', 'Only whether it fits on the board', 'Whether its leads have equal length', 'That its voltage rating is below the supply'], 'Reverse bias or excessive voltage can damage a polarized capacitor. Observe markings and the operating-voltage rating.'),
+  q('el-223', 'electronics', 1, 'Components', 'A ceramic capacitor is marked 223. What is its nominal capacitance?', ['22 nF', '220 nF', '2.2 µF', '223 µF'], '223 means 22 × 10³ pF = 22,000 pF = 22 nF. A 220 nF capacitor is commonly marked 224.'),
+  q('el-coupling', 'electronics', 2, 'Audio circuits', 'Two audio stages have different DC bias voltages. What is a coupling capacitor commonly used for?', ['Pass the changing audio signal while blocking steady DC', 'Pass DC and completely block all audio', 'Generate an independent power supply', 'Guarantee unlimited low-frequency gain'], 'The capacitor and resistance seen around it form a high-pass network. Its value affects the low-frequency cutoff.'),
+  q('el-heat', 'electronics', 2, 'Power supplies', 'A linear regulator drops 12 V to 5 V at 0.5 A. Why does it get hot?', ['It dissipates roughly (12 − 5) × 0.5 = 3.5 W', 'It creates 3.5 W of free energy', 'Every regulator dissipates exactly 0 W', 'The output voltage is always 12 V'], 'A linear regulator turns much of the voltage-drop power into heat. Thermal design must handle that dissipation.'),
+  q('el-opamp-bandwidth', 'electronics', 3, 'Amplifiers', 'A conventional voltage-feedback op-amp has a 1 MHz gain-bandwidth product and closed-loop gain of 100. What bandwidth is a rough first estimate?', ['10 kHz', '100 MHz', '1 MHz at every gain', '100 Hz'], 'For a dominant-pole op-amp, bandwidth is approximately gain-bandwidth product divided by noise gain: 1 MHz / 100.', { source: 'ti' }),
+  q('el-clipping-diode', 'electronics', 2, 'Guitar pedals', 'You replace silicon clipping diodes with germanium diodes. What often changes at comparable currents?', ['The clipping threshold tends to be lower', 'The supply voltage doubles', 'All clipping disappears', 'Input impedance becomes infinite'], 'Germanium diodes often conduct at lower forward voltages. The exact clipping shape depends on current, parts, and the circuit.'),
+  q('ee-open', 'electrical', 1, 'Fault finding', 'A 12 V lamp does not light. You measure about 12 V across the open switch supplying it. What does this suggest?', ['The open switch is interrupting the circuit', 'The switch is a perfect short circuit', 'The battery has no voltage', 'The lamp must be drawing infinite current'], 'An open switch can have the supply voltage across it while preventing load current. Voltage alone does not prove current flow.'),
+  q('ee-parallel', 'electrical', 1, 'Wiring', 'Two identical 12 V lamps should each receive the full voltage of a 12 V supply. How should they be connected?', ['In parallel', 'In series', 'Both disconnected', 'Across the same terminal'], 'Parallel loads share the same supply voltage. The supply must support their combined current.'),
+  q('ee-stall', 'electrical', 2, 'Motors', 'Your motor supply is rated just above the motor’s normal running current, but startup trips it. What did you probably miss?', ['The much higher startup or stall current', 'The colour of the motor case', 'The motor’s label font', 'The idea that motors cannot run on electricity'], 'Back EMF is small at startup. The initial current can be much higher than the normal running current.'),
+  q('ee-wire', 'electrical', 1, 'Wiring', 'A low-voltage cable gets noticeably hot while supplying a load. What is the appropriate response?', ['Stop and investigate current, cable size, and connection resistance', 'Cover it with insulation to hide the heat', 'Keep using it until the insulation melts', 'Replace the fuse with a much larger one'], 'Heating follows I²R. An undersized conductor or poor connection can waste power and create a hazard.'),
+  q('ee-drop', 'electrical', 2, 'Power distribution', 'A long cable makes a 12 V device unreliable under heavy load. Which change normally reduces the cable voltage drop?', ['Use a larger conductor cross-section', 'Use a thinner conductor', 'Make the cable longer', 'Add resistance in series'], 'Larger cross-section lowers conductor resistance. At the same current, lower resistance means less voltage drop and heating.'),
+  q('ee-ac-rms', 'electrical', 2, 'AC power', 'A sinusoidal AC supply is rated 230 V RMS. Approximately what is its peak voltage?', ['325 V', '115 V', '230 V', '460 V'], 'For a sine wave, peak = RMS × √2. So 230 × 1.414 ≈ 325 V.'),
+  q('ee-transformer', 'electrical', 2, 'Power conversion', 'An ideal transformer steps 240 V AC down to 24 V AC. At the same transferred power, what happens to the secondary current?', ['It is ten times the primary current', 'It is one tenth of the primary current', 'It is always zero', 'It is unchanged'], 'In the ideal model, input and output power are equal. One tenth the voltage requires ten times the current.'),
+  q('ee-battery-series', 'electrical', 1, 'Batteries', 'In an ideal example, two matching 12 V, 7 Ah batteries are connected in series. What is the pack rating?', ['24 V, 7 Ah', '12 V, 14 Ah', '24 V, 14 Ah', '6 V, 7 Ah'], 'Series connection adds voltages. The amp-hour capacity remains that of one matching battery.'),
+  q('ee-battery-parallel', 'electrical', 1, 'Batteries', 'In an ideal example, two matching 12 V, 7 Ah batteries are connected in parallel. What is the pack rating?', ['12 V, 14 Ah', '24 V, 7 Ah', '24 V, 14 Ah', '6 V, 14 Ah'], 'Parallel connection adds amp-hour capacities while retaining voltage. Real battery packs need compatible cells and suitable protection.'),
+  q('ee-rcd', 'electrical', 2, 'Protection', 'What does a residual-current device primarily detect?', ['An imbalance between current flowing out and returning through its monitored conductors', 'Only total energy consumption', 'Only battery polarity', 'Every possible fault with guaranteed protection'], 'An imbalance can indicate leakage current. An RCD does not replace overcurrent protection or safe working practices.'),
+  q('ee-fuse', 'electrical', 1, 'Protection', 'A circuit fuse keeps blowing. What should you do before replacing it?', ['Find the cause and use the specified type and rating', 'Bypass it with wire', 'Fit the largest fuse available', 'Short the load to reduce resistance'], 'A blown fuse is evidence of a fault or overload. Bypassing protection can allow dangerous current and heating.'),
+  q('ee-pf', 'electrical', 3, 'AC power', 'A single-phase load takes 10 A from 230 V RMS at power factor 0.8. What is its real power?', ['1.84 kW', '2.30 kW', '0.80 kW', '2.875 kW'], 'Real power = Vrms × Irms × power factor = 230 × 10 × 0.8 = 1,840 W.'),
+  q('ee-efficiency', 'electrical', 2, 'Power conversion', 'A converter delivers 90 W while drawing 100 W. What is its efficiency?', ['90%', '10%', '111%', '100%'], 'Efficiency = useful output power / input power × 100%. Here it is 90 / 100 × 100 = 90%.'),
+  q('ee-scope-ground', 'electrical', 3, 'Measurement', 'A normal bench oscilloscope ground clip is connected to protective earth. What is the risk of clipping it to a live mains node?', ['It can short that node to earth and create a dangerous fault', 'It makes any mains measurement safe', 'It isolates the entire circuit', 'It only changes the screen brightness'], 'Use a properly rated measurement method designed for the circuit. Never defeat the oscilloscope’s protective earth.'),
+
+  q('fs-access', 'fire', 1, 'Placement', 'A trolley blocks the workplace extinguisher. What is the correct action?', ['Restore clear access immediately', 'Wait until the next annual service', 'Keep it blocked if the gauge is green', 'Hide the sign too'], 'Extinguishers must be reachable without obstruction.', { jurisdiction: 'US · OSHA', source: 'osha' }),
+  q('fs-a-distance', 'fire', 2, 'Placement', 'Under OSHA 1910.157(d)(2), what is the maximum travel distance for employee access to a Class A extinguisher where that distribution rule applies?', ['75 ft / 22.9 m', '150 ft / 45.7 m', '30 ft / 9.1 m', 'There is no limit'], 'OSHA specifies a 75 ft maximum travel distance for this Class A distribution requirement.', { jurisdiction: 'US · OSHA', source: 'osha' }),
+  q('fs-b-distance', 'fire', 2, 'Placement', 'Under OSHA 1910.157(d)(4), what is the maximum travel distance from a Class B hazard area to an extinguisher where that distribution rule applies?', ['50 ft / 15.2 m', '75 ft / 22.9 m', '200 ft / 61 m', 'Any distance if a sign is provided'], 'The OSHA Class B maximum is 50 ft; specific hazard ratings and other adopted codes can impose additional requirements.', { jurisdiction: 'US · OSHA', source: 'osha' }),
+  q('fs-c-distance', 'fire', 3, 'Placement', 'Under OSHA, how is distribution for Class C electrical hazards determined?', ['Using the appropriate pattern for the underlying Class A or B hazards', 'By a universal 100 ft rule', 'Only by room colour', 'No extinguisher is needed near any electrical equipment'], 'OSHA 1910.157(d)(5) bases Class C distribution on the applicable Class A or B hazard.', { jurisdiction: 'US · OSHA', source: 'osha' }),
+  q('fs-monthly', 'fire', 1, 'Inspection', 'Under OSHA 1910.157(e)(2), how often must portable extinguishers be visually inspected?', ['Monthly', 'Every five years', 'Only after a fire', 'Only when a customer asks'], 'Monthly visual inspection is required under this OSHA provision.', { jurisdiction: 'US · OSHA', source: 'osha' }),
+  q('fs-annual', 'fire', 1, 'Maintenance', 'Under OSHA 1910.157(e)(3), how often is an extinguisher maintenance check required?', ['Annually', 'Every ten years', 'Only when the pressure gauge breaks', 'Never if the extinguisher is unused'], 'Annual maintenance is separate from the monthly visual inspection.', { jurisdiction: 'US · OSHA', source: 'osha' }),
+  q('fs-replacement', 'fire', 2, 'Maintenance', 'A workplace extinguisher is removed for service. What does OSHA require?', ['Alternative equivalent protection', 'A photograph in its place', 'No action until it returns', 'Only an empty bracket'], 'OSHA requires equivalent alternative protection during maintenance or recharging.', { jurisdiction: 'US · OSHA', source: 'osha' }),
+  q('fs-training', 'fire', 2, 'Workplace procedures', 'An employer provides extinguishers for employee use. Under OSHA, when is general extinguisher education required?', ['At initial employment and at least annually afterward', 'Only after the first workplace fire', 'Every twenty years', 'Only for visitors'], 'OSHA requires initial education and annual refreshers for this employee-use arrangement.', { jurisdiction: 'US · OSHA', source: 'osha' }),
+  q('fs-site-plan', 'fire', 1, 'Workplace procedures', 'Your workplace plan requires ordinary staff to evacuate when the alarm sounds. What should you do?', ['Follow the evacuation plan rather than stopping to fight the fire', 'Ignore the plan because an extinguisher is nearby', 'Wait for visible flames before moving', 'Collect all your possessions first'], 'The workplace emergency plan determines staff responsibilities. Extinguisher availability does not authorize everyone to fight fires.', { jurisdiction: 'US · OSHA', source: 'osha' }),
+  q('fs-height-small', 'fire', 2, 'Mounting', 'OSHA’s placement eTool advises a maximum carrying-handle height for an extinguisher weighing 40 lb or less. What is it?', ['5 ft / about 1.52 m', '8 ft / about 2.44 m', '10 ft / about 3.05 m', 'No limit'], 'This eTool installation guidance gives a 5 ft maximum handle height for units up to 40 lb.', { jurisdiction: 'US · OSHA guidance', source: 'placement' }),
+  q('fs-height-large', 'fire', 3, 'Mounting', 'OSHA’s placement eTool gives what maximum handle height for a hand-portable extinguisher over 40 lb?', ['3½ ft / about 1.07 m', '5 ft / about 1.52 m', '7 ft / about 2.13 m', 'At ceiling level'], 'Heavier units have a lower advised maximum handle height of 3½ ft.', { jurisdiction: 'US · OSHA guidance', source: 'placement' }),
+  q('fs-clearance', 'fire', 2, 'Mounting', 'According to OSHA’s placement eTool, what minimum floor clearance is advised under a hand-portable extinguisher?', ['4 in / about 10 cm', '0 in; always rest it on the floor', '24 in / about 61 cm', '36 in / about 91 cm'], 'The eTool gives at least 4 in of clearance beneath the extinguisher.', { jurisdiction: 'US · OSHA guidance', source: 'placement' }),
+  q('fs-pressure', 'fire', 1, 'Inspection', 'A stored-pressure extinguisher has a gauge with its needle outside the operable range. What should happen?', ['Report it and arrange qualified service or replacement', 'Assume it is ready because the cylinder looks clean', 'Paint the needle green', 'Open the cylinder yourself'], 'An abnormal pressure indication needs attention. Maintain suitable protection while the unit is serviced.', { jurisdiction: 'US · OSHA guidance', source: 'placement' }),
+  q('fs-us-c', 'fire', 1, 'Fire classes', 'In the US classification system used by OSHA, what does Class C describe?', ['Energized electrical equipment', 'Cooking oils and fats', 'Combustible metals', 'Flammable gases as a separate class'], 'US Class C refers to energized electrical equipment. Class letters differ between classification systems.', { jurisdiction: 'US · classification', source: 'basics' }),
+  q('fs-us-k', 'fire', 1, 'Fire classes', 'In the US system, a commercial deep-fat fryer fire belongs to which class?', ['Class K', 'Class C', 'Class D', 'Class A only'], 'US Class K covers cooking oils and fats.', { jurisdiction: 'US · classification', source: 'basics' }),
+  q('fs-metals', 'fire', 2, 'Fire classes', 'Burning magnesium shavings require which kind of extinguisher selection?', ['A Class D agent specifically suitable for the metal', 'Any ordinary water extinguisher', 'Any extinguisher because all fires are identical', 'A Class A water extinguisher only'], 'Combustible-metal fires need suitable specialist agents. Ordinary extinguishers can be ineffective or dangerous.', { jurisdiction: 'US · classification', source: 'basics' }),
+  q('fs-co2-gauge', 'fire', 2, 'Inspection', 'A CO₂ extinguisher has no pressure gauge. Is that alone evidence of a fault?', ['No; CO₂ units commonly lack a pressure gauge', 'Yes; every extinguisher must have a gauge', 'Yes; it must be empty', 'No; therefore it never needs maintenance'], 'A missing gauge is normal for many CO₂ extinguishers. Readiness still requires the appropriate checks and maintenance.', { jurisdiction: 'General practice', source: 'basics' }),
+  q('fs-co2-space', 'fire', 2, 'Safe response', 'What is a major concern when CO₂ is discharged into a confined occupied space?', ['It can displace oxygen and endanger people', 'It creates breathable oxygen', 'It is always harmless to occupants', 'It turns into drinking water'], 'CO₂ displaces oxygen. Do not treat a confined-space discharge as safe for unprotected occupants.', { jurisdiction: 'General practice', source: 'basics' }),
+  q('fs-water-live', 'fire', 1, 'Safe response', 'A piece of energized electrical equipment is burning. Which choice should you avoid?', ['Using an ordinary water extinguisher on the live equipment', 'Raising the alarm', 'Keeping a safe escape route', 'Following the emergency plan'], 'Ordinary water can conduct electricity. Select equipment rated for the hazard and follow the site response plan.', { jurisdiction: 'General practice', source: 'basics' }),
+  q('fs-pass-aim', 'fire', 1, 'Extinguisher use', 'In PASS, where does “Aim” tell a trained user to direct the nozzle?', ['At the base of the fire', 'At the top of the flames', 'At the ceiling', 'At their own feet'], 'Aim low at the fuel, rather than the tops of the flames.', { jurisdiction: 'General practice', source: 'usfa' }),
+  q('fs-pass-order', 'fire', 1, 'Extinguisher use', 'What does PASS stand for?', ['Pull, Aim, Squeeze, Sweep', 'Push, Alarm, Stop, Stand', 'Pull, Add water, Shake, Spray', 'Pause, Aim, Sit, Signal'], 'PASS is a memory aid for operating suitable extinguishers. Training and the unit’s instructions still matter.', { jurisdiction: 'General practice', source: 'usfa' }),
+  q('fs-exit', 'fire', 1, 'Safe response', 'You are considering using an extinguisher on a small fire, but your escape route is becoming blocked by smoke. What should you do?', ['Leave immediately rather than attempt firefighting', 'Keep fighting until the extinguisher is empty', 'Move deeper into the room', 'Wait for the smoke to clear by itself'], 'A clear escape route is essential. If conditions become unsafe, evacuate and alert emergency responders.', { jurisdiction: 'General practice', source: 'usfa' }),
+  q('fs-small', 'fire', 1, 'Safe response', 'Which situation is most suitable for a trained, authorized person to consider extinguisher use after the alarm is raised?', ['A small contained fire, with safe air and a clear escape route', 'A fire already spreading across the ceiling', 'A room full of toxic smoke', 'A fire between them and the only exit'], 'Fire size, smoke, and escape conditions must all support safe action. If uncertain, evacuate.', { jurisdiction: 'General practice', source: 'usfa' }),
+  q('fs-uk-c', 'fire', 1, 'Fire classes', 'In the UK/European classification shown in the Home Office guide, what is Class C?', ['Flammable gases', 'Energized electrical equipment', 'Cooking oils and fats', 'Paper and wood'], 'UK/European Class C means gases. It is different from US Class C.', { jurisdiction: 'UK · European classes', source: 'uk' }),
+  q('fs-uk-f', 'fire', 1, 'Fire classes', 'In the UK/European system, which class covers deep-fat-fryer cooking oils and fats?', ['Class F', 'Class K', 'Class C', 'Class D'], 'Cooking-oil and fat fires are Class F in this system; US terminology uses Class K.', { jurisdiction: 'UK · European classes', source: 'uk' }),
+  q('fs-uk-location', 'fire', 1, 'Placement', 'For general Class A risks, where does UK Home Office offices-and-shops guidance recommend siting extinguishers?', ['On escape routes, near room or floor exits', 'At the most hidden corner of a locked room', 'Where a fire could block access to them', 'Behind stacked deliveries'], 'Equipment should support safe access near exits; localized risks also need suitably located protection.', { jurisdiction: 'UK · Home Office guidance', source: 'uk' }),
+  q('fs-uk-distance', 'fire', 2, 'Placement', 'What ideal maximum travel distance to an extinguisher is stated in the UK Home Office offices-and-shops guide?', ['30 m', '75 m', '100 m', 'There is no recommendation'], 'The guide recommends ideally no more than 30 m. This is guidance, not a worldwide placement rule.', { jurisdiction: 'UK · Home Office guidance', source: 'uk' }),
+  q('fs-uk-height', 'fire', 2, 'Mounting', 'UK Home Office offices-and-shops guidance suggests handles around what heights for larger and smaller extinguishers?', ['About 1 m for larger and 1.5 m for smaller units', '3 m for larger and 4 m for smaller units', 'At ceiling height for both', 'Exactly 5 cm for every unit'], 'The guide suggests accessible handle heights of about 1 m and 1.5 m respectively.', { jurisdiction: 'UK · Home Office guidance', source: 'uk' }),
+  q('fs-uk-powder', 'fire', 2, 'Agent selection', 'Why does UK Home Office guidance caution against powder extinguishers in enclosed spaces?', ['Powder can impair visibility and breathing', 'Powder always creates more oxygen', 'Powder cannot extinguish any fire', 'Powder changes the building voltage'], 'Discharged powder can obscure escape routes and affect breathing; select agents through the risk assessment.', { jurisdiction: 'UK · Home Office guidance', source: 'uk' }),
+  q('fs-uk-signs', 'fire', 1, 'Placement', 'An extinguisher’s position is not obvious. What does UK Home Office guidance suggest may be necessary?', ['Suitable signs indicating its location', 'Removing all signs', 'A sign saying it is unavailable', 'Covering it with a coat'], 'Location signs can help people find equipment when it is not clearly visible.', { jurisdiction: 'UK · Home Office guidance', source: 'uk' }),
+  q('fs-uk-risk', 'fire', 2, 'Workplace procedures', 'A workplace changes from office use to storing flammable liquids. What should drive the extinguisher selection?', ['A review of the actual fire risks and suitable protection', 'Keeping every old extinguisher without review', 'Selecting only by the cheapest price', 'The wall paint colour'], 'A changed hazard needs a reviewed risk assessment and suitable equipment.', { jurisdiction: 'UK · Home Office guidance', source: 'uk' }),
+];
+
+
+const DIGITS = '0123456789AB';
+const CATEGORIES = {
+  bases: { name: 'Number bases', short: 'Bases', description: 'Count, convert, and calculate in bases 2–12.', mark: '01', color: '#d9fc72' },
+  electronics: { name: 'Electronics', short: 'Electronics', description: 'Components, circuits, audio, and fault finding.', mark: '02', color: '#86c9ff' },
+  electrical: { name: 'Electrical engineering', short: 'Electrical', description: 'Power, motors, batteries, and real loads.', mark: '03', color: '#c4a5ff' },
+  fire: { name: 'Fire safety', short: 'Fire safety', description: 'Extinguishers, placement, and safe decisions.', mark: '04', color: '#ffad85' },
+};
+
+function shuffle(items, rng = Math.random) {
+  const copy = [...items];
+  for (let i = copy.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [copy[i], copy[j]] = [copy[j], copy[i]]; }
+  return copy;
+}
+const choose = (items, rng) => items[Math.floor(rng() * items.length)];
+const integer = (min, max, rng) => min + Math.floor(rng() * (max - min + 1));
+const formatNumber = (n) => Number(n.toFixed(3)).toLocaleString('en-US', { maximumFractionDigits: 3, useGrouping: false });
+
+function toBase(value, base) {
+  if (!Number.isSafeInteger(value) || !Number.isInteger(base) || base < 2 || base > 12) throw new RangeError('Use an integer and a base from 2 to 12.');
+  return value.toString(base).toUpperCase();
+}
+
+function parseBase(raw, base) {
+  if (!Number.isInteger(base) || base < 2 || base > 12) return null;
+  let value = String(raw).trim().toUpperCase().replace(/\s+/g, '');
+  if (base === 2) value = value.replace(/^0B/, '');
+  if (!/^-?[0-9AB]+$/.test(value)) return null;
+  const negative = value.startsWith('-');
+  const body = negative ? value.slice(1) : value;
+  let result = 0;
+  for (const digit of body) { const place = DIGITS.indexOf(digit); if (place >= base) return null; result = result * base + place; if (!Number.isSafeInteger(result)) return null; }
+  return negative ? -result : result;
+}
+
+function placeValue(n, base) {
+  return [...toBase(n, base)].map((digit, i, arr) => `${DIGITS.indexOf(digit)} × ${base}^${arr.length - i - 1}`).join(' + ');
+}
+
+function makeBaseQuestion(settings, rng = Math.random) {
+  const base = settings.base === 'any' ? integer(2, 12, rng) : Number(settings.base);
+  const level = Number(settings.difficulty);
+  const mode = settings.baseMode === 'mixed' ? choose(['count', 'convert', 'arithmetic', 'convert'], rng) : settings.baseMode;
+  const max = [0, 30, 255, 4095][level];
+  let prompt, value, answerBase = base, explanation, hint, visual, topic;
+  if (mode === 'count') {
+    const step = level === 3 ? choose([1, 2, 3, -1], rng) : 1;
+    const start = integer(step < 0 ? 4 : 0, max, rng);
+    const sequence = [start, start + step, start + 2 * step];
+    value = start + 3 * step;
+    prompt = `Keep counting in base ${base}. What comes next?`;
+    visual = `${sequence.map(n => toBase(n, base)).join('  ·  ')}  ·  ?`;
+    topic = 'Counting';
+    explanation = `The step is ${step} in decimal. The next decimal value is ${value}, written ${toBase(value, base)} in base ${base}. Each digit must be smaller than ${base}.`;
+    hint = step === 1 ? `After the largest digit (${DIGITS[base - 1]}), carry 1 into the next column.` : `Find the step in decimal, then write the next value in base ${base}.`;
+  } else if (mode === 'convert') {
+    const from = level === 1 ? choose([base, 10], rng) : choose([base, 10, integer(2, 12, rng)], rng);
+    const to = from === base ? (base === 10 ? choose([2, 3, 8, 12], rng) : 10) : base;
+    value = integer(1, max, rng);
+    answerBase = to;
+    prompt = `Convert this base-${from} number to base ${to}.`;
+    visual = `${toBase(value, from)}${subscript(from)}  =  ?${subscript(to)}`;
+    topic = 'Conversion';
+    explanation = `${toBase(value, from)} in base ${from} = ${placeValue(value, from)} = ${value} in decimal. ${value} in base ${to} is ${toBase(value, to)}.`;
+    hint = `Use powers of ${from} to reach decimal. Then repeatedly divide by ${to} and read the remainders backward.`;
+  } else {
+    const subtract = level > 1 && rng() < 0.5;
+    let a = integer(1, Math.max(5, Math.floor(max / 3)), rng), b = integer(1, Math.max(5, Math.floor(max / 4)), rng);
+    if (subtract && a < b) [a, b] = [b, a];
+    value = subtract ? a - b : a + b;
+    prompt = `${subtract ? 'Subtract' : 'Add'} these numbers in base ${base}.`;
+    visual = `${toBase(a, base)}${subscript(base)}  ${subtract ? '−' : '+'}  ${toBase(b, base)}${subscript(base)}  =  ?`;
+    topic = 'Arithmetic';
+    explanation = `In decimal: ${a} ${subtract ? '−' : '+'} ${b} = ${value}. In base ${base}, the result is ${toBase(value, base)}. Carry or borrow using ${base}, rather than 10.`;
+    hint = `Each column has a place value that is a power of ${base}. You can convert to decimal as a cross-check.`;
+  }
+  return { id: `bases-${mode}-${base}-${visual}`, category: 'bases', level, topic, prompt, visual, type: 'base', answer: toBase(value, answerBase), value, answerBase, explanation, hint, inputLabel: `Your answer in base ${answerBase}`, inputHelp: `Digits: ${DIGITS.slice(0, answerBase).split('').join(' ')}${answerBase > 10 ? ' · A = 10' + (answerBase > 11 ? ', B = 11' : '') : ''}` };
+}
+
+const subscript = n => String(n).split('').map(x => '₀₁₂₃₄₅₆₇₈₉'[Number(x)]).join('');
+
+function makeEngineeringQuestion(category, difficulty, rng = Math.random) {
+  const level = Number(difficulty);
+  const kind = category === 'electronics' ? choose(['led', 'divider', 'gain', ...(level > 1 ? ['rc', 'regulator'] : [])], rng) : choose(['current', 'energy', 'cable', 'runtime', ...(level > 1 ? ['power', 'efficiency'] : [])], rng);
+  let prompt, value, unit, explanation, hint, visual = [], topic, source;
+  if (kind === 'led') {
+    const supply = choose([5, 9, 12], rng), forward = choose([2, 3], rng), current = choose([5, 10, 20], rng);
+    value = (supply - forward) / (current / 1000); unit = 'Ω'; topic = 'LED resistor';
+    prompt = `You want an LED to draw ${current} mA from a ${supply} V supply. Its forward voltage is ${forward} V. What is the calculated series resistance (before choosing a standard value)?`;
+    visual = [['Supply', `${supply} V`], ['LED drop', `${forward} V`], ['Current', `${current} mA`]];
+    hint = 'The resistor drops supply voltage minus LED voltage. Convert mA to A, then use R = V/I.';
+    explanation = `R = (${supply} − ${forward}) / (${current}/1000) = ${formatNumber(value)} Ω. Select an appropriate standard value and verify resistor power.`;
+  } else if (kind === 'divider') {
+    const supply = choose([6, 9, 12], rng), top = choose([1, 2, 4, 10], rng), bottom = choose([1, 2, 5, 10], rng);
+    value = supply * bottom / (top + bottom); unit = 'V'; topic = 'Voltage divider';
+    prompt = `A ${supply} V supply feeds an unloaded divider: ${top} kΩ from supply to output and ${bottom} kΩ from output to ground. What is the output voltage?`;
+    visual = [['Supply', `${supply} V`], ['Top resistor', `${top} kΩ`], ['Bottom resistor', `${bottom} kΩ`]];
+    hint = 'Vout = Vin × Rbottom / (Rtop + Rbottom). Assume no load is connected.';
+    explanation = `Vout = ${supply} × ${bottom}/(${top} + ${bottom}) = ${formatNumber(value)} V. Connecting a load can change this voltage.`;
+  } else if (kind === 'gain') {
+    const feedback = choose([10, 22, 47, 100], rng), ground = choose([1, 2, 10], rng);
+    value = 1 + feedback / ground; unit = 'V/V'; topic = 'Amplifier gain'; source = 'ti';
+    prompt = `An ideal non-inverting op-amp stage has Rf = ${feedback} kΩ and Rg = ${ground} kΩ. What is its closed-loop voltage gain?`;
+    visual = [['Feedback Rf', `${feedback} kΩ`], ['Ground Rg', `${ground} kΩ`]];
+    hint = 'For a non-inverting stage, gain = 1 + Rf/Rg.';
+    explanation = `Gain = 1 + ${feedback}/${ground} = ${formatNumber(value)} V/V. This assumes operation within the amplifier’s linear limits.`;
+  } else if (kind === 'rc') {
+    const r = choose([1, 4.7, 10, 22], rng), c = choose([10, 22, 100, 220], rng);
+    value = 1 / (2 * Math.PI * r * 1000 * c * 1e-9); unit = 'Hz'; topic = 'Audio filtering';
+    prompt = `An ideal first-order RC filter has R = ${r} kΩ and C = ${c} nF. What is its cutoff frequency? Give your answer in Hz.`;
+    visual = [['Resistance', `${r} kΩ`], ['Capacitance', `${c} nF`]];
+    hint = 'fc = 1/(2πRC). Convert kΩ to Ω and nF to F.';
+    explanation = `fc = 1/(2π × ${r * 1000} × ${c}×10⁻⁹) ≈ ${formatNumber(value)} Hz. The circuit arrangement determines whether it is high-pass or low-pass.`;
+  } else if (kind === 'regulator') {
+    const vin = choose([9, 12, 15], rng), vout = 5, current = choose([0.1, 0.25, 0.5], rng);
+    value = (vin - vout) * current; unit = 'W'; topic = 'Regulator heat';
+    prompt = `A linear regulator converts ${vin} V to ${vout} V while delivering ${current} A. Ignoring its own small supply current, how much heat power does it dissipate?`;
+    visual = [['Input', `${vin} V`], ['Output', `${vout} V`], ['Load', `${current} A`]];
+    hint = 'Heat dissipation ≈ (Vin − Vout) × I.';
+    explanation = `P = (${vin} − ${vout}) × ${current} = ${formatNumber(value)} W. The regulator’s thermal path must handle this heat.`;
+  } else if (kind === 'current') {
+    const voltage = choose([6, 12, 24], rng), resistance = choose([6, 12, 24, 48], rng);
+    value = voltage / resistance; unit = 'A'; topic = 'Load current';
+    prompt = `A low-voltage resistive heater has ${resistance} Ω resistance and is connected to ${voltage} V DC. What current does it draw?`;
+    visual = [['Voltage', `${voltage} V`], ['Resistance', `${resistance} Ω`]];
+    hint = 'Use Ohm’s law: I = V/R.';
+    explanation = `I = ${voltage}/${resistance} = ${formatNumber(value)} A, assuming the resistance stays constant.`;
+  } else if (kind === 'energy') {
+    const watts = choose([40, 60, 100, 1500, 2000], rng), hours = choose([2, 3, 4, 5], rng);
+    value = watts * hours / 1000; unit = 'kWh'; topic = 'Energy use';
+    prompt = `A ${watts} W appliance runs continuously for ${hours} hours. How much electrical energy does it use, in kWh?`;
+    visual = [['Power', `${watts} W`], ['Time', `${hours} hours`]];
+    hint = 'Convert watts to kilowatts, then multiply by hours.';
+    explanation = `Energy = (${watts}/1000) × ${hours} = ${formatNumber(value)} kWh. Power and energy are different quantities.`;
+  } else if (kind === 'cable') {
+    const current = choose([1, 2, 5, 10], rng), resistance = choose([0.1, 0.2, 0.5, 1], rng);
+    value = current * resistance; unit = 'V'; topic = 'Cable voltage drop';
+    prompt = `A DC load draws ${current} A through a cable with ${resistance} Ω TOTAL outgoing-and-return resistance. What voltage is lost in the cable?`;
+    visual = [['Current', `${current} A`], ['Loop resistance', `${resistance} Ω`]];
+    hint = 'The total loop resistance is already given. Use Vdrop = I × R.';
+    explanation = `Vdrop = ${current} × ${resistance} = ${formatNumber(value)} V. Do not double the resistance; it already includes both conductors.`;
+  } else if (kind === 'runtime') {
+    const ah = choose([2, 4, 7, 10], rng), amps = choose([0.5, 1, 2], rng);
+    value = ah / amps; unit = 'hours'; topic = 'Battery runtime';
+    prompt = `For an ideal battery with ${ah} Ah of usable capacity and a constant ${amps} A load, what is the estimated runtime? Ignore losses and discharge-rate effects.`;
+    visual = [['Usable capacity', `${ah} Ah`], ['Load current', `${amps} A`]];
+    hint = 'Runtime in hours = amp-hours / current in amps.';
+    explanation = `Runtime = ${ah}/${amps} = ${formatNumber(value)} hours. Real runtime depends on usable capacity, temperature, load, and cutoff voltage.`;
+  } else if (kind === 'power') {
+    const voltage = choose([12, 24, 48], rng), current = choose([0.5, 1, 2, 5], rng);
+    value = voltage * current; unit = 'W'; topic = 'DC power';
+    prompt = `A DC motor driver supplies ${voltage} V at ${current} A to a motor. What is the electrical input power to the motor?`;
+    visual = [['Voltage', `${voltage} V`], ['Current', `${current} A`]];
+    hint = 'For DC input power, use P = V × I.';
+    explanation = `P = ${voltage} × ${current} = ${formatNumber(value)} W. Mechanical output power will be lower because of losses.`;
+  } else {
+    const output = choose([40, 60, 90, 120], rng), efficiency = choose([80, 90, 95], rng);
+    value = output / (efficiency / 100); unit = 'W'; topic = 'Converter input';
+    prompt = `A power converter delivers ${output} W with ${efficiency}% efficiency. What input power does it require?`;
+    visual = [['Output', `${output} W`], ['Efficiency', `${efficiency}%`]];
+    hint = 'Efficiency = Pout/Pin, so Pin = Pout / efficiency as a fraction.';
+    explanation = `Pin = ${output}/(${efficiency}/100) ≈ ${formatNumber(value)} W. Input power exceeds useful output power.`;
+  }
+  return { id: `${category}-${kind}-${prompt}`, category, level, type: 'number', topic, prompt, visual, value, answer: formatNumber(value), unit, explanation, hint, source, tolerance: Math.max(Math.abs(value) * 0.02, 0.002), inputLabel: `Your answer in ${unit}`, inputHelp: 'Enter the number in the unit shown. Rounding within 2% is accepted.' };
+}
+
+function prepareChoice(question, rng = Math.random) {
+  const correct = question.options[0];
+  const options = shuffle(question.options, rng);
+  return { ...question, type: 'choice', options, correctIndex: options.indexOf(correct), answer: correct, hint: `Think about the ${question.topic.toLowerCase()} decision in this specific situation${question.jurisdiction ? ` and the ${question.jurisdiction} label` : ''}.` };
+}
+
+function checkAnswer(question, input) {
+  if (question.type === 'choice') return Number.isInteger(input) && input === question.correctIndex;
+  if (question.type === 'base') return parseBase(input, question.answerBase) === question.value;
+  const raw = String(input).trim().replace(/,/g, '.');
+  if (!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(raw)) return false;
+  const value = Number(raw);
+  return Number.isFinite(value) && Math.abs(value - question.value) <= question.tolerance;
+}
+
+function eligibleQuestions(category, settings) {
+  return QUESTIONS.filter(q => q.category === category && q.level <= Number(settings.difficulty) && (category !== 'fire' || settings.fireScope === 'all' || (settings.fireScope === 'general' ? q.jurisdiction === 'General practice' : q.jurisdiction.startsWith(settings.fireScope === 'us' ? 'US' : 'UK'))));
+}
+
+function makeDeck(settings, count = 10, rng = Math.random, previous = new Set()) {
+  const categories = settings.category === 'mixed' ? Object.keys(CATEGORIES) : [settings.category];
+  const pools = Object.fromEntries(categories.map(c => [c, shuffle(eligibleQuestions(c, settings), rng)]));
+  const cursor = Object.fromEntries(categories.map(c => [c, 0]));
+  const deck = [];
+  for (let i = 0; i < count; i++) {
+    const category = settings.category === 'mixed' ? categories[i % categories.length] : categories[0];
+    let question;
+    for (let tries = 0; tries < 30; tries++) {
+      if (category === 'bases') question = makeBaseQuestion(settings, rng);
+      else if (category !== 'fire' && rng() < 0.45) question = makeEngineeringQuestion(category, settings.difficulty, rng);
+      else {
+        const pool = pools[category];
+        if (!pool.length) throw new Error('No questions match this selection.');
+        question = prepareChoice(pool[cursor[category]++ % pool.length], rng);
+      }
+      if (!previous.has(question.id) || tries === 29) break;
+    }
+    previous.add(question.id);
+    deck.push(question);
+  }
+  return settings.category === 'mixed' ? shuffle(deck, rng) : deck;
+}
+
+
+
+const main = document.querySelector('#main');
+const settings = { category: 'bases', difficulty: '2', length: '10', base: 'any', baseMode: 'mixed', fireScope: 'all' };
+let session = null;
+let selected = null;
+let revealed = false;
+let hintUsed = false;
+let screen = 'home';
+const esc = value => String(value).replace(/[&<>"']/g, x => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[x]));
+const options = (entries, value) => entries.map(([v, text]) => `<option value="${v}" ${String(v) === String(value) ? 'selected' : ''}>${text}</option>`).join('');
+const setAccent = category => document.documentElement.style.setProperty('--accent', CATEGORIES[category]?.color || '#d9fc72');
+const focusHeading = () => main.querySelector('h1, h2')?.focus({ preventScroll: true });
+
+function home(focusCategory = null) {
+  screen = 'home'; setAccent(settings.category);
+  const basesVisible = ['bases', 'mixed'].includes(settings.category);
+  const fireVisible = ['fire', 'mixed'].includes(settings.category);
+  main.innerHTML = `
+    <section class="setup">
+      <div class="intro"><p class="eyebrow">YOUR PRACTICE BENCH</p><h1 tabindex="-1">What are we practicing?</h1><p>Pick a topic. Work it out. See why it works.</p></div>
+      <div class="category-grid" role="group" aria-label="Quiz category">
+      ${Object.entries(CATEGORIES).map(([id, category]) => `<button type="button" class="category-card ${settings.category === id ? 'is-selected' : ''}" data-category="${id}" aria-pressed="${settings.category === id}" style="--card-accent:${category.color}">
+        <span class="category-top"><span class="category-index">${category.mark}</span><span class="selection-dot" aria-hidden="true">${settings.category === id ? '✓' : ''}</span></span>
+        <span class="category-name">${category.name}</span><span class="category-description">${category.description}</span>
+        <span class="category-foot">${id === 'bases' ? '2  3  4  5  6  7  8  9  10  11  12' : id === 'fire' ? 'SCENARIOS + LABELLED RULES' : 'SCENARIOS + CALCULATIONS'}</span>
+      </button>`).join('')}
+      </div>
+      <button type="button" class="mixed-toggle ${settings.category === 'mixed' ? 'active' : ''}" data-category="mixed" aria-pressed="${settings.category === 'mixed'}"><span aria-hidden="true">◈</span> Mix all four topics <span class="mixed-check">${settings.category === 'mixed' ? '✓' : '+'}</span></button>
+      <div class="setup-panel">
+        <div class="panel-label"><span class="eyebrow">SET YOUR ROUND</span><span class="panel-note">No timer. Take your time.</span></div>
+        <div class="controls-row">
+          <label>Difficulty<select id="difficulty">${options([['1', 'Starter'], ['2', 'Standard'], ['3', 'Advanced']], settings.difficulty)}</select></label>
+          <label>Questions<select id="length">${options([['10', '10 questions'], ['20', '20 questions'], ['endless', 'Keep practicing']], settings.length)}</select></label>
+          ${basesVisible ? `<label>Base<select id="base">${options([['any', 'All bases · 2–12'], ...Array.from({ length: 11 }, (_, i) => [String(i + 2), `Base ${i + 2}`])], settings.base)}</select></label><label>Practice<select id="baseMode">${options([['mixed', 'Counting + conversions + arithmetic'], ['count', 'Counting sequences'], ['convert', 'Conversions'], ['arithmetic', 'Addition and subtraction']], settings.baseMode)}</select></label>` : ''}
+          ${fireVisible ? `<label>Fire safety focus<select id="fireScope">${options([['all', 'International · labelled US + UK'], ['general', 'Practical safety'], ['us', 'US · OSHA'], ['uk', 'UK · Home Office']], settings.fireScope)}</select></label>` : ''}
+        </div>
+        ${fireVisible ? '<p class="scope-note">Each fire question identifies its rule set. Placement depends on the hazard, local requirements, and the site’s fire plan.</p>' : basesVisible ? '<p class="scope-note">In bases 11 and 12: <strong>A = 10</strong> and <strong>B = 11</strong>. Counting rolls over when you run out of digits.</p>' : '<p class="scope-note">Real situations first. Calculations include units, assumptions, and worked answers.</p>'}
+        <div class="start-row"><span class="start-description"><span class="round-marker" aria-hidden="true"></span>${settings.category === 'mixed' ? 'A bit of everything' : esc(CATEGORIES[settings.category].name)}<small>${settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`}</small></span><button class="primary-button" id="start">Start round <span aria-hidden="true">▶</span></button></div>
+      </div>
+      <div class="home-foot"><span><strong>${QUESTIONS.length}</strong> scenario questions + generated calculations</span><span>Keyboard friendly <kbd>1–4</kbd> <kbd>Enter</kbd></span></div>
+    </section>`;
+  main.querySelectorAll('[data-category]').forEach(button => button.addEventListener('click', () => { settings.category = button.dataset.category; home(settings.category); }));
+  for (const id of ['difficulty', 'length', 'base', 'baseMode', 'fireScope']) {
+    main.querySelector(`#${id}`)?.addEventListener('change', e => { settings[id] = e.target.value; if (id === 'length') main.querySelector('.start-description small').textContent = settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`; });
+  }
+  main.querySelector('#start').addEventListener('click', () => start());
+  if (focusCategory) main.querySelector(`[data-category="${focusCategory}"]`).focus({ preventScroll: true });
+}
+
+function start(reviewDeck = null) {
+  const seen = new Set();
+  const endless = !reviewDeck && settings.length === 'endless';
+  session = { settings: { ...settings }, deck: reviewDeck ? shuffle(reviewDeck) : makeDeck(settings, endless ? 10 : Number(settings.length), Math.random, seen), seen, endless, index: 0, answers: [], streak: 0, bestStreak: 0, score: 0, review: !!reviewDeck };
+  renderQuestion();
+}
+
+function renderVisual(q) {
+  if (typeof q.visual === 'string') return `<div class="number-display" aria-label="${esc(q.visual)}">${esc(q.visual)}</div>`;
+  if (Array.isArray(q.visual)) return `<div class="givens">${q.visual.map(([label, value]) => `<div><span>${esc(label)}</span><strong>${esc(value)}</strong></div>`).join('')}</div>`;
+  return '';
+}
+
+function renderQuestion() {
+  screen = 'quiz'; selected = null; revealed = false; hintUsed = false;
+  const q = session.deck[session.index], cat = CATEGORIES[q.category];
+  setAccent(q.category);
+  const total = session.endless ? '∞' : session.deck.length;
+  const progress = session.endless ? 0 : session.index / session.deck.length * 100;
+  main.innerHTML = `
+    <section class="quiz">
+      <div class="round-top"><button class="text-button" id="end-round">End round</button><div class="round-position">QUESTION <strong>${session.index + 1}</strong><span>/ ${total}</span></div><div class="round-score"><span id="score">${session.score}</span> <span class="muted">PTS</span></div></div>
+      ${!session.endless ? `<div class="progress-track" role="progressbar" aria-label="Round progress" aria-valuemin="0" aria-valuemax="${session.deck.length}" aria-valuenow="${session.index}"><div style="width:${progress}%"></div></div>` : '<div class="endless-rule"></div>'}
+      <div class="question-meta"><span class="topic-chip">${esc(cat.short)}</span><span>${esc(q.topic)}</span>${q.jurisdiction ? `<span class="jurisdiction">${esc(q.jurisdiction)}</span>` : ''}<span class="streak">${session.streak > 1 ? `${session.streak} in a row` : ''}</span></div>
+      <div class="question-card">
+        <h1 class="question-title" tabindex="-1">${esc(q.prompt)}</h1>
+        ${renderVisual(q)}
+        <form id="answer-form" novalidate>
+          ${q.type === 'choice' ? `<fieldset class="answer-choices"><legend class="sr-only">Choose an answer</legend>${q.options.map((choice, i) => `<label class="answer-choice" data-choice="${i}"><input type="radio" name="answer" value="${i}"><span class="choice-key" aria-hidden="true">${i + 1}</span><span>${esc(choice)}</span><span class="choice-status" aria-hidden="true"></span></label>`).join('')}</fieldset>` : `<div class="input-area"><label for="answer-input">${esc(q.inputLabel)}</label><div class="answer-input-wrap"><input id="answer-input" name="answer" type="text" inputmode="${q.type === 'base' && q.answerBase > 10 ? 'text' : 'decimal'}" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="input-help input-error" placeholder="${q.type === 'base' ? 'Type your number' : 'Type your value'}">${q.unit ? `<span class="input-unit">${esc(q.unit)}</span>` : `<span class="input-unit">base ${q.answerBase}</span>`}</div><p id="input-help" class="input-help">${esc(q.inputHelp)}</p></div>`}
+          <p class="input-error" id="input-error" role="alert"></p>
+          <div class="answer-actions"><div><button type="button" class="text-button hint-button" id="hint">Show hint</button><button type="button" class="text-button skip-button" id="skip">Skip</button></div><button class="primary-button" type="submit" id="check">Check answer <kbd>↵</kbd></button></div>
+        </form>
+        <div id="hint-panel" class="hint-panel" hidden></div>
+        <div id="feedback" class="feedback" aria-live="polite" aria-atomic="true" hidden></div>
+      </div>
+      <p class="quiz-foot">${q.type === 'choice' ? 'Choose an answer with 1–4. Press Enter to check.' : 'Write your answer, then press Enter to check.'} <span>Correct answers earn points. Hints are always available.</span></p>
+    </section>`;
+  const form = main.querySelector('#answer-form');
+  form.addEventListener('submit', e => { e.preventDefault(); submit(); });
+  main.querySelectorAll('input[type="radio"]').forEach(input => input.addEventListener('change', () => pick(Number(input.value))));
+  main.querySelector('#hint').addEventListener('click', () => {
+    if (revealed) return;
+    hintUsed = true;
+    const panel = main.querySelector('#hint-panel'); panel.hidden = !panel.hidden; panel.innerHTML = `<strong>A nudge</strong><p>${esc(q.hint)}</p>`;
+    main.querySelector('#hint').textContent = panel.hidden ? 'Show hint' : 'Hide hint';
+  });
+  main.querySelector('#skip').addEventListener('click', () => submit(true));
+  main.querySelector('#end-round').addEventListener('click', finish);
+  if (q.type !== 'choice') main.querySelector('#answer-input').focus({ preventScroll: true }); else focusHeading();
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+function pick(index) {
+  if (revealed) return;
+  selected = index;
+  main.querySelectorAll('.answer-choice').forEach(label => { const active = Number(label.dataset.choice) === index; label.classList.toggle('selected', active); label.querySelector('input').checked = active; });
+  main.querySelector('#input-error').textContent = '';
+}
+
+function submit(skip = false) {
+  if (revealed) return;
+  const q = session.deck[session.index];
+  const input = q.type === 'choice' ? selected : main.querySelector('#answer-input').value.trim();
+  if (!skip && (input === null || input === '')) {
+    main.querySelector('#input-error').textContent = q.type === 'choice' ? 'Choose an answer first.' : 'Enter an answer first.';
+    main.querySelector('#answer-input')?.focus(); return;
+  }
+  revealed = true;
+  const correct = !skip && checkAnswer(q, input);
+  session.streak = correct ? session.streak + 1 : 0;
+  session.bestStreak = Math.max(session.bestStreak, session.streak);
+  const points = correct ? (hintUsed ? 75 : 100) + Math.min((session.streak - 1) * 10, 50) : 0;
+  session.score += points;
+  session.answers.push({ q, correct, skipped: skip, input: skip ? null : input, hintUsed, points });
+  main.querySelector('#score').textContent = session.score;
+  main.querySelectorAll('#answer-form input').forEach(el => el.disabled = true);
+  main.querySelectorAll('#answer-form button').forEach(el => el.disabled = true);
+  if (q.type === 'choice') {
+    main.querySelectorAll('.answer-choice').forEach(label => {
+      const index = Number(label.dataset.choice);
+      if (index === q.correctIndex) { label.classList.add('correct'); label.querySelector('.choice-status').textContent = '✓'; }
+      else if (index === input && !skip) { label.classList.add('incorrect'); label.querySelector('.choice-status').textContent = '×'; }
+    });
+  } else main.querySelector('.answer-input-wrap').classList.add(correct ? 'correct' : 'incorrect');
+  const feedback = main.querySelector('#feedback');
+  feedback.hidden = false; feedback.className = `feedback ${correct ? 'feedback-correct' : 'feedback-incorrect'}`;
+  const final = !session.endless && session.index === session.deck.length - 1;
+  feedback.innerHTML = `<div class="feedback-heading"><strong>${correct ? 'That’s right.' : skip ? 'Let’s work it out.' : 'Not quite.'}</strong><span>${correct ? `+${points} pts` : 'Keep going'}</span></div>${!correct ? `<p class="correct-answer">Answer: <strong>${esc(q.answer)}${q.unit ? ` ${esc(q.unit)}` : q.type === 'base' ? ` (base ${q.answerBase})` : ''}</strong></p>` : ''}<p class="explanation">${esc(q.explanation)}</p>${sourceLink(q)}<button class="primary-button next-button" id="next">${final ? 'See results' : 'Next question'} <kbd>↵</kbd></button>`;
+  main.querySelector('#next').addEventListener('click', next);
+  main.querySelector('#next').focus({ preventScroll: true });
+  feedback.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+}
+
+function sourceLink(q) {
+  const source = SOURCES[q.source];
+  return source ? `<a class="source-link" href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.name)} <span class="sr-only">(opens in a new tab)</span></a>` : '';
+}
+
+function next() {
+  if (!revealed) return;
+  session.index++;
+  if (session.index === session.deck.length) {
+    if (session.endless) session.deck.push(...makeDeck(session.settings, 10, Math.random, session.seen));
+    else { finish(); return; }
+  }
+  renderQuestion();
+}
+
+function finish() {
+  if (!session.answers.length) { session = null; home(); focusHeading(); return; }
+  screen = 'results'; setAccent(session.settings.category);
+  const answers = session.answers, correct = answers.filter(a => a.correct).length, missed = answers.filter(a => !a.correct);
+  const accuracy = Math.round(correct / answers.length * 100);
+  const verdict = accuracy === 100 ? 'A clean sweep.' : accuracy >= 80 ? 'You know your way around.' : accuracy >= 50 ? 'Good work. Keep building.' : 'Every round teaches you something.';
+  main.innerHTML = `<section class="results">
+    <p class="eyebrow">${session.review ? 'REVIEW COMPLETE' : 'ROUND COMPLETE'}</p><h1 tabindex="-1">${verdict}</h1>
+    <div class="result-score"><strong>${accuracy}<span>%</span></strong><div>${correct} of ${answers.length} correct<small>${session.settings.category === 'mixed' ? 'Mixed practice' : CATEGORIES[session.settings.category].name}</small></div></div>
+    <div class="result-stats"><div><span>Points earned</span><strong>${session.score.toLocaleString()}</strong></div><div><span>Best streak</span><strong>${session.bestStreak}<small> in a row</small></strong></div><div><span>To revisit</span><strong>${missed.length}<small> question${missed.length === 1 ? '' : 's'}</small></strong></div></div>
+    <div class="result-actions"><button class="primary-button" id="again">Play another round</button>${missed.length ? '<button class="secondary-button" id="review">Retry missed questions</button>' : ''}<button class="text-button" id="topics">Choose a topic</button></div>
+    ${missed.length ? `<div class="review-area"><h2>Your takeaways <span>${missed.length}</span></h2>${missed.map((entry, i) => `<details class="review-item"><summary><span class="review-number">${String(i + 1).padStart(2, '0')}</span><span>${esc(entry.q.prompt)}</span><span class="review-plus" aria-hidden="true">+</span></summary><div class="review-content">${entry.q.jurisdiction ? `<span class="jurisdiction">${esc(entry.q.jurisdiction)}</span>` : ''}<p class="muted">${entry.skipped ? 'Skipped' : `Your answer: ${esc(entry.q.type === 'choice' ? entry.q.options[entry.input] : entry.input)}`}</p><p>Answer: <strong>${esc(entry.q.answer)}${entry.q.unit ? ` ${esc(entry.q.unit)}` : entry.q.type === 'base' ? ` (base ${entry.q.answerBase})` : ''}</strong></p><p>${esc(entry.q.explanation)}</p>${sourceLink(entry.q)}</div></details>`).join('')}</div>` : '<div class="perfect-note"><span aria-hidden="true">✓</span><p>Everything clicked this round. Try another base or raise the difficulty.</p></div>'}
+  </section>`;
+  main.querySelector('#again').addEventListener('click', () => start());
+  main.querySelector('#review')?.addEventListener('click', () => start(missed.map(a => a.q)));
+  main.querySelector('#topics').addEventListener('click', () => { session = null; home(); focusHeading(); });
+  focusHeading(); window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+document.querySelector('.brand').addEventListener('click', e => { e.preventDefault(); session = null; home(); focusHeading(); });
+
+document.addEventListener('keydown', e => {
+  if (screen !== 'quiz' || e.altKey || e.ctrlKey || e.metaKey || e.repeat) return;
+  const q = session.deck[session.index];
+  if (!revealed && q.type === 'choice' && /^[1-4]$/.test(e.key)) { e.preventDefault(); pick(Number(e.key) - 1); }
+  if (e.key === 'Enter' && e.target?.tagName !== 'BUTTON' && e.target?.tagName !== 'A') {
+    e.preventDefault(); if (revealed) next(); else submit();
+  }
+});
+
+home();
+
+</script>
+</body>
+</html>
