@@ -1,7 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { toBase, parseBase, checkAnswer, makeBaseQuestion, makeEngineeringQuestion, makeDeck, eligibleQuestions } from '../docs/engine.js';
+import { CATEGORIES, toBase, parseBase, checkAnswer, makeBaseQuestion, makeEngineeringQuestion, makeDeck, eligibleQuestions } from '../docs/engine.js';
 import { QUESTIONS, SOURCES } from '../docs/question-bank.js';
+import { generalSegregation, class1Compatibility, GENERAL_MATRIX, COMPATIBILITY_GROUPS, makeCargoQuestion } from '../docs/cargo.js';
+import { CHALLENGES, normalizeOutput } from '../docs/challenges.js';
+import { spawnSync } from 'node:child_process';
 
 const settings = { category: 'bases', difficulty: '3', base: 'any', baseMode: 'mixed', fireScope: 'all' };
 function seeded(seed = 42) { return () => { seed = (1664525 * seed + 1013904223) >>> 0; return seed / 2 ** 32; }; }
@@ -40,9 +43,55 @@ test('practical calculations: LED resistance, rounding, and bad input', () => {
 test('mixed rounds include every topic and avoid question duplicates', () => {
   const deck = makeDeck({ ...settings, category: 'mixed' }, 20, seeded());
   assert.equal(deck.length, 20);
-  assert.deepEqual([...new Set(deck.map(q => q.category))].sort(), ['bases', 'electrical', 'electronics', 'fire']);
+  assert.deepEqual([...new Set(deck.map(q => q.category))].sort(), Object.keys(CATEGORIES).sort());
   assert.equal(new Set(deck.map(q => q.id)).size, 20);
   for (const q of deck) assert.equal(checkAnswer(q, q.type === 'choice' ? q.correctIndex : String(q.value === undefined ? q.answer : q.type === 'base' ? q.answer : q.value)), true);
+});
+
+test('IMDG lookup transcription is symmetric and key pairings match the official tables', () => {
+  assert.equal(GENERAL_MATRIX.length, 17);
+  for (let i = 0; i < 17; i++) {
+    assert.equal(GENERAL_MATRIX[i].length, 17);
+    for (let j = 0; j < 17; j++) assert.equal(GENERAL_MATRIX[i][j], GENERAL_MATRIX[j][i], `${i},${j}`);
+  }
+  assert.equal(generalSegregation('3', '5.1'), '2');
+  assert.equal(generalSegregation('1.1', '3'), '4');
+  assert.equal(generalSegregation('3', '9'), 'X');
+  assert.equal(generalSegregation('1.1', '1.2'), '*');
+  assert.deepEqual(class1Compatibility('B', 'D'), { status: 'forbidden', note: null });
+  assert.deepEqual(class1Compatibility('D', 'D'), { status: 'permitted', note: 0 });
+  assert.deepEqual(class1Compatibility('L', 'L'), { status: 'conditional', note: 2 });
+  assert.deepEqual(class1Compatibility('N', 'N'), { status: 'conditional', note: 3 });
+  assert.deepEqual(class1Compatibility('G', 'D'), { status: 'conditional', note: 1 });
+  assert.equal(class1Compatibility('', 'D').status, 'unknown');
+  for (const a of COMPATIBILITY_GROUPS) for (const b of COMPATIBILITY_GROUPS) assert.deepEqual(class1Compatibility(a, b), class1Compatibility(b, a));
+});
+
+test('all categories generate valid rounds; cargo focus and full explosive labels are preserved', () => {
+  for (const category of Object.keys(CATEGORIES)) {
+    const deck = makeDeck({ ...settings, category, cargoFocus: 'segregation' }, 10, seeded());
+    assert.ok(deck.every(q => q.category === category));
+    for (const q of deck) assert.equal(checkAnswer(q, q.type === 'choice' ? q.correctIndex : q.answer), true);
+  }
+  for (const focus of ['segregation', 'general', 'class1', 'all']) {
+    const deck = makeDeck({...settings, category:'cargo', cargoFocus:focus}, 20, seeded());
+    assert.ok(deck.every(q => q.source === 'imdg' && q.reference));
+    if (['general','class1'].includes(focus)) assert.ok(deck.every(q => q.focus === focus));
+  }
+  const example = makeCargoQuestion({...settings, cargoFocus:'class1'}, () => 0);
+  assert.match(example.prompt, /1\.1B and 1\.2D/);
+  assert.match(example.options[0], /Not permitted/);
+  assert.match(example.explanation, /separated from/);
+});
+
+test('Python output questions and coding solutions execute as described', () => {
+  const examples = QUESTIONS.filter(q => q.category === 'python' && q.sampleOutput !== undefined).map(q => ({code:q.code, expected:q.sampleOutput, id:q.id}));
+  examples.push(...CHALLENGES.python.map(q => ({code:q.solution, expected:q.expected, id:q.id})));
+  for (const example of examples) {
+    const run = spawnSync('python3', ['-c', example.code], {encoding:'utf8', timeout:3000});
+    assert.equal(run.status, 0, example.id + ': ' + run.stderr);
+    assert.equal(normalizeOutput(run.stdout), normalizeOutput(example.expected), example.id);
+  }
 });
 
 test('fire question scopes, answer uniqueness, and source labels', () => {

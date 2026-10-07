@@ -1,8 +1,11 @@
-import { CATEGORIES, makeDeck, checkAnswer, shuffle, formatNumber } from './engine.js';
+import { CATEGORIES, CATEGORY_GROUPS, makeDeck, checkAnswer, shuffle, formatNumber } from './engine.js';
 import { QUESTIONS, SOURCES } from './question-bank.js';
+import { createCodingLab } from './coding.js';
 
 const main = document.querySelector('#main');
-const settings = { category: 'bases', difficulty: '2', length: '10', base: 'any', baseMode: 'mixed', fireScope: 'all' };
+const settings = { category: 'bases', difficulty: '2', length: '10', base: 'any', baseMode: 'mixed', fireScope: 'all', cargoFocus: 'segregation' };
+let activeGroup = 'numbers';
+let codingCleanup = null;
 let session = null;
 let selected = null;
 let revealed = false;
@@ -14,20 +17,24 @@ const setAccent = category => document.documentElement.style.setProperty('--acce
 const focusHeading = () => main.querySelector('h1, h2')?.focus({ preventScroll: true });
 
 function home(focusCategory = null) {
+  codingCleanup?.(); codingCleanup = null;
   screen = 'home'; setAccent(settings.category);
   const basesVisible = ['bases', 'mixed'].includes(settings.category);
   const fireVisible = ['fire', 'mixed'].includes(settings.category);
+  const cargoVisible = ['cargo', 'mixed'].includes(settings.category);
+  const codingVisible = CATEGORIES[settings.category]?.coding;
   main.innerHTML = `
     <section class="setup">
       <div class="intro"><p class="eyebrow">YOUR PRACTICE BENCH</p><h1 tabindex="-1">What are we practicing?</h1><p>Pick a topic. Work it out. See why it works.</p></div>
+      <div class="category-groups" role="group" aria-label="Topic group">${Object.entries(CATEGORY_GROUPS).map(([id, name]) => `<button type="button" data-group="${id}" aria-pressed="${activeGroup === id}" class="group-button ${activeGroup === id ? 'active' : ''}">${name}<span>${Object.values(CATEGORIES).filter(c => c.group === id).length}</span></button>`).join('')}</div>
       <div class="category-grid" role="group" aria-label="Quiz category">
-      ${Object.entries(CATEGORIES).map(([id, category]) => `<button type="button" class="category-card ${settings.category === id ? 'is-selected' : ''}" data-category="${id}" aria-pressed="${settings.category === id}" style="--card-accent:${category.color}">
+      ${Object.entries(CATEGORIES).filter(([, c]) => c.group === activeGroup).map(([id, category]) => `<button type="button" class="category-card ${settings.category === id ? 'is-selected' : ''}" data-category="${id}" aria-pressed="${settings.category === id}" style="--card-accent:${category.color}">
         <span class="category-top"><span class="category-index">${category.mark}</span><span class="selection-dot" aria-hidden="true">${settings.category === id ? '✓' : ''}</span></span>
         <span class="category-name">${category.name}</span><span class="category-description">${category.description}</span>
-        <span class="category-foot">${id === 'bases' ? '2  3  4  5  6  7  8  9  10  11  12' : id === 'fire' ? 'SCENARIOS + LABELLED RULES' : 'SCENARIOS + CALCULATIONS'}</span>
+        <span class="category-foot">${id === 'bases' ? '2  3  4  5  6  7  8  9  10  11  12' : id === 'fire' ? 'SCENARIOS + LABELLED RULES' : id === 'cargo' ? 'IMDG 42-24 · STOWAGE + SEGREGATION' : category.coding ? 'CODE QUIZZES + CODING CHALLENGES' : 'REAL EXAMPLES + FIND THE FAULT'}</span>
       </button>`).join('')}
       </div>
-      <button type="button" class="mixed-toggle ${settings.category === 'mixed' ? 'active' : ''}" data-category="mixed" aria-pressed="${settings.category === 'mixed'}"><span aria-hidden="true">◈</span> Mix all four topics <span class="mixed-check">${settings.category === 'mixed' ? '✓' : '+'}</span></button>
+      <button type="button" class="mixed-toggle ${settings.category === 'mixed' ? 'active' : ''}" data-category="mixed" aria-pressed="${settings.category === 'mixed'}"><span aria-hidden="true">◈</span> Mix all ${Object.keys(CATEGORIES).length} topics <span class="mixed-check">${settings.category === 'mixed' ? '✓' : '+'}</span></button>
       <div class="setup-panel">
         <div class="panel-label"><span class="eyebrow">SET YOUR ROUND</span><span class="panel-note">No timer. Take your time.</span></div>
         <div class="controls-row">
@@ -35,21 +42,26 @@ function home(focusCategory = null) {
           <label>Questions<select id="length">${options([['10', '10 questions'], ['20', '20 questions'], ['endless', 'Keep practicing']], settings.length)}</select></label>
           ${basesVisible ? `<label>Base<select id="base">${options([['any', 'All bases · 2–12'], ...Array.from({ length: 11 }, (_, i) => [String(i + 2), `Base ${i + 2}`])], settings.base)}</select></label><label>Practice<select id="baseMode">${options([['mixed', 'Counting + conversions + arithmetic'], ['count', 'Counting sequences'], ['convert', 'Conversions'], ['arithmetic', 'Addition and subtraction']], settings.baseMode)}</select></label>` : ''}
           ${fireVisible ? `<label>Fire safety focus<select id="fireScope">${options([['all', 'International · labelled US + UK'], ['general', 'Practical safety'], ['us', 'US · OSHA'], ['uk', 'UK · Home Office']], settings.fireScope)}</select></label>` : ''}
+          ${cargoVisible ? `<label>Cargo focus<select id="cargoFocus">${options([['segregation', 'Stowage + segregation'], ['class1', 'Class 1 · explosives compatibility'], ['general', 'General table + loading decisions'], ['all', 'All cargo · including hazard classes']], settings.cargoFocus)}</select></label>` : ''}
         </div>
-        ${fireVisible ? '<p class="scope-note">Each fire question identifies its rule set. Placement depends on the hazard, local requirements, and the site’s fire plan.</p>' : basesVisible ? '<p class="scope-note">In bases 11 and 12: <strong>A = 10</strong> and <strong>B = 11</strong>. Counting rolls over when you run out of digits.</p>' : '<p class="scope-note">Real situations first. Calculations include units, assumptions, and worked answers.</p>'}
+        ${settings.category === 'mixed' ? '<p class="scope-note">A mix across 12 topics. Fire rule sets and IMDG context are shown before you answer. A 20-question round includes every topic.</p>' : cargoVisible ? '<p class="scope-note">IMDG 42-24: explosives need their compatibility letters. Division numbers alone do not decide whether 1.1 and 1.2 may be stowed together. Each answer links to its table or rule.</p>' : fireVisible ? '<p class="scope-note">Each fire question identifies its rule set. Placement depends on the hazard, local requirements, and the site’s fire plan.</p>' : basesVisible ? '<p class="scope-note">In bases 11 and 12: <strong>A = 10</strong> and <strong>B = 11</strong>. Counting rolls over when you run out of digits.</p>' : '<p class="scope-note">Real situations first. Read code, find faults, and see a worked explanation for every answer.</p>'}
         <div class="start-row"><span class="start-description"><span class="round-marker" aria-hidden="true"></span>${settings.category === 'mixed' ? 'A bit of everything' : esc(CATEGORIES[settings.category].name)}<small>${settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`}</small></span><button class="primary-button" id="start">Start round <span aria-hidden="true">▶</span></button></div>
       </div>
+      ${codingVisible ? `<div class="coding-entry"><div><strong>Want to write some code?</strong><p>Fix a short program, run it, and compare its output with the target.</p></div><button class="secondary-button" id="open-coding">Open coding challenges →</button></div>` : ''}
       <div class="home-foot"><span><strong>${QUESTIONS.length}</strong> scenario questions + generated calculations</span><span>Keyboard friendly <kbd>1–4</kbd> <kbd>Enter</kbd></span></div>
     </section>`;
   main.querySelectorAll('[data-category]').forEach(button => button.addEventListener('click', () => { settings.category = button.dataset.category; home(settings.category); }));
-  for (const id of ['difficulty', 'length', 'base', 'baseMode', 'fireScope']) {
+  main.querySelectorAll('[data-group]').forEach(button => button.addEventListener('click', () => { activeGroup = button.dataset.group; settings.category = Object.keys(CATEGORIES).find(id => CATEGORIES[id].group === activeGroup); home(); main.querySelector(`[data-group="${activeGroup}"]`).focus({preventScroll:true}); }));
+  for (const id of ['difficulty', 'length', 'base', 'baseMode', 'fireScope', 'cargoFocus']) {
     main.querySelector(`#${id}`)?.addEventListener('change', e => { settings[id] = e.target.value; if (id === 'length') main.querySelector('.start-description small').textContent = settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`; });
   }
   main.querySelector('#start').addEventListener('click', () => start());
+  main.querySelector('#open-coding')?.addEventListener('click', () => { screen = 'coding'; codingCleanup = createCodingLab(main, settings.category, () => { home(); focusHeading(); }); window.scrollTo({top:0, behavior:'instant'}); });
   if (focusCategory) main.querySelector(`[data-category="${focusCategory}"]`).focus({ preventScroll: true });
 }
 
 function start(reviewDeck = null) {
+  codingCleanup?.(); codingCleanup = null;
   const seen = new Set();
   const endless = !reviewDeck && settings.length === 'endless';
   session = { settings: { ...settings }, deck: reviewDeck ? shuffle(reviewDeck) : makeDeck(settings, endless ? 10 : Number(settings.length), Math.random, seen), seen, endless, index: 0, answers: [], streak: 0, bestStreak: 0, score: 0, review: !!reviewDeck };
@@ -57,6 +69,8 @@ function start(reviewDeck = null) {
 }
 
 function renderVisual(q) {
+  if (q.code) return `<pre class="question-code" aria-label="Code to examine"><code>${esc(q.code)}</code></pre>`;
+  if (q.cargo) return `<div class="cargo-comparison"><p>${esc(q.cargo.context)}</p><div class="cargo-pair"><div><span>CONSIGNMENT A</span><strong>${esc(q.cargo.a)}</strong></div><div><span>CONSIGNMENT B</span><strong>${esc(q.cargo.b)}</strong></div></div></div>`;
   if (typeof q.visual === 'string') return `<div class="number-display" aria-label="${esc(q.visual)}">${esc(q.visual)}</div>`;
   if (Array.isArray(q.visual)) return `<div class="givens">${q.visual.map(([label, value]) => `<div><span>${esc(label)}</span><strong>${esc(value)}</strong></div>`).join('')}</div>`;
   return '';
@@ -144,7 +158,7 @@ function submit(skip = false) {
 
 function sourceLink(q) {
   const source = SOURCES[q.source];
-  return source ? `<a class="source-link" href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.name)} <span class="sr-only">(opens in a new tab)</span></a>` : '';
+  return source ? `<a class="source-link" href="${esc(source.url + (q.page ? `#page=${q.page}` : ''))}" target="_blank" rel="noopener noreferrer">${esc(source.name)}${q.reference ? ` · ${esc(q.reference)}` : ''} <span class="sr-only">(opens in a new tab)</span></a>` : '';
 }
 
 function next() {
@@ -168,7 +182,7 @@ function finish() {
     <div class="result-score"><strong>${accuracy}<span>%</span></strong><div>${correct} of ${answers.length} correct<small>${session.settings.category === 'mixed' ? 'Mixed practice' : CATEGORIES[session.settings.category].name}</small></div></div>
     <div class="result-stats"><div><span>Points earned</span><strong>${session.score.toLocaleString()}</strong></div><div><span>Best streak</span><strong>${session.bestStreak}<small> in a row</small></strong></div><div><span>To revisit</span><strong>${missed.length}<small> question${missed.length === 1 ? '' : 's'}</small></strong></div></div>
     <div class="result-actions"><button class="primary-button" id="again">Play another round</button>${missed.length ? '<button class="secondary-button" id="review">Retry missed questions</button>' : ''}<button class="text-button" id="topics">Choose a topic</button></div>
-    ${missed.length ? `<div class="review-area"><h2>Your takeaways <span>${missed.length}</span></h2>${missed.map((entry, i) => `<details class="review-item"><summary><span class="review-number">${String(i + 1).padStart(2, '0')}</span><span>${esc(entry.q.prompt)}</span><span class="review-plus" aria-hidden="true">+</span></summary><div class="review-content">${entry.q.jurisdiction ? `<span class="jurisdiction">${esc(entry.q.jurisdiction)}</span>` : ''}<p class="muted">${entry.skipped ? 'Skipped' : `Your answer: ${esc(entry.q.type === 'choice' ? entry.q.options[entry.input] : entry.input)}`}</p><p>Answer: <strong>${esc(entry.q.answer)}${entry.q.unit ? ` ${esc(entry.q.unit)}` : entry.q.type === 'base' ? ` (base ${entry.q.answerBase})` : ''}</strong></p><p>${esc(entry.q.explanation)}</p>${sourceLink(entry.q)}</div></details>`).join('')}</div>` : '<div class="perfect-note"><span aria-hidden="true">✓</span><p>Everything clicked this round. Try another base or raise the difficulty.</p></div>'}
+    ${missed.length ? `<div class="review-area"><h2>Your takeaways <span>${missed.length}</span></h2>${missed.map((entry, i) => `<details class="review-item"><summary><span class="review-number">${String(i + 1).padStart(2, '0')}</span><span>${esc(entry.q.prompt)}</span><span class="review-plus" aria-hidden="true">+</span></summary><div class="review-content">${renderVisual(entry.q)}${entry.q.jurisdiction ? `<span class="jurisdiction">${esc(entry.q.jurisdiction)}</span>` : ''}<p class="muted">${entry.skipped ? 'Skipped' : `Your answer: ${esc(entry.q.type === 'choice' ? entry.q.options[entry.input] : entry.input)}`}</p><p>Answer: <strong>${esc(entry.q.answer)}${entry.q.unit ? ` ${esc(entry.q.unit)}` : entry.q.type === 'base' ? ` (base ${entry.q.answerBase})` : ''}</strong></p><p>${esc(entry.q.explanation)}</p>${sourceLink(entry.q)}</div></details>`).join('')}</div>` : '<div class="perfect-note"><span aria-hidden="true">✓</span><p>Everything clicked this round. Try another topic or raise the difficulty.</p></div>'}
   </section>`;
   main.querySelector('#again').addEventListener('click', () => start());
   main.querySelector('#review')?.addEventListener('click', () => start(missed.map(a => a.q)));

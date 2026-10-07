@@ -1,6 +1,6 @@
 {
   "name": "radix-quiz-lab",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "scripts": { "test": "node --test tests/engine.test.mjs", "start": "python3 -m http.server 8080 --directory docs" }

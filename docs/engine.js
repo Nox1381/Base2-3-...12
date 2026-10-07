@@ -1,12 +1,23 @@
 import { QUESTIONS } from './question-bank.js';
+import { makeCargoQuestion } from './cargo.js';
+import { makeMathQuestion } from './extra-questions.js';
 
 export const DIGITS = '0123456789AB';
 export const CATEGORIES = {
-  bases: { name: 'Number bases', short: 'Bases', description: 'Count, convert, and calculate in bases 2–12.', mark: '01', color: '#d9fc72' },
-  electronics: { name: 'Electronics', short: 'Electronics', description: 'Components, circuits, audio, and fault finding.', mark: '02', color: '#86c9ff' },
-  electrical: { name: 'Electrical engineering', short: 'Electrical', description: 'Power, motors, batteries, and real loads.', mark: '03', color: '#c4a5ff' },
-  fire: { name: 'Fire safety', short: 'Fire safety', description: 'Extinguishers, placement, and safe decisions.', mark: '04', color: '#ffad85' },
+  bases: { name: 'Number bases', short: 'Bases', description: 'Count, convert, and calculate in bases 2–12.', mark: '01', color: '#d9fc72', group: 'numbers' },
+  logic: { name: 'Digital logic', short: 'Logic', description: 'Gates, truth tables, counters, and timing.', mark: '02', color: '#d9fc72', group: 'numbers' },
+  maths: { name: 'Engineering maths', short: 'Maths', description: 'Units, formulas, calibration, and waveforms.', mark: '03', color: '#f3d884', group: 'numbers' },
+  electronics: { name: 'Electronics', short: 'Electronics', description: 'Components, circuits, audio, and fault finding.', mark: '04', color: '#86c9ff', group: 'circuits' },
+  electrical: { name: 'Electrical engineering', short: 'Electrical', description: 'Power, motors, batteries, and real loads.', mark: '05', color: '#c4a5ff', group: 'circuits' },
+  signals: { name: 'Signals & communication', short: 'Signals', description: 'Sampling, serial links, filtering, and noise.', mark: '06', color: '#81ddd0', group: 'circuits' },
+  python: { name: 'Python', short: 'Python', description: 'Read code, fix bugs, and run small programs.', mark: '07', color: '#f3d884', group: 'computing', coding: true },
+  msx: { name: 'MSX BASIC 1', short: 'MSX BASIC 1', description: 'Line numbers, loops, graphics, and subroutines.', mark: '08', color: '#ffacdb', group: 'computing', coding: true },
+  embedded: { name: 'Embedded systems', short: 'Embedded', description: 'GPIO, sensors, PWM, interrupts, and firmware.', mark: '09', color: '#86c9ff', group: 'computing' },
+  architecture: { name: 'Computer architecture', short: 'Architecture', description: 'Memory, CPU instructions, and MSX hardware ideas.', mark: '10', color: '#c4a5ff', group: 'computing' },
+  fire: { name: 'Fire safety', short: 'Fire safety', description: 'Extinguishers, placement, and safe decisions.', mark: '11', color: '#ffad85', group: 'safety' },
+  cargo: { name: 'Cargo-ship dangerous goods', short: 'IMDG cargo', description: 'Class 1 compatibility, container placement, and segregation.', mark: '12', color: '#81ddd0', group: 'safety' },
 };
+export const CATEGORY_GROUPS = { numbers: 'Numbers & logic', circuits: 'Circuits & signals', computing: 'Programming & computers', safety: 'Fire & cargo' };
 
 export function shuffle(items, rng = Math.random) {
   const copy = [...items];
@@ -168,7 +179,7 @@ export function makeEngineeringQuestion(category, difficulty, rng = Math.random)
 export function prepareChoice(question, rng = Math.random) {
   const correct = question.options[0];
   const options = shuffle(question.options, rng);
-  return { ...question, type: 'choice', options, correctIndex: options.indexOf(correct), answer: correct, hint: `Think about the ${question.topic.toLowerCase()} decision in this specific situation${question.jurisdiction ? ` and the ${question.jurisdiction} label` : ''}.` };
+  return { ...question, type: 'choice', options, correctIndex: options.indexOf(correct), answer: correct, hint: question.hint || `Think about the ${question.topic.toLowerCase()} decision in this specific situation${question.jurisdiction ? ` and the ${question.jurisdiction} label` : ''}.` };
 }
 
 export function checkAnswer(question, input) {
@@ -181,11 +192,13 @@ export function checkAnswer(question, input) {
 }
 
 export function eligibleQuestions(category, settings) {
-  return QUESTIONS.filter(q => q.category === category && q.level <= Number(settings.difficulty) && (category !== 'fire' || settings.fireScope === 'all' || (settings.fireScope === 'general' ? q.jurisdiction === 'General practice' : q.jurisdiction.startsWith(settings.fireScope === 'us' ? 'US' : 'UK'))));
+  return QUESTIONS.filter(q => q.category === category && q.level <= Number(settings.difficulty)
+    && (category !== 'fire' || !settings.fireScope || settings.fireScope === 'all' || (settings.fireScope === 'general' ? q.jurisdiction === 'General practice' : q.jurisdiction.startsWith(settings.fireScope === 'us' ? 'US' : 'UK')))
+    && (category !== 'cargo' || !settings.cargoFocus || settings.cargoFocus === 'all' || (settings.cargoFocus === 'segregation' ? q.focus !== 'labels' : q.focus === settings.cargoFocus)));
 }
 
 export function makeDeck(settings, count = 10, rng = Math.random, previous = new Set()) {
-  const categories = settings.category === 'mixed' ? Object.keys(CATEGORIES) : [settings.category];
+  const categories = settings.category === 'mixed' ? shuffle(Object.keys(CATEGORIES), rng) : [settings.category];
   const pools = Object.fromEntries(categories.map(c => [c, shuffle(eligibleQuestions(c, settings), rng)]));
   const cursor = Object.fromEntries(categories.map(c => [c, 0]));
   const deck = [];
@@ -194,7 +207,9 @@ export function makeDeck(settings, count = 10, rng = Math.random, previous = new
     let question;
     for (let tries = 0; tries < 30; tries++) {
       if (category === 'bases') question = makeBaseQuestion(settings, rng);
-      else if (category !== 'fire' && rng() < 0.45) question = makeEngineeringQuestion(category, settings.difficulty, rng);
+      else if (['electronics', 'electrical'].includes(category) && rng() < 0.45) question = makeEngineeringQuestion(category, settings.difficulty, rng);
+      else if (category === 'maths' && rng() < 0.55) question = makeMathQuestion(settings.difficulty, rng);
+      else if (category === 'cargo' && settings.cargoFocus !== 'labels' && rng() < 0.55) question = prepareChoice(makeCargoQuestion(settings, rng), rng);
       else {
         const pool = pools[category];
         if (!pool.length) throw new Error('No questions match this selection.');

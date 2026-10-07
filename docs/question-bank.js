@@ -1,6 +1,12 @@
+import { EXTRA_QUESTIONS } from './extra-questions.js';
+import { CARGO_QUESTIONS, IMDG_SOURCE } from './cargo.js';
+
 // Correct answers are always options[0] here; the engine shuffles choices for play.
 // Numeric placement guidance is labelled by jurisdiction, never presented as worldwide law.
 export const SOURCES = {
+  imdg: IMDG_SOURCE,
+  python: { name: 'Python documentation · Tutorial', url: 'https://docs.python.org/3/tutorial/' },
+  msx: { name: 'MSX Resource Center · MSX-BASIC instructions', url: 'https://www.msx.org/wiki/MSX-BASIC_Instructions' },
   osha: { name: 'US OSHA · 29 CFR 1910.157', url: 'https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.157' },
   placement: { name: 'US OSHA · Placement and spacing guidance', url: 'https://www.osha.gov/etools/evacuation-plans-procedures/emergency-standards/portable-extinguishers/placement' },
   basics: { name: 'US OSHA · Extinguisher basics', url: 'https://www.osha.gov/etools/evacuation-plans-procedures/emergency-standards/portable-extinguishers/about' },
@@ -14,6 +20,8 @@ export const SOURCES = {
 const q = (id, category, level, topic, prompt, options, explanation, extra = {}) => ({ id, category, level, topic, prompt, options, explanation, ...extra });
 
 export const QUESTIONS = [
+  ...EXTRA_QUESTIONS,
+  ...CARGO_QUESTIONS,
   q('el-led', 'electronics', 1, 'LEDs', 'You connect a bare LED directly to a 9 V battery. What should you add to control its current?', ['A correctly sized resistor in series', 'A resistor in parallel with the battery', 'A bigger battery', 'Only a capacitor across the LED'], 'A series resistor limits LED current. Use R = (supply voltage − LED forward voltage) / desired current.'),
   q('el-buffer', 'electronics', 2, 'Guitar pedals', 'A passive guitar loses high frequencies when connected to your pedal. Which input change is most likely to help?', ['Use a high-input-impedance buffer', 'Put a 100 Ω resistor across the input', 'Increase the LED brightness', 'Connect the pickup directly to a speaker'], 'A high-impedance input reduces pickup loading. A buffer also provides a lower-impedance signal to the next stage.'),
   q('el-gain', 'electronics', 2, 'Amplifiers', 'A guitar preamp has enough power-supply headroom. How do you increase the gain of its non-inverting op-amp stage?', ['Increase the feedback-resistor / ground-resistor ratio', 'Make both feedback resistors zero', 'Swap the supply pins', 'Disconnect all feedback'], 'The ideal gain is 1 + Rf/Rg. Real output swing, bandwidth, and stability still limit the result.', { source: 'ti' }),

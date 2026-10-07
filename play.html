@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101819">
-  <meta name="description" content="A personal quiz game for number bases 2–12, practical electronics, electrical engineering, and international fire safety.">
+  <meta name="description" content="Practice 12 topics: number bases, circuits, Python, MSX BASIC 1, digital logic, fire safety and IMDG cargo segregation. Quizzes and live coding challenges.">
   <title>Radix — Quiz Lab</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23d9fc72'/%3E%3Ctext x='7' y='24' font-family='monospace' font-size='25' font-weight='bold' fill='%23101819'%3E2%3C/text%3E%3C/svg%3E">
   <style>
@@ -16,6 +16,13 @@
 @media(max-width:950px){.site-shell{padding:0 28px}.category-grid{grid-template-columns:repeat(2,1fr)}.category-card{min-height:190px}.category-name{min-height:unset}.category-top{margin-bottom:16px}.category-description{max-width:280px}.category-foot{font-size:11px}.setup{padding-top:32px}.intro h1{font-size:39px}.controls-row{grid-template-columns:repeat(2,1fr)}.header-caption{display:none}.repo-link{margin-left:auto;border:0}.home-foot{flex-wrap:wrap}.question-card{padding:27px}.quiz-foot{display:block}.quiz-foot>span{display:block;margin-top:5px}}
 @media(max-width:570px){.site-shell{padding:0 18px}.site-header{height:83px}.brand{font-size:29px}.brand-mark{width:37px;height:37px}.repo-link{padding-left:8px;font-size:13px}.setup{padding-top:28px}.intro h1{font-size:32px;line-height:1.2}.intro>p:last-child{font-size:15px;margin-bottom:22px}.category-grid{gap:10px}.category-card{padding:15px 13px;min-height:195px}.category-name{font-size:19px}.category-description{font-size:13px;line-height:1.5;margin-top:7px}.category-foot{font-size:10px;padding-top:16px}.category-top{margin-bottom:20px}.setup-panel{padding:18px 16px}.panel-label{align-items:flex-start;margin-bottom:17px}.panel-note{font-size:12px}.panel-label .eyebrow{font-size:10px}.controls-row{gap:14px 10px}.controls-row label{font-size:13px}.controls-row label:nth-child(4),.controls-row label:has(#fireScope){grid-column:1 / -1}select{font-size:14px}.start-row{align-items:stretch;flex-direction:column}.start-description{font-size:15px}.primary-button{width:100%;justify-content:center}.start-description small{font-size:12px}.scope-note{font-size:12px}.home-foot{gap:10px;font-size:11px}.site-footer{font-size:11px;align-items:flex-start;justify-content:center;flex-direction:column;padding:19px 0;gap:8px}.quiz{padding-top:22px}.round-top{gap:8px}.round-position{font-size:10px;letter-spacing:.09em}.round-score{font-size:18px}.question-meta{gap:9px;margin-top:22px;font-size:12px}.question-card{padding:22px 17px}.question-title{font-size:22px;line-height:1.4;margin-bottom:22px}.answer-choice{padding:12px 11px;gap:10px;font-size:15px;line-height:1.5}.choice-key{width:22px;height:25px}.answer-actions{align-items:stretch;flex-direction:column;gap:15px;margin-top:18px}.answer-actions>div{justify-content:space-between}.text-button{font-size:14px}.number-display{padding:22px 9px;font-size:28px;letter-spacing:0;margin-bottom:22px}.input-unit{font-size:13px;padding:0 12px}.answer-input-wrap input{font-size:25px;padding:15px 13px}.input-help{font-size:12px}.givens{padding:15px 13px;gap:12px}.givens>div{padding:0 8px;min-width:90px}.givens strong{font-size:20px}.givens span{font-size:11px}.feedback{padding:18px 15px}.feedback-heading strong{font-size:22px}.feedback-heading>span{font-size:12px}.explanation{font-size:15px}.source-link{font-size:12px}.results{padding-top:32px}.results>h1{font-size:32px}.result-score{gap:20px}.result-score>strong{font-size:74px}.result-score>div{font-size:17px}.result-score small{font-size:13px}.result-stats{gap:8px}.result-stats>div{padding:15px 10px}.result-stats span{font-size:12px;line-height:1.4;min-height:34px;margin-bottom:6px}.result-stats strong{font-size:24px}.result-stats small{display:block;font-size:11px;margin-top:4px}.result-actions>*{width:100%;text-align:center}.result-actions .text-button{margin:0}.review-item summary{font-size:14px;gap:10px}.review-content{padding-left:24px}.perfect-note{padding:18px}.review-area{margin-top:30px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+.category-groups{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.group-button{display:flex;align-items:center;gap:12px;min-height:42px;padding:10px 15px;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--muted);font:inherit;font-size:13px}.group-button span{font:11px monospace;opacity:.7}.group-button.active{color:var(--text);border-color:var(--accent);background:var(--surface)}.group-button:hover{color:var(--text)}.category-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}.category-foot{line-height:1.6}.coding-entry{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px 24px;border:1px solid var(--border);border-radius:8px;background:var(--surface);margin-top:18px}.coding-entry strong{font-size:15px}.coding-entry p{color:var(--muted);font-size:13px;margin:6px 0 0}.coding-entry button{flex-shrink:0}
+.question-code{background:#0d1415;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:6px;padding:20px 24px;margin:0 0 24px;font:16px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;tab-size:4}.cargo-comparison{margin:0 0 24px;padding:18px;border:1px solid var(--border);background:#0d1415;border-radius:6px}.cargo-comparison>p{color:var(--muted);font-size:12px;margin:0 0 14px;line-height:1.6}.cargo-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}.cargo-pair>div{padding:15px;border:1px solid #36544e;border-radius:4px;min-width:0}.cargo-pair span{display:block;font:10px/1.6 monospace;color:var(--muted);letter-spacing:.08em;margin-bottom:8px}.cargo-pair strong{display:block;font-family:ui-monospace,Consolas,monospace;font-size:19px;font-weight:500;color:var(--accent);line-height:1.5;overflow-wrap:anywhere}.source-link{overflow-wrap:anywhere}.review-content .question-code,.review-content .cargo-comparison{margin-top:18px}
+.coding-lab{padding:28px 0 42px;max-width:1040px;margin:auto}.lab-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}.coding-lab>h1{font-family:'Space Grotesk',sans-serif;font-size:40px;letter-spacing:-.04em;font-weight:500;margin:8px 0 24px}.lab-selection{display:flex;align-items:center;gap:18px;max-width:560px;margin-bottom:28px}.lab-selection label{white-space:nowrap;font-size:13px;color:var(--muted)}.lab-selection select{flex:1;min-width:0}.coding-lab>h2{font-size:23px;font-weight:500;margin:0 0 10px}.lab-prompt{color:var(--muted);font-size:16px;line-height:1.7;max-width:780px;margin:0 0 24px}.lab-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:20px}.lab-editor-panel,.lab-output-panel{min-width:0;padding:22px;border:1px solid var(--border);background:var(--surface);border-radius:8px}.lab-editor-panel>label{display:block;font-size:13px;color:var(--muted);margin-bottom:12px}#code-editor{display:block;width:100%;height:285px;padding:16px;border:1px solid #37504d;border-radius:5px;resize:vertical;font:15px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--text);background:#0b1213;tab-size:4;white-space:pre;overflow:auto}#code-editor:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.lab-buttons{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px}.lab-buttons .primary-button{padding:12px 19px}.lab-buttons button:disabled{opacity:.45;cursor:default}.lab-output-panel pre,.lab-help pre{padding:15px;background:#0b1213;border:1px solid var(--border);border-radius:5px;white-space:pre-wrap;overflow-wrap:anywhere;font:15px/1.6 ui-monospace,Consolas,monospace;margin:12px 0 22px}.lab-output-panel #code-output{min-height:130px;margin-bottom:12px}.run-status{font-size:13px;line-height:1.6;color:var(--muted);min-height:24px;margin-bottom:0}.run-status.passed{color:var(--accent)}.lab-help{padding:18px 20px;border:1px solid var(--border);border-radius:6px;margin-top:22px;font-size:14px;color:var(--muted);line-height:1.7}.lab-help summary{cursor:pointer;color:var(--text)}.lab-foot{font-size:12px;color:var(--muted);line-height:1.7;margin-top:22px}.msx-display-panel{padding:22px;background:#0b1213;border:1px solid var(--border);border-radius:8px;margin-top:20px}#msx-mount{max-width:100%;overflow:hidden;margin-top:16px}#wmsx-screen{max-width:100%;margin:auto!important}#wmsx-screen canvas{max-width:100%;height:auto}.msx-display-panel[hidden]{display:none}
+@media(max-width:950px){.category-grid{grid-template-columns:repeat(2,1fr)}.lab-grid{grid-template-columns:1fr 1fr}.lab-editor-panel,.lab-output-panel{padding:18px}}
+@media(max-width:660px){.lab-grid{grid-template-columns:1fr}.coding-entry{align-items:stretch;flex-direction:column;padding:18px}.coding-entry button{width:100%}.coding-lab>h1{font-size:32px}.lab-prompt{font-size:15px}.lab-selection{gap:10px}.lab-buttons .primary-button{width:auto}.lab-buttons .text-button{margin-left:auto}.lab-output-panel #code-output{min-height:100px}.msx-display-panel{padding:14px}}
+@media(max-width:570px){.category-groups{display:grid;grid-template-columns:1fr 1fr;gap:8px}.group-button{padding:9px 10px;gap:6px;justify-content:space-between;font-size:12px;line-height:1.5}.category-foot{font-size:9px}.question-code{padding:15px 12px;font-size:13px}.cargo-comparison{padding:12px}.cargo-pair{gap:8px}.cargo-pair>div{padding:10px}.cargo-pair strong{font-size:15px}.cargo-pair span{font-size:8px;letter-spacing:0}.controls-row label:has(#cargoFocus){grid-column:1/-1}.lab-top{margin-bottom:24px}#code-editor{font-size:13px;padding:12px;height:260px}.lab-editor-panel,.lab-output-panel{padding:15px}.lab-buttons{gap:8px}.lab-buttons .text-button{font-size:12px}.lab-buttons .primary-button,.lab-buttons .secondary-button{font-size:13px;padding:12px 15px}.lab-foot{font-size:11px}}
 
 </style>
 
@@ -33,9 +40,247 @@
   </div>
   <noscript><p class="noscript">Enable JavaScript to play this quiz.</p></noscript>
 <script type="module">
+const xq = (id, category, level, topic, prompt, options, explanation, extra = {}) => ({ id, category, level, topic, prompt, options, explanation, ...extra });
+const py = (id, level, topic, prompt, code, options, explanation, expected) => xq(`py-${id}`, 'python', level, topic, prompt, options, explanation, { code, source: 'python', ...(expected === undefined ? {} : { sampleOutput: expected }) });
+const basic = (id, level, topic, prompt, code, options, explanation) => xq(`msx-${id}`, 'msx', level, topic, prompt, options, explanation, { code, source: 'msx' });
+
+const EXTRA_QUESTIONS = [
+  xq('logic-and', 'logic', 1, 'Interlocks', 'A low-voltage controller may run only when ENABLE is 1 AND READY is 1. ENABLE = 1 and READY = 0. What should RUN be?', ['0', '1', 'Always alternate', 'Depends on which input arrived first'], 'An AND gate produces 1 only when every input is 1. This is a logic exercise; actual safety interlocks require a suitable safety design.'),
+  xq('logic-or', 'logic', 1, 'Alarm logic', 'A panel lights an indicator if either of two sensors is active. Which Boolean function describes this?', ['OR', 'AND', 'NOT', 'XNOR'], 'OR is true when at least one input is true, including when both are true.'),
+  xq('logic-xor', 'logic', 1, 'Switch states', 'An indicator should light when exactly one of two switches is on. Which gate matches this?', ['XOR', 'OR', 'AND', 'NOR'], 'XOR is true for different input states (01 or 10), and false for 00 and 11.'),
+  xq('logic-active-low', 'logic', 1, 'Signal polarity', 'A chip’s /RESET input is active LOW. Which voltage state asserts reset within its valid logic range?', ['Logic 0', 'Logic 1', 'Either state equally', 'Only an alternating signal'], 'An active-low control is asserted by logic 0. The slash, bar or suffix often identifies that polarity.'),
+  xq('logic-nand', 'logic', 1, 'Truth tables', 'A NAND gate has inputs A = 1 and B = 1. What is its output?', ['0', '1', '2', 'Floating'], 'NAND is NOT(AND). AND is 1 for 11, so NAND is 0.'),
+  xq('logic-invert', 'logic', 1, 'Gate building', 'You connect both inputs of a NAND gate to the same signal A. What function results?', ['NOT A', 'A', 'Always 0', 'Always 1'], 'A AND A = A. Negating that gives NOT A, so a NAND with tied inputs acts as an inverter.'),
+  xq('logic-demorgan', 'logic', 2, 'Alarm design', 'An alarm condition is NOT(A AND B). Which equivalent form can you use?', ['(NOT A) OR (NOT B)', '(NOT A) AND (NOT B)', 'A OR B', 'A XOR B'], 'De Morgan’s law replaces a negated AND with an OR of the negated inputs.'),
+  xq('logic-dff', 'logic', 2, 'State storage', 'A positive-edge-triggered D flip-flop has D = 1 just before a valid rising clock edge, meeting setup and hold times. What does Q become?', ['1', '0 regardless of D', 'The clock frequency', 'A copy of D at every instant'], 'A D flip-flop samples D at the specified clock edge and stores that state between edges.'),
+  xq('logic-debounce', 'logic', 2, 'Find the fault', 'One button press advances a digital counter several times. The switch directly feeds the clock input. What is the likely cause?', ['Contact bounce creates several transitions', 'The counter needs AC mains', 'The button stores several binary digits', 'An AND gate always multiplies pulses'], 'Mechanical contacts often bounce. Use an appropriate debouncing method before treating the press as one digital event.'),
+  xq('logic-mux', 'logic', 2, 'Signal selection', 'You need to route one of four digital inputs to one output using a 2-bit selection value. Which block fits?', ['A 4-to-1 multiplexer', 'A 1-bit inverter', 'A rectifier', 'A current transformer'], 'Two select bits encode four choices. A multiplexer connects the selected input to the output.'),
+  xq('logic-latch', 'logic', 2, 'Timing', 'A transparent-high D latch has ENABLE = 1. What normally happens to Q?', ['Q follows D, subject to propagation delay', 'Q can change only on a rising edge', 'Q always becomes 0', 'Q is disconnected from all logic'], 'A latch is level-sensitive: it is transparent during its enable level. A flip-flop is edge-triggered.'),
+  xq('logic-metastable', 'logic', 3, 'Clock domains', 'An asynchronous input is sampled near a clock edge. What does a suitable multi-stage synchronizer mainly do?', ['Reduce the probability that metastability propagates into downstream logic', 'Guarantee that metastability can never occur', 'Convert the input to mains voltage', 'Store the entire input waveform'], 'The extra resolution time reduces failure probability; it is not an absolute elimination of metastability. Multi-bit data requires a suitable crossing protocol.'),
+
+  xq('math-milli', 'maths', 1, 'Units in practice', 'A sensor consumes 250 mA. What is that current in amperes?', ['0.25 A', '250 A', '2.5 A', '0.0025 A'], 'Milli means one thousandth. 250 mA = 250 / 1000 A = 0.25 A.'),
+  xq('math-micro', 'maths', 1, 'Units in practice', 'A capacitor is 4700 nF. Which equivalent value is correct?', ['4.7 µF', '4700 µF', '0.0047 µF', '47 mF'], '1000 nF = 1 µF, so 4700 nF = 4.7 µF.'),
+  xq('math-rearrange', 'maths', 1, 'Rearranging formulas', 'You know the desired power P and the supply voltage V. Starting with P = VI, how do you find current?', ['I = P / V', 'I = P × V', 'I = V / P', 'I = P − V'], 'Divide both sides of P = VI by V. Units also check: watts / volts = amperes.'),
+  xq('math-tolerance', 'maths', 2, 'Component tolerance', 'A 100 Ω resistor has ±5% tolerance. Which range is within its stated tolerance?', ['95–105 Ω', '5–100 Ω', '99.95–100.05 Ω', '100–150 Ω'], '5% of 100 Ω is 5 Ω, so the nominal tolerance range is 100 ± 5 Ω.'),
+  xq('math-rms', 'maths', 2, 'Waveforms', 'A pure sine wave is 10 V peak. What is its approximate RMS voltage?', ['7.07 V', '20 V', '10 V', '5 V'], 'For a sine wave, Vrms = Vpeak / √2. This relation does not apply to every waveform shape.'),
+  xq('math-period', 'maths', 1, 'Timing', 'A repeating event happens 1000 times per second. What is its period?', ['1 ms', '1 s', '1000 s', '100 ms'], 'Period T = 1/f = 1/1000 second = 1 ms.'),
+  xq('math-db', 'maths', 3, 'Decibels', 'A voltage amplifier doubles signal amplitude, with equal input/output reference impedance. What is its approximate voltage gain in dB?', ['6.02 dB', '2 dB', '3.01 dB', '20 dB'], 'Voltage gain in dB under the stated condition is 20 log10(Vout/Vin). For a factor of 2 this is about 6.02 dB.'),
+  xq('math-average', 'maths', 1, 'Measurement', 'You record sensor readings 10, 12 and 14. What is their arithmetic mean?', ['12', '36', '14', '2'], 'Add the readings and divide by their count: (10 + 12 + 14)/3 = 12.'),
+  xq('math-slope', 'maths', 2, 'Calibration', 'A sensor output rises from 1 V to 3 V while temperature rises from 20 °C to 40 °C. Assuming a linear response, what is its slope?', ['0.1 V/°C', '10 V/°C', '2 V/°C', '20 V/°C'], 'Slope = change in output / change in input = (3 − 1)/(40 − 20) = 0.1 V/°C.'),
+  xq('math-error', 'maths', 2, 'Measurement error', 'A meter reads 10.2 V when the reference is 10.0 V. What is the signed percentage error relative to the reference?', ['+2%', '+0.2%', '−2%', '+20%'], 'Percentage error = (measured − reference)/reference × 100 = 0.2/10 × 100 = +2%.'),
+
+  xq('sig-serial', 'signals', 1, 'UART wiring', 'Two compatible low-voltage UART boards share signal ground. How do you connect their data lines for two-way communication?', ['TX of each board to RX of the other', 'TX to TX and RX to RX', 'Both TX pins directly to ground', 'Only connect RX to RX'], 'One device’s transmitter drives the other device’s receiver. Check signal levels and interface standards too.'),
+  xq('sig-baud', 'signals', 1, 'UART timing', 'One UART is configured for 9600 baud and the other for 115200 baud. What should you check first when receiving garbled characters?', ['Make baud rate and frame format agree', 'Double the wire length', 'Set both pins as outputs', 'Remove their signal reference'], 'Both ends must agree on timing and frame settings, within their supported tolerances.'),
+  xq('sig-i2c', 'signals', 1, 'I²C bus', 'A standard I²C bus uses open-drain/open-collector SDA and SCL. What brings the released lines HIGH?', ['Suitable pull-up resistors', 'Every device driving HIGH strongly', 'A resistor in series with each supply only', 'Reversing the clock and data wires'], 'Devices pull a line low or release it; pull-ups establish the high level. Values depend on bus capacitance, speed and device limits.'),
+  xq('sig-spi', 'signals', 1, 'SPI selection', 'Several peripherals share an SPI bus. What normally tells a particular peripheral that a transfer is for it?', ['Its chip-select signal', 'A unique UART baud rate', 'A mains frequency change', 'Its LED colour'], 'A common SPI arrangement shares clock/data but uses individual chip-select signals. Exact behaviour is peripheral-specific.'),
+  xq('sig-antialias', 'signals', 2, 'Sampling', 'Why put an anti-alias low-pass filter before an ADC?', ['Reduce higher-frequency content that would fold into the sampled band', 'Restore information after it has already aliased', 'Guarantee a higher bit depth', 'Make every signal DC'], 'Content above the usable sampling band can appear at false lower frequencies. The filter must act before sampling.'),
+  xq('sig-alias', 'signals', 2, 'Sampling', 'A 900 Hz sine is sampled at exactly 1000 samples/s with no anti-alias filter. What lower frequency does it alias to?', ['100 Hz', '9000 Hz', '1900 Hz', '500 Hz'], '900 Hz folds around the 500 Hz Nyquist frequency to 100 Hz: |900 − 1000| = 100. Phase may differ.'),
+  xq('sig-sampling', 'signals', 1, 'Sampling', 'To reconstruct an ideally band-limited signal containing frequencies up to 3 kHz, which sampling rate is safely above twice the highest frequency?', ['10 ksample/s', '3 ksample/s', '4 ksample/s', '5 ksample/s'], 'The ideal condition requires more than 6 ksample/s here. Practical filters need a transition band, so designs usually allow extra margin.'),
+  xq('sig-differential', 'signals', 2, 'Noise rejection', 'A receiver measures the voltage difference across a differential pair. Equal interference is added to both wires. What advantage does this provide?', ['Common-mode interference can be rejected within the receiver’s limits', 'The signal no longer needs any voltage limits', 'All noise is eliminated in every situation', 'The pair becomes a power supply'], 'The subtraction can cancel interference shared by both conductors. Balance, termination and common-mode ratings still matter.'),
+  xq('sig-termination', 'signals', 2, 'Long cables', 'Fast digital edges on a long transmission line cause ringing at the receiver. What design issue should you investigate?', ['Impedance matching and suitable termination', 'Whether the cable has enough paint', 'Whether the bits are decimal', 'Only the average DC current'], 'Reflections occur at impedance changes. The relevant edge time and line delay can make even a modest clock rate a transmission-line problem.'),
+  xq('sig-bandwidth', 'signals', 2, 'Audio filtering', 'An audio low-pass filter has its cutoff below the upper notes you want to preserve. What will likely happen?', ['Those higher-frequency components are attenuated', 'All bass disappears while treble increases', 'It generates missing harmonics exactly', 'It changes all notes to DC'], 'A low-pass filter attenuates frequencies above its passband. Choose its response around the actual signal bandwidth.'),
+  xq('sig-8n1', 'signals', 2, 'Serial throughput', 'At 9600 baud, an 8N1 UART frame uses 1 start, 8 data and 1 stop bit. Ignoring gaps, what is the maximum payload rate?', ['960 bytes/s', '9600 bytes/s', '1200 bytes/s', '96 bytes/s'], 'Each payload byte consumes 10 line bits, so 9600/10 = 960 bytes/s.'),
+  xq('sig-parity', 'signals', 2, 'Error detection', 'A simple parity bit detects which error pattern reliably within a protected frame?', ['An odd number of flipped bits', 'Every possible bit error pattern', 'Only errors in decimal digits', 'No single-bit errors'], 'An odd number of flips changes parity. An even number may leave parity unchanged; parity is detection, not a general correction scheme.'),
+
+  py('range', 1, 'Read the output', 'What does this print?', 'total = 0\nfor n in range(4):\n    total += n\nprint(total)', ['6', '10', '4', '3'], 'range(4) yields 0, 1, 2, 3. Their sum is 6; the stop value is excluded.', '6'),
+  py('input', 1, 'Find the bug', 'The user types 7. Which change makes the final line print the number 8?', 'count = input("Count: ")\nprint(count + 1)', ['Convert input with int(input("Count: "))', 'Replace + with a comma only', 'Remove the quotation marks from the prompt', 'Rename count to COUNT'], 'input() returns text. Convert suitable numeric input before doing arithmetic. Real applications should also handle invalid input.'),
+  py('append', 1, 'Read the output', 'What does this print?', 'readings = [10, 20]\nreadings.append(30)\nprint(len(readings))', ['3', '30', '2', '60'], 'append adds one element to the existing list. len then returns 3.', '3'),
+  py('division', 1, 'Operators', 'What does this print?', 'print(7 // 2)', ['3', '3.5', '4', '1'], '// performs floor division. 7 divided by 2 is 3.5, whose floor is 3.', '3'),
+  py('remainder', 1, 'Practical arithmetic', 'A packet counter wraps every 8 packets. What does this print?', 'packet = 11\nprint(packet % 8)', ['3', '8', '1', '11'], 'Modulo returns the remainder. 11 = 1 × 8 + 3.', '3'),
+  py('branch', 1, 'Control flow', 'A temperature reading is 35. What does the program print?', 'temperature = 35\nif temperature >= 30:\n    print("HOT")\nelse:\n    print("OK")', ['HOT', 'OK', 'HOT then OK', 'Nothing'], '35 >= 30 is true, so the if branch runs and the else branch does not.', 'HOT'),
+  py('slice', 2, 'Read the output', 'What does this print?', 'samples = [4, 8, 12, 16]\nprint(samples[1:3])', ['[8, 12]', '[4, 8, 12]', '[8, 12, 16]', '[12]'], 'Slicing includes the start index (1) and excludes the stop index (3).', '[8, 12]'),
+  py('return', 2, 'Functions', 'What does this print?', 'def power(v, i):\n    return v * i\n\nprint(power(12, 2))', ['24', '14', '6', 'None'], 'The function returns the product. The outer print displays that returned value.', '24'),
+  py('alias', 2, 'Find the bug', 'Changing b also changes a. Which initialization makes a separate shallow copy of the list?', 'a = [1, 2]\nb = a\nb.append(3)', ['b = a.copy()', 'b = a again', 'b = None', 'b = len(a)'], 'Assignment shares the same list object. a.copy() makes a new list; nested objects still require care because the copy is shallow.'),
+  py('loop-fix', 2, 'Find the bug', 'This counter is meant to print 0, 1, 2 then stop. What is missing?', 'n = 0\nwhile n < 3:\n    print(n)', ['Increment n inside the loop', 'Convert n to a string', 'Change while to an import', 'Add another print before the loop'], 'Without updating n, the condition remains true forever. Add n += 1 inside the loop.'),
+  py('dictionary', 2, 'Sensor data', 'What does this print?', 'sensor = {"voltage": 12, "current": 2}\nprint(sensor["voltage"] * sensor["current"])', ['24', '14', '"voltagecurrent"', '2'], 'Dictionary keys retrieve the values 12 and 2; their product is 24.', '24'),
+  py('default-list', 3, 'Find the bug', 'Calls unexpectedly share old readings. What is a standard fix for this function’s default argument?', 'def record(value, readings=[]):\n    readings.append(value)\n    return readings', ['Default to None and create a new list inside when needed', 'Move append before def', 'Use the same list with a different name', 'Replace return with input'], 'Default arguments are evaluated when the function is defined. A mutable list is reused across calls that omit that argument.'),
+
+  basic('loop', 1, 'Read the program', 'Which numbers are printed, in order?', '10 FOR I=1 TO 3\n20 PRINT I\n30 NEXT I', ['1, 2, 3', '0, 1, 2', '1, 2', '3, 2, 1'], 'MSX BASIC FOR includes the end value when the step reaches it. The default STEP is 1.'),
+  basic('string', 1, 'Variables', 'Which variable is a string variable in MSX BASIC 1?', '10 NAME$="RADIX"\n20 PRINT NAME$', ['NAME$', 'NAME%', 'NAME!', 'NAME#'], 'The $ suffix identifies a string. %, ! and # are numeric type suffixes.'),
+  basic('jump', 1, 'Program flow', 'Which word is printed?', '10 GOTO 30\n20 PRINT "A"\n30 PRINT "B"\n40 END', ['B', 'A', 'A then B', 'Neither'], 'GOTO 30 skips line 20. Line 30 prints B, and END stops the program.'),
+  basic('gosub', 1, 'Subroutines', 'Which words are printed, in order?', '10 GOSUB 100\n20 PRINT "DONE"\n30 END\n100 PRINT "HELLO"\n110 RETURN', ['HELLO then DONE', 'DONE then HELLO', 'Only HELLO', 'HELLO forever'], 'GOSUB saves a return point. RETURN resumes at line 20. END prevents normal execution from falling into the subroutine.'),
+  basic('data', 1, 'Stored data', 'Which value is printed?', '10 DATA 12,24,48\n20 READ A,B\n30 PRINT B', ['24', '12', '48', '2'], 'READ consumes DATA values in order. A receives 12 and B receives 24.'),
+  basic('screen', 1, 'MSX1 graphics', 'Which command selects the MSX1 256 × 192 graphics mode used by SCREEN 2 programs?', '10 REM CHOOSE A SCREEN MODE', ['SCREEN 2', 'SCREEN 5', 'SCREEN 8', 'SCREEN 12'], 'SCREEN 2 is an MSX1 graphics mode. SCREEN 5 and 8 require MSX2; SCREEN 12 requires MSX2+ capabilities.'),
+  basic('line-order', 1, 'Line numbers', 'You enter these lines in the shown order. Which words are printed when you RUN?', '20 PRINT "SECOND"\n10 PRINT "FIRST"\n30 END', ['FIRST then SECOND', 'SECOND then FIRST', 'Only SECOND', 'Nothing until lines are re-entered'], 'Numbered program lines execute in increasing line-number order, unless a control-flow statement redirects execution.'),
+  basic('step', 2, 'Loops', 'Which values are printed?', '10 FOR I=6 TO 2 STEP -2\n20 PRINT I\n30 NEXT I', ['6, 4, 2', '6, 5, 4, 3, 2', '2, 4, 6', '6, 4'], 'A negative STEP counts down. The end value 2 is included here.'),
+  basic('if', 1, 'Decisions', 'Which word is printed?', '10 T=35\n20 IF T>=30 THEN PRINT "HOT" ELSE PRINT "OK"\n30 END', ['HOT', 'OK', 'Both', 'Neither'], 'The condition is true. MSX BASIC executes the THEN branch.'),
+  basic('dim', 2, 'Arrays', 'With this declaration, which indexes are available for A?', '10 DIM A(3)', ['0, 1, 2, 3', '1, 2, 3 only', '0, 1, 2 only', '3 only'], 'In MSX BASIC, the DIM value is the upper bound; indexing starts at 0. A(3) provides four elements.'),
+  basic('restore', 2, 'DATA and READ', 'Which values are printed?', '10 DATA 5,9\n20 READ A\n30 RESTORE\n40 READ B\n50 PRINT A;B', ['5 and 5', '5 and 9', '9 and 5', '9 and 9'], 'RESTORE resets the DATA read position to the start, so B receives 5 again.'),
+  basic('return-bug', 2, 'Find the bug', 'Why can this program report RETURN without GOSUB after printing DONE?', '10 GOSUB 100\n20 PRINT "DONE"\n100 PRINT "SUB"\n110 RETURN', ['It falls into the subroutine again; add END after the main program', 'GOSUB never saves a return point', 'PRINT cannot use string literals', 'Line numbers must always increase by 1'], 'After the first RETURN, execution resumes at line 20 then continues into line 100. The second RETURN has no matching GOSUB. End or redirect the main path.'),
+
+  xq('em-button', 'embedded', 1, 'Button input', 'A button connects a GPIO to ground when pressed, and the input has a pull-up. Which state means pressed?', ['LOW', 'HIGH', 'Both states', 'A negative supply voltage'], 'The pull-up makes an open switch read HIGH; the pressed switch pulls the pin LOW.'),
+  xq('em-pwm', 'embedded', 1, 'LED brightness', 'An LED driver uses a fixed PWM frequency. What usually controls average brightness?', ['Duty cycle', 'The variable’s name', 'The program file extension', 'UART parity'], 'Duty cycle is the fraction of each cycle spent on. The LED driver and current limits must also be suitable.'),
+  xq('em-adc', 'embedded', 1, 'ADC readings', 'An ideal unsigned 10-bit ADC reports which range of integer codes?', ['0–1023', '0–10', '1–1024 only', '0–65535'], '10 bits encode 2^10 = 1024 distinct codes, numbered 0 through 1023.'),
+  xq('em-block', 'embedded', 1, 'Responsive code', 'A device must watch a button while blinking an LED. Why can a long blocking delay be a problem?', ['The loop cannot service the button during that delay', 'It always doubles battery voltage', 'It converts the button to an output', 'It changes the CPU into RAM'], 'Use elapsed-time checks or suitable scheduling so other tasks can run between LED changes.'),
+  xq('em-driver', 'embedded', 1, 'Actuator control', 'A GPIO controls a large load through a driver. What belongs in the firmware’s role?', ['Set the control signal; let a suitably rated driver handle load current', 'Supply all load current from a software variable', 'Ignore the driver’s enable polarity', 'Assume every GPIO can drive a motor directly'], 'Firmware controls the interface. The external circuit must meet current, voltage and protection requirements.'),
+  xq('em-sensor-range', 'embedded', 1, 'Sensor scaling', 'A temperature sensor maps 0–100 °C linearly to 0–1000 counts. What temperature corresponds to 250 counts?', ['25 °C', '250 °C', '2.5 °C', '75 °C'], '250/1000 of the full-scale range is 0.25 × 100 = 25 °C.'),
+  xq('em-isr', 'embedded', 2, 'Interrupts', 'A time-critical interrupt routine performs slow text printing. What is a better structure?', ['Capture the essential event quickly, then process/print outside the interrupt', 'Add more blocking delays inside the interrupt', 'Disable all inputs permanently', 'Repeat the printing forever'], 'Long interrupt work can delay other service and create timing problems. Hand off data to the main loop using an appropriate synchronization mechanism.'),
+  xq('em-watchdog', 'embedded', 2, 'Recovery', 'What does a watchdog timer commonly do if firmware stops servicing it?', ['Triggers a configured reset or recovery action', 'Makes a stuck loop finish successfully', 'Increases RAM automatically', 'Verifies every sensor is calibrated'], 'A watchdog can help recover from hangs, but must be integrated into a suitable fault-handling design.'),
+  xq('em-i2c-address', 'embedded', 2, 'Find the fault', 'Two identical fixed-address I²C sensors are on the same bus. Reads do not identify them separately. What can help?', ['Use address selection if supported, separate buses, or a suitable bus multiplexer', 'Use different variable names only', 'Connect SDA to supply without a pull-up', 'Read both at different UART baud rates'], 'The bus address selects a device. Software variable names cannot resolve an address collision.'),
+  xq('em-wrap', 'embedded', 3, 'Timer rollover', 'With an unsigned wrapping tick counter, which pattern handles elapsed time across rollover, within the counter’s intended comparison interval?', ['Compare unsigned (now − previous) with the interval', 'Require now to always be greater than previous', 'Reset the CPU every millisecond', 'Convert every timestamp to a string'], 'Unsigned subtraction is modulo the counter range. Use the correct width and interval limits for the implementation.'),
+  xq('em-volatile', 'embedded', 3, 'Shared state', 'In C firmware, an interrupt changes a variable read by the main loop. Is volatile alone enough to guarantee an atomic multi-byte read?', ['No: it does not provide atomicity or a general synchronization protocol', 'Yes: volatile makes every operation atomic', 'Yes: it disables all interrupts', 'Yes: it adds a hardware mutex automatically'], 'volatile affects accesses but does not guarantee atomic operations. The required protection depends on the target, type width and concurrency.'),
+  xq('em-debounce', 'embedded', 2, 'Find the fault', 'A menu advances three entries from one button press. What firmware behaviour would directly help with switch bounce?', ['Accept a change after an appropriate stable-state debounce interval', 'Handle every transition as a new press', 'Increase the display font size', 'Print the menu faster'], 'Debouncing filters the brief transitions from mechanical contact bounce. Distinguish press events from holding the button down.'),
+
+  xq('arch-ram', 'architecture', 1, 'Memory', 'A typical device loses working variables when its power is removed. Which memory was probably holding them?', ['Volatile RAM', 'Read-only mask ROM', 'A printed manual', 'An unplugged keyboard'], 'Ordinary working RAM is volatile. Nonvolatile memory retains data without continuous power.'),
+  xq('arch-byte', 'architecture', 1, 'Data sizes', 'How many bits are in a byte in this quiz’s computer examples?', ['8', '2', '10', '16'], 'These examples use the conventional 8-bit byte.'),
+  xq('arch-address', 'architecture', 1, 'Address space', 'A byte-addressed processor has 16 address bits. How many byte addresses can it select?', ['65,536', '16', '256', '16,384'], '2^16 = 65,536 distinct byte addresses, a 64 KiB address space. The actual memory map can include ROM and I/O.'),
+  xq('arch-register', 'architecture', 1, 'CPU operation', 'Where does a CPU commonly hold a small set of immediate working operands?', ['Registers', 'The monitor’s frame', 'The mains transformer', 'The repository name'], 'Registers are storage within the CPU used for operands, addresses and control state.'),
+  xq('arch-fetch', 'architecture', 1, 'Instructions', 'What does the program counter normally identify?', ['The address of the next instruction to fetch', 'The number of files in the repository', 'The brightness of the screen', 'Only the total RAM size'], 'Control flow changes the program counter so the CPU fetches the intended instruction.'),
+  xq('arch-msx-bank', 'architecture', 2, 'MSX memory', 'A Z80 has a 64 KiB directly addressed memory space. How can a machine expose more total memory over time?', ['Switch banks/pages into parts of that address space', 'Rename addresses using decimal only', 'Increase a BASIC line number', 'Make every byte contain 64 KiB'], 'Bank switching changes which physical memory is mapped at a given address. Total storage can exceed simultaneously visible address space.'),
+  xq('arch-endian', 'architecture', 2, 'Byte order', 'A little-endian 16-bit value 0x1234 is stored starting at address 0x1000. Which byte is at 0x1000?', ['0x34', '0x12', '0x1234 as one byte', '0x00 always'], 'Little-endian storage puts the least significant byte at the lower address.'),
+  xq('arch-stack', 'architecture', 2, 'Subroutines', 'A conventional call stack helps a subroutine return by storing what?', ['A return address and, as needed, saved state', 'The screen’s physical dimensions', 'Every hard-drive sector', 'Only the function’s spelling'], 'Calls save the information needed to resume the caller. The calling convention defines how state is stored and restored.'),
+  xq('arch-overflow', 'architecture', 2, 'Integer limits', 'An unsigned 8-bit counter uses wrapping arithmetic. What follows 255 when you add 1?', ['0', '256 in the same 8 bits', '−1', '128'], '8 bits hold 0–255. Wrapping arithmetic keeps the result modulo 256.'),
+  xq('arch-signed', 'architecture', 2, 'Two’s complement', 'What range fits in an 8-bit signed two’s-complement integer?', ['−128 to 127', '0 to 255', '−255 to 255', '−127 to 128'], 'The range is −2^7 through 2^7−1. One bit pattern represents zero, making the endpoints asymmetric.'),
+  xq('arch-kib', 'architecture', 1, 'Memory units', 'A buffer holds 4 KiB. How many bytes is that?', ['4096', '4000', '4', '40,960'], 'KiB is binary: 1 KiB = 1024 bytes. Decimal kB is 1000 bytes.'),
+  xq('arch-cache', 'architecture', 2, 'Performance', 'Why can repeatedly accessing nearby data benefit from a CPU cache?', ['Nearby/reused data may already be in fast cached memory', 'A cache changes the correct program answer', 'A cache always makes all memory accesses instantaneous', 'It removes the need for an address bus'], 'Caches exploit spatial and temporal locality. Performance depends on the access pattern and hardware.'),
+];
+
+function makeMathQuestion(difficulty, rng = Math.random) {
+  const pick = values => values[Math.floor(rng() * values.length)];
+  const level = Number(difficulty), kind = pick(['period', 'tolerance', 'conversion', 'scaling', ...(level > 1 ? ['rms'] : [])]);
+  let value, prompt, unit, explanation, visual;
+  if (kind === 'period') {
+    const frequency = pick([50, 100, 250, 500, 1000, 2000]);
+    value = 1000 / frequency; unit = 'ms'; prompt = `A signal repeats at ${frequency} Hz. What is its period in milliseconds?`;
+    explanation = `T = 1/f seconds = 1000/${frequency} = ${value} ms.`; visual = [['Frequency', `${frequency} Hz`]];
+  } else if (kind === 'tolerance') {
+    const nominal = pick([100, 220, 470, 1000]), percent = pick([1, 5, 10]);
+    value = nominal * (1 + percent / 100); unit = 'Ω'; prompt = `A ${nominal} Ω resistor has ±${percent}% tolerance. What is the upper limit?`;
+    explanation = `Upper limit = ${nominal} × (1 + ${percent}/100) = ${value} Ω.`; visual = [['Nominal', `${nominal} Ω`], ['Tolerance', `±${percent}%`]];
+  } else if (kind === 'conversion') {
+    const ma = pick([5, 25, 80, 125, 250, 750, 1500]);
+    value = ma / 1000; unit = 'A'; prompt = `Convert ${ma} mA to amperes.`;
+    explanation = `Milli means 10⁻³: ${ma}/1000 = ${value} A.`; visual = [['Current', `${ma} mA`]];
+  } else if (kind === 'scaling') {
+    const count = pick([100, 250, 400, 600, 750, 900]), full = pick([50, 100, 200]);
+    value = count / 1000 * full; unit = '°C'; prompt = `A linear temperature sensor maps 0–${full} °C to 0–1000 counts. What temperature is ${count} counts?`;
+    explanation = `${count}/1000 × ${full} = ${value} °C, assuming the stated ideal linear calibration.`; visual = [['Reading', `${count} counts`], ['Full scale', `${full} °C`]];
+  } else {
+    const peak = pick([2, 5, 10, 12, 20]); value = peak / Math.SQRT2; unit = 'V'; prompt = `A pure sine wave is ${peak} V peak. What is its RMS voltage?`;
+    explanation = `For a sine wave, Vrms = ${peak}/√2 ≈ ${Number(value.toFixed(3))} V.`; visual = [['Sine-wave peak', `${peak} V`]];
+  }
+  return { id: `maths-${kind}-${prompt}`, category: 'maths', level, type: 'number', topic: 'Engineering calculation', prompt, value, unit, visual, answer: String(Number(value.toFixed(3))), explanation, tolerance: Math.max(value * 0.02, 0.002), hint: kind === 'period' ? 'T = 1/f; multiply seconds by 1000 to get ms.' : kind === 'tolerance' ? 'Upper limit = nominal × (1 + tolerance/100).' : kind === 'conversion' ? 'Divide milliamps by 1000.' : kind === 'scaling' ? 'Find the fraction of full-scale counts, then apply it to the temperature range.' : 'Divide the peak voltage by √2.', inputLabel: `Your answer in ${unit}`, inputHelp: 'Enter the number in the shown unit. Rounding within 2% is accepted.' };
+}
+
+// IMDG Code, Amendment 42-24 (mandatory 1 January 2026), chapter 7.2.
+// General-table X and explosives-table X have DIFFERENT meanings.
+const IMDG_SOURCE = {
+  name: 'IMO · IMDG 42-24 · MSC.556(108)',
+  url: 'https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.556%28108%29.pdf',
+};
+const SEGREGATION_TERMS = {
+  '1': 'Away from',
+  '2': 'Separated from',
+  '3': 'Separated by a complete compartment or hold from',
+  '4': 'Separated longitudinally by an intervening complete compartment or hold from',
+  X: 'Consult the Dangerous Goods List for specific segregation provisions',
+  '*': 'Use the Class 1 compatibility provisions in 7.2.7.1',
+};
+const GENERAL_CLASSES = ['1.1/1.2/1.5', '1.3/1.6', '1.4', '2.1', '2.2', '2.3', '3', '4.1', '4.2', '4.3', '5.1', '5.2', '6.1', '6.2', '7', '8', '9'];
+const GENERAL_MATRIX = [
+  '* * * 4 2 2 4 4 4 4 4 4 2 4 2 4 X',
+  '* * * 4 2 2 4 3 3 4 4 4 2 4 2 2 X',
+  '* * * 2 1 1 2 2 2 2 2 2 X 4 2 2 X',
+  '4 4 2 X X X 2 1 2 2 2 2 X 4 2 1 X',
+  '2 2 1 X X X 1 X 1 X X 1 X 2 1 X X',
+  '2 2 1 X X X 2 X 2 X X 2 X 2 1 X X',
+  '4 4 2 2 1 2 X X 2 2 2 2 X 3 2 X X',
+  '4 3 2 1 X X X X 1 X 1 2 X 3 2 1 X',
+  '4 3 2 2 1 2 2 1 X 1 2 2 1 3 2 1 X',
+  '4 4 2 2 X X 2 X 1 X 2 2 X 2 2 1 X',
+  '4 4 2 2 X X 2 1 2 2 X 2 1 3 1 2 X',
+  '4 4 2 2 1 2 2 2 2 2 2 X 1 3 2 2 X',
+  '2 2 X X X X X X 1 X 1 1 X 1 X X X',
+  '4 4 4 4 2 2 3 3 3 2 3 3 1 X 3 3 X',
+  '2 2 2 2 1 1 2 2 2 2 1 2 X 3 X 2 X',
+  '4 2 2 1 X X X 1 1 1 2 2 X 3 2 X X',
+  'X X X X X X X X X X X X X X X X X',
+].map(row => row.split(' '));
+
+function generalSegregation(a, b) {
+  const group = c => ['1.1', '1.2', '1.5'].includes(c) ? GENERAL_CLASSES[0] : ['1.3', '1.6'].includes(c) ? GENERAL_CLASSES[1] : c;
+  const i = GENERAL_CLASSES.indexOf(group(a)), j = GENERAL_CLASSES.indexOf(group(b));
+  if (i < 0 || j < 0) throw new RangeError('Unknown IMDG class or division.');
+  return GENERAL_MATRIX[i][j];
+}
+
+const COMPATIBILITY_GROUPS = 'A B C D E F G H J K L N S'.split(' ');
+// Entries are the X cells; the suffix is the associated table note.
+const COMPATIBILITY_ROWS = {
+  A: { A: 0 }, B: { B: 0, S: 0 },
+  C: { C: 0, D: 6, E: 6, G: 1, N: 4, S: 0 },
+  D: { C: 6, D: 0, E: 6, G: 1, N: 4, S: 0 },
+  E: { C: 6, D: 6, E: 0, G: 1, N: 4, S: 0 },
+  F: { F: 0, S: 0 }, G: { C: 1, D: 1, E: 1, G: 0, S: 0 },
+  H: { H: 0, S: 0 }, J: { J: 0, S: 0 }, K: { K: 0, S: 0 },
+  L: { L: 2 }, N: { C: 4, D: 4, E: 4, N: 3, S: 5 },
+  S: { B: 0, C: 0, D: 0, E: 0, F: 0, G: 0, H: 0, J: 0, K: 0, N: 5, S: 0 },
+};
+function class1Compatibility(a, b) {
+  if (!COMPATIBILITY_GROUPS.includes(a) || !COMPATIBILITY_GROUPS.includes(b)) return { status: 'unknown', note: null };
+  const note = COMPATIBILITY_ROWS[a][b];
+  return note === undefined ? { status: 'forbidden', note: null } : { status: note ? 'conditional' : 'permitted', note };
+}
+
+const cargoQuestion = (id, level, focus, topic, prompt, options, explanation, extra = {}) => ({
+  id: `cargo-${id}`, category: 'cargo', level, focus, topic, prompt, options, explanation,
+  source: 'imdg', jurisdiction: 'IMDG 42-24 · packaged dangerous goods', ...extra,
+});
+const pair = (a, b, context) => ({ cargo: { a, b, context } });
+const CARGO_QUESTIONS = [
+  cargoQuestion('missing-letters', 1, 'class1', 'Full classification', 'A booking lists only explosive divisions 1.1 and 1.2. Can you decide whether they may share a closed cargo transport unit (CTU)?', ['No: obtain compatibility groups and the full applicable cargo provisions', 'No: every 1.1/1.2 pairing is forbidden', 'Yes: every Class 1 pairing is permitted', 'Yes: place the smaller consignment at the door'], 'Divisions describe explosion hazards; compatibility letters determine this Class 1 mixed-stowage check. For example, B/D is blank (not permitted), whereas D/D is X (permitted by the table). Full cargo entries and other applicable provisions still matter.', { reference: '7.2.7.1.1–7.2.7.1.4', page: 491, ...pair('1.1 · group unknown', '1.2 · group unknown', 'Proposed: same closed CTU') }),
+  cargoQuestion('bd-separate', 1, 'class1', 'Container placement', 'Closed CTUs contain 1.1B and 1.2D. Their compatibility-table cell is blank. Which plan meets the Class 1 segregation requirement in 7.2.7.1.5?', ['Apply “separated from” between the closed CTUs using the applicable ship/CTU provisions', 'Put them next to each other because both are Class 1', 'Use one shared closed CTU', 'Change 1.2D to 1.4S on the shipping label'], 'B/D is not an authorized mixed-stowage combination. Under 7.2.7.1.5, closed CTUs whose explosives are not authorized together must be “separated from” one another. The physical arrangement comes from the relevant ship and CTU rules.', { reference: '7.2.7.1.4–7.2.7.1.5', page: 491, ...pair('1.1B', '1.2D', 'Two closed CTUs on a ship') }),
+  cargoQuestion('dd-most-stringent', 2, 'class1', 'Mixed explosive divisions', 'The D/D compatibility check permits 1.1D and 1.2D in one hold. Which hazard division governs the allowed mixed load for stowage?', ['Division 1.1', 'Division 1.2', 'Whichever consignment is lighter', 'Division 1.4 automatically'], '7.2.7.1.2 requires the most stringent stowage provisions. Under 7.2.7.1.3, 1.1 has higher precedence than 1.2. Table permission is one check, not complete loading approval.', { reference: '7.2.7.1.2–7.2.7.1.3', page: 491, ...pair('1.1D', '1.2D', 'Mixed stowage already permitted by the compatibility check') }),
+  cargoQuestion('x-difference', 1, 'class1', 'Find the mistake', 'A planner says: “X always means mixed stowage is permitted, whichever IMDG table I use.” What is wrong?', ['X permits the explosives compatibility-table pairing; general-table X instead directs you to the DGL', 'X always means completely forbidden', 'X always means 3 metres', 'Both tables use X to mean no paperwork'], 'The two tables use X differently. In 7.2.7.1.4 it marks a permitted Class 1 combination, subject to any note. In 7.2.4 it directs the reader to the Dangerous Goods List for specific provisions.', { reference: '7.2.4 and 7.2.7.1.4', page: 487 }),
+  cargoQuestion('l-note', 3, 'class1', 'Conditional compatibility', 'Two group L consignments have an X with note 2. What extra condition must be met before using that permission?', ['They must be the same type of consignment within group L', 'Any two group L types may always be mixed', 'One must be relabelled group S', 'Both must have the same package colour'], 'Note 2 permits group L mixed stowage only with the same type of consignment within that compatibility group. The letter alone is insufficient here.', { reference: '7.2.7.1.4 note 2', page: 492, ...pair('Group L · type A', 'Group L · type B', 'Proposed: same hold or closed CTU') }),
+  cargoQuestion('g-fireworks', 3, 'class1', 'Conditional compatibility', 'You want to mix group G fireworks with group D articles. Can the G/D table note 1 itself authorize this?', ['No: note 1 applies to group G articles other than fireworks, with additional conditions', 'Yes: all group G goods qualify', 'Yes: if the fireworks are small', 'Yes: division numbers replace the note'], 'Note 1 excludes fireworks from its permission for group G articles with C/D/E articles; it also requires no explosive substances in that hold or closed CTU. Do not turn a conditional X into a blanket permission.', { reference: '7.2.7.1.4 note 1', page: 492 }),
+  cargoQuestion('n-proof', 3, 'class1', 'Conditional compatibility', 'Different types of 1.6N articles are proposed together. What does compatibility-table note 3 require?', ['Proof that there is no added sympathetic-detonation risk; otherwise treat them as division 1.1', 'Only equal gross mass', 'Only matching package sizes', 'No condition because both are 1.6N'], 'The note allows different types of 1.6N articles together only if the stated additional risk is absent. Otherwise the articles are treated as division 1.1.', { reference: '7.2.7.1.4 note 3', page: 492 }),
+  cargoQuestion('cde-articles', 2, 'class1', 'Mixed compatibility groups', 'An allowed mixed load contains explosive ARTICLES of groups C and D. Under note 6, which compatibility group is assigned to that combination?', ['Group E', 'Group S', 'Group A', 'Always group C'], 'Note 6 assigns any combination of articles in groups C, D and E to group E. Its separate rule for explosive substances of C and D uses the most appropriate classification based on combined properties.', { reference: '7.2.7.1.4 note 6', page: 492 }),
+  cargoQuestion('ns-group', 3, 'class1', 'Mixed compatibility groups', 'Groups N and S are stowed together under note 5. Which compatibility group is assigned to the entire load?', ['Group N', 'Group S', 'Group A', 'No compatibility group'], 'Note 5 treats the entire combined N/S load as group N.', { reference: '7.2.7.1.4 note 5', page: 492 }),
+  cargoQuestion('dgl-priority', 1, 'general', 'Loading-plan checks', 'The general segregation table and the specific DGL column 16b provision conflict. Which takes precedence?', ['The specific Dangerous Goods List column 16b provision', 'The general table always overrides it', 'The container’s paint colour', 'The cargo that arrived first'], '7.2.3.1 requires both checks and gives column 16b precedence when they conflict. Use the complete UN entry and applicable special provisions.', { reference: '7.2.3.1', page: 486 }),
+  cargoQuestion('same-ctu', 2, 'general', 'Container packing', 'Two ordinary full-regulation consignments have an applicable segregation requirement. No exception applies. Can putting their packages at opposite ends of the SAME CTU satisfy it?', ['No: they must not be transported in the same CTU under 7.2.3.2', 'Yes: opposite corners always satisfy every term', 'Yes: add a cardboard divider', 'Yes: close the CTU doors'], '7.2.3.2 excludes a shared outer packaging and shared CTU when a segregation term applies, subject to the cited exceptions. A shipboard separation plan does not make incompatible co-packing acceptable.', { reference: '7.2.3.2', page: 486 }),
+  cargoQuestion('subsidiary', 2, 'general', 'Subsidiary hazards', 'A consignment has one subsidiary hazard that requires stricter segregation than its primary class. What governs?', ['The stricter subsidiary-hazard segregation requirement', 'Only the primary hazard label', 'Only the gross mass', 'Only the container size'], '7.2.3.3 says to use the more stringent requirement when a single subsidiary hazard is stricter. With two or more subsidiary hazards, consult the specific DGL column 16b provisions.', { reference: '7.2.3.3–7.2.3.4', page: 486 }),
+  cargoQuestion('no-fixed-distance', 1, 'general', 'Practical placement', 'You read “separated from” in an IMDG question. Is that enough to assign one universal number of metres for every cargo ship?', ['No: use the applicable ship type, CTU arrangement and relevant segregation provisions', 'Yes: it always means 1 metre', 'Yes: it always means adjacent slots', 'Yes: it always means separate ports'], '7.2.2 explains that segregation uses distances and/or steel bulkheads and decks, with terms defined for the type of ship and CTU arrangement. Do not apply a general-cargo example as a universal container-ship rule.', { reference: '7.2.2', page: 486 }),
+  cargoQuestion('class5', 1, 'labels', 'Hazard sorting', 'Which pair correctly sorts these cargo labels: 5.1 and 5.2?', ['5.1 oxidizing substances; 5.2 organic peroxides', '5.1 flammable liquids; 5.2 corrosives', '5.1 radioactive; 5.2 infectious', '5.1 explosives; 5.2 miscellaneous'], 'Class 5 distinguishes oxidizing substances (5.1) from organic peroxides (5.2). Their reactions and specific cargo provisions make that distinction useful in stowage decisions.', { reference: '2.5', page: null }),
+  cargoQuestion('water-reactive', 1, 'labels', 'Hazard sorting', 'A cargo releases flammable gas on contact with water. Which division describes that hazard?', ['4.3', '4.1', '2.2', '6.2'], 'Division 4.3 covers substances that, in contact with water, emit flammable gases. Protecting the cargo from water and checking its particular entry are central to its handling.', { reference: '2.4.4', page: null }),
+  cargoQuestion('un-entry', 1, 'general', 'Cargo information', 'Two consignments both have Class 8 labels. What should you obtain before making their complete segregation plan?', ['Their full UN entries, subsidiary hazards and specific segregation provisions', 'Only the largest package dimensions', 'Only their common class number', 'Only the voyage length'], 'Class numbers support the general table lookup, but specific entries, chemical segregation groups, subsidiary risks and other applicable provisions can add requirements.', { reference: '7.2.3–7.2.5', page: 486 }),
+];
+
+const simpleExplosivePairs = [
+  ['1.1B', '1.2D'], ['1.1D', '1.2D'], ['1.1B', '1.4S'], ['1.1D', '1.4S'],
+  ['1.3C', '1.2F'], ['1.3G', '1.4S'], ['1.1A', '1.4S'], ['1.2H', '1.2J'],
+  ['1.2F', '1.4S'], ['1.2J', '1.4S'], ['1.3C', '1.3C'], ['1.1D', '1.2F'],
+];
+const classLabels = { '1.1': 'Explosives · mass explosion', '1.2': 'Explosives · projection hazard', '1.3': 'Explosives · fire/minor blast or projection', '1.4': 'Explosives · small hazard', '2.1': 'Flammable gas', '2.2': 'Non-flammable, non-toxic gas', '2.3': 'Toxic gas', '3': 'Flammable liquid', '4.1': 'Flammable solid / related hazards', '4.2': 'Spontaneously combustible', '4.3': 'Dangerous when wet', '5.1': 'Oxidizing substance', '5.2': 'Organic peroxide', '6.1': 'Toxic substance', '6.2': 'Infectious substance', '7': 'Radioactive material', '8': 'Corrosive substance', '9': 'Miscellaneous dangerous goods' };
+function makeCargoQuestion(settings, rng = Math.random) {
+  const focus = settings.cargoFocus || 'segregation';
+  const explosives = focus === 'class1' || (focus !== 'general' && focus !== 'labels' && rng() < 0.45);
+  if (explosives) {
+    const [a, b] = simpleExplosivePairs[Math.floor(rng() * simpleExplosivePairs.length)];
+    const ga = a.at(-1), gb = b.at(-1), result = class1Compatibility(ga, gb);
+    const allowed = result.status === 'permitted';
+    return cargoQuestion(`pair-${a}-${b}`, 1, 'class1', 'Same-container compatibility', `For ${a} and ${b}, what does the Class 1 compatibility table say about mixed stowage in the same closed CTU?`, [
+      allowed ? 'Permitted by this compatibility-table check; complete the other applicable checks' : 'Not permitted together: use separate closed CTUs and apply “separated from” between them',
+      allowed ? 'Forbidden solely because the divisions must always match' : 'Permitted because both consignments are Class 1',
+      'Permitted if separated by cardboard inside one CTU', 'The compatibility letters have no effect',
+    ], `${ga}/${gb} is ${allowed ? 'an X cell, so this table permits the combination' : 'a blank cell, so this table does not permit the combination'}. ${allowed ? 'Use the most stringent stowage provisions for the whole mixed load and check the full cargo entries.' : '7.2.7.1.1 requires separate compartments/holds/closed CTUs. For separate closed CTUs, 7.2.7.1.5 requires “separated from”.'} Division numbers alone are not the compatibility test.`, { reference: '7.2.7.1.1–7.2.7.1.5', page: 491, ...pair(a, b, 'Proposed: same closed CTU') });
+  }
+  const classes = Object.keys(classLabels);
+  const a = classes[Math.floor(rng() * classes.length)], b = classes[Math.floor(rng() * classes.length)];
+  const key = generalSegregation(a, b), correct = SEGREGATION_TERMS[key];
+  const rest = Object.values(SEGREGATION_TERMS).filter(x => x !== correct);
+  const distractors = rest.slice(0, 3);
+  return cargoQuestion(`general-${a}-${b}`, 1, 'general', 'General segregation lookup', `Class/division ${a} and ${b}: what is the starting result in the general segregation table 7.2.4? Use primary hazards only for this table-reading exercise.`, [correct, ...distractors], `The ${a}/${b} cell is ${key}: “${correct}”. ${key === 'X' ? 'This is not blanket permission to place the cargo together.' : key === '*' ? 'Obtain the explosive compatibility groups and apply the Class 1 provisions.' : 'Apply the term through the relevant ship/CTU provisions.'} Then check DGL column 16b (which takes precedence), subsidiary hazards and other applicable provisions before approving any plan.`, { reference: '7.2.3.1 and 7.2.4', page: 487, ...pair(`${a} · ${classLabels[a]}`, `${b} · ${classLabels[b]}`, 'General-table exercise · full loading approval requires further checks') });
+}
+
+
+
 // Correct answers are always options[0] here; the engine shuffles choices for play.
 // Numeric placement guidance is labelled by jurisdiction, never presented as worldwide law.
 const SOURCES = {
+  imdg: IMDG_SOURCE,
+  python: { name: 'Python documentation · Tutorial', url: 'https://docs.python.org/3/tutorial/' },
+  msx: { name: 'MSX Resource Center · MSX-BASIC instructions', url: 'https://www.msx.org/wiki/MSX-BASIC_Instructions' },
   osha: { name: 'US OSHA · 29 CFR 1910.157', url: 'https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.157' },
   placement: { name: 'US OSHA · Placement and spacing guidance', url: 'https://www.osha.gov/etools/evacuation-plans-procedures/emergency-standards/portable-extinguishers/placement' },
   basics: { name: 'US OSHA · Extinguisher basics', url: 'https://www.osha.gov/etools/evacuation-plans-procedures/emergency-standards/portable-extinguishers/about' },
@@ -49,6 +294,8 @@ const SOURCES = {
 const q = (id, category, level, topic, prompt, options, explanation, extra = {}) => ({ id, category, level, topic, prompt, options, explanation, ...extra });
 
 const QUESTIONS = [
+  ...EXTRA_QUESTIONS,
+  ...CARGO_QUESTIONS,
   q('el-led', 'electronics', 1, 'LEDs', 'You connect a bare LED directly to a 9 V battery. What should you add to control its current?', ['A correctly sized resistor in series', 'A resistor in parallel with the battery', 'A bigger battery', 'Only a capacitor across the LED'], 'A series resistor limits LED current. Use R = (supply voltage − LED forward voltage) / desired current.'),
   q('el-buffer', 'electronics', 2, 'Guitar pedals', 'A passive guitar loses high frequencies when connected to your pedal. Which input change is most likely to help?', ['Use a high-input-impedance buffer', 'Put a 100 Ω resistor across the input', 'Increase the LED brightness', 'Connect the pickup directly to a speaker'], 'A high-impedance input reduces pickup loading. A buffer also provides a lower-impedance signal to the next stage.'),
   q('el-gain', 'electronics', 2, 'Amplifiers', 'A guitar preamp has enough power-supply headroom. How do you increase the gain of its non-inverting op-amp stage?', ['Increase the feedback-resistor / ground-resistor ratio', 'Make both feedback resistors zero', 'Swap the supply pins', 'Disconnect all feedback'], 'The ideal gain is 1 + Rf/Rg. Real output swing, bandwidth, and stability still limit the result.', { source: 'ti' }),
@@ -120,13 +367,24 @@ const QUESTIONS = [
 ];
 
 
+
+
 const DIGITS = '0123456789AB';
 const CATEGORIES = {
-  bases: { name: 'Number bases', short: 'Bases', description: 'Count, convert, and calculate in bases 2–12.', mark: '01', color: '#d9fc72' },
-  electronics: { name: 'Electronics', short: 'Electronics', description: 'Components, circuits, audio, and fault finding.', mark: '02', color: '#86c9ff' },
-  electrical: { name: 'Electrical engineering', short: 'Electrical', description: 'Power, motors, batteries, and real loads.', mark: '03', color: '#c4a5ff' },
-  fire: { name: 'Fire safety', short: 'Fire safety', description: 'Extinguishers, placement, and safe decisions.', mark: '04', color: '#ffad85' },
+  bases: { name: 'Number bases', short: 'Bases', description: 'Count, convert, and calculate in bases 2–12.', mark: '01', color: '#d9fc72', group: 'numbers' },
+  logic: { name: 'Digital logic', short: 'Logic', description: 'Gates, truth tables, counters, and timing.', mark: '02', color: '#d9fc72', group: 'numbers' },
+  maths: { name: 'Engineering maths', short: 'Maths', description: 'Units, formulas, calibration, and waveforms.', mark: '03', color: '#f3d884', group: 'numbers' },
+  electronics: { name: 'Electronics', short: 'Electronics', description: 'Components, circuits, audio, and fault finding.', mark: '04', color: '#86c9ff', group: 'circuits' },
+  electrical: { name: 'Electrical engineering', short: 'Electrical', description: 'Power, motors, batteries, and real loads.', mark: '05', color: '#c4a5ff', group: 'circuits' },
+  signals: { name: 'Signals & communication', short: 'Signals', description: 'Sampling, serial links, filtering, and noise.', mark: '06', color: '#81ddd0', group: 'circuits' },
+  python: { name: 'Python', short: 'Python', description: 'Read code, fix bugs, and run small programs.', mark: '07', color: '#f3d884', group: 'computing', coding: true },
+  msx: { name: 'MSX BASIC 1', short: 'MSX BASIC 1', description: 'Line numbers, loops, graphics, and subroutines.', mark: '08', color: '#ffacdb', group: 'computing', coding: true },
+  embedded: { name: 'Embedded systems', short: 'Embedded', description: 'GPIO, sensors, PWM, interrupts, and firmware.', mark: '09', color: '#86c9ff', group: 'computing' },
+  architecture: { name: 'Computer architecture', short: 'Architecture', description: 'Memory, CPU instructions, and MSX hardware ideas.', mark: '10', color: '#c4a5ff', group: 'computing' },
+  fire: { name: 'Fire safety', short: 'Fire safety', description: 'Extinguishers, placement, and safe decisions.', mark: '11', color: '#ffad85', group: 'safety' },
+  cargo: { name: 'Cargo-ship dangerous goods', short: 'IMDG cargo', description: 'Class 1 compatibility, container placement, and segregation.', mark: '12', color: '#81ddd0', group: 'safety' },
 };
+const CATEGORY_GROUPS = { numbers: 'Numbers & logic', circuits: 'Circuits & signals', computing: 'Programming & computers', safety: 'Fire & cargo' };
 
 function shuffle(items, rng = Math.random) {
   const copy = [...items];
@@ -288,7 +546,7 @@ function makeEngineeringQuestion(category, difficulty, rng = Math.random) {
 function prepareChoice(question, rng = Math.random) {
   const correct = question.options[0];
   const options = shuffle(question.options, rng);
-  return { ...question, type: 'choice', options, correctIndex: options.indexOf(correct), answer: correct, hint: `Think about the ${question.topic.toLowerCase()} decision in this specific situation${question.jurisdiction ? ` and the ${question.jurisdiction} label` : ''}.` };
+  return { ...question, type: 'choice', options, correctIndex: options.indexOf(correct), answer: correct, hint: question.hint || `Think about the ${question.topic.toLowerCase()} decision in this specific situation${question.jurisdiction ? ` and the ${question.jurisdiction} label` : ''}.` };
 }
 
 function checkAnswer(question, input) {
@@ -301,11 +559,13 @@ function checkAnswer(question, input) {
 }
 
 function eligibleQuestions(category, settings) {
-  return QUESTIONS.filter(q => q.category === category && q.level <= Number(settings.difficulty) && (category !== 'fire' || settings.fireScope === 'all' || (settings.fireScope === 'general' ? q.jurisdiction === 'General practice' : q.jurisdiction.startsWith(settings.fireScope === 'us' ? 'US' : 'UK'))));
+  return QUESTIONS.filter(q => q.category === category && q.level <= Number(settings.difficulty)
+    && (category !== 'fire' || !settings.fireScope || settings.fireScope === 'all' || (settings.fireScope === 'general' ? q.jurisdiction === 'General practice' : q.jurisdiction.startsWith(settings.fireScope === 'us' ? 'US' : 'UK')))
+    && (category !== 'cargo' || !settings.cargoFocus || settings.cargoFocus === 'all' || (settings.cargoFocus === 'segregation' ? q.focus !== 'labels' : q.focus === settings.cargoFocus)));
 }
 
 function makeDeck(settings, count = 10, rng = Math.random, previous = new Set()) {
-  const categories = settings.category === 'mixed' ? Object.keys(CATEGORIES) : [settings.category];
+  const categories = settings.category === 'mixed' ? shuffle(Object.keys(CATEGORIES), rng) : [settings.category];
   const pools = Object.fromEntries(categories.map(c => [c, shuffle(eligibleQuestions(c, settings), rng)]));
   const cursor = Object.fromEntries(categories.map(c => [c, 0]));
   const deck = [];
@@ -314,7 +574,9 @@ function makeDeck(settings, count = 10, rng = Math.random, previous = new Set())
     let question;
     for (let tries = 0; tries < 30; tries++) {
       if (category === 'bases') question = makeBaseQuestion(settings, rng);
-      else if (category !== 'fire' && rng() < 0.45) question = makeEngineeringQuestion(category, settings.difficulty, rng);
+      else if (['electronics', 'electrical'].includes(category) && rng() < 0.45) question = makeEngineeringQuestion(category, settings.difficulty, rng);
+      else if (category === 'maths' && rng() < 0.55) question = makeMathQuestion(settings.difficulty, rng);
+      else if (category === 'cargo' && settings.cargoFocus !== 'labels' && rng() < 0.55) question = prepareChoice(makeCargoQuestion(settings, rng), rng);
       else {
         const pool = pools[category];
         if (!pool.length) throw new Error('No questions match this selection.');
@@ -328,10 +590,228 @@ function makeDeck(settings, count = 10, rng = Math.random, previous = new Set())
   return settings.category === 'mixed' ? shuffle(deck, rng) : deck;
 }
 
+const CHALLENGES = {
+  python: [
+    { id: 'count', title: 'Count in binary', prompt: 'Print the binary form of each number from 0 to 3, one per line. Use bin(n)[2:] to omit the 0b prefix.', starter: 'for n in range(3):\n    print(bin(n)[2:])', solution: 'for n in range(4):\n    print(bin(n)[2:])', expected: '0\n1\n10\n11', hint: 'range excludes its stop value. Four numbers are needed.' },
+    { id: 'power', title: 'Calculate lamp power', prompt: 'Fix the function so a 12 V, 2 A DC load prints 24.', starter: 'def power(voltage, current):\n    return voltage + current\n\nprint(power(12, 2))', solution: 'def power(voltage, current):\n    return voltage * current\n\nprint(power(12, 2))', expected: '24', hint: 'Power in watts is voltage multiplied by current.' },
+    { id: 'filter', title: 'Filter hot readings', prompt: 'Print only temperatures that are at least 30, one per line.', starter: 'readings = [18, 35, 24, 40]\nfor temperature in readings:\n    print(temperature)', solution: 'readings = [18, 35, 24, 40]\nfor temperature in readings:\n    if temperature >= 30:\n        print(temperature)', expected: '35\n40', hint: 'Put a conditional inside the loop.' },
+    { id: 'sum', title: 'Total the samples', prompt: 'Fix the loop to print the sum of 2, 4 and 6: 12.', starter: 'total = 0\nfor sample in [2, 4, 6]:\n    total = sample\nprint(total)', solution: 'total = 0\nfor sample in [2, 4, 6]:\n    total += sample\nprint(total)', expected: '12', hint: 'Accumulate into total rather than replace it.' },
+    { id: 'lookup', title: 'Read a sensor packet', prompt: 'Use the dictionary values to calculate power and print 60.', starter: 'sensor = {"voltage": 12, "current": 5}\nprint(sensor["voltage"])', solution: 'sensor = {"voltage": 12, "current": 5}\nprint(sensor["voltage"] * sensor["current"])', expected: '60', hint: 'Multiply the two values retrieved by their keys.' },
+    { id: 'countdown', title: 'Repair a countdown', prompt: 'Make this print 3, 2, 1 on separate lines and finish. Stop the run if your version loops forever.', starter: 'n = 3\nwhile n > 0:\n    print(n)', solution: 'n = 3\nwhile n > 0:\n    print(n)\n    n -= 1', expected: '3\n2\n1', hint: 'Decrease n inside the loop so the condition eventually becomes false.' },
+  ],
+  msx: [
+    { id: 'count', title: 'Fix the counting loop', prompt: 'Print 1, 2, 3, each on its own line, on a real MSX1 emulator.', starter: '10 FOR I=1 TO 2\n20 PRINT I\n30 NEXT I\n40 END', solution: '10 FOR I=1 TO 3\n20 PRINT I\n30 NEXT I\n40 END', expected: '1\n2\n3', hint: 'MSX BASIC FOR includes the end value.' },
+    { id: 'power', title: 'Calculate lamp power', prompt: 'Fix the arithmetic to print 24 for a 12 V, 2 A DC lamp.', starter: '10 V=12:I=2\n20 PRINT V+I\n30 END', solution: '10 V=12:I=2\n20 PRINT V*I\n30 END', expected: '24', hint: 'Use multiplication for P = VI.' },
+    { id: 'data', title: 'Add stored readings', prompt: 'Use DATA and READ to print the total of 5 and 7: 12.', starter: '10 DATA 5,7\n20 READ A,B\n30 PRINT A\n40 END', solution: '10 DATA 5,7\n20 READ A,B\n30 PRINT A+B\n40 END', expected: '12', hint: 'Both values have already been read into A and B.' },
+    { id: 'subroutine', title: 'Return to the caller', prompt: 'Replace the infinite jump with the correct statement, so the output is HELLO then DONE.', starter: '10 GOSUB 100\n20 PRINT "DONE"\n30 END\n100 PRINT "HELLO"\n110 GOTO 100', solution: '10 GOSUB 100\n20 PRINT "DONE"\n30 END\n100 PRINT "HELLO"\n110 RETURN', expected: 'HELLO\nDONE', hint: 'GOSUB needs a matching RETURN to resume its caller.' },
+    { id: 'countdown', title: 'Count backwards', prompt: 'Change the loop to print 6, 4, 2 on separate lines.', starter: '10 FOR I=6 TO 2\n20 PRINT I\n30 NEXT I\n40 END', solution: '10 FOR I=6 TO 2 STEP -2\n20 PRINT I\n30 NEXT I\n40 END', expected: '6\n4\n2', hint: 'Use a negative STEP when counting down.' },
+    { id: 'condition', title: 'Choose the warning', prompt: 'The temperature is 35. Fix the comparison so the program prints HOT for values of at least 30.', starter: '10 T=35\n20 IF T<30 THEN PRINT "HOT" ELSE PRINT "OK"\n30 END', solution: '10 T=35\n20 IF T>=30 THEN PRINT "HOT" ELSE PRINT "OK"\n30 END', expected: 'HOT', hint: 'At least means greater than or equal to.' },
+  ],
+};
+const normalizeOutput = value => String(value).replace(/\r/g, '').split('\n').map(line => line.trim()).filter(Boolean).join('\n');
+
+
+const PYODIDE_URL = 'https://cdn.jsdelivr.net/pyodide/v0.28.3/full/pyodide.mjs';
+const WEBMSX_URL = 'https://cdn.jsdelivr.net/gh/ppeccin/WebMSX@4f4009e86d3e0bb9be7dcd7f0a582b0cd411d660/release/stable/6.0/embedded/wmsx.js';
+const pythonWorkerSource = `
+const { loadPyodide } = await import('${PYODIDE_URL}');
+const python = await loadPyodide();
+self.postMessage({type: 'ready'});
+self.onmessage = async ({data}) => {
+  let output = '', errors = '';
+  python.setStdout({batched: line => { if (output.length < 20000) output += line + '\\n'; }});
+  python.setStderr({batched: line => { if (errors.length < 20000) errors += line + '\\n'; }});
+  python.setStdin({stdin: () => undefined});
+  const globals = python.globals.get('dict')();
+  globals.set('__name__', '__main__');
+  try {
+    await python.runPythonAsync(data.code, {globals});
+    self.postMessage({type: 'result', output, error: errors});
+  } catch (error) {
+    self.postMessage({type: 'result', output, error: errors + error.message});
+  } finally { globals.destroy(); }
+};`;
+
+class PythonRunner {
+  worker = null;
+  ready = false;
+  pending = null;
+  timer = null;
+  async run(code, status) {
+    if (this.pending) throw new Error('A program is already running.');
+    return new Promise((resolve, reject) => {
+      this.pending = {resolve, reject, code};
+      if (!this.worker) {
+        status('Loading Python… First load needs an internet connection.');
+        const url = URL.createObjectURL(new Blob([pythonWorkerSource], {type: 'text/javascript'}));
+        try { this.worker = new Worker(url, {type: 'module'}); }
+        catch (error) { URL.revokeObjectURL(url); this.stop(error.message); return; }
+        URL.revokeObjectURL(url);
+        this.timer = setTimeout(() => this.stop('Python could not load. Check your connection, then run again.'), 45000);
+        this.worker.onerror = () => this.stop('Python could not load. Check your connection, then run again.');
+        this.worker.onmessage = ({data}) => {
+          if (data.type === 'ready') { this.ready = true; this.send(status); }
+          if (data.type === 'result' && this.pending) {
+            clearTimeout(this.timer);
+            const request = this.pending; this.pending = null;
+            request.resolve(data);
+          }
+        };
+      } else this.send(status);
+    });
+  }
+  send(status) {
+    if (!this.ready || !this.pending) return;
+    clearTimeout(this.timer); status('Running Python…');
+    this.timer = setTimeout(() => this.stop('Stopped after 5 seconds. Check for an infinite loop, then run again.'), 5000);
+    this.worker.postMessage({code: this.pending.code});
+  }
+  stop(reason = 'Stopped. You can edit the code and run again.') {
+    clearTimeout(this.timer); this.worker?.terminate(); this.worker = null; this.ready = false;
+    const request = this.pending; this.pending = null;
+    request?.reject(new Error(reason));
+  }
+}
+
+let msxScriptPromise = null;
+let msxHost = null;
+let msxParking = null;
+async function loadMSX() {
+  if (window.WMSX?.room) return;
+  if (!msxScriptPromise) msxScriptPromise = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = WEBMSX_URL; script.crossOrigin = 'anonymous';
+    script.integrity = 'sha384-kNkyHYQgtc2n314hU9laE0OhE+HSJ4vgEDskx8nWjJpq+STHkpMzmjhQWG0XnIlH';
+    const timer = setTimeout(() => { script.remove(); msxScriptPromise = null; reject(new Error('MSX could not load. Check your connection, then run again.')); }, 30000);
+    script.onload = () => { clearTimeout(timer); resolve(); };
+    script.onerror = () => { clearTimeout(timer); script.remove(); msxScriptPromise = null; reject(new Error('MSX could not load. Check your connection, then run again.')); };
+    document.head.append(script);
+  });
+  await msxScriptPromise;
+}
+const waitBriefly = ms => new Promise(resolve => setTimeout(resolve, ms));
+async function waitMSX(test, active, limit = 10000) {
+  const start = performance.now();
+  while (performance.now() - start < limit) {
+    if (!active()) throw new Error('Stopped. You can edit the code and run again.');
+    const value = test(); if (value) return value;
+    await waitBriefly(100);
+  }
+  throw new Error('The MSX program did not finish. Check for an infinite loop or an INPUT waiting for keyboard input.');
+}
+function parkMSX() {
+  window.WMSX?.room?.keyboard?.cancelTypeString();
+  window.WMSX?.room?.machine?.powerOff();
+  if (msxHost) {
+    if (!msxParking) { msxParking = document.createElement('div'); msxParking.hidden = true; document.body.append(msxParking); }
+    msxParking.append(msxHost);
+  }
+}
+
+// Output checks compare displayed output, not source text. They are practice checks,
+// not a sandboxed examination of whether a particular algorithm was used.
+function createCodingLab(container, language, onExit) {
+  const labChallenges = CHALLENGES[language], isPython = language === 'python';
+  const htmlEscape = v => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  let active = true, busy = false, challengeIndex = 0, runToken = 0;
+  const pythonRunner = new PythonRunner();
+  const drafts = new Map();
+  container.innerHTML = `<section class="coding-lab">
+    <div class="lab-top"><button class="text-button" id="lab-back">← Choose a topic</button><span class="topic-chip">${isPython ? 'Python' : 'MSX BASIC 1'}</span></div>
+    <p class="eyebrow">CODING CHALLENGES</p><h1 tabindex="-1">Make it work.</h1>
+    <div class="lab-selection"><label for="challenge-select">Challenge</label><select id="challenge-select">${labChallenges.map((c, i) => `<option value="${i}">${i + 1}. ${htmlEscape(c.title)}</option>`).join('')}</select></div>
+    <h2 id="challenge-title"></h2><p class="lab-prompt" id="challenge-prompt"></p>
+    <div class="lab-grid"><div class="lab-editor-panel"><label for="code-editor">Your ${isPython ? 'Python' : 'MSX BASIC 1'} code</label><textarea id="code-editor" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="editor-help"></textarea><p id="editor-help" class="input-help">${isPython ? 'Run executes real Python in your browser. Runs stop after 5 seconds.' : 'Run types your numbered program into a real MSX1. Keep SCREEN 0 for these output exercises.'} Tab inserts four spaces.</p><div class="lab-buttons"><button class="primary-button" id="run-code">Run code ▶</button><button class="secondary-button" id="stop-code" disabled>Stop</button><button class="text-button" id="reset-code">Reset code</button></div></div>
+    <div class="lab-output-panel"><span class="eyebrow">TARGET OUTPUT</span><pre id="target-output"></pre><span class="eyebrow">YOUR OUTPUT</span><pre id="code-output" aria-label="Program output">Run your code to see its output.</pre><p id="run-status" class="run-status" role="status" aria-live="polite"></p></div></div>
+    ${!isPython ? '<div class="msx-display-panel" id="msx-display-panel" hidden><span class="eyebrow">LIVE MSX1</span><div id="msx-mount"></div><p class="input-help">Numbered BASIC program, executed by WebMSX. Screen capture checks the output after RUN.</p></div>' : ''}
+    <details class="lab-help"><summary>Need a nudge?</summary><p id="code-hint"></p><button class="text-button" id="show-solution">Show a working solution</button><pre id="code-solution" hidden></pre></details>
+    <p class="lab-foot">Quiz rounds work offline. The optional coding engines need an internet connection on first load. ${isPython ? 'Python: Pyodide 0.28.3.' : 'MSX1: WebMSX 6.0.8.'} Output checks ignore surrounding spaces and blank lines.</p>
+  </section>`;
+  const element = id => container.querySelector(`#${id}`);
+  const editor = element('code-editor'), status = element('run-status');
+  function setStatus(text, passed = false) { if (!active) return; status.textContent = text; status.classList.toggle('passed', passed); }
+  function setBusy(value) {
+    busy = value; if (!active) return;
+    element('run-code').disabled = value; element('stop-code').disabled = !value;
+    element('challenge-select').disabled = value; element('reset-code').disabled = value;
+    editor.readOnly = value;
+  }
+  function loadChallenge() {
+    const challenge = labChallenges[challengeIndex];
+    element('challenge-title').textContent = challenge.title;
+    element('challenge-prompt').textContent = challenge.prompt;
+    element('target-output').textContent = challenge.expected;
+    editor.value = drafts.get(challengeIndex) ?? challenge.starter;
+    element('code-hint').textContent = challenge.hint;
+    element('code-solution').hidden = true;
+    element('code-solution').textContent = challenge.solution;
+    element('code-output').textContent = 'Run your code to see its output.';
+    setStatus('');
+  }
+  element('challenge-select').addEventListener('change', e => { drafts.set(challengeIndex, editor.value); challengeIndex = Number(e.target.value); loadChallenge(); });
+  element('reset-code').addEventListener('click', () => { drafts.delete(challengeIndex); loadChallenge(); });
+  element('show-solution').addEventListener('click', () => { element('code-solution').hidden = !element('code-solution').hidden; });
+  editor.addEventListener('keydown', e => { if (e.key === 'Tab') { e.preventDefault(); editor.setRangeText('    ', editor.selectionStart, editor.selectionEnd, 'end'); } });
+  element('stop-code').addEventListener('click', () => { runToken++; pythonRunner.stop(); window.WMSX?.room?.keyboard?.cancelTypeString(); window.WMSX?.room?.machine?.powerOff(); setStatus('Stopped. You can edit the code and run again.'); setBusy(false); });
+  element('lab-back').addEventListener('click', onExit);
+  element('run-code').addEventListener('click', async () => {
+    if (busy || !editor.value.trim()) { if (!editor.value.trim()) setStatus('Write a program first.'); return; }
+    const token = ++runToken; const running = () => active && runToken === token;
+    setBusy(true); element('code-output').textContent = '';
+    try {
+      let output, error = '';
+      if (isPython) {
+        const result = await pythonRunner.run(editor.value, setStatus);
+        output = result.output; error = result.error;
+      } else {
+        if (!/^\s*\d+\s+\S/m.test(editor.value) || editor.value.split('\n').some(line => line.trim() && !/^\s*\d+\s+/.test(line))) throw new Error('Use numbered MSX BASIC program lines, for example: 10 PRINT "HELLO"');
+        if (editor.value.length > 4000) throw new Error('Keep these practice programs under 4000 characters.');
+        setStatus('Loading MSX1… First load needs an internet connection.');
+        await loadMSX(); if (!running()) return;
+        element('msx-display-panel').hidden = false;
+        if (!msxHost) { msxHost = document.createElement('div'); msxHost.id = 'wmsx-screen'; }
+        element('msx-mount').append(msxHost);
+        if (!window.WMSX.room) {
+          const width = element('msx-mount').clientWidth || 500;
+          Object.assign(window.WMSX, {AUTO_START: false, ALLOW_URL_PARAMETERS: false, MACHINE: 'MSX1A', PRESETS: 'NODISK', FAST_BOOT: 1, AUTO_POWER_ON_DELAY: 0, SCREEN_ELEMENT_ID: 'wmsx-screen', SCREEN_DEFAULT_SCALE: Math.min(1, Math.max(0.25, width / (544 * 1.14))), SCREEN_DEFAULT_ASPECT: 1.14, SCREEN_FULLSCREEN_MODE: 0, SCREEN_FILTER_MODE: 0, SCREEN_CRT_SCANLINES: 0, SCREEN_CONTROL_BAR: 0, ENVIRONMENT: 83, JOYKEYS_MODE: -1, TOUCH_MODE: 0, Z80_CLOCK_MODE: 2});
+          window.WMSX.start();
+        } else { window.WMSX.room.keyboard.cancelTypeString(); window.WMSX.room.machine.powerOn(); }
+        await waitMSX(() => {
+          const text = window.WMSX.room?.machine.vdp.getScreenText() || '';
+          return text.includes('MSX BASIC') && text.includes('Ok') && !text.includes('RDEND');
+        }, running, 15000);
+        setStatus('Running MSX BASIC 1…');
+        const program = editor.value.replace(/\r/g, '').replace(/\n/g, '\r');
+        // Clear entered source before RUN. Only text after the executed marker is graded.
+        window.WMSX.room.keyboard.typeString(`NEW\r${program}\rSCREEN 0:WIDTH 40:CLS\rPRINT "RDSTART"\rRUN\rPRINT "RDEND"\r`);
+        const screenText = await waitMSX(() => {
+          const lines = window.WMSX.room.machine.vdp.getScreenText().split('\n').map(line => line.trim());
+          const begin = lines.lastIndexOf('RDSTART'), end = lines.lastIndexOf('RDEND');
+          return begin >= 0 && end > begin ? lines.slice(begin + 1, end).join('\n') : null;
+        }, running, 10000);
+        const lines = screenText.split('\n').filter(line => line !== 'RUN' && line !== 'Ok' && !/^PRINT\s*"RDEND"$/i.test(line));
+        output = lines.join('\n');
+        if (/\b(?:error|without|undefined|overflow|out of|illegal|syntax)\b/i.test(output)) error = 'MSX BASIC reported an error. Check the live screen and your numbered lines.';
+      }
+      if (!running()) return;
+      element('code-output').textContent = output + (error ? `${output ? '\n' : ''}${error}` : '') || '(No output)';
+      const passed = !error && normalizeOutput(output) === normalizeOutput(labChallenges[challengeIndex].expected);
+      setStatus(passed ? 'Output matches. Nicely done.' : error ? 'Fix the error and run again.' : 'Output differs from the target. Edit your code and try again.', passed);
+    } catch (error) {
+      if (running()) { setStatus(error.message); if (!isPython) { window.WMSX?.room?.keyboard?.cancelTypeString(); window.WMSX?.room?.machine?.powerOff(); } }
+    } finally { if (running()) setBusy(false); }
+  });
+  loadChallenge(); container.querySelector('h1').focus({preventScroll: true});
+  return () => { active = false; runToken++; pythonRunner.stop(); if (!isPython) parkMSX(); };
+}
+
+
 
 
 const main = document.querySelector('#main');
-const settings = { category: 'bases', difficulty: '2', length: '10', base: 'any', baseMode: 'mixed', fireScope: 'all' };
+const settings = { category: 'bases', difficulty: '2', length: '10', base: 'any', baseMode: 'mixed', fireScope: 'all', cargoFocus: 'segregation' };
+let activeGroup = 'numbers';
+let codingCleanup = null;
 let session = null;
 let selected = null;
 let revealed = false;
@@ -343,20 +823,24 @@ const setAccent = category => document.documentElement.style.setProperty('--acce
 const focusHeading = () => main.querySelector('h1, h2')?.focus({ preventScroll: true });
 
 function home(focusCategory = null) {
+  codingCleanup?.(); codingCleanup = null;
   screen = 'home'; setAccent(settings.category);
   const basesVisible = ['bases', 'mixed'].includes(settings.category);
   const fireVisible = ['fire', 'mixed'].includes(settings.category);
+  const cargoVisible = ['cargo', 'mixed'].includes(settings.category);
+  const codingVisible = CATEGORIES[settings.category]?.coding;
   main.innerHTML = `
     <section class="setup">
       <div class="intro"><p class="eyebrow">YOUR PRACTICE BENCH</p><h1 tabindex="-1">What are we practicing?</h1><p>Pick a topic. Work it out. See why it works.</p></div>
+      <div class="category-groups" role="group" aria-label="Topic group">${Object.entries(CATEGORY_GROUPS).map(([id, name]) => `<button type="button" data-group="${id}" aria-pressed="${activeGroup === id}" class="group-button ${activeGroup === id ? 'active' : ''}">${name}<span>${Object.values(CATEGORIES).filter(c => c.group === id).length}</span></button>`).join('')}</div>
       <div class="category-grid" role="group" aria-label="Quiz category">
-      ${Object.entries(CATEGORIES).map(([id, category]) => `<button type="button" class="category-card ${settings.category === id ? 'is-selected' : ''}" data-category="${id}" aria-pressed="${settings.category === id}" style="--card-accent:${category.color}">
+      ${Object.entries(CATEGORIES).filter(([, c]) => c.group === activeGroup).map(([id, category]) => `<button type="button" class="category-card ${settings.category === id ? 'is-selected' : ''}" data-category="${id}" aria-pressed="${settings.category === id}" style="--card-accent:${category.color}">
         <span class="category-top"><span class="category-index">${category.mark}</span><span class="selection-dot" aria-hidden="true">${settings.category === id ? '✓' : ''}</span></span>
         <span class="category-name">${category.name}</span><span class="category-description">${category.description}</span>
-        <span class="category-foot">${id === 'bases' ? '2  3  4  5  6  7  8  9  10  11  12' : id === 'fire' ? 'SCENARIOS + LABELLED RULES' : 'SCENARIOS + CALCULATIONS'}</span>
+        <span class="category-foot">${id === 'bases' ? '2  3  4  5  6  7  8  9  10  11  12' : id === 'fire' ? 'SCENARIOS + LABELLED RULES' : id === 'cargo' ? 'IMDG 42-24 · STOWAGE + SEGREGATION' : category.coding ? 'CODE QUIZZES + CODING CHALLENGES' : 'REAL EXAMPLES + FIND THE FAULT'}</span>
       </button>`).join('')}
       </div>
-      <button type="button" class="mixed-toggle ${settings.category === 'mixed' ? 'active' : ''}" data-category="mixed" aria-pressed="${settings.category === 'mixed'}"><span aria-hidden="true">◈</span> Mix all four topics <span class="mixed-check">${settings.category === 'mixed' ? '✓' : '+'}</span></button>
+      <button type="button" class="mixed-toggle ${settings.category === 'mixed' ? 'active' : ''}" data-category="mixed" aria-pressed="${settings.category === 'mixed'}"><span aria-hidden="true">◈</span> Mix all ${Object.keys(CATEGORIES).length} topics <span class="mixed-check">${settings.category === 'mixed' ? '✓' : '+'}</span></button>
       <div class="setup-panel">
         <div class="panel-label"><span class="eyebrow">SET YOUR ROUND</span><span class="panel-note">No timer. Take your time.</span></div>
         <div class="controls-row">
@@ -364,21 +848,26 @@ function home(focusCategory = null) {
           <label>Questions<select id="length">${options([['10', '10 questions'], ['20', '20 questions'], ['endless', 'Keep practicing']], settings.length)}</select></label>
           ${basesVisible ? `<label>Base<select id="base">${options([['any', 'All bases · 2–12'], ...Array.from({ length: 11 }, (_, i) => [String(i + 2), `Base ${i + 2}`])], settings.base)}</select></label><label>Practice<select id="baseMode">${options([['mixed', 'Counting + conversions + arithmetic'], ['count', 'Counting sequences'], ['convert', 'Conversions'], ['arithmetic', 'Addition and subtraction']], settings.baseMode)}</select></label>` : ''}
           ${fireVisible ? `<label>Fire safety focus<select id="fireScope">${options([['all', 'International · labelled US + UK'], ['general', 'Practical safety'], ['us', 'US · OSHA'], ['uk', 'UK · Home Office']], settings.fireScope)}</select></label>` : ''}
+          ${cargoVisible ? `<label>Cargo focus<select id="cargoFocus">${options([['segregation', 'Stowage + segregation'], ['class1', 'Class 1 · explosives compatibility'], ['general', 'General table + loading decisions'], ['all', 'All cargo · including hazard classes']], settings.cargoFocus)}</select></label>` : ''}
         </div>
-        ${fireVisible ? '<p class="scope-note">Each fire question identifies its rule set. Placement depends on the hazard, local requirements, and the site’s fire plan.</p>' : basesVisible ? '<p class="scope-note">In bases 11 and 12: <strong>A = 10</strong> and <strong>B = 11</strong>. Counting rolls over when you run out of digits.</p>' : '<p class="scope-note">Real situations first. Calculations include units, assumptions, and worked answers.</p>'}
+        ${settings.category === 'mixed' ? '<p class="scope-note">A mix across 12 topics. Fire rule sets and IMDG context are shown before you answer. A 20-question round includes every topic.</p>' : cargoVisible ? '<p class="scope-note">IMDG 42-24: explosives need their compatibility letters. Division numbers alone do not decide whether 1.1 and 1.2 may be stowed together. Each answer links to its table or rule.</p>' : fireVisible ? '<p class="scope-note">Each fire question identifies its rule set. Placement depends on the hazard, local requirements, and the site’s fire plan.</p>' : basesVisible ? '<p class="scope-note">In bases 11 and 12: <strong>A = 10</strong> and <strong>B = 11</strong>. Counting rolls over when you run out of digits.</p>' : '<p class="scope-note">Real situations first. Read code, find faults, and see a worked explanation for every answer.</p>'}
         <div class="start-row"><span class="start-description"><span class="round-marker" aria-hidden="true"></span>${settings.category === 'mixed' ? 'A bit of everything' : esc(CATEGORIES[settings.category].name)}<small>${settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`}</small></span><button class="primary-button" id="start">Start round <span aria-hidden="true">▶</span></button></div>
       </div>
+      ${codingVisible ? `<div class="coding-entry"><div><strong>Want to write some code?</strong><p>Fix a short program, run it, and compare its output with the target.</p></div><button class="secondary-button" id="open-coding">Open coding challenges →</button></div>` : ''}
       <div class="home-foot"><span><strong>${QUESTIONS.length}</strong> scenario questions + generated calculations</span><span>Keyboard friendly <kbd>1–4</kbd> <kbd>Enter</kbd></span></div>
     </section>`;
   main.querySelectorAll('[data-category]').forEach(button => button.addEventListener('click', () => { settings.category = button.dataset.category; home(settings.category); }));
-  for (const id of ['difficulty', 'length', 'base', 'baseMode', 'fireScope']) {
+  main.querySelectorAll('[data-group]').forEach(button => button.addEventListener('click', () => { activeGroup = button.dataset.group; settings.category = Object.keys(CATEGORIES).find(id => CATEGORIES[id].group === activeGroup); home(); main.querySelector(`[data-group="${activeGroup}"]`).focus({preventScroll:true}); }));
+  for (const id of ['difficulty', 'length', 'base', 'baseMode', 'fireScope', 'cargoFocus']) {
     main.querySelector(`#${id}`)?.addEventListener('change', e => { settings[id] = e.target.value; if (id === 'length') main.querySelector('.start-description small').textContent = settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`; });
   }
   main.querySelector('#start').addEventListener('click', () => start());
+  main.querySelector('#open-coding')?.addEventListener('click', () => { screen = 'coding'; codingCleanup = createCodingLab(main, settings.category, () => { home(); focusHeading(); }); window.scrollTo({top:0, behavior:'instant'}); });
   if (focusCategory) main.querySelector(`[data-category="${focusCategory}"]`).focus({ preventScroll: true });
 }
 
 function start(reviewDeck = null) {
+  codingCleanup?.(); codingCleanup = null;
   const seen = new Set();
   const endless = !reviewDeck && settings.length === 'endless';
   session = { settings: { ...settings }, deck: reviewDeck ? shuffle(reviewDeck) : makeDeck(settings, endless ? 10 : Number(settings.length), Math.random, seen), seen, endless, index: 0, answers: [], streak: 0, bestStreak: 0, score: 0, review: !!reviewDeck };
@@ -386,6 +875,8 @@ function start(reviewDeck = null) {
 }
 
 function renderVisual(q) {
+  if (q.code) return `<pre class="question-code" aria-label="Code to examine"><code>${esc(q.code)}</code></pre>`;
+  if (q.cargo) return `<div class="cargo-comparison"><p>${esc(q.cargo.context)}</p><div class="cargo-pair"><div><span>CONSIGNMENT A</span><strong>${esc(q.cargo.a)}</strong></div><div><span>CONSIGNMENT B</span><strong>${esc(q.cargo.b)}</strong></div></div></div>`;
   if (typeof q.visual === 'string') return `<div class="number-display" aria-label="${esc(q.visual)}">${esc(q.visual)}</div>`;
   if (Array.isArray(q.visual)) return `<div class="givens">${q.visual.map(([label, value]) => `<div><span>${esc(label)}</span><strong>${esc(value)}</strong></div>`).join('')}</div>`;
   return '';
@@ -473,7 +964,7 @@ function submit(skip = false) {
 
 function sourceLink(q) {
   const source = SOURCES[q.source];
-  return source ? `<a class="source-link" href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.name)} <span class="sr-only">(opens in a new tab)</span></a>` : '';
+  return source ? `<a class="source-link" href="${esc(source.url + (q.page ? `#page=${q.page}` : ''))}" target="_blank" rel="noopener noreferrer">${esc(source.name)}${q.reference ? ` · ${esc(q.reference)}` : ''} <span class="sr-only">(opens in a new tab)</span></a>` : '';
 }
 
 function next() {
@@ -497,7 +988,7 @@ function finish() {
     <div class="result-score"><strong>${accuracy}<span>%</span></strong><div>${correct} of ${answers.length} correct<small>${session.settings.category === 'mixed' ? 'Mixed practice' : CATEGORIES[session.settings.category].name}</small></div></div>
     <div class="result-stats"><div><span>Points earned</span><strong>${session.score.toLocaleString()}</strong></div><div><span>Best streak</span><strong>${session.bestStreak}<small> in a row</small></strong></div><div><span>To revisit</span><strong>${missed.length}<small> question${missed.length === 1 ? '' : 's'}</small></strong></div></div>
     <div class="result-actions"><button class="primary-button" id="again">Play another round</button>${missed.length ? '<button class="secondary-button" id="review">Retry missed questions</button>' : ''}<button class="text-button" id="topics">Choose a topic</button></div>
-    ${missed.length ? `<div class="review-area"><h2>Your takeaways <span>${missed.length}</span></h2>${missed.map((entry, i) => `<details class="review-item"><summary><span class="review-number">${String(i + 1).padStart(2, '0')}</span><span>${esc(entry.q.prompt)}</span><span class="review-plus" aria-hidden="true">+</span></summary><div class="review-content">${entry.q.jurisdiction ? `<span class="jurisdiction">${esc(entry.q.jurisdiction)}</span>` : ''}<p class="muted">${entry.skipped ? 'Skipped' : `Your answer: ${esc(entry.q.type === 'choice' ? entry.q.options[entry.input] : entry.input)}`}</p><p>Answer: <strong>${esc(entry.q.answer)}${entry.q.unit ? ` ${esc(entry.q.unit)}` : entry.q.type === 'base' ? ` (base ${entry.q.answerBase})` : ''}</strong></p><p>${esc(entry.q.explanation)}</p>${sourceLink(entry.q)}</div></details>`).join('')}</div>` : '<div class="perfect-note"><span aria-hidden="true">✓</span><p>Everything clicked this round. Try another base or raise the difficulty.</p></div>'}
+    ${missed.length ? `<div class="review-area"><h2>Your takeaways <span>${missed.length}</span></h2>${missed.map((entry, i) => `<details class="review-item"><summary><span class="review-number">${String(i + 1).padStart(2, '0')}</span><span>${esc(entry.q.prompt)}</span><span class="review-plus" aria-hidden="true">+</span></summary><div class="review-content">${renderVisual(entry.q)}${entry.q.jurisdiction ? `<span class="jurisdiction">${esc(entry.q.jurisdiction)}</span>` : ''}<p class="muted">${entry.skipped ? 'Skipped' : `Your answer: ${esc(entry.q.type === 'choice' ? entry.q.options[entry.input] : entry.input)}`}</p><p>Answer: <strong>${esc(entry.q.answer)}${entry.q.unit ? ` ${esc(entry.q.unit)}` : entry.q.type === 'base' ? ` (base ${entry.q.answerBase})` : ''}</strong></p><p>${esc(entry.q.explanation)}</p>${sourceLink(entry.q)}</div></details>`).join('')}</div>` : '<div class="perfect-note"><span aria-hidden="true">✓</span><p>Everything clicked this round. Try another topic or raise the difficulty.</p></div>'}
   </section>`;
   main.querySelector('#again').addEventListener('click', () => start());
   main.querySelector('#review')?.addEventListener('click', () => start(missed.map(a => a.q)));
