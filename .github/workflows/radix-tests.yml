@@ -16,9 +16,7 @@ jobs:
       - name: Validate module syntax
         run: |
           for file in docs/*.js; do node --check "$file"; done
-      - name: Run quiz, MSX and cargo tests
+      - name: Build browser standalone
+        run: node tools/build-standalone.mjs
+      - name: Run quiz, MSX, cargo and bundle tests
         run: npm test
-      - name: Validate generated standalone HTML
-        run: |
-          node tools/build-standalone.mjs
-          test -s play.html
