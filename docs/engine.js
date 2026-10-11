@@ -1,7 +1,7 @@
-import { QUESTIONS } from './question-bank.js?v=344c627957d1';
-import { makeCargoQuestion } from './cargo.js?v=344c627957d1';
-import { makeMathQuestion } from './extra-questions.js?v=344c627957d1';
-import { MSX_QUESTIONS, makeMsxGeneratedQuestion } from './msx-questions.js?v=344c627957d1';
+import { QUESTIONS } from './question-bank.js?v=20261011-msx-cargo';
+import { makeCargoQuestion } from './cargo.js?v=20261011-msx-cargo';
+import { makeMathQuestion } from './extra-questions.js?v=20261011-msx-cargo';
+import { MSX_QUESTIONS, makeMsxGeneratedQuestion } from './msx-questions.js?v=20261011-msx-cargo';
 
 export const DIGITS = '0123456789AB';
 export const CATEGORIES = {
