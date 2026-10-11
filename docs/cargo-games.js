@@ -9,7 +9,7 @@ export function createCargoArcade(container, onExit) {
   let active = true;
   let mode = 'packer', count = 2, mission = createCargoMission(mode, count);
   let placements = { ...mission.placements };
-  let selected = null, history = [], checked = false, success = 0, feedback = '';
+  let selected = null, history = [], checked = false, success = 0, solvedMission = false, feedback = '';
   const getCard = id => mission.cards.find(card => card.id === id);
   const getReport = () => inspectCargo(mission, placements);
   function statusMarkup() {
@@ -54,7 +54,7 @@ export function createCargoArcade(container, onExit) {
     container.querySelector('#cargo-size').addEventListener('change', e => { count = Number(e.target.value); newMission(); });
     container.querySelector('#cargo-new').addEventListener('click', newMission);
     container.querySelector('#cargo-undo').addEventListener('click', () => { if (!history.length) return; placements = history.pop(); checked = false; feedback = 'Last move undone.'; selected = null; refresh(); });
-    container.querySelector('#cargo-reset').addEventListener('click', () => { placements = {...mission.placements}; selected = null; history = []; checked = false; feedback = 'Mission reset.'; refresh(); });
+    container.querySelector('#cargo-reset').addEventListener('click', () => { placements = {...mission.placements}; selected = null; history = []; checked = false; solvedMission = false; feedback = 'Mission reset.'; refresh(); });
     container.querySelector('#cargo-check').addEventListener('click', check);
     container.querySelectorAll('[data-card]').forEach(el => {
       el.addEventListener('click', event => { event.stopPropagation(); selected = selected === el.dataset.card ? null : el.dataset.card; feedback = selected ? 'Cargo selected. Choose a position or the quayside.' : 'Selection cleared.'; refresh(); });
@@ -69,7 +69,7 @@ export function createCargoArcade(container, onExit) {
       el.addEventListener('keydown', event => { if ((event.key === 'Enter' || event.key === ' ') && event.target === el) { event.preventDefault(); if (selected) place(selected, target); } });
     });
   }
-  function newMission() { mission = createCargoMission(mode, count); placements = {...mission.placements}; history = []; selected = null; checked = false; feedback = ''; refresh(); }
+  function newMission() { mission = createCargoMission(mode, count); placements = {...mission.placements}; history = []; selected = null; checked = false; solvedMission = false; feedback = ''; refresh(); }
   function place(cardId, target) {
     if (!getCard(cardId)) return;
     const next = moveCargo(mission, placements, cardId, target);
@@ -86,7 +86,8 @@ export function createCargoArcade(container, onExit) {
     if (!report.passed) {
       feedback = `<strong>${report.placed}/${report.total} cargo entries assigned · ${report.findings.length} issue(s)</strong>${mission.mode === 'repair' && report.findings.length === 0 && report.placed === report.total ? '<p>Resolve the original conflict by making at least one change.</p>' : ''}${report.findings.map(x => `<p>${escapeHTML(x.message)}</p>`).join('')}${report.placed !== report.total ? '<p>Assign every cargo entry before checking again.</p>' : ''}`;
     } else {
-      success += 1;
+      if (!solvedMission) success += 1;
+      solvedMission = true;
       feedback = `<strong>Mission passed: all ${report.total} entries checked.</strong><p>${mode === 'packer' || mode === 'repair' ? 'Every closed CTU now contains a pair permitted by the Class 1 compatibility table.' : 'Every table decision is correctly classified.'} This is an educational table check, not a complete ship loading authorization.</p><p>Try another mission, or increase to ${count < 6 ? count + 2 : 6} pairs.</p>`;
     }
     refresh();
