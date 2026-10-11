@@ -1,4 +1,4 @@
-import { class1Compatibility, generalSegregation, SEGREGATION_TERMS, IMDG_SOURCE } from './cargo.js';
+import { class1Compatibility, generalSegregation, SEGREGATION_TERMS, IMDG_SOURCE } from './cargo.js?v=20261011-msx-cargo';
 
 export const CARGO_MODES = [
   { id: 'packer', name: 'Pack the CTUs', subtitle: 'Drag Class 1 consignments into closed cargo transport units. Each unit holds two.' },
