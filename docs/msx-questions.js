@@ -91,7 +91,7 @@ export function makeMsxGeneratedQuestion(settings, rng = Math.random) {
     code = `10 S=0\n20 FOR I=1 TO ${n}\n30 FOR J=1 TO ${m}\n40 S=S+1\n50 NEXT J:NEXT I\n60 PRINT S`; prompt='What final count is printed?'; answer=String(n*m); distractors=[String(n+m),String(n*m+1),String(n)]; explanation='Each of the ' + n + ' outer iterations runs the inner loop ' + m + ' times.';
   }
   // Prevent any duplicate answer options for special operand combinations.
-  const options = [answer, ...distractors.filter(x => x !== answer)];
+  const options = [answer, ...distractors.filter(x => x !== answer)].filter((x, index, all) => all.indexOf(x) === index);
   for (let k = 1; options.length < 4; k++) { const v = String(Number(answer) + 10*k); if (!options.includes(v)) options.push(v); }
   return {
     id: 'msx-generated-' + type + '-' + n + '-' + m + '-' + code,
