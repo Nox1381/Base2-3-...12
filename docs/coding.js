@@ -99,8 +99,11 @@ function parkMSX() {
 
 // Output checks compare displayed output, not source text. They are practice checks,
 // not a sandboxed examination of whether a particular algorithm was used.
-export function createCodingLab(container, language, onExit) {
-  const labChallenges = CHALLENGES[language], isPython = language === 'python';
+export function createCodingLab(container, language, onExit, initialDifficulty = '1') {
+  const isPython = language === 'python';
+  let level = Number(initialDifficulty) || 1;
+  const available = () => isPython ? CHALLENGES.python : CHALLENGES.msx.filter(c => (c.level || 1) === level);
+  let labChallenges = available();
   const htmlEscape = v => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   let active = true, busy = false, challengeIndex = 0, runToken = 0;
   const pythonRunner = new PythonRunner();
@@ -108,7 +111,7 @@ export function createCodingLab(container, language, onExit) {
   container.innerHTML = `<section class="coding-lab">
     <div class="lab-top"><button class="text-button" id="lab-back">← Choose a topic</button><span class="topic-chip">${isPython ? 'Python' : 'MSX BASIC 1'}</span></div>
     <p class="eyebrow">CODING CHALLENGES</p><h1 tabindex="-1">Make it work.</h1>
-    <div class="lab-selection"><label for="challenge-select">Challenge</label><select id="challenge-select">${labChallenges.map((c, i) => `<option value="${i}">${i + 1}. ${htmlEscape(c.title)}</option>`).join('')}</select></div>
+    <div class="lab-selection">${!isPython ? `<label for="lab-difficulty">Difficulty</label><select id="lab-difficulty"><option value="1" ${level === 1 ? 'selected' : ''}>Starter</option><option value="2" ${level === 2 ? 'selected' : ''}>Standard</option><option value="3" ${level === 3 ? 'selected' : ''}>Advanced</option></select>` : ''}<label for="challenge-select">Challenge</label><select id="challenge-select">${labChallenges.map((c, i) => `<option value="${i}">${i + 1}. ${htmlEscape(c.title)}</option>`).join('')}</select></div>
     <h2 id="challenge-title"></h2><p class="lab-prompt" id="challenge-prompt"></p>
     <div class="lab-grid"><div class="lab-editor-panel"><label for="code-editor">Your ${isPython ? 'Python' : 'MSX BASIC 1'} code</label><textarea id="code-editor" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="editor-help"></textarea><p id="editor-help" class="input-help">${isPython ? 'Run executes real Python in your browser. Runs stop after 5 seconds.' : 'Run types your numbered program into a real MSX1. Keep SCREEN 0 for these output exercises.'} Tab inserts four spaces.</p><div class="lab-buttons"><button class="primary-button" id="run-code">Run code ▶</button><button class="secondary-button" id="stop-code" disabled>Stop</button><button class="text-button" id="reset-code">Reset code</button></div></div>
     <div class="lab-output-panel"><span class="eyebrow">TARGET OUTPUT</span><pre id="target-output"></pre><span class="eyebrow">YOUR OUTPUT</span><pre id="code-output" aria-label="Program output">Run your code to see its output.</pre><p id="run-status" class="run-status" role="status" aria-live="polite"></p></div></div>
@@ -130,15 +133,16 @@ export function createCodingLab(container, language, onExit) {
     element('challenge-title').textContent = challenge.title;
     element('challenge-prompt').textContent = challenge.prompt;
     element('target-output').textContent = challenge.expected;
-    editor.value = drafts.get(challengeIndex) ?? challenge.starter;
+    editor.value = drafts.get(challenge.id) ?? challenge.starter;
     element('code-hint').textContent = challenge.hint;
     element('code-solution').hidden = true;
     element('code-solution').textContent = challenge.solution;
     element('code-output').textContent = 'Run your code to see its output.';
     setStatus('');
   }
-  element('challenge-select').addEventListener('change', e => { drafts.set(challengeIndex, editor.value); challengeIndex = Number(e.target.value); loadChallenge(); });
-  element('reset-code').addEventListener('click', () => { drafts.delete(challengeIndex); loadChallenge(); });
+  element('challenge-select').addEventListener('change', e => { drafts.set(labChallenges[challengeIndex].id, editor.value); challengeIndex = Number(e.target.value); loadChallenge(); });
+  element('lab-difficulty')?.addEventListener('change', e => { drafts.set(labChallenges[challengeIndex].id, editor.value); level = Number(e.target.value); labChallenges = available(); challengeIndex = 0; element('challenge-select').innerHTML = labChallenges.map((c, i) => `<option value="${i}">${i + 1}. ${htmlEscape(c.title)}</option>`).join(''); loadChallenge(); });
+  element('reset-code').addEventListener('click', () => { drafts.delete(labChallenges[challengeIndex].id); loadChallenge(); });
   element('show-solution').addEventListener('click', () => { element('code-solution').hidden = !element('code-solution').hidden; });
   editor.addEventListener('keydown', e => { if (e.key === 'Tab') { e.preventDefault(); editor.setRangeText('    ', editor.selectionStart, editor.selectionEnd, 'end'); } });
   element('stop-code').addEventListener('click', () => { runToken++; pythonRunner.stop(); window.WMSX?.room?.keyboard?.cancelTypeString(); window.WMSX?.room?.machine?.powerOff(); setStatus('Stopped. You can edit the code and run again.'); setBusy(false); });
