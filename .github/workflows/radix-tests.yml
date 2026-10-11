@@ -1,0 +1,24 @@
+name: Radix tests
+on:
+  push:
+    branches: [main, feature/msx-cargo-games-20261011]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate module syntax
+        run: |
+          for file in docs/*.js; do node --check "$file"; done
+      - name: Run quiz, MSX and cargo tests
+        run: npm test
+      - name: Validate generated standalone HTML
+        run: |
+          node tools/build-standalone.mjs
+          test -s play.html
