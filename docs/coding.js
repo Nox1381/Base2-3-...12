@@ -1,4 +1,4 @@
-import { CHALLENGES, normalizeOutput } from './challenges.js';
+import { CHALLENGES, normalizeOutput } from './challenges.js?v=344c627957d1';
 
 const PYODIDE_URL = 'https://cdn.jsdelivr.net/pyodide/v0.28.3/full/pyodide.mjs';
 const WEBMSX_URL = 'https://cdn.jsdelivr.net/gh/ppeccin/WebMSX@4f4009e86d3e0bb9be7dcd7f0a582b0cd411d660/release/stable/6.0/embedded/wmsx.js';

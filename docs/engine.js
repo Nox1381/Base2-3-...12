@@ -1,6 +1,6 @@
-import { QUESTIONS } from './question-bank.js';
-import { makeCargoQuestion } from './cargo.js';
-import { makeMathQuestion } from './extra-questions.js';
+import { QUESTIONS } from './question-bank.js?v=344c627957d1';
+import { makeCargoQuestion } from './cargo.js?v=344c627957d1';
+import { makeMathQuestion } from './extra-questions.js?v=344c627957d1';
 
 export const DIGITS = '0123456789AB';
 export const CATEGORIES = {

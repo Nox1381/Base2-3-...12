@@ -23,6 +23,7 @@
 @media(max-width:950px){.category-grid{grid-template-columns:repeat(2,1fr)}.lab-grid{grid-template-columns:1fr 1fr}.lab-editor-panel,.lab-output-panel{padding:18px}}
 @media(max-width:660px){.lab-grid{grid-template-columns:1fr}.coding-entry{align-items:stretch;flex-direction:column;padding:18px}.coding-entry button{width:100%}.coding-lab>h1{font-size:32px}.lab-prompt{font-size:15px}.lab-selection{gap:10px}.lab-buttons .primary-button{width:auto}.lab-buttons .text-button{margin-left:auto}.lab-output-panel #code-output{min-height:100px}.msx-display-panel{padding:14px}}
 @media(max-width:570px){.category-groups{display:grid;grid-template-columns:1fr 1fr;gap:8px}.group-button{padding:9px 10px;gap:6px;justify-content:space-between;font-size:12px;line-height:1.5}.category-foot{font-size:9px}.question-code{padding:15px 12px;font-size:13px}.cargo-comparison{padding:12px}.cargo-pair{gap:8px}.cargo-pair>div{padding:10px}.cargo-pair strong{font-size:15px}.cargo-pair span{font-size:8px;letter-spacing:0}.controls-row label:has(#cargoFocus){grid-column:1/-1}.lab-top{margin-bottom:24px}#code-editor{font-size:13px;padding:12px;height:260px}.lab-editor-panel,.lab-output-panel{padding:15px}.lab-buttons{gap:8px}.lab-buttons .text-button{font-size:12px}.lab-buttons .primary-button,.lab-buttons .secondary-button{font-size:13px;padding:12px 15px}.lab-foot{font-size:11px}}
+.category-card{min-width:0}.category-name,.category-description{overflow-wrap:anywhere}
 
 </style>
 
@@ -810,7 +811,7 @@ function createCodingLab(container, language, onExit) {
 
 const main = document.querySelector('#main');
 const settings = { category: 'bases', difficulty: '2', length: '10', base: 'any', baseMode: 'mixed', fireScope: 'all', cargoFocus: 'segregation' };
-let activeGroup = 'numbers';
+let activeGroup = 'all';
 let codingCleanup = null;
 let session = null;
 let selected = null;
@@ -832,9 +833,9 @@ function home(focusCategory = null) {
   main.innerHTML = `
     <section class="setup">
       <div class="intro"><p class="eyebrow">YOUR PRACTICE BENCH</p><h1 tabindex="-1">What are we practicing?</h1><p>Pick a topic. Work it out. See why it works.</p></div>
-      <div class="category-groups" role="group" aria-label="Topic group">${Object.entries(CATEGORY_GROUPS).map(([id, name]) => `<button type="button" data-group="${id}" aria-pressed="${activeGroup === id}" class="group-button ${activeGroup === id ? 'active' : ''}">${name}<span>${Object.values(CATEGORIES).filter(c => c.group === id).length}</span></button>`).join('')}</div>
+      <div class="category-groups" role="group" aria-label="Topic group">${Object.entries({ all: 'All topics', ...CATEGORY_GROUPS }).map(([id, name]) => `<button type="button" data-group="${id}" aria-pressed="${activeGroup === id}" class="group-button ${activeGroup === id ? 'active' : ''}">${name}<span>${id === 'all' ? Object.keys(CATEGORIES).length : Object.values(CATEGORIES).filter(c => c.group === id).length}</span></button>`).join('')}</div>
       <div class="category-grid" role="group" aria-label="Quiz category">
-      ${Object.entries(CATEGORIES).filter(([, c]) => c.group === activeGroup).map(([id, category]) => `<button type="button" class="category-card ${settings.category === id ? 'is-selected' : ''}" data-category="${id}" aria-pressed="${settings.category === id}" style="--card-accent:${category.color}">
+      ${Object.entries(CATEGORIES).filter(([, c]) => activeGroup === 'all' || c.group === activeGroup).map(([id, category]) => `<button type="button" class="category-card ${settings.category === id ? 'is-selected' : ''}" data-category="${id}" aria-pressed="${settings.category === id}" style="--card-accent:${category.color}">
         <span class="category-top"><span class="category-index">${category.mark}</span><span class="selection-dot" aria-hidden="true">${settings.category === id ? '✓' : ''}</span></span>
         <span class="category-name">${category.name}</span><span class="category-description">${category.description}</span>
         <span class="category-foot">${id === 'bases' ? '2  3  4  5  6  7  8  9  10  11  12' : id === 'fire' ? 'SCENARIOS + LABELLED RULES' : id === 'cargo' ? 'IMDG 42-24 · STOWAGE + SEGREGATION' : category.coding ? 'CODE QUIZZES + CODING CHALLENGES' : 'REAL EXAMPLES + FIND THE FAULT'}</span>
@@ -857,7 +858,7 @@ function home(focusCategory = null) {
       <div class="home-foot"><span><strong>${QUESTIONS.length}</strong> scenario questions + generated calculations</span><span>Keyboard friendly <kbd>1–4</kbd> <kbd>Enter</kbd></span></div>
     </section>`;
   main.querySelectorAll('[data-category]').forEach(button => button.addEventListener('click', () => { settings.category = button.dataset.category; home(settings.category); }));
-  main.querySelectorAll('[data-group]').forEach(button => button.addEventListener('click', () => { activeGroup = button.dataset.group; settings.category = Object.keys(CATEGORIES).find(id => CATEGORIES[id].group === activeGroup); home(); main.querySelector(`[data-group="${activeGroup}"]`).focus({preventScroll:true}); }));
+  main.querySelectorAll('[data-group]').forEach(button => button.addEventListener('click', () => { activeGroup = button.dataset.group; if (activeGroup !== 'all') settings.category = Object.keys(CATEGORIES).find(id => CATEGORIES[id].group === activeGroup); home(); main.querySelector(`[data-group="${activeGroup}"]`).focus({preventScroll:true}); }));
   for (const id of ['difficulty', 'length', 'base', 'baseMode', 'fireScope', 'cargoFocus']) {
     main.querySelector(`#${id}`)?.addEventListener('change', e => { settings[id] = e.target.value; if (id === 'length') main.querySelector('.start-description small').textContent = settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`; });
   }

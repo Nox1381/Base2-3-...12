@@ -1,10 +1,10 @@
-import { CATEGORIES, CATEGORY_GROUPS, makeDeck, checkAnswer, shuffle, formatNumber } from './engine.js';
-import { QUESTIONS, SOURCES } from './question-bank.js';
-import { createCodingLab } from './coding.js';
+import { CATEGORIES, CATEGORY_GROUPS, makeDeck, checkAnswer, shuffle, formatNumber } from './engine.js?v=344c627957d1';
+import { QUESTIONS, SOURCES } from './question-bank.js?v=344c627957d1';
+import { createCodingLab } from './coding.js?v=344c627957d1';
 
 const main = document.querySelector('#main');
 const settings = { category: 'bases', difficulty: '2', length: '10', base: 'any', baseMode: 'mixed', fireScope: 'all', cargoFocus: 'segregation' };
-let activeGroup = 'numbers';
+let activeGroup = 'all';
 let codingCleanup = null;
 let session = null;
 let selected = null;
@@ -26,9 +26,9 @@ function home(focusCategory = null) {
   main.innerHTML = `
     <section class="setup">
       <div class="intro"><p class="eyebrow">YOUR PRACTICE BENCH</p><h1 tabindex="-1">What are we practicing?</h1><p>Pick a topic. Work it out. See why it works.</p></div>
-      <div class="category-groups" role="group" aria-label="Topic group">${Object.entries(CATEGORY_GROUPS).map(([id, name]) => `<button type="button" data-group="${id}" aria-pressed="${activeGroup === id}" class="group-button ${activeGroup === id ? 'active' : ''}">${name}<span>${Object.values(CATEGORIES).filter(c => c.group === id).length}</span></button>`).join('')}</div>
+      <div class="category-groups" role="group" aria-label="Topic group">${Object.entries({ all: 'All topics', ...CATEGORY_GROUPS }).map(([id, name]) => `<button type="button" data-group="${id}" aria-pressed="${activeGroup === id}" class="group-button ${activeGroup === id ? 'active' : ''}">${name}<span>${id === 'all' ? Object.keys(CATEGORIES).length : Object.values(CATEGORIES).filter(c => c.group === id).length}</span></button>`).join('')}</div>
       <div class="category-grid" role="group" aria-label="Quiz category">
-      ${Object.entries(CATEGORIES).filter(([, c]) => c.group === activeGroup).map(([id, category]) => `<button type="button" class="category-card ${settings.category === id ? 'is-selected' : ''}" data-category="${id}" aria-pressed="${settings.category === id}" style="--card-accent:${category.color}">
+      ${Object.entries(CATEGORIES).filter(([, c]) => activeGroup === 'all' || c.group === activeGroup).map(([id, category]) => `<button type="button" class="category-card ${settings.category === id ? 'is-selected' : ''}" data-category="${id}" aria-pressed="${settings.category === id}" style="--card-accent:${category.color}">
         <span class="category-top"><span class="category-index">${category.mark}</span><span class="selection-dot" aria-hidden="true">${settings.category === id ? '✓' : ''}</span></span>
         <span class="category-name">${category.name}</span><span class="category-description">${category.description}</span>
         <span class="category-foot">${id === 'bases' ? '2  3  4  5  6  7  8  9  10  11  12' : id === 'fire' ? 'SCENARIOS + LABELLED RULES' : id === 'cargo' ? 'IMDG 42-24 · STOWAGE + SEGREGATION' : category.coding ? 'CODE QUIZZES + CODING CHALLENGES' : 'REAL EXAMPLES + FIND THE FAULT'}</span>
@@ -51,7 +51,7 @@ function home(focusCategory = null) {
       <div class="home-foot"><span><strong>${QUESTIONS.length}</strong> scenario questions + generated calculations</span><span>Keyboard friendly <kbd>1–4</kbd> <kbd>Enter</kbd></span></div>
     </section>`;
   main.querySelectorAll('[data-category]').forEach(button => button.addEventListener('click', () => { settings.category = button.dataset.category; home(settings.category); }));
-  main.querySelectorAll('[data-group]').forEach(button => button.addEventListener('click', () => { activeGroup = button.dataset.group; settings.category = Object.keys(CATEGORIES).find(id => CATEGORIES[id].group === activeGroup); home(); main.querySelector(`[data-group="${activeGroup}"]`).focus({preventScroll:true}); }));
+  main.querySelectorAll('[data-group]').forEach(button => button.addEventListener('click', () => { activeGroup = button.dataset.group; if (activeGroup !== 'all') settings.category = Object.keys(CATEGORIES).find(id => CATEGORIES[id].group === activeGroup); home(); main.querySelector(`[data-group="${activeGroup}"]`).focus({preventScroll:true}); }));
   for (const id of ['difficulty', 'length', 'base', 'baseMode', 'fireScope', 'cargoFocus']) {
     main.querySelector(`#${id}`)?.addEventListener('change', e => { settings[id] = e.target.value; if (id === 'length') main.querySelector('.start-description small').textContent = settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`; });
   }
