@@ -1,6 +1,7 @@
 import { CATEGORIES, CATEGORY_GROUPS, makeDeck, checkAnswer, shuffle, formatNumber } from './engine.js?v=344c627957d1';
 import { QUESTIONS, SOURCES } from './question-bank.js?v=344c627957d1';
 import { createCodingLab } from './coding.js?v=344c627957d1';
+import { createCargoArcade } from './cargo-games.js?v=344c627957d1';
 
 const main = document.querySelector('#main');
 const settings = { category: 'bases', difficulty: '2', length: '10', base: 'any', baseMode: 'mixed', fireScope: 'all', cargoFocus: 'segregation' };
@@ -47,6 +48,7 @@ function home(focusCategory = null) {
         ${settings.category === 'mixed' ? '<p class="scope-note">A mix across 12 topics. Fire rule sets and IMDG context are shown before you answer. A 20-question round includes every topic.</p>' : cargoVisible ? '<p class="scope-note">IMDG 42-24: explosives need their compatibility letters. Division numbers alone do not decide whether 1.1 and 1.2 may be stowed together. Each answer links to its table or rule.</p>' : fireVisible ? '<p class="scope-note">Each fire question identifies its rule set. Placement depends on the hazard, local requirements, and the site’s fire plan.</p>' : basesVisible ? '<p class="scope-note">In bases 11 and 12: <strong>A = 10</strong> and <strong>B = 11</strong>. Counting rolls over when you run out of digits.</p>' : '<p class="scope-note">Real situations first. Read code, find faults, and see a worked explanation for every answer.</p>'}
         <div class="start-row"><span class="start-description"><span class="round-marker" aria-hidden="true"></span>${settings.category === 'mixed' ? 'A bit of everything' : esc(CATEGORIES[settings.category].name)}<small>${settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`}</small></span><button class="primary-button" id="start">Start round <span aria-hidden="true">▶</span></button></div>
       </div>
+      ${cargoVisible && settings.category === 'cargo' ? `<div class="coding-entry"><div><strong>Want to load a cargo ship?</strong><p>Four drag-and-drop IMDG practice games. Pack 2, 4 or 6 pairs and resolve segregation conflicts.</p></div><button class="secondary-button" id="open-cargo">Open cargo games →</button></div>` : ''}
       ${codingVisible ? `<div class="coding-entry"><div><strong>Want to write some code?</strong><p>Fix a short program, run it, and compare its output with the target.</p></div><button class="secondary-button" id="open-coding">Open coding challenges →</button></div>` : ''}
       <div class="home-foot"><span><strong>${QUESTIONS.length}</strong> scenario questions + generated calculations</span><span>Keyboard friendly <kbd>1–4</kbd> <kbd>Enter</kbd></span></div>
     </section>`;
@@ -56,7 +58,8 @@ function home(focusCategory = null) {
     main.querySelector(`#${id}`)?.addEventListener('change', e => { settings[id] = e.target.value; if (id === 'length') main.querySelector('.start-description small').textContent = settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`; });
   }
   main.querySelector('#start').addEventListener('click', () => start());
-  main.querySelector('#open-coding')?.addEventListener('click', () => { screen = 'coding'; codingCleanup = createCodingLab(main, settings.category, () => { home(); focusHeading(); }); window.scrollTo({top:0, behavior:'instant'}); });
+  main.querySelector('#open-coding')?.addEventListener('click', () => { screen = 'coding'; codingCleanup = createCodingLab(main, settings.category, () => { home(); focusHeading(); }, settings.difficulty); window.scrollTo({top:0, behavior:'instant'}); });
+  main.querySelector('#open-cargo')?.addEventListener('click', () => { screen = 'cargo'; codingCleanup = createCargoArcade(main, () => { home(); focusHeading(); }); window.scrollTo({top:0, behavior:'instant'}); });
   if (focusCategory) main.querySelector(`[data-category="${focusCategory}"]`).focus({ preventScroll: true });
 }
 
