@@ -1,4 +1,4 @@
-import { ADDITIONAL_MSX_CHALLENGES } from './msx-challenges.js?v=344c627957d1';
+import { ADDITIONAL_MSX_CHALLENGES } from './msx-challenges.js?v=20261011-msx-cargo';
 export const CHALLENGES = {
   python: [
     { id: 'count', title: 'Count in binary', prompt: 'Print the binary form of each number from 0 to 3, one per line. Use bin(n)[2:] to omit the 0b prefix.', starter: 'for n in range(3):\n    print(bin(n)[2:])', solution: 'for n in range(4):\n    print(bin(n)[2:])', expected: '0\n1\n10\n11', hint: 'range excludes its stop value. Four numbers are needed.' },
