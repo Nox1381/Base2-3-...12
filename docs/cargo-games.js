@@ -1,4 +1,4 @@
-import { CARGO_MODES, CARGO_SIZES, createCargoMission, inspectCargo, moveCargo, slotOf, CARGO_REFERENCE, pairExplanation } from './cargo-games-engine.js';
+import { CARGO_MODES, CARGO_SIZES, createCargoMission, inspectCargo, moveCargo, slotOf, CARGO_REFERENCE, pairExplanation } from './cargo-games-engine.js?v=20261011-msx-cargo';
 
 const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
 const icons = { B: '◆', D: '◇', F: '▲', H: '◈', J: '⬡', K: '✦' };
