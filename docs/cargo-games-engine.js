@@ -127,7 +127,7 @@ export function moveCargo(mission, placements, cardId, target) {
   const permittedSlots = mission.kind === 'ship' ? mission.bins.flatMap(bin => bin.slots) : mission.bins.map(bin => bin.id);
   if (target !== 'quay' && !permittedSlots.includes(target)) return placements;
   const next = { ...placements };
-  const from = slotOf(next, cardId);
+  const from = mission.kind === 'sorting' ? (next[cardId] ? cardId : null) : slotOf(next, cardId);
   if (from) delete next[from];
   if (target === 'quay') return next;
   if (mission.kind === 'ship') {
