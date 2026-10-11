@@ -1,3 +1,4 @@
+import { ADDITIONAL_MSX_CHALLENGES } from './msx-challenges.js?v=344c627957d1';
 export const CHALLENGES = {
   python: [
     { id: 'count', title: 'Count in binary', prompt: 'Print the binary form of each number from 0 to 3, one per line. Use bin(n)[2:] to omit the 0b prefix.', starter: 'for n in range(3):\n    print(bin(n)[2:])', solution: 'for n in range(4):\n    print(bin(n)[2:])', expected: '0\n1\n10\n11', hint: 'range excludes its stop value. Four numbers are needed.' },
@@ -16,4 +17,5 @@ export const CHALLENGES = {
     { id: 'condition', title: 'Choose the warning', prompt: 'The temperature is 35. Fix the comparison so the program prints HOT for values of at least 30.', starter: '10 T=35\n20 IF T<30 THEN PRINT "HOT" ELSE PRINT "OK"\n30 END', solution: '10 T=35\n20 IF T>=30 THEN PRINT "HOT" ELSE PRINT "OK"\n30 END', expected: 'HOT', hint: 'At least means greater than or equal to.' },
   ],
 };
+CHALLENGES.msx.push(...ADDITIONAL_MSX_CHALLENGES);
 export const normalizeOutput = value => String(value).replace(/\r/g, '').split('\n').map(line => line.trim()).filter(Boolean).join('\n');
