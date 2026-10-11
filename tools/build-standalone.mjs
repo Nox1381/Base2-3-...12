@@ -6,7 +6,7 @@ import { createHash } from 'node:crypto';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = file => readFile(path.join(root, file), 'utf8');
 const stripModule = source => source.replace(/^import .*;\s*$/gm, '').replace(/^export /gm, '');
-const files = ['docs/index.html', 'docs/styles.css', 'docs/extra-questions.js', 'docs/cargo.js', 'docs/question-bank.js', 'docs/engine.js', 'docs/challenges.js', 'docs/coding.js', 'docs/app.js'];
+const files = ['docs/index.html', 'docs/styles.css', 'docs/extra-questions.js', 'docs/cargo.js', 'docs/cargo-games-engine.js', 'docs/question-bank.js', 'docs/msx-questions.js', 'docs/engine.js', 'docs/msx-challenges.js', 'docs/challenges.js', 'docs/coding.js', 'docs/cargo-games.js', 'docs/app.js'];
 const originals = await Promise.all(files.map(read));
 const sources = originals.map(source => source.replace(/(\.\/[\w.-]+\.(?:js|css))\?v=[\w.-]+/g, '$1'));
 const assetVersion = createHash('sha256').update(sources.join('\n')).digest('hex').slice(0, 12);
