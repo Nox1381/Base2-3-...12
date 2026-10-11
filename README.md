@@ -1,6 +1,6 @@
 # Radix · Quiz Lab
 
-A personal browser quiz game with 12 categories, practical scenarios, code questions, and live Python/MSX BASIC 1 coding challenges.
+A personal browser quiz game with 12 categories, a broad MSX BASIC 1 practice bank, live Python/MSX coding challenges, and four drag-and-drop cargo training games.
 
 **Repository:** [Nox1381/Base2-3-...12](https://github.com/Nox1381/Base2-3-...12)
 
@@ -26,7 +26,7 @@ The URL is only playable after GitHub Pages is enabled and its deployment comple
 - **Engineering maths:** SI prefixes, periods/frequencies, tolerances, formula rearrangement, RMS, decibels, and calibration.
 - **Signals and communication:** UART, I²C, SPI, sampling, aliasing, filters, differential links, and transmission-line behaviour.
 - **Python:** read output, repair loops, use functions/lists/dictionaries, and find common bugs.
-- **MSX BASIC 1:** numbered programs, FOR/NEXT, GOTO, GOSUB/RETURN, DATA/READ/RESTORE, arrays, and MSX1 screen modes.
+- **MSX BASIC 1:** 50+ new curated quiz examples plus procedurally varied questions at three difficulties; numbered programs, FOR/NEXT, GOTO, GOSUB/RETURN, DATA/READ/RESTORE, string handling, arrays, operators, sprites, and MSX1 screen modes.
 - **Embedded systems:** GPIO, ADC, PWM, sensor scaling, responsive loops, interrupts, watchdogs, and rollover.
 - **Computer architecture:** RAM/ROM, registers, address spaces, byte order, stacks, integer limits, and memory banking.
 - **Cargo-ship dangerous goods:** IMDG general segregation lookup, full explosive classifications, compatibility groups, closed-CTU placement, subsidiary hazards, and loading-plan checks.
@@ -52,9 +52,20 @@ Questions distinguish same-CTU compatibility from separation between closed CTUs
 - [Official IMO resolution MSC.556(108), complete Amendment 42-24](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.556%28108%29.pdf) — 7.2.3, 7.2.4, and 7.2.7.1. Source links in each answer include the section and relevant PDF page.
 - [IMO December 2025 errata](https://wwwcdn.imo.org/localresources/en/publications/Documents/Supplements/English/QO200E_errata_December2025_PQ.pdf)
 
+## Four cargo-ship mini-games
+
+Choose **Cargo-ship dangerous goods** and click **Open cargo games**. Each game supports **2, 4, or 6 pairs** (4, 8, or 12 individual packages in the two ship games). On desktop, drag a marked cargo card into a CTU or category; on mobile or keyboard, select the card and then its destination. Already loaded cargo can be moved, swapped, unloaded, and rechecked.
+
+1. **Pack the CTUs:** fill every closed cargo transport unit with two Class 1 consignments while avoiding incompatible compatibility groups.
+2. **Fix the load:** inspect a preloaded ship with incompatible Class 1 pairings and rearrange the containers' contents to clear the conflicts.
+3. **Segregation deck:** move class pairs to the correct general-table term: `1` away from, `2` separated from, `3` separated by a complete compartment/hold, `4` separated longitudinally by an intervening hold, `X` consult the DGL, or `*` Class 1 special rules.
+4. **Harbour decisions:** distinguish permitted, prohibited, and conditional Class 1 compatibility checks from general segregation terms and DGL requirements.
+
+Games have a check step, clear feedback, Undo, Reset, and New mission. A JavaScript rules engine derives answers from the same documented IMDG 42-24 tables as the quiz. The ship is a **conceptual learning diagram, not a scaled vessel layout**. It checks only compatibility *inside* individual closed CTUs, not safe separation distances *between* CTUs or complete ship stowage approval. Always consult the current IMDG Dangerous Goods List, subsidiary hazards, applicable ship-specific provisions and competent personnel for real loading decisions.
+
 ## Coding challenges
 
-Select **Python** or **MSX BASIC 1**, then **Open coding challenges**. Each has six small repair/build tasks, a target output, hints, a working solution, Run, Stop, and Reset. The editor preserves your draft while switching challenges. Output comparison ignores leading/trailing line whitespace and blank lines; it verifies output rather than enforcing a particular algorithm.
+Select **Python** or **MSX BASIC 1**, then **Open coding challenges**. Python has six exercises; MSX BASIC 1 has **36** exercises across three distinct difficulties (**16 Starter, 10 Standard, 10 Advanced**). Each has a target output, hints, a working solution, Run, Stop, and Reset. The editor preserves your draft while switching challenges. Output comparison ignores leading/trailing line whitespace and blank lines; it verifies output rather than enforcing a particular algorithm.
 
 - Python runs genuine CPython using pinned [Pyodide 0.28.3](https://pyodide.org/en/0.28.3/usage/webworker.html) in a separate worker. Runs have a five-second limit and can be stopped without freezing the quiz. Input prompts have no stdin in these exercises and will receive EOF.
 - MSX BASIC runs on a genuine **MSX1** using pinned [WebMSX 6.0.8](https://github.com/ppeccin/WebMSX/tree/4f4009e86d3e0bb9be7dcd7f0a582b0cd411d660). The live screen is visible; only screen output after RUN is compared. Each Run starts a fresh program. Numbered programs should fit within 4000 characters. These short tasks use text mode, not graphical output checks.
@@ -93,11 +104,11 @@ Open **http://localhost:8080**. You can also download `play.html` and open it di
 Run the mathematical/content checks with Node.js 18 or later:
 
 ```sh
-node --test tests/engine.test.mjs
+npm test
 ```
 
 ## Edit questions
 
-Curated questions are in `docs/question-bank.js` and `docs/extra-questions.js`. IMDG tables and questions are in `docs/cargo.js`; coding tasks and runtimes are in `docs/challenges.js` and `docs/coding.js`. The first option is the correct answer in source; choices are shuffled for play. Add a jurisdiction and a source for regulatory questions. Generated problems and answer validation are in `docs/engine.js`; quiz UI is in `docs/app.js`, and appearance is in `docs/styles.css`.
+Curated questions are in `docs/question-bank.js`, `docs/extra-questions.js` and `docs/msx-questions.js`. IMDG tables and questions are in `docs/cargo.js`; cargo simulation, validation and gameplay are in `docs/cargo-games-engine.js` and `docs/cargo-games.js`. Coding tasks are in `docs/challenges.js` and `docs/msx-challenges.js`; the browser runtimes are in `docs/coding.js`. The first option is the correct answer in source; choices are shuffled for play. Add a jurisdiction and a source for regulatory questions. Generated problems and answer validation are in `docs/engine.js`; quiz UI is in `docs/app.js`, and appearance is in `docs/styles.css`.
 
 The standalone `play.html` is generated by `node tools/build-standalone.mjs` after any source changes. This command also versions the stylesheet and module URLs so browsers load updated assets together. The GitHub Actions workflow publishes `docs/` directly. Quiz progress is kept only in the current session; closing or refreshing the page starts fresh. No analytics or account data are collected by the game. Optional Google Fonts fall back to system fonts when unavailable.

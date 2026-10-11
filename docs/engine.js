@@ -1,6 +1,7 @@
-import { QUESTIONS } from './question-bank.js?v=344c627957d1';
-import { makeCargoQuestion } from './cargo.js?v=344c627957d1';
-import { makeMathQuestion } from './extra-questions.js?v=344c627957d1';
+import { QUESTIONS } from './question-bank.js?v=20261011-msx-cargo';
+import { makeCargoQuestion } from './cargo.js?v=20261011-msx-cargo';
+import { makeMathQuestion } from './extra-questions.js?v=20261011-msx-cargo';
+import { MSX_QUESTIONS, makeMsxGeneratedQuestion } from './msx-questions.js?v=20261011-msx-cargo';
 
 export const DIGITS = '0123456789AB';
 export const CATEGORIES = {
@@ -192,7 +193,7 @@ export function checkAnswer(question, input) {
 }
 
 export function eligibleQuestions(category, settings) {
-  return QUESTIONS.filter(q => q.category === category && q.level <= Number(settings.difficulty)
+  return (category === 'msx' ? [...QUESTIONS, ...MSX_QUESTIONS] : QUESTIONS).filter(q => q.category === category && q.level <= Number(settings.difficulty)
     && (category !== 'fire' || !settings.fireScope || settings.fireScope === 'all' || (settings.fireScope === 'general' ? q.jurisdiction === 'General practice' : q.jurisdiction.startsWith(settings.fireScope === 'us' ? 'US' : 'UK')))
     && (category !== 'cargo' || !settings.cargoFocus || settings.cargoFocus === 'all' || (settings.cargoFocus === 'segregation' ? q.focus !== 'labels' : q.focus === settings.cargoFocus)));
 }
@@ -210,6 +211,7 @@ export function makeDeck(settings, count = 10, rng = Math.random, previous = new
       else if (['electronics', 'electrical'].includes(category) && rng() < 0.45) question = makeEngineeringQuestion(category, settings.difficulty, rng);
       else if (category === 'maths' && rng() < 0.55) question = makeMathQuestion(settings.difficulty, rng);
       else if (category === 'cargo' && settings.cargoFocus !== 'labels' && rng() < 0.55) question = prepareChoice(makeCargoQuestion(settings, rng), rng);
+      else if (category === 'msx' && rng() < 0.42) question = prepareChoice(makeMsxGeneratedQuestion(settings, rng), rng);
       else {
         const pool = pools[category];
         if (!pool.length) throw new Error('No questions match this selection.');

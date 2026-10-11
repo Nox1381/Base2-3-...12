@@ -25,6 +25,81 @@
 @media(max-width:570px){.category-groups{display:grid;grid-template-columns:1fr 1fr;gap:8px}.group-button{padding:9px 10px;gap:6px;justify-content:space-between;font-size:12px;line-height:1.5}.category-foot{font-size:9px}.question-code{padding:15px 12px;font-size:13px}.cargo-comparison{padding:12px}.cargo-pair{gap:8px}.cargo-pair>div{padding:10px}.cargo-pair strong{font-size:15px}.cargo-pair span{font-size:8px;letter-spacing:0}.controls-row label:has(#cargoFocus){grid-column:1/-1}.lab-top{margin-bottom:24px}#code-editor{font-size:13px;padding:12px;height:260px}.lab-editor-panel,.lab-output-panel{padding:15px}.lab-buttons{gap:8px}.lab-buttons .text-button{font-size:12px}.lab-buttons .primary-button,.lab-buttons .secondary-button{font-size:13px;padding:12px 15px}.lab-foot{font-size:11px}}
 .category-card{min-width:0}.category-name,.category-description{overflow-wrap:anywhere}
 
+
+/* Interactive cargo training */
+.cargo-game{max-width:1180px;margin:0 auto;padding:28px 0 70px}
+.cargo-game>h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,5vw,46px);font-weight:550;letter-spacing:-.045em;margin:8px 0 10px}
+.cargo-subhead{font-size:15px;line-height:1.65;color:var(--muted);max-width:800px;margin:0 0 24px}
+.cargo-game-modes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}
+.cargo-mode{border:1px solid #36504c;background:#192425;color:var(--text);border-radius:7px;padding:14px 12px;text-align:center;font-weight:600;font-size:13px;cursor:pointer;min-height:48px}
+.cargo-mode:hover,.cargo-mode:focus-visible{border-color:var(--accent)}
+.cargo-mode.active{background:#233a38;color:var(--accent);border-color:var(--accent)}
+.cargo-game-setup{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:12px 0 20px}
+.cargo-game-setup h2{margin:0;font-size:23px;font-weight:560}
+.cargo-game-setup p{max-width:760px;font-size:13px;color:var(--muted);line-height:1.6;margin:7px 0 0}
+.cargo-game-setup label{font-size:12px;color:var(--muted);display:grid;gap:7px;flex:none}
+.cargo-game-setup select{min-width:175px}
+.cargo-game-stats{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+.cargo-stat{padding:11px 15px;border:1px solid var(--border);border-radius:5px;color:var(--muted);font-size:12px}
+.cargo-stat strong{color:var(--accent);font:700 20px ui-monospace,monospace;margin-right:5px}
+.cargo-playfield{display:grid;grid-template-columns:minmax(225px,1fr) minmax(0,2.1fr);gap:18px;align-items:stretch}
+.cargo-quay,.cargo-vessel-panel{border:1px solid #334b48;border-radius:9px;background:#111c1d;min-width:0;padding:16px}
+.cargo-quay-heading{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border-bottom:1px solid #30423f;padding-bottom:14px;margin-bottom:14px}
+.cargo-quay-heading strong{font:700 12px ui-monospace,monospace;letter-spacing:.045em;color:var(--accent)}
+.cargo-quay-heading span{font-size:11px;color:var(--muted)}
+.cargo-quay-cards{display:flex;flex-direction:column;gap:9px;max-height:570px;overflow:auto}
+.cargo-item{display:flex;align-items:center;gap:10px;text-align:left;width:100%;padding:11px;border:1px solid #43514b;background:#213032;color:var(--text);border-radius:6px;cursor:grab;touch-action:manipulation}
+.cargo-item:hover,.cargo-item:focus-visible,.cargo-item.is-selected{border-color:var(--accent);background:#304440}
+.cargo-item.is-selected{outline:2px solid var(--accent);outline-offset:1px}
+.cargo-item:active{cursor:grabbing}
+.cargo-item>span:nth-child(2){min-width:0;flex:1;display:grid;gap:5px}
+.cargo-item strong{font:700 13px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.03em;overflow-wrap:anywhere}
+.cargo-item small{font-size:11px;color:#c4cecc;line-height:1.35;overflow-wrap:anywhere}
+.cargo-hazard{display:grid;place-items:center;width:38px;height:38px;min-width:38px;background:#edbd63;border:3px solid #f3d29c;transform:rotate(-5deg);color:#1c2525;font-size:20px}
+.cargo-grip{font-size:17px;color:#b1c0bc}
+.cargo-quay-clear{font-size:13px;color:#c1d8d1;line-height:1.6}
+.cargo-quay-drop{border:1px dashed #68847b;color:#c3dfd2;padding:12px;margin-top:14px;border-radius:5px;font-size:12px;text-align:center;cursor:pointer}
+.cargo-quay-drop:hover,.cargo-quay-drop:focus-visible{border-color:var(--accent)}
+.cargo-ship{position:relative;padding:12px 0 0;min-height:260px}
+.cargo-ship-top{display:flex;justify-content:space-between;align-items:center;gap:7px;font:600 10px ui-monospace,monospace;color:#b0c2bb;padding:0 8px 12px}
+.cargo-ship-top strong{font-size:12px;color:var(--accent);text-align:center}
+.cargo-ship-bays{background:linear-gradient(140deg,#263d3c,#1a2d2b);border:2px solid #6b9291;border-bottom:0;border-radius:18px 18px 4px 4px;padding:15px;display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px}
+.cargo-hull{height:42px;margin:0 2px;background:linear-gradient(#547f87,#284958);border:2px solid #759ca3;border-top:0;border-radius:0 0 46% 46%;display:flex;align-items:center;justify-content:space-around}
+.cargo-hull span{height:2px;background:#a0d2d1;width:80%;opacity:.6}
+.cargo-ctu{background:#172627;border:1px solid #4f7674;border-radius:5px;min-width:0}
+.cargo-ctu.has-conflict{border-color:#ef9a82;box-shadow:0 0 0 1px #ef9a82}
+.cargo-ctu-label{display:flex;align-items:center;gap:6px;font:700 11px ui-monospace,monospace;color:#c7dbd3;padding:9px 10px}
+.cargo-ctu-icon{font-size:17px;color:#add7d1}
+.cargo-warning{margin-left:auto;color:#ffb19a}
+.cargo-ctu-slots{display:grid;grid-template-columns:1fr;gap:7px;padding:0 9px 9px}
+.cargo-slot{min-height:78px;display:grid;align-items:stretch;padding:5px;border:1px dashed #57736d;border-radius:4px;cursor:pointer;min-width:0}
+.cargo-slot .cargo-item{padding:7px;border-radius:3px}
+.cargo-slot .cargo-item small{font-size:10px}
+.cargo-slot .cargo-hazard{width:26px;height:26px;min-width:26px;font-size:14px;border-width:2px}
+.cargo-empty{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:12px 7px;color:#b9cec5;text-align:center;font:600 10px ui-monospace,monospace;letter-spacing:.02em}
+.cargo-empty small{font:400 10px ui-sans-serif,sans-serif;color:#90ada5}
+.cargo-slot.cargo-drag-over,.cargo-sort-bin.cargo-drag-over,.cargo-quay-drop.cargo-drag-over{outline:2px dashed var(--accent);outline-offset:-2px;background:#2a4842}
+.cargo-sorting-board{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.cargo-sort-bin{min-height:128px;padding:12px;border:1px dashed #60867c;border-radius:6px;background:#1b2d2b;cursor:pointer}
+.cargo-sort-bin>strong{display:block;font:600 12px/1.5 ui-monospace,monospace;color:#b8ded3;margin-bottom:10px}
+.cargo-bin-items{display:flex;flex-direction:column;gap:7px;min-height:58px}
+.cargo-bin-items .cargo-item{padding:8px}
+.cargo-bin-items .cargo-hazard{width:28px;height:28px;min-width:28px;font-size:14px;border-width:2px}
+.cargo-game-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:20px 0 14px}
+.cargo-game-actions .primary-button,.cargo-game-actions .secondary-button{padding:12px 18px}
+.cargo-game-actions button:disabled{opacity:.4;cursor:not-allowed}
+.cargo-result{border:1px solid #405c55;background:#182823;border-radius:6px;padding:17px;line-height:1.6;color:#c5ded5;font-size:13px;min-height:58px}
+.cargo-result p{margin:8px 0 0}
+.cargo-result-pass{border-color:#84b881}
+.cargo-result-issues{border-color:#b98070}
+.cargo-game-notes{font-size:12px;line-height:1.7;color:var(--muted);border-bottom:1px solid var(--border);margin-top:22px;padding-bottom:14px}
+.cargo-game-notes summary{cursor:pointer;color:var(--text)}
+.cargo-game-notes a{color:var(--accent)}
+.cargo-accessible-tip{font-size:12px;color:var(--muted);line-height:1.5;margin:17px 0}
+@media(max-width:1050px){.cargo-playfield{grid-template-columns:minmax(210px,0.95fr) minmax(0,1.45fr)}.cargo-ship-bays{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}}
+@media(max-width:760px){.cargo-game-modes{grid-template-columns:repeat(2,1fr)}.cargo-playfield{grid-template-columns:1fr}.cargo-quay-cards{max-height:220px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.cargo-ship-bays{grid-template-columns:repeat(2,minmax(0,1fr))}.cargo-sorting-board{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.cargo-game-setup{align-items:stretch;flex-direction:column}.cargo-game-setup select{width:100%}.cargo-ship-bays,.cargo-sorting-board{grid-template-columns:1fr}.cargo-quay-cards{grid-template-columns:1fr}.cargo-game-actions .primary-button{flex:1}.cargo-quay,.cargo-vessel-panel{padding:12px}.cargo-game-modes{gap:7px}.cargo-mode{font-size:12px}.lab-selection{flex-wrap:wrap}.lab-selection label{min-width:72px}}
+
 </style>
 
 </head>
@@ -275,6 +350,168 @@ function makeCargoQuestion(settings, rng = Math.random) {
 }
 
 
+const CARGO_MODES = [
+  { id: 'packer', name: 'Pack the CTUs', subtitle: 'Drag Class 1 consignments into closed cargo transport units. Each unit holds two.' },
+  { id: 'repair', name: 'Fix the load', subtitle: 'The ship starts with incompatible explosive groups sharing CTUs. Move cargo to resolve every conflict.' },
+  { id: 'terms', name: 'Segregation deck', subtitle: 'Move pairs to the correct IMDG general-table term: 1–4, X or *.' },
+  { id: 'desk', name: 'Harbour decisions', subtitle: 'Classify compatibility decisions, conditional permissions and DGL lookups.' },
+];
+const CARGO_SIZES = [2, 4, 6];
+const CARGO_REFERENCE = IMDG_SOURCE.url;
+const GROUPS = [
+  { group: 'B', labels: ['1.1B', '1.2B'], cargo: 'Initiation articles' },
+  { group: 'D', labels: ['1.1D', '1.2D'], cargo: 'Secondary explosive articles' },
+  { group: 'F', labels: ['1.2F', '1.3F'], cargo: 'Articles with means of initiation' },
+  { group: 'H', labels: ['1.2H', '1.3H'], cargo: 'Explosive articles containing white phosphorus' },
+  { group: 'J', labels: ['1.1J', '1.2J'], cargo: 'Articles containing flammable liquid or gel' },
+  { group: 'K', labels: ['1.2K', '1.3K'], cargo: 'Articles containing a toxic chemical agent' },
+];
+const GENERAL_LABELS = {
+  '1.1': 'Explosives 1.1', '1.2': 'Explosives 1.2', '1.4': 'Explosives 1.4',
+  '2.1': 'Flammable gas', '2.2': 'Non-flammable gas', '2.3': 'Toxic gas',
+  '3': 'Flammable liquid', '4.1': 'Flammable solid', '4.2': 'Spontaneously combustible',
+  '4.3': 'Dangerous when wet', '5.1': 'Oxidizer', '5.2': 'Organic peroxide',
+  '6.1': 'Toxic substance', '6.2': 'Infectious substance', '7': 'Radioactive material',
+  '8': 'Corrosive', '9': 'Miscellaneous',
+};
+const TERM_CODES = ['1', '2', '3', '4', 'X', '*'];
+const TERM_TARGETS = TERM_CODES.map(id => ({ id, label: id === '*' ? 'Class 1 procedure · *' : id === 'X' ? 'Consult DGL · X' : `${id} · ${SEGREGATION_TERMS[id]}` }));
+const DECISION_TARGETS = [
+  { id: 'permitted', label: 'Class 1 table permits' },
+  { id: 'forbidden', label: 'Class 1 table forbids' },
+  { id: 'conditional', label: 'Class 1 has conditions' },
+  { id: 'dgl', label: 'General X · consult DGL' },
+  { id: 'term', label: 'General 1–4 · apply term' },
+  { id: 'class1', label: 'General * · check Class 1' },
+];
+
+const randomInt = (limit, rng) => Math.min(limit - 1, Math.floor(rng() * limit));
+function shuffled(items, rng) {
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = randomInt(i + 1, rng);
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+const item = (id, label, detail, group) => ({ id, label, detail, group });
+const termForPair = (a, b) => generalSegregation(a, b);
+const class1Result = (a, b) => class1Compatibility(a, b);
+const pairExplanation = (pair) => pair.kind === 'explosive'
+  ? `The ${pair.a.group}/${pair.b.group} Class 1 compatibility-table cell is ${pair.result === 'forbidden' ? 'blank (not authorized together)' : pair.result === 'conditional' ? 'X with a condition that needs verification' : 'X (permitted by this table check)'}. This is not full stowage approval; check the actual entries and other provisions. IMDG 7.2.7.1.4–7.2.7.1.5.`
+  : `General table 7.2.4: ${pair.a.label} with ${pair.b.label} gives ${pair.code} — ${SEGREGATION_TERMS[pair.code]}. Check the actual DGL column 16b, subsidiary hazards, exceptions and ship/CTU provisions before any real stowage decision.`;
+
+function cargoGroups(count, rng) {
+  return shuffled(GROUPS, rng).slice(0, count).map((group, i) => [
+    item(`G${i}-a`, group.labels[0], group.cargo, group.group),
+    item(`G${i}-b`, group.labels[1], group.cargo, group.group),
+  ]);
+}
+const SAMPLES = ['1.1', '1.2', '1.4', '2.1', '2.2', '2.3', '3', '4.1', '4.2', '4.3', '5.1', '5.2', '6.1', '6.2', '7', '8', '9'];
+function generalCatalogue() {
+  const list = [];
+  for (let i = 0; i < SAMPLES.length; i++) for (let j = i; j < SAMPLES.length; j++) {
+    const a = SAMPLES[i], b = SAMPLES[j], code = termForPair(a, b);
+    list.push({ a, b, code });
+  }
+  return list;
+}
+const GENERAL_CATALOGUE = generalCatalogue();
+function createCargoMission(mode = 'packer', count = 2, rng = Math.random) {
+  if (!CARGO_MODES.some(x => x.id === mode)) throw new RangeError('Unknown cargo game.');
+  if (!CARGO_SIZES.includes(count)) throw new RangeError('Choose 2, 4, or 6 cargo pairs.');
+  if (mode === 'packer' || mode === 'repair') {
+    const pairs = cargoGroups(count, rng);
+    const cards = shuffled(pairs.flat(), rng);
+    const bins = Array.from({ length: count }, (_, i) => ({
+      id: `CTU-${i + 1}`, label: `Closed CTU ${i + 1}`, capacity: 2, slots: [`CTU-${i + 1}-0`, `CTU-${i + 1}-1`],
+    }));
+    const placements = {};
+    if (mode === 'repair') {
+      pairs.forEach((p, i) => { placements[bins[i].slots[0]] = p[0].id; placements[bins[i].slots[1]] = p[1].id; });
+      // Break two or more otherwise valid pairings, while keeping a solvable permutation.
+      for (let i = 0; i < count; i += 2) {
+        const a = bins[i].slots[1], b = bins[i + 1].slots[1];
+        [placements[a], placements[b]] = [placements[b], placements[a]];
+      }
+    }
+    return { mode, count, cards, bins, placements, moves: 0, inspected: false, kind: 'ship' };
+  }
+  if (mode === 'terms') {
+    const choices = shuffled(TERM_CODES, rng).slice(0, count);
+    const cards = shuffled(choices.map((code, i) => {
+      const options = GENERAL_CATALOGUE.filter(x => x.code === code);
+      const pick = options[randomInt(options.length, rng)];
+      return { id: `pair-${i}`, label: `${pick.a} + ${pick.b}`, detail: `${GENERAL_LABELS[pick.a]} / ${GENERAL_LABELS[pick.b]}`, code, target: code, a: item('a', pick.a, GENERAL_LABELS[pick.a]), b: item('b', pick.b, GENERAL_LABELS[pick.b]), kind: 'general' };
+    }), rng);
+    return { mode, count, cards, bins: TERM_TARGETS.map(x => ({ ...x, capacity: count })), placements: {}, moves: 0, kind: 'sorting' };
+  }
+  const cases = [
+    { kind: 'explosive', a: '1.1B', b: '1.2D' },
+    { kind: 'explosive', a: '1.1D', b: '1.2D' },
+    { kind: 'explosive', a: '1.1L', b: '1.2L' },
+    { kind: 'explosive', a: '1.2F', b: '1.3J' },
+    { kind: 'explosive', a: '1.3G', b: '1.1D' },
+    { kind: 'general', a: '3', b: '5.1' },
+    { kind: 'general', a: '3', b: '9' },
+    { kind: 'general', a: '1.1', b: '1.2' },
+    { kind: 'general', a: '6.2', b: '3' },
+    { kind: 'general', a: '8', b: '2.1' },
+  ];
+  const chosen = shuffled(cases, rng).slice(0, count);
+  const cards = shuffled(chosen.map((c, i) => {
+    const a = item('a', c.a, GENERAL_LABELS[c.a] || `Explosives ${c.a}`, c.kind === 'explosive' ? c.a.at(-1) : undefined);
+    const b = item('b', c.b, GENERAL_LABELS[c.b] || `Explosives ${c.b}`, c.kind === 'explosive' ? c.b.at(-1) : undefined);
+    const result = c.kind === 'explosive' ? class1Result(a.group, b.group).status : null;
+    const code = c.kind === 'general' ? termForPair(c.a, c.b) : null;
+    const target = c.kind === 'explosive' ? result : code === 'X' ? 'dgl' : code === '*' ? 'class1' : 'term';
+    return { id: `decision-${i}`, label: `${c.a} + ${c.b}`, detail: c.kind === 'explosive' ? 'Class 1 · same closed CTU' : 'General segregation table', a, b, kind: c.kind, result, code, target };
+  }), rng);
+  return { mode, count, cards, bins: DECISION_TARGETS.map(x => ({ ...x, capacity: count })), placements: {}, moves: 0, kind: 'sorting' };
+}
+function slotOf(placements, cardId) {
+  return Object.keys(placements).find(slot => placements[slot] === cardId) || null;
+}
+function moveCargo(mission, placements, cardId, target) {
+  if (!mission.cards.some(x => x.id === cardId)) return placements;
+  const permittedSlots = mission.kind === 'ship' ? mission.bins.flatMap(bin => bin.slots) : mission.bins.map(bin => bin.id);
+  if (target !== 'quay' && !permittedSlots.includes(target)) return placements;
+  const next = { ...placements };
+  const from = mission.kind === 'sorting' ? (next[cardId] ? cardId : null) : slotOf(next, cardId);
+  if (from) delete next[from];
+  if (target === 'quay') return next;
+  if (mission.kind === 'ship') {
+    const swapped = next[target];
+    next[target] = cardId;
+    if (swapped && from) next[from] = swapped;
+  } else next[cardId] = target;
+  return next;
+}
+function inspectCargo(mission, placements = mission.placements) {
+  const assignments = mission.kind === 'ship'
+    ? mission.bins.flatMap(bin => bin.slots.map(slot => placements[slot]).filter(Boolean))
+    : mission.cards.filter(card => !!placements[card.id]).map(card => card.id);
+  const placed = new Set(assignments).size;
+  const findings = [];
+  if (mission.kind === 'ship') {
+    for (const bin of mission.bins) {
+      const inBin = bin.slots.map(slot => mission.cards.find(card => card.id === placements[slot])).filter(Boolean);
+      if (inBin.length === 2) {
+        const result = class1Result(inBin[0].group, inBin[1].group);
+        if (result.status !== 'permitted') findings.push({
+          id: bin.id, message: `${bin.label}: ${inBin[0].label} / ${inBin[1].label} — ${result.status === 'conditional' ? 'conditional compatibility; no automatic approval' : 'not authorized together in the Class 1 table'}.`,
+        });
+      }
+    }
+  } else {
+    for (const card of mission.cards) if (placements[card.id] && placements[card.id] !== card.target) {
+      findings.push({ id: card.id, message: `${card.label}: this belongs in "${mission.bins.find(x => x.id === card.target).label}". ${pairExplanation(card)}` });
+    }
+  }
+  return { placed, total: mission.cards.length, findings, complete: placed === mission.cards.length && findings.length === 0, passed: placed === mission.cards.length && findings.length === 0 && (mission.mode !== 'repair' || Object.keys(placements).some(k => placements[k] !== mission.placements[k])) };
+}
+
+
 
 // Correct answers are always options[0] here; the engine shuffles choices for play.
 // Numeric placement guidance is labelled by jurisdiction, never presented as worldwide law.
@@ -366,6 +603,109 @@ const QUESTIONS = [
   q('fs-uk-signs', 'fire', 1, 'Placement', 'An extinguisher’s position is not obvious. What does UK Home Office guidance suggest may be necessary?', ['Suitable signs indicating its location', 'Removing all signs', 'A sign saying it is unavailable', 'Covering it with a coat'], 'Location signs can help people find equipment when it is not clearly visible.', { jurisdiction: 'UK · Home Office guidance', source: 'uk' }),
   q('fs-uk-risk', 'fire', 2, 'Workplace procedures', 'A workplace changes from office use to storing flammable liquids. What should drive the extinguisher selection?', ['A review of the actual fire risks and suitable protection', 'Keeping every old extinguisher without review', 'Selecting only by the cheapest price', 'The wall paint colour'], 'A changed hazard needs a reviewed risk assessment and suitable equipment.', { jurisdiction: 'UK · Home Office guidance', source: 'uk' }),
 ];
+
+// MSX BASIC 1 question expansion. Correct answer is always first; engine shuffles choices.
+const msxQ = (id, level, topic, prompt, code, correct, a, b, c, explanation) => ({
+  id: 'msx-extra-' + id, category: 'msx', level, topic, prompt, code,
+  options: [correct, a, b, c], explanation, source: 'msx',
+});
+const MSX_QUESTIONS = [
+  msxQ('print',1,'PRINT','What appears on screen?', '10 PRINT "MSX"\n20 END', 'MSX','10 MSX','"MSX"','Nothing','PRINT displays the string without quotation marks.'),
+  msxQ('colon',1,'Statements','How many numbers does this one numbered program line print?', '10 PRINT 2:PRINT 4:PRINT 6\n20 END', '3','1','2','6','A colon separates three statements on one numbered line.'),
+  msxQ('add',1,'Arithmetic','What does BASIC print?', '10 A=7:B=5\n20 PRINT A+B', '12','75','2','35','+ adds numeric variables.'),
+  msxQ('times',1,'Arithmetic','What does BASIC print?', '10 A=3\n20 PRINT A*4', '12','34','7','0','The multiplication operator in BASIC is *.'),
+  msxQ('division',1,'Arithmetic','What is the numerical result?', '10 PRINT 10/2', '5','20','12','2','The slash divides the left numeric operand by the right.'),
+  msxQ('precedence',1,'Arithmetic','What is printed?', '10 PRINT 2+3*4', '14','20','24','9','Multiplication happens before addition.'),
+  msxQ('parentheses',1,'Arithmetic','What is printed?', '10 PRINT (2+3)*4', '20','14','24','9','Parentheses force the addition first.'),
+  msxQ('first-loop',1,'FOR / NEXT','How many times does HELLO appear?', '10 FOR I=1 TO 4\n20 PRINT "HELLO"\n30 NEXT I', '4','3','5','1','The ending value in FOR is inclusive.'),
+  msxQ('zero-loop',1,'FOR / NEXT','What is the first number printed?', '10 FOR I=0 TO 3\n20 PRINT I\n30 NEXT I', '0','1','3','4','FOR starts at its specified initial value.'),
+  msxQ('assign',1,'Variables','What is the value printed?', '10 X=2\n20 X=X+3\n30 PRINT X', '5','2','3','6','The assignment updates X using its previous value.'),
+  msxQ('semicolon',1,'Formatting','What does the semicolon do in this code?', '10 PRINT "HEL";"LO"', 'Print HELLO without a line break between parts','Print HEL and LO on different lines','Start a comment','Erase the screen','A semicolon in PRINT joins output fields without an inserted newline.'),
+  msxQ('remark',1,'REM','Which line is a comment?', '10 REM SHOW THE SCORE\n20 PRINT 5', '10 REM SHOW THE SCORE','20 PRINT 5','Both execute as printing','Neither','REM introduces a comment; it does not display text.'),
+  msxQ('end',1,'Program control','What appears?', '10 PRINT "A"\n20 END\n30 PRINT "B"', 'A only','A and B','B only','Nothing','END stops execution before line 30.'),
+  msxQ('if-true',1,'IF / THEN','Which word is displayed?', '10 N=9\n20 IF N>5 THEN PRINT "BIG" ELSE PRINT "SMALL"', 'BIG','SMALL','9','Both','9 is greater than 5, so the THEN branch executes.'),
+  msxQ('if-false',1,'IF / THEN','Which word appears?', '10 N=3\n20 IF N>=5 THEN PRINT "GO" ELSE PRINT "WAIT"', 'WAIT','GO','3','Nothing','3 does not satisfy the >= comparison.'),
+  msxQ('goto',1,'GOTO','What is printed?', '10 GOTO 30\n20 PRINT "NO"\n30 PRINT "YES"\n40 END', 'YES','NO','NO then YES','Nothing','GOTO branches to the numbered line.'),
+  msxQ('strings',1,'Strings','Which variable holds text?', '10 A$="RADIX"\n20 PRINT A$', 'A$','A','A%','RADIX$','The $ suffix denotes a string variable.'),
+  msxQ('screen',1,'MSX screen modes','Which command selects the 40-column text screen used in these challenges?', '10 SCREEN 0:WIDTH 40', 'SCREEN 0','SCREEN 2','SCREEN 3','SCREEN 1','SCREEN 0 is the MSX text screen; WIDTH sets its columns.'),
+  msxQ('step',2,'FOR / NEXT','Which sequence prints?', '10 FOR I=2 TO 8 STEP 2\n20 PRINT I\n30 NEXT I', '2, 4, 6, 8','2, 3, 4, 5, 6, 7, 8','2, 4, 6','8, 6, 4, 2','STEP 2 increments the loop variable by two, including 8.'),
+  msxQ('reverse',2,'FOR / NEXT','Which output is correct?', '10 FOR I=5 TO 1 STEP -2\n20 PRINT I\n30 NEXT I', '5, 3, 1','5, 4, 3, 2, 1','1, 3, 5','5 only','Negative STEP counts down: 5, 3, 1.'),
+  msxQ('counter',2,'Accumulator','What is the final value?', '10 S=0\n20 FOR I=1 TO 3\n30 S=S+I\n40 NEXT I\n50 PRINT S', '6','3','4','0','1 + 2 + 3 accumulates to 6.'),
+  msxQ('read',2,'DATA / READ','What is printed?', '10 DATA 8,13\n20 READ A,B\n30 PRINT B-A', '5','21','8','13','READ takes successive DATA entries into A then B.'),
+  msxQ('restore',2,'DATA / RESTORE','What is printed?', '10 DATA 4,9\n20 READ A,B\n30 RESTORE\n40 READ C\n50 PRINT C', '4','9','13','0','RESTORE resets the DATA pointer; READ starts from its first item.'),
+  msxQ('sub',2,'GOSUB / RETURN','What is printed?', '10 X=5\n20 GOSUB 100\n30 PRINT X\n40 END\n100 X=X*2\n110 RETURN', '10','5','20','0','GOSUB invokes a subroutine, which changes X before returning.'),
+  msxQ('nested',2,'Nested loops','How many stars print?', '10 FOR I=1 TO 2\n20 FOR J=1 TO 3\n30 PRINT "*"\n40 NEXT J\n50 NEXT I', '6','5','3','2','The inner loop runs three times for each of two outer iterations.'),
+  msxQ('left',2,'String slicing','What is printed?', '10 PRINT LEFT$("RADIX",2)', 'RA','DI','RADI','AX','LEFT$ extracts two characters from the left.'),
+  msxQ('right',2,'String slicing','What is printed?', '10 PRINT RIGHT$("COMPUTER",3)', 'TER','COM','PUT','ER','RIGHT$ returns the final three characters.'),
+  msxQ('mid',2,'String slicing','What is printed?', '10 PRINT MID$("RADIX",2,3)', 'ADI','RAD','DIX','ADI X','MID$ starts at 1-based position 2 and takes three characters.'),
+  msxQ('length',2,'String length','What number is printed?', '10 PRINT LEN("BASIC")', '5','4','6','0','LEN returns the length of a string.'),
+  msxQ('ascii',2,'Character codes','What is printed?', '10 PRINT ASC("A")', '65','64','97','1','ASC returns the character code of A (65).'),
+  msxQ('chr',2,'Character codes','What does the code print?', '10 PRINT CHR$(66)', 'B','A','66','C','CHR$ converts the ASCII code 66 to the character B.'),
+  msxQ('int',2,'Numeric functions','What is printed?', '10 PRINT INT(8/3)', '2','3','2.67','8','INT rounds down to the nearest integer.'),
+  msxQ('mod',2,'Remainders','Which value is printed?', '10 PRINT 17 MOD 5', '2','3','5','12','MOD returns the remainder after integer division.'),
+  msxQ('dim',2,'Arrays','What is the final output?', '10 DIM A(3)\n20 A(1)=5:A(2)=7\n30 PRINT A(1)+A(2)', '12','2','7','0','Array indices reference different values; DIM reserves array elements.'),
+  msxQ('swap',2,'Variables','What is printed?', '10 A=2:B=9\n20 T=A:A=B:B=T\n30 PRINT A;B', '9 then 2','2 then 9','9 then 9','2 then 2','T temporarily preserves A while the two variables exchange values.'),
+  msxQ('and',2,'Boolean operators','Will the program print OK?', '10 A=1:B=0\n20 IF A=1 AND B=1 THEN PRINT "OK" ELSE PRINT "NO"', 'No; it prints NO','Yes; it prints OK','It prints 1','It prints 0','Both parts of AND must be true.'),
+  msxQ('or',2,'Boolean operators','What is printed?', '10 A=1:B=0\n20 IF A=1 OR B=1 THEN PRINT "YES" ELSE PRINT "NO"', 'YES','NO','1','0','OR needs at least one true condition.'),
+  msxQ('on-goto',3,'ON GOTO','Where does execution jump?', '10 N=2\n20 ON N GOTO 100,200,300\n30 END\n100 PRINT "A":END\n200 PRINT "B":END\n300 PRINT "C":END', 'Line 200; it prints B','Line 100; it prints A','Line 300; it prints C','Line 30; no output','ON N GOTO picks the Nth line from the target list.'),
+  msxQ('on-gosub',3,'ON GOSUB','What is printed?', '10 N=1\n20 ON N GOSUB 100,200\n30 PRINT "END":END\n100 PRINT "ONE":RETURN\n200 PRINT "TWO":RETURN', 'ONE then END','TWO then END','ONE only','END only','The first subroutine is called, then RETURN resumes at line 30.'),
+  msxQ('nested-acc',3,'Nested loops','What total is printed?', '10 S=0\n20 FOR I=1 TO 3\n30 FOR J=1 TO 2\n40 S=S+I\n50 NEXT J:NEXT I\n60 PRINT S', '12','6','9','3','Each I is added twice, so 2 × (1+2+3) = 12.'),
+  msxQ('restore-line',3,'RESTORE line','What is printed?', '10 DATA 2,3\n20 DATA 7,8\n30 RESTORE 20\n40 READ A,B\n50 PRINT A+B', '15','5','10','7','RESTORE 20 positions the DATA pointer at the statement on line 20.'),
+  msxQ('integer-overflow',3,'MSX numeric types','Which declaration represents an integer typed variable?', '10 X%=120', 'X%','X$','X!','X#','The % suffix denotes a 16-bit integer variable in MSX BASIC.'),
+  msxQ('hex',3,'Hexadecimal','What value is printed in decimal?', '10 PRINT &H10+2', '18','12','16','258','&H10 is hexadecimal 16; 16 + 2 = 18.'),
+  msxQ('binary',3,'Number constants','What is printed?', '10 PRINT &B1010', '10','1010','12','5','&B introduces a binary integer literal: 1010₂ is ten.'),
+  msxQ('octal',3,'Octal constants','What is printed?', '10 PRINT &O17', '15','17','8','7','&O17 is octal 17, equal to 1×8 + 7 = 15.'),
+  msxQ('xor',3,'Bitwise logic','What is printed?', '10 PRINT 5 XOR 3', '6','7','1','2','0101 XOR 0011 = 0110, decimal 6.'),
+  msxQ('mask',3,'Bitwise logic','What is printed?', '10 PRINT 12 AND 10', '8','14','2','6','1100 AND 1010 leaves 1000 (decimal 8).'),
+  msxQ('not-equals',3,'Conditional logic','Which word appears?', '10 X=5\n20 IF X<>4 THEN PRINT "DIFFERENT" ELSE PRINT "SAME"', 'DIFFERENT','SAME','5','Neither','<> means not equal.'),
+  msxQ('while',3,'WHILE / WEND','Which final output does this loop produce?', '10 N=1\n20 WHILE N<5\n30 N=N*2\n40 WEND\n50 PRINT N', '8','4','5','16','N goes 1→2→4→8; the loop exits when N is not below 5.'),
+  msxQ('def-fn',3,'Functions','What is printed?', '10 DEF FNA(X)=X*X+1\n20 PRINT FNA(4)', '17','16','9','5','DEF FN creates a user-defined expression; 4²+1 = 17.'),
+  msxQ('string-array',3,'Arrays','What appears?', '10 DIM N$(2)\n20 N$(0)="RED":N$(1)="BLUE"\n30 PRINT N$(1)', 'BLUE','RED','0','1','String arrays use the $ suffix; element 1 contains BLUE.'),
+  msxQ('instr',3,'String search','What is printed?', '10 PRINT INSTR("RADIX","DI")', '3','2','4','0','INSTR returns the 1-based start position of DI in RADIX.'),
+  msxQ('val',3,'String conversion','What is printed?', '10 PRINT VAL("12")+3', '15','123','3','12','VAL converts a numeric string to a number before arithmetic.'),
+  msxQ('str',3,'String conversion','Which function converts a numeric value into a string?', '10 A$=STR$(42)', 'STR$','VAL','ASC','CHR$','STR$ converts numbers to text (formatting may include a leading sign space).'),
+  msxQ('gosub-math',3,'Subroutine side-effects','What does this program print?', '10 A=1\n20 FOR I=1 TO 3\n30 GOSUB 100\n40 NEXT I\n50 PRINT A:END\n100 A=A*2:RETURN', '8','4','6','16','Each GOSUB doubles A: 1→2→4→8.'),
+  msxQ('sprite',3,'MSX sprites','Which command writes an eight-byte pattern to sprite pattern 0?', '10 SPRITE$(0)=CHR$(&HFF)+STRING$(7,CHR$(0))', 'SPRITE$(0)=...','SCREEN 0','COLOR 15','LOCATE 0,0','SPRITE$ is the pattern-string array; eight bytes describe an 8×8 sprite pattern.'),
+  msxQ('screen2',3,'MSX graphics','Which screen mode provides 256×192 pattern graphics with sprites on MSX1?', '10 SCREEN 2', 'SCREEN 2','SCREEN 0','SCREEN 3','WIDTH 40','MSX1 SCREEN 2 is the high-resolution pattern-based graphics mode.'),
+];
+const msxPick = (xs, rng) => xs[Math.min(xs.length - 1, Math.floor(rng() * xs.length))];
+function makeMsxGeneratedQuestion(settings, rng = Math.random) {
+  const level = Number(settings.difficulty) || 1;
+  const types = level === 1 ? ['loop', 'compare', 'math'] : level === 2 ? ['step', 'read', 'mid', 'loop', 'compare', 'math'] : ['branch', 'subroutine', 'nested', 'step', 'read', 'mid'];
+  const type = msxPick(types, rng);
+  const n = 2 + Math.floor(rng()*7), m = 1 + Math.floor(rng()*5);
+  let code, prompt, answer, distractors, explanation;
+  if (type === 'loop') {
+    code = `10 FOR I=1 TO ${n}\n20 PRINT I\n30 NEXT I`; prompt = 'How many numbers does the program print?'; answer = String(n); distractors = [String(n-1), String(n+1), String(n*2)]; explanation = 'FOR includes both endpoints: 1 through ' + n + '.';
+  } else if (type === 'compare') {
+    code = `10 X=${n}\n20 IF X>=${m} THEN PRINT "READY" ELSE PRINT "WAIT"`; prompt = 'What word is printed?'; answer = n>=m?'READY':'WAIT'; distractors = [n>=m?'WAIT':'READY',String(n),'Nothing']; explanation = 'Evaluate the >= comparison before choosing THEN or ELSE.';
+  } else if (type === 'math') {
+    code = `10 A=${n}:B=${m}\n20 PRINT A*B+2`; prompt = 'What value is printed?'; answer = String(n*m+2); distractors = [String(n*(m+2)), String(n+m+2), String(n*m)]; explanation = 'Multiply A by B before adding 2.';
+  } else if (type === 'step') {
+    code = `10 FOR I=${m} TO ${m+2*n} STEP 2\n20 PRINT I\n30 NEXT I`; prompt = 'How many lines of numbers are printed?'; answer = String(n+1); distractors = [String(n),String(2*n),String(2*n+1)]; explanation = 'The inclusive loop visits ' + (n+1) + ' values.';
+  } else if (type === 'read') {
+    code = `10 DATA ${n},${m}\n20 READ A,B\n30 RESTORE\n40 READ C\n50 PRINT B+C`; prompt = 'What number is printed?'; answer = String(n+m); distractors = [String(n*2),String(m*2),String(n)]; explanation = 'RESTORE resets to the first DATA item, so C equals A.';
+  } else if (type === 'mid') {
+    const words = ['RADIX','BASIC','PIXEL','SOUND','SPRITE']; const word=msxPick(words,rng);
+    code = `10 PRINT MID$("${word}",2,${m>3?3:m})`; prompt = 'What exactly is printed?'; const width=m>3?3:m; answer=word.slice(1,1+width); distractors = [word.slice(0,width),word.slice(-width),word.slice(1,2) + 'X'];
+    explanation='MID$ uses 1-based character positions; position 2 begins at the second letter.';
+  } else if (type === 'branch') {
+    code = `10 A=${n}\n20 ON 2 GOSUB 100,200\n30 PRINT A:END\n100 A=A+1:RETURN\n200 A=A*${m}:RETURN`; prompt='What final number does PRINT display?'; answer=String(n*m); distractors=[String(n+1),String(n*m+1),String(n)]; explanation='ON 2 GOSUB calls line 200, which multiplies A by ' + m + '.';
+  } else if (type === 'subroutine') {
+    code = `10 X=${m}\n20 FOR I=1 TO ${n}\n30 GOSUB 100\n40 NEXT I\n50 PRINT X:END\n100 X=X+2:RETURN`; prompt='What is the final value of X?'; answer=String(m+2*n); distractors=[String(m+n),String(2*n),String(m+2*(n-1))]; explanation='The subroutine adds two exactly ' + n + ' times.';
+  } else {
+    code = `10 S=0\n20 FOR I=1 TO ${n}\n30 FOR J=1 TO ${m}\n40 S=S+1\n50 NEXT J:NEXT I\n60 PRINT S`; prompt='What final count is printed?'; answer=String(n*m); distractors=[String(n+m),String(n*m+1),String(n)]; explanation='Each of the ' + n + ' outer iterations runs the inner loop ' + m + ' times.';
+  }
+  // Prevent any duplicate answer options for special operand combinations.
+  const options = [answer, ...distractors.filter(x => x !== answer)].filter((x, index, all) => all.indexOf(x) === index);
+  for (let k = 1; options.length < 4; k++) { const v = String(Number(answer) + 10*k); if (!options.includes(v)) options.push(v); }
+  return {
+    id: 'msx-generated-' + type + '-' + n + '-' + m + '-' + code,
+    category: 'msx', level: type === 'branch' || type === 'subroutine' || type === 'nested' ? 3 : type === 'step' || type === 'read' || type === 'mid' ? 2 : 1,
+    topic: 'MSX BASIC · ' + type, prompt, code, options: options.slice(0,4), explanation, source: 'msx',
+  };
+}
+
 
 
 
@@ -560,7 +900,7 @@ function checkAnswer(question, input) {
 }
 
 function eligibleQuestions(category, settings) {
-  return QUESTIONS.filter(q => q.category === category && q.level <= Number(settings.difficulty)
+  return (category === 'msx' ? [...QUESTIONS, ...MSX_QUESTIONS] : QUESTIONS).filter(q => q.category === category && q.level <= Number(settings.difficulty)
     && (category !== 'fire' || !settings.fireScope || settings.fireScope === 'all' || (settings.fireScope === 'general' ? q.jurisdiction === 'General practice' : q.jurisdiction.startsWith(settings.fireScope === 'us' ? 'US' : 'UK')))
     && (category !== 'cargo' || !settings.cargoFocus || settings.cargoFocus === 'all' || (settings.cargoFocus === 'segregation' ? q.focus !== 'labels' : q.focus === settings.cargoFocus)));
 }
@@ -578,6 +918,7 @@ function makeDeck(settings, count = 10, rng = Math.random, previous = new Set())
       else if (['electronics', 'electrical'].includes(category) && rng() < 0.45) question = makeEngineeringQuestion(category, settings.difficulty, rng);
       else if (category === 'maths' && rng() < 0.55) question = makeMathQuestion(settings.difficulty, rng);
       else if (category === 'cargo' && settings.cargoFocus !== 'labels' && rng() < 0.55) question = prepareChoice(makeCargoQuestion(settings, rng), rng);
+      else if (category === 'msx' && rng() < 0.42) question = prepareChoice(makeMsxGeneratedQuestion(settings, rng), rng);
       else {
         const pool = pools[category];
         if (!pool.length) throw new Error('No questions match this selection.');
@@ -590,6 +931,42 @@ function makeDeck(settings, count = 10, rng = Math.random, previous = new Set())
   }
   return settings.category === 'mixed' ? shuffle(deck, rng) : deck;
 }
+
+// Runnable SCREEN 0 exercises. Difficulty: 1 = Starter, 2 = Standard, 3 = Advanced.
+const task = (id, level, title, prompt, starter, solution, expected, hint) => ({ id: 'extra-' + id, level, title, prompt, starter, solution, expected, hint });
+const ADDITIONAL_MSX_CHALLENGES = [
+  task('hello',1,'First PRINT','Make this print HELLO MSX.', '10 PRINT "HELLO"\n20 END','10 PRINT "HELLO MSX"\n20 END','HELLO MSX','Change the text inside the quotation marks.'),
+  task('variable',1,'Change a variable','Print 9 using a variable, not a string.', '10 N=4\n20 PRINT N\n30 END','10 N=9\n20 PRINT N\n30 END','9','Assign N the intended value.'),
+  task('order',1,'Operator order','Change the arithmetic so the output is 20.', '10 PRINT 2+3*4\n20 END','10 PRINT (2+3)*4\n20 END','20','Use parentheses around the addition.'),
+  task('greeting',1,'Join strings','Print HELLO WORLD as a single line.', '10 PRINT "HELLO";"MSX"\n20 END','10 PRINT "HELLO";" WORLD"\n20 END','HELLO WORLD','Use a semicolon in PRINT, and include the required space.'),
+  task('jump',1,'Skip a bad line','Print SAFE, not ERROR.', '10 PRINT "ERROR"\n20 PRINT "SAFE"\n30 END','10 GOTO 20\n20 PRINT "SAFE"\n30 END','SAFE','A GOTO can skip to line 20.'),
+  task('loop5',1,'Five passes','Print 1 through 5 on separate lines.', '10 FOR I=1 TO 3\n20 PRINT I\n30 NEXT I\n40 END','10 FOR I=1 TO 5\n20 PRINT I\n30 NEXT I\n40 END','1\n2\n3\n4\n5','FOR includes its upper bound.'),
+  task('even',1,'Even numbers','Make the loop print 2, 4, 6, 8.', '10 FOR I=2 TO 8\n20 PRINT I\n30 NEXT I\n40 END','10 FOR I=2 TO 8 STEP 2\n20 PRINT I\n30 NEXT I\n40 END','2\n4\n6\n8','STEP 2 advances by two.'),
+  task('reverse',1,'Backwards','Print 5, 4, 3, 2, 1.', '10 FOR I=1 TO 5\n20 PRINT I\n30 NEXT I\n40 END','10 FOR I=5 TO 1 STEP -1\n20 PRINT I\n30 NEXT I\n40 END','5\n4\n3\n2\n1','Negative STEP counts down.'),
+  task('hot',1,'Thermostat decision','If the temperature is 35, print HOT.', '10 T=35\n20 IF T>40 THEN PRINT "HOT" ELSE PRINT "OK"\n30 END','10 T=35\n20 IF T>=30 THEN PRINT "HOT" ELSE PRINT "OK"\n30 END','HOT','35 is at least 30.'),
+  task('caption',1,'Text from a string','Print the contents of a string variable, not its variable name.', '10 A$="BASIC"\n20 PRINT "A$"\n30 END','10 A$="BASIC"\n20 PRINT A$\n30 END','BASIC','Remove the quotes around the variable name.'),
+  task('sumloop',2,'Sum a loop','Print 15, the sum of 1 through 5.', '10 S=0\n20 FOR I=1 TO 5\n30 S=I\n40 NEXT I\n50 PRINT S\n60 END','10 S=0\n20 FOR I=1 TO 5\n30 S=S+I\n40 NEXT I\n50 PRINT S\n60 END','15','Accumulate into S instead of replacing it.'),
+  task('read3',2,'Read three DATA items','Add 2, 5 and 7, then print 14.', '10 DATA 2,5,7\n20 READ A,B\n30 PRINT A+B\n40 END','10 DATA 2,5,7\n20 READ A,B,C\n30 PRINT A+B+C\n40 END','14','READ must fetch all three items.'),
+  task('restore2',2,'Reset the DATA pointer','Print 12: read 4 and 8, RESTORE, then read 4 again and add it to 8.', '10 DATA 4,8\n20 READ A,B\n30 READ C\n40 PRINT B+C\n50 END','10 DATA 4,8\n20 READ A,B\n30 RESTORE\n40 READ C\n50 PRINT B+C\n60 END','12','RESTORE resets the DATA pointer to the start.'),
+  task('left2',2,'LEFT$ slices','Make the program print RA.', '10 A$="RADIX"\n20 PRINT LEFT$(A$,3)\n30 END','10 A$="RADIX"\n20 PRINT LEFT$(A$,2)\n30 END','RA','LEFT$ keeps the first two characters.'),
+  task('mid3',2,'MID$ slices','Make the program print ADI.', '10 A$="RADIX"\n20 PRINT MID$(A$,1,3)\n30 END','10 A$="RADIX"\n20 PRINT MID$(A$,2,3)\n30 END','ADI','String positions start at one.'),
+  task('array',2,'Array readings','Make the program print 18 from the two stored readings.', '10 DIM A(2)\n20 A(0)=7:A(1)=11\n30 PRINT A(0)\n40 END','10 DIM A(2)\n20 A(0)=7:A(1)=11\n30 PRINT A(0)+A(1)\n40 END','18','Add array element 0 and element 1.'),
+  task('go-return',2,'Repair a subroutine','Output PING then PONG and stop.', '10 GOSUB 100\n20 PRINT "PONG"\n30 END\n100 PRINT "PING"\n110 GOTO 100','10 GOSUB 100\n20 PRINT "PONG"\n30 END\n100 PRINT "PING"\n110 RETURN','PING\nPONG','RETURN goes back after GOSUB; GOTO repeats forever.'),
+  task('bool',2,'Use AND','Print GO only if both flags are 1. Here A=1 and B=0, so print STOP.', '10 A=1:B=0\n20 IF A=1 OR B=1 THEN PRINT "GO" ELSE PRINT "STOP"\n30 END','10 A=1:B=0\n20 IF A=1 AND B=1 THEN PRINT "GO" ELSE PRINT "STOP"\n30 END','STOP','AND means both conditions must hold.'),
+  task('hex',2,'Hexadecimal arithmetic','Print 31 by adding decimal 15 to hexadecimal 10.', '10 PRINT &H10+10\n20 END','10 PRINT &H10+15\n20 END','31','&H10 equals decimal 16.'),
+  task('remainder',2,'Remainder','Print 2, the remainder of 17 divided by 5.', '10 PRINT 17/5\n20 END','10 PRINT 17 MOD 5\n20 END','2','MOD, not /, yields the remainder.'),
+  task('nested',3,'Nested-loop counter','Print 12, the number of passes through a 3 by 4 grid.', '10 S=0\n20 FOR I=1 TO 3\n30 FOR J=1 TO 4\n40 S=S+1\n50 NEXT I\n60 NEXT J\n70 PRINT S\n80 END','10 S=0\n20 FOR I=1 TO 3\n30 FOR J=1 TO 4\n40 S=S+1\n50 NEXT J\n60 NEXT I\n70 PRINT S\n80 END','12','NEXT must first close the inner J loop, then outer I.'),
+  task('matrix',3,'Two-dimensional arrays','Print 9 from array element (1,2).', '10 DIM A(2,2)\n20 A(1,2)=9\n30 PRINT A(2,1)\n40 END','10 DIM A(2,2)\n20 A(1,2)=9\n30 PRINT A(1,2)\n40 END','9','Row and column subscripts are ordered.'),
+  task('choose-sub',3,'ON GOSUB dispatch','Print TWO then DONE using the second subroutine.', '10 N=1\n20 ON N GOSUB 100,200\n30 PRINT "DONE":END\n100 PRINT "ONE":RETURN\n200 PRINT "TWO":RETURN','10 N=2\n20 ON N GOSUB 100,200\n30 PRINT "DONE":END\n100 PRINT "ONE":RETURN\n200 PRINT "TWO":RETURN','TWO\nDONE','ON 2 GOSUB jumps to the second target, then returns.'),
+  task('fn',3,'DEF FN calculation','Define a square-plus-one function and print 17.', '10 DEF FNA(X)=X+1\n20 PRINT FNA(4)\n30 END','10 DEF FNA(X)=X*X+1\n20 PRINT FNA(4)\n30 END','17','Compute X times X before adding one.'),
+  task('while',3,'WHILE / WEND','Print 16 by doubling from 1 while X is below 10.', '10 X=1\n20 WHILE X<10\n30 X=X+2\n40 WEND\n50 PRINT X\n60 END','10 X=1\n20 WHILE X<10\n30 X=X*2\n40 WEND\n50 PRINT X\n60 END','16','Each pass doubles X: 1→2→4→8→16.'),
+  task('bitmask',3,'Digital input mask','Print 8, the bits shared by 12 (1100b) and 10 (1010b).', '10 PRINT 12 OR 10\n20 END','10 PRINT 12 AND 10\n20 END','8','Bitwise AND retains only bits set in both values.'),
+  task('hex-bin',3,'Mixed number bases','Print 26 using hexadecimal &H10 plus binary &B1010.', '10 PRINT &H10+&B0010\n20 END','10 PRINT &H10+&B1010\n20 END','26','Hex 10 = 16 and binary 1010 = 10.'),
+  task('restore-line',3,'Directed RESTORE','Print 7 by reading from the DATA statement on line 200.', '10 DATA 3\n20 READ N\n30 PRINT N:END\n200 DATA 7','10 DATA 3\n20 RESTORE 200\n30 READ N\n40 PRINT N:END\n200 DATA 7','7','RESTORE 200 positions the DATA pointer at line 200.'),
+  task('swap',3,'Swap three values','Print 3 then 7 by swapping A and B without losing either value.', '10 A=7:B=3\n20 A=B:B=A\n30 PRINT A\n40 PRINT B\n50 END','10 A=7:B=3\n20 T=A:A=B:B=T\n30 PRINT A\n40 PRINT B\n50 END','3\n7','Store the old A in temporary variable T.'),
+  task('score',3,'GOSUB score logic','Print 17 after a subroutine adds 5 to score 12.', '10 S=12\n20 GOSUB 100\n30 PRINT S:END\n100 S=S+5\n110 GOTO 30','10 S=12\n20 GOSUB 100\n30 PRINT S:END\n100 S=S+5\n110 RETURN','17','A subroutine must RETURN to its caller.'),
+];
+
 
 const CHALLENGES = {
   python: [
@@ -609,6 +986,7 @@ const CHALLENGES = {
     { id: 'condition', title: 'Choose the warning', prompt: 'The temperature is 35. Fix the comparison so the program prints HOT for values of at least 30.', starter: '10 T=35\n20 IF T<30 THEN PRINT "HOT" ELSE PRINT "OK"\n30 END', solution: '10 T=35\n20 IF T>=30 THEN PRINT "HOT" ELSE PRINT "OK"\n30 END', expected: 'HOT', hint: 'At least means greater than or equal to.' },
   ],
 };
+CHALLENGES.msx.push(...ADDITIONAL_MSX_CHALLENGES);
 const normalizeOutput = value => String(value).replace(/\r/g, '').split('\n').map(line => line.trim()).filter(Boolean).join('\n');
 
 
@@ -711,8 +1089,11 @@ function parkMSX() {
 
 // Output checks compare displayed output, not source text. They are practice checks,
 // not a sandboxed examination of whether a particular algorithm was used.
-function createCodingLab(container, language, onExit) {
-  const labChallenges = CHALLENGES[language], isPython = language === 'python';
+function createCodingLab(container, language, onExit, initialDifficulty = '1') {
+  const isPython = language === 'python';
+  let level = Number(initialDifficulty) || 1;
+  const available = () => isPython ? CHALLENGES.python : CHALLENGES.msx.filter(c => (c.level || 1) === level);
+  let labChallenges = available();
   const htmlEscape = v => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   let active = true, busy = false, challengeIndex = 0, runToken = 0;
   const pythonRunner = new PythonRunner();
@@ -720,7 +1101,7 @@ function createCodingLab(container, language, onExit) {
   container.innerHTML = `<section class="coding-lab">
     <div class="lab-top"><button class="text-button" id="lab-back">← Choose a topic</button><span class="topic-chip">${isPython ? 'Python' : 'MSX BASIC 1'}</span></div>
     <p class="eyebrow">CODING CHALLENGES</p><h1 tabindex="-1">Make it work.</h1>
-    <div class="lab-selection"><label for="challenge-select">Challenge</label><select id="challenge-select">${labChallenges.map((c, i) => `<option value="${i}">${i + 1}. ${htmlEscape(c.title)}</option>`).join('')}</select></div>
+    <div class="lab-selection">${!isPython ? `<label for="lab-difficulty">Difficulty</label><select id="lab-difficulty"><option value="1" ${level === 1 ? 'selected' : ''}>Starter</option><option value="2" ${level === 2 ? 'selected' : ''}>Standard</option><option value="3" ${level === 3 ? 'selected' : ''}>Advanced</option></select>` : ''}<label for="challenge-select">Challenge</label><select id="challenge-select">${labChallenges.map((c, i) => `<option value="${i}">${i + 1}. ${htmlEscape(c.title)}</option>`).join('')}</select></div>
     <h2 id="challenge-title"></h2><p class="lab-prompt" id="challenge-prompt"></p>
     <div class="lab-grid"><div class="lab-editor-panel"><label for="code-editor">Your ${isPython ? 'Python' : 'MSX BASIC 1'} code</label><textarea id="code-editor" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="editor-help"></textarea><p id="editor-help" class="input-help">${isPython ? 'Run executes real Python in your browser. Runs stop after 5 seconds.' : 'Run types your numbered program into a real MSX1. Keep SCREEN 0 for these output exercises.'} Tab inserts four spaces.</p><div class="lab-buttons"><button class="primary-button" id="run-code">Run code ▶</button><button class="secondary-button" id="stop-code" disabled>Stop</button><button class="text-button" id="reset-code">Reset code</button></div></div>
     <div class="lab-output-panel"><span class="eyebrow">TARGET OUTPUT</span><pre id="target-output"></pre><span class="eyebrow">YOUR OUTPUT</span><pre id="code-output" aria-label="Program output">Run your code to see its output.</pre><p id="run-status" class="run-status" role="status" aria-live="polite"></p></div></div>
@@ -742,15 +1123,16 @@ function createCodingLab(container, language, onExit) {
     element('challenge-title').textContent = challenge.title;
     element('challenge-prompt').textContent = challenge.prompt;
     element('target-output').textContent = challenge.expected;
-    editor.value = drafts.get(challengeIndex) ?? challenge.starter;
+    editor.value = drafts.get(challenge.id) ?? challenge.starter;
     element('code-hint').textContent = challenge.hint;
     element('code-solution').hidden = true;
     element('code-solution').textContent = challenge.solution;
     element('code-output').textContent = 'Run your code to see its output.';
     setStatus('');
   }
-  element('challenge-select').addEventListener('change', e => { drafts.set(challengeIndex, editor.value); challengeIndex = Number(e.target.value); loadChallenge(); });
-  element('reset-code').addEventListener('click', () => { drafts.delete(challengeIndex); loadChallenge(); });
+  element('challenge-select').addEventListener('change', e => { drafts.set(labChallenges[challengeIndex].id, editor.value); challengeIndex = Number(e.target.value); loadChallenge(); });
+  element('lab-difficulty')?.addEventListener('change', e => { drafts.set(labChallenges[challengeIndex].id, editor.value); level = Number(e.target.value); labChallenges = available(); challengeIndex = 0; element('challenge-select').innerHTML = labChallenges.map((c, i) => `<option value="${i}">${i + 1}. ${htmlEscape(c.title)}</option>`).join(''); loadChallenge(); });
+  element('reset-code').addEventListener('click', () => { drafts.delete(labChallenges[challengeIndex].id); loadChallenge(); });
   element('show-solution').addEventListener('click', () => { element('code-solution').hidden = !element('code-solution').hidden; });
   editor.addEventListener('keydown', e => { if (e.key === 'Tab') { e.preventDefault(); editor.setRangeText('    ', editor.selectionStart, editor.selectionEnd, 'end'); } });
   element('stop-code').addEventListener('click', () => { runToken++; pythonRunner.stop(); window.WMSX?.room?.keyboard?.cancelTypeString(); window.WMSX?.room?.machine?.powerOff(); setStatus('Stopped. You can edit the code and run again.'); setBusy(false); });
@@ -807,6 +1189,105 @@ function createCodingLab(container, language, onExit) {
 }
 
 
+const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
+const icons = { B: '◆', D: '◇', F: '▲', H: '◈', J: '⬡', K: '✦' };
+const badge = card => `<span class="cargo-hazard" aria-hidden="true">${icons[card.group] || '▣'}</span>`;
+const renderCard = (card, selected) => `<button type="button" class="cargo-item ${selected ? 'is-selected' : ''}" data-card="${card.id}" draggable="true" aria-pressed="${selected}" aria-label="${escapeHTML(card.label)}. ${escapeHTML(card.detail)}. Select or drag to move.">${badge(card)}<span><strong>${escapeHTML(card.label)}</strong><small>${escapeHTML(card.detail)}</small></span><span class="cargo-grip" aria-hidden="true">⠿</span></button>`;
+
+function createCargoArcade(container, onExit) {
+  let active = true;
+  let mode = 'packer', count = 2, mission = createCargoMission(mode, count);
+  let placements = { ...mission.placements };
+  let selected = null, history = [], checked = false, success = 0, solvedMission = false, feedback = '';
+  const getCard = id => mission.cards.find(card => card.id === id);
+  const getReport = () => inspectCargo(mission, placements);
+  function statusMarkup() {
+    const result = getReport();
+    return `<span class="cargo-stat"><strong>${result.placed}</strong> / ${result.total} placed</span><span class="cargo-stat"><strong>${result.findings.length}</strong> conflicts ${mission.kind === 'ship' ? 'in CTUs' : 'after checking'}</span><span class="cargo-stat"><strong>${success}</strong> solved</span>`;
+  }
+  function renderBoard() {
+    const report = getReport();
+    if (mission.kind === 'ship') {
+      const bins = mission.bins.map(bin => {
+        const conflict = checked && report.findings.some(f => f.id === bin.id);
+        return `<div class="cargo-ctu ${conflict ? 'has-conflict' : ''}"><div class="cargo-ctu-label"><span class="cargo-ctu-icon" aria-hidden="true">▤</span>${escapeHTML(bin.label)}${conflict ? '<span class="cargo-warning">Conflict</span>' : ''}</div><div class="cargo-ctu-slots">${bin.slots.map(slot => `<div class="cargo-slot" data-slot="${slot}" tabindex="0" role="button" aria-label="Place selected cargo in ${escapeHTML(bin.label)} slot ${slot.endsWith('0') ? 1 : 2}">${placements[slot] ? renderCard(getCard(placements[slot]), selected === placements[slot]) : '<span class="cargo-empty">DROP CARGO HERE <small>or click to place</small></span>'}</div>`).join('')}</div></div>`;
+      }).join('');
+      return `<div class="cargo-ship"><div class="cargo-ship-top"><span>FORWARD <span aria-hidden="true">➜</span></span><strong>MV RADIX · CLOSED CTUs</strong><span>TRAINING PLAN</span></div><div class="cargo-ship-bays">${bins}</div><div class="cargo-hull" aria-hidden="true"><span></span></div></div>`;
+    }
+    return `<div class="cargo-sorting-board">${mission.bins.map(bin => {
+      const assigned = mission.cards.filter(card => placements[card.id] === bin.id);
+      return `<div class="cargo-sort-bin" data-bin="${bin.id}" tabindex="0" role="button" aria-label="Place selected cargo pair in ${escapeHTML(bin.label)}"><strong>${escapeHTML(bin.label)}</strong><div class="cargo-bin-items">${assigned.length ? assigned.map(card => renderCard(card, selected === card.id)).join('') : '<span class="cargo-empty">DROP PAIR HERE</span>'}</div></div>`;
+    }).join('')}</div>`;
+  }
+  function refresh() {
+    if (!active) return;
+    const report = getReport();
+    const modeText = CARGO_MODES.find(x => x.id === mode);
+    container.innerHTML = `<section class="cargo-game">
+      <div class="lab-top"><button class="text-button" id="cargo-back">← Choose a topic</button><span class="topic-chip">IMDG 42-24 · PRACTICE</span></div>
+      <p class="eyebrow">INTERACTIVE CARGO ARCADE</p><h1 tabindex="-1">Stowage simulator</h1><p class="cargo-subhead">Four playable exercises. Drag the marked cargo, or select a card and then a slot. Move an already placed card to reorganize the load.</p>
+      <div class="cargo-game-modes" role="group" aria-label="Cargo mini-game">${CARGO_MODES.map(entry => `<button type="button" class="cargo-mode ${entry.id === mode ? 'active' : ''}" data-mode="${entry.id}" aria-pressed="${entry.id === mode}">${escapeHTML(entry.name)}</button>`).join('')}</div>
+      <div class="cargo-game-setup"><div><h2>${escapeHTML(modeText.name)}</h2><p>${escapeHTML(modeText.subtitle)}</p></div><label>Pairs in this mission <select id="cargo-size">${CARGO_SIZES.map(size => `<option value="${size}" ${count === size ? 'selected' : ''}>${size} pairs · ${size * 2} items</option>`).join('')}</select></label></div>
+      <div class="cargo-game-stats" aria-live="polite">${statusMarkup()}</div>
+      <div class="cargo-playfield">
+        <div class="cargo-quay" data-quay="quay"><div class="cargo-quay-heading"><strong>QUAYSIDE · CARGO MANIFEST</strong><span>${mission.kind === 'ship' ? 'Individual marked packages' : 'Paired consignments'}</span></div><div class="cargo-quay-cards">${mission.cards.filter(card => !slotOf(placements, card.id) && !(mission.kind === 'sorting' && placements[card.id])).map(card => renderCard(card, selected === card.id)).join('') || '<span class="cargo-quay-clear">All cargo has been assigned. Move items between bays to correct conflicts.</span>'}</div><div class="cargo-quay-drop" data-quay="quay" tabindex="0" role="button">Unload selected cargo here</div></div>
+        <div class="cargo-vessel-panel">${renderBoard()}</div>
+      </div>
+      <div class="cargo-game-actions"><button type="button" class="primary-button" id="cargo-check">Check ${mission.kind === 'ship' ? 'load' : 'answers'} <span aria-hidden="true">✓</span></button><button type="button" class="secondary-button" id="cargo-new">New mission</button><button type="button" class="secondary-button" id="cargo-undo" ${!history.length ? 'disabled' : ''}>Undo move</button><button type="button" class="text-button" id="cargo-reset">Reset</button></div>
+      <div class="cargo-result ${checked ? report.passed ? 'cargo-result-pass' : 'cargo-result-issues' : ''}" id="cargo-feedback" role="status" aria-live="polite">${feedback || 'Place the cargo, then check your plan. A table result is not authorization for real-world loading.'}</div>
+      <details class="cargo-game-notes"><summary>Rules and scope of this simulation</summary><p>The ship drawing is conceptual, not a scaled distance or approved bay plan. <strong>Pack the CTUs</strong> and <strong>Fix the load</strong> test only Class 1 compatibility within each closed CTU. They do not validate separation between different CTUs, stowage location, vessel type or particular UN entries. In real loading, incompatible Class 1 closed CTUs may require “separated from” under 7.2.7.1.5. <strong>Segregation deck</strong> and <strong>Harbour decisions</strong> test table interpretation, not physical placement. The general-table X means consult the DGL; Class 1 X may have notes and must not be treated as unconditional clearance. All loading needs the current code, DGL columns 16a/16b, subsidiary hazards and competent ship-specific checks.</p><a target="_blank" rel="noopener noreferrer" href="${CARGO_REFERENCE}">Official IMO amendment 42-24 · Chapter 7.2 ↗</a></details>
+      <p class="cargo-accessible-tip">Keyboard and touch: select a cargo card, then tap or activate a target slot. Drag and drop also works on desktop.</p>
+    </section>`;
+    container.querySelector('#cargo-back').addEventListener('click', onExit);
+    container.querySelectorAll('[data-mode]').forEach(el => el.addEventListener('click', () => { if (mode === el.dataset.mode) return; mode = el.dataset.mode; newMission(); }));
+    container.querySelector('#cargo-size').addEventListener('change', e => { count = Number(e.target.value); newMission(); });
+    container.querySelector('#cargo-new').addEventListener('click', newMission);
+    container.querySelector('#cargo-undo').addEventListener('click', () => { if (!history.length) return; placements = history.pop(); checked = false; feedback = 'Last move undone.'; selected = null; refresh(); });
+    container.querySelector('#cargo-reset').addEventListener('click', () => { placements = {...mission.placements}; selected = null; history = []; checked = false; solvedMission = false; feedback = 'Mission reset.'; refresh(); });
+    container.querySelector('#cargo-check').addEventListener('click', check);
+    container.querySelectorAll('[data-card]').forEach(el => {
+      el.addEventListener('click', event => { event.stopPropagation(); selected = selected === el.dataset.card ? null : el.dataset.card; feedback = selected ? 'Cargo selected. Choose a position or the quayside.' : 'Selection cleared.'; refresh(); });
+      el.addEventListener('dragstart', event => { event.dataTransfer.setData('text/plain', el.dataset.card); event.dataTransfer.effectAllowed = 'move'; selected = el.dataset.card; });
+    });
+    container.querySelectorAll('[data-slot], [data-bin], [data-quay]').forEach(el => {
+      const target = el.dataset.slot || el.dataset.bin || 'quay';
+      el.addEventListener('dragover', event => { event.preventDefault(); event.dataTransfer.dropEffect = 'move'; el.classList.add('cargo-drag-over'); });
+      el.addEventListener('dragleave', () => el.classList.remove('cargo-drag-over'));
+      el.addEventListener('drop', event => { event.preventDefault(); event.stopPropagation(); el.classList.remove('cargo-drag-over'); place(event.dataTransfer.getData('text/plain'), target); });
+      el.addEventListener('click', event => { if (event.target.closest('[data-card]')) return; if (selected) place(selected, target); });
+      el.addEventListener('keydown', event => { if ((event.key === 'Enter' || event.key === ' ') && event.target === el) { event.preventDefault(); if (selected) place(selected, target); } });
+    });
+  }
+  function newMission() { mission = createCargoMission(mode, count); placements = {...mission.placements}; history = []; selected = null; checked = false; solvedMission = false; feedback = ''; refresh(); }
+  function place(cardId, target) {
+    if (!getCard(cardId)) return;
+    const next = moveCargo(mission, placements, cardId, target);
+    if (JSON.stringify(next) === JSON.stringify(placements)) return;
+    history.push({ ...placements }); placements = next; selected = null; checked = false;
+    const result = getReport();
+    feedback = mission.kind === 'ship' && result.findings.length
+      ? `You have ${result.findings.length} incompatible or conditional pairing(s). Check the load to identify them.`
+      : 'Cargo moved. Complete the manifest, then check the plan.';
+    refresh();
+  }
+  function check() {
+    const report = getReport(); checked = true;
+    if (!report.passed) {
+      feedback = `<strong>${report.placed}/${report.total} cargo entries assigned · ${report.findings.length} issue(s)</strong>${mission.mode === 'repair' && report.findings.length === 0 && report.placed === report.total ? '<p>Resolve the original conflict by making at least one change.</p>' : ''}${report.findings.map(x => `<p>${escapeHTML(x.message)}</p>`).join('')}${report.placed !== report.total ? '<p>Assign every cargo entry before checking again.</p>' : ''}`;
+    } else {
+      if (!solvedMission) success += 1;
+      solvedMission = true;
+      feedback = `<strong>Mission passed: all ${report.total} entries checked.</strong><p>${mode === 'packer' || mode === 'repair' ? 'Every closed CTU now contains a pair permitted by the Class 1 compatibility table.' : 'Every table decision is correctly classified.'} This is an educational table check, not a complete ship loading authorization.</p><p>Try another mission, or increase to ${count < 6 ? count + 2 : 6} pairs.</p>`;
+    }
+    refresh();
+  }
+  refresh();
+  container.querySelector('h1')?.focus({preventScroll:true});
+  return () => { active = false; };
+}
+
+
+
 
 
 const main = document.querySelector('#main');
@@ -854,6 +1335,7 @@ function home(focusCategory = null) {
         ${settings.category === 'mixed' ? '<p class="scope-note">A mix across 12 topics. Fire rule sets and IMDG context are shown before you answer. A 20-question round includes every topic.</p>' : cargoVisible ? '<p class="scope-note">IMDG 42-24: explosives need their compatibility letters. Division numbers alone do not decide whether 1.1 and 1.2 may be stowed together. Each answer links to its table or rule.</p>' : fireVisible ? '<p class="scope-note">Each fire question identifies its rule set. Placement depends on the hazard, local requirements, and the site’s fire plan.</p>' : basesVisible ? '<p class="scope-note">In bases 11 and 12: <strong>A = 10</strong> and <strong>B = 11</strong>. Counting rolls over when you run out of digits.</p>' : '<p class="scope-note">Real situations first. Read code, find faults, and see a worked explanation for every answer.</p>'}
         <div class="start-row"><span class="start-description"><span class="round-marker" aria-hidden="true"></span>${settings.category === 'mixed' ? 'A bit of everything' : esc(CATEGORIES[settings.category].name)}<small>${settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`}</small></span><button class="primary-button" id="start">Start round <span aria-hidden="true">▶</span></button></div>
       </div>
+      ${cargoVisible && settings.category === 'cargo' ? `<div class="coding-entry"><div><strong>Want to load a cargo ship?</strong><p>Four drag-and-drop IMDG practice games. Pack 2, 4 or 6 pairs and resolve segregation conflicts.</p></div><button class="secondary-button" id="open-cargo">Open cargo games →</button></div>` : ''}
       ${codingVisible ? `<div class="coding-entry"><div><strong>Want to write some code?</strong><p>Fix a short program, run it, and compare its output with the target.</p></div><button class="secondary-button" id="open-coding">Open coding challenges →</button></div>` : ''}
       <div class="home-foot"><span><strong>${QUESTIONS.length}</strong> scenario questions + generated calculations</span><span>Keyboard friendly <kbd>1–4</kbd> <kbd>Enter</kbd></span></div>
     </section>`;
@@ -863,7 +1345,8 @@ function home(focusCategory = null) {
     main.querySelector(`#${id}`)?.addEventListener('change', e => { settings[id] = e.target.value; if (id === 'length') main.querySelector('.start-description small').textContent = settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`; });
   }
   main.querySelector('#start').addEventListener('click', () => start());
-  main.querySelector('#open-coding')?.addEventListener('click', () => { screen = 'coding'; codingCleanup = createCodingLab(main, settings.category, () => { home(); focusHeading(); }); window.scrollTo({top:0, behavior:'instant'}); });
+  main.querySelector('#open-coding')?.addEventListener('click', () => { screen = 'coding'; codingCleanup = createCodingLab(main, settings.category, () => { home(); focusHeading(); }, settings.difficulty); window.scrollTo({top:0, behavior:'instant'}); });
+  main.querySelector('#open-cargo')?.addEventListener('click', () => { screen = 'cargo'; codingCleanup = createCargoArcade(main, () => { home(); focusHeading(); }); window.scrollTo({top:0, behavior:'instant'}); });
   if (focusCategory) main.querySelector(`[data-category="${focusCategory}"]`).focus({ preventScroll: true });
 }
 
