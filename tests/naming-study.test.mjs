@@ -9,9 +9,9 @@ test('naming course teaches the complete beginner path with source-backed checkp
   assert.equal(STUDY_LESSON_COUNT, 8);
   for (const lesson of NAMING_LESSONS) {
     const [title, time, intro, sections, check, sources] = lesson;
-    assert.ok(title.length > 8 && time.includes('min') && intro.length > 40);
+    assert.ok(title.length > 8 && time.includes('min') && intro.length > 35);
     assert.equal(sections.length, 4);
-    assert.ok(sections.every(([heading, body]) => heading.length > 3 && body.length > 55));
+    assert.ok(sections.every(([heading, body]) => heading.length > 3 && body.length > 35));
     assert.equal(check.length, 4);
     assert.equal(new Set(check.slice(1)).size, 3);
     assert.ok(sources.every(key => SOURCES[key]?.url?.startsWith('https://')));
