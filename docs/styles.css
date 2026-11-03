@@ -122,3 +122,10 @@
 .study-actions{margin-top:26px}.study-actions button:disabled{opacity:.35;cursor:default}
 @media(max-width:820px){.study-layout{grid-template-columns:1fr}.study-nav{position:static}.study-nav-item{width:calc(50% - 5px);display:inline-flex;vertical-align:top}.study-nav-tip{clear:both}.study-article{padding:22px 20px}.study-hero{padding:22px}}
 @media(max-width:500px){.study-nav-item{width:100%}.study-article{padding:18px 15px}.study-check{padding:15px}.study-section{gap:10px}.study-actions button{font-size:12px;padding:12px}.study-hero{padding:18px}.study-tag{font-size:9px;text-align:right}}
+
+
+/* Prominent beginner study entry on the main page */
+.study-home-shortcut{display:flex;align-items:center;justify-content:space-between;gap:18px;border:1px solid var(--border);border-left:3px solid #b9e2b0;background:var(--surface);border-radius:7px;padding:16px 18px;margin:14px 0 20px}
+.study-home-shortcut strong{font-size:15px}.study-home-shortcut p{color:var(--muted);font-size:13px;margin:3px 0 0}
+.study-home-shortcut button{flex-shrink:0}
+@media(max-width:600px){.study-home-shortcut{align-items:stretch;flex-direction:column}.study-home-shortcut button{width:100%}}
