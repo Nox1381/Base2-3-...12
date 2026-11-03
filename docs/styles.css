@@ -129,3 +129,9 @@
 .study-home-shortcut strong{font-size:15px}.study-home-shortcut p{color:var(--muted);font-size:13px;margin:3px 0 0}
 .study-home-shortcut button{flex-shrink:0}
 @media(max-width:600px){.study-home-shortcut{align-items:stretch;flex-direction:column}.study-home-shortcut button{width:100%}}
+
+
+.study-worked{display:grid;gap:7px;margin-top:16px;padding:15px;border:1px solid var(--border);border-left:3px solid var(--accent);background:rgba(185,226,176,.045);border-radius:6px;max-width:100%;overflow-x:auto}
+.study-worked>.eyebrow{font-size:10px;margin-bottom:4px}
+.study-worked code{display:block;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--text)}
+.study-section>div{min-width:0;width:100%}

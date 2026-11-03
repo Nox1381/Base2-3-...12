@@ -29,13 +29,38 @@ The URL is only playable after GitHub Pages is enabled and its deployment comple
 - **MSX BASIC 1:** 50+ new curated quiz examples plus procedurally varied questions at three difficulties; numbered programs, FOR/NEXT, GOTO, GOSUB/RETURN, DATA/READ/RESTORE, string handling, arrays, operators, sprites, and MSX1 screen modes.
 - **Embedded systems:** GPIO, ADC, PWM, sensor scaling, responsive loops, interrupts, watchdogs, and rollover.
 - **Computer architecture:** RAM/ROM, registers, address spaces, byte order, stacks, integer limits, and memory banking.
-- **Pharmaceutical naming systems:** 93 curated questions plus randomized scenarios on IUPAC chemical nomenclature, internal development codes, WHO INN selection and protected stems, USAN generic-name design rules, US FDA proprietary names and biologic suffixes, and EU EMA invented-name assessment. No real medicines or their indications are tested.\n- **Cargo-ship dangerous goods:** IMDG general segregation lookup, full explosive classifications, compatibility groups, closed-CTU placement, subsidiary hazards, and loading-plan checks.
+- **Chemical and pharmaceutical naming:** read condensed molecular formulas, construct IUPAC-style names, identify functional groups and decode recognized generic drug-family stems. Includes a 12-lesson study guide and naming-only quizzes.
 
 Choose from all 12 visible topic cards, narrow them using the four topic groups, or mix all 12. A mixed 20-question round includes every category; a mixed 10-question round samples 10 categories. Use Starter, Standard, or Advanced difficulty. Choose 10 questions, 20 questions, or continuous practice. Every answer has an explanation; calculations show working. Missed questions can be retried at the end. The game uses multiple-choice and written numerical answers, with points and streaks. Questions repeat once a selected finite bank is exhausted.
 
 **Keyboard:** 1–4 selects an option; Enter checks an answer or continues. Numerical engineering answers must use the displayed unit; a 2% rounding tolerance is allowed. Units are shown beside the input, so type just the number.
 
-## Pharmaceutical naming: classification, constraints and review\n\nSelect **Pharmaceutical naming** to practice the naming process without studying real medicines. Choose Starter, Standard, Advanced or continuous rounds, and optionally narrow the **Naming focus** to chemical names/research codes, WHO INN, commercial brand names, US biologic suffixes, or US/EU regulatory decisions. Questions are scenario-based and use fictional names and hypothetical protected stems, with explanations and links to primary guidance. A focused round automatically expands with new procedural examples when its finite question pool is exhausted.\n\nThe naming layers are deliberately distinguished: **systematic chemical nomenclature** (IUPAC) describes chemical identity, a **development code** tracks research, a **nonproprietary name (INN)** publicly identifies an active substance, and a **proprietary or brand name** identifies a commercial product. FDA's four-letter suffix practice is a **US-specific guidance convention for covered biological products**, not a worldwide rule for all medicines. Brand-name and nonproprietary-name standards are different, and names remain subject to regulator-specific assessment.\n\nPrimary sources:\n\n- [IUPAC nomenclature recommendations](https://iupac.org/what-we-do/nomenclature/)\n- [WHO guidance on INN selection, usage, objections and stem protection](https://www.who.int/teams/health-product-and-policy-standards/inn/guidance-on-inn)\n- [WHO general principles for devising INNs](https://www.who.int/publications/m/item/who-edm-qsm-2004-5-en)\n- [AMA USAN naming guidelines](https://www.ama-assn.org/about/united-states-adopted-names-usan/united-states-adopted-names-naming-guidelines)\n- [US FDA best practices for proprietary prescription names (2020)](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/best-practices-developing-proprietary-names-human-prescription-drug-products-guidance-industry)\n- [US FDA biologics nonproprietary naming guidance (2017)](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/nonproprietary-naming-biological-products-guidance-industry)\n- [EMA acceptability of invented names, revision 7](https://www.ema.europa.eu/en/scientific-guidelines/acceptability-names-human-medicinal-products-processed-through-centralised-procedure)\n\nThis is an educational naming-rules quiz, not a product-naming approval service or legal opinion.\n\n## Cargo segregation: divisions are not compatibility groups
+## Pharmaceutical naming: build and decode chemical names
+
+Choose **Pharmaceutical naming** and select **Open study guide** (or use the `#study-naming` URL). The previous name-approval and trademark curriculum has been **replaced** by a real chemical-nomenclature course with **12 worked lessons**:
+
+1. Reading condensed structural formulas and atom symbols
+2. Carbon-chain roots: meth-, eth-, prop-, but-, pent-, hex-, hept-, oct-
+3. C=C and C≡C bonds; -ane, -ene, -yne and bond locants
+4. Alcohol, aldehyde, ketone and carboxylic-acid groups
+5. Amines, amides, esters and nitriles
+6. Branches, numbering, methyl/ethyl and multiple substituents
+7. Functional-group priority and mixed-group naming
+8. Ethers, carboxylate salts and ester alkyl/acid portions
+9. Benzene, phenol and simple aromatic substituents
+10. Limits of flat formulas for E/Z and R/S stereochemistry
+11. Generic pharmaceutical stems and families (-pril, -sartan, -olol, -prazole, -cillin, -gliflozin, -vastatin)
+12. Integrated structure-to-name and name-to-structure exercises
+
+The study material has step-by-step examples such as `CH₃CH(OH)CH₃ → propan-2-ol`, `CH₃COOCH₃ → methyl ethanoate` and `CH₃CH(OH)COOH → 2-hydroxypropanoic acid`. A knowledge check follows each chapter; browser-local progress is tracked under a new version, independently of the old unrelated course.
+
+**Quizzes:** The former procedural questions have been replaced by **180+ curated structure/naming and drug-stem questions**, plus randomized formula challenges. Choose one focus: **Chains and bonds**, **Functional groups**, **Branches and numbering**, **Esters and combined structures**, or **Drug-name stems**. Tests ask you to name an actual condensed formula, reverse a name into its formula, or infer a pharmacological family from an established suffix. Real generic examples are used to teach stem recognition. No FDA/EMA review-process trivia is tested.
+
+**Two separate systems:** A systematic **chemical name** follows the structure; it depends on carbon chains, functional groups, bond types and positions. A **generic drug stem** indicates a pharmacological class and cannot uniquely determine a chemical formula. A fragment like `-vir` is broader than a single mechanism, and the specific INN stem for HMG-CoA reductase inhibitor statins is `-vastatin` (not every name containing the substring `-statin` belongs to that class).
+
+References: [IUPAC Brief Guide](https://iupac.qmul.ac.uk/BriefGuide/organic.html), [OpenStax: polyfunctional nomenclature](https://openstax.org/books/organic-chemistry/pages/a-nomenclature-of-polyfunctional-organic-compounds), and [WHO INN Stem Book (2024)](https://www.who.int/publications/i/item/9789240099388).
+
+## Cargo segregation: divisions are not compatibility groups
 
 The cargo category uses **IMDG Amendment 42-24**, mandatory from 1 January 2026, with the December 2025 errata checked. It focuses on packaged dangerous goods, not bulk cargo codes.
 
