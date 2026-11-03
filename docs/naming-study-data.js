@@ -75,23 +75,23 @@ export const NAMING_STUDY_LESSONS = [
       {
         "question": "A document uses “QX-204” to track a hypothetical compound before official naming. What is it?",
         "options": [
-          "An internal development code",
           "A WHO-recommended INN",
           "A marketed brand approval",
+          "An internal development code",
           "A chemical structure formula"
         ],
-        "answer": 0,
+        "answer": 2,
         "explanation": "Internal codes track research candidates. They do not become official names or approvals simply by being used."
       },
       {
         "question": "What is the primary purpose of a WHO-recommended INN?",
         "options": [
-          "Identify an active substance publicly",
           "Identify the only company permitted to sell it",
+          "Identify an active substance publicly",
           "Describe every bond in the molecule",
           "Prove the product is approved"
         ],
-        "answer": 0,
+        "answer": 1,
         "explanation": "An INN provides a shared public active-substance name; it is neither a trademark nor a marketing authorisation."
       }
     ],
@@ -143,12 +143,12 @@ export const NAMING_STUDY_LESSONS = [
       {
         "question": "Which naming type is constructed from the actual molecule's structure?",
         "options": [
-          "Systematic chemical name",
           "Research code",
           "Advertising slogan",
-          "Trademark search result"
+          "Trademark search result",
+          "Systematic chemical name"
         ],
-        "answer": 0,
+        "answer": 3,
         "explanation": "Chemical nomenclature expresses structural identity; codes and commercial labels serve different purposes."
       },
       {
@@ -212,23 +212,23 @@ export const NAMING_STUDY_LESSONS = [
       {
         "question": "Why do some INNs share a stem?",
         "options": [
-          "To indicate a pharmacological relationship",
           "To declare the same marketing owner",
+          "To indicate a pharmacological relationship",
           "To guarantee an identical dose",
           "To encode a package size"
         ],
-        "answer": 0,
+        "answer": 1,
         "explanation": "Shared stems help relate substance names by pharmacological class. They do not imply matching doses or owners."
       },
       {
         "question": "In a fictional classroom example, “-vex” is declared a protected INN stem. What should a company do with a proposed brand “Solvex”?",
         "options": [
-          "Reconsider the brand because it uses the protected stem",
           "Register the shared stem as exclusive property",
           "Assume a capital V makes the stem available",
-          "Use the stem to advertise superior efficacy"
+          "Use the stem to advertise superior efficacy",
+          "Reconsider the brand because it uses the protected stem"
         ],
-        "answer": 0,
+        "answer": 3,
         "explanation": "WHO advises against incorporating established INN stems in proprietary names. The stem in this exercise is hypothetical."
       }
     ],
@@ -292,12 +292,12 @@ export const NAMING_STUDY_LESSONS = [
       {
         "question": "A formal trademark objection remains unresolved. Can WHO publish that proposed name as recommended?",
         "options": [
-          "No; it remains unresolved until a suitable outcome",
           "Yes; every proposal becomes recommended automatically",
           "Yes; if the sponsor likes the name",
+          "No; it remains unresolved until a suitable outcome",
           "Only if the candidate name is uppercase"
         ],
-        "answer": 0,
+        "answer": 2,
         "explanation": "WHO will not publish a recommended INN while a formal objection is maintained."
       }
     ],
@@ -349,23 +349,23 @@ export const NAMING_STUDY_LESSONS = [
       {
         "question": "How do USAN and WHO INN generally relate?",
         "options": [
-          "They are separate but coordinated nonproprietary naming systems",
           "USAN is a trademark register for commercial brands",
           "Every WHO INN is always identical in every country without exception",
-          "USAN only assigns laboratory project codes"
+          "USAN only assigns laboratory project codes",
+          "They are separate but coordinated nonproprietary naming systems"
         ],
-        "answer": 0,
+        "answer": 3,
         "explanation": "USAN is a national nomenclature programme that works closely with WHO; exact identity across all jurisdictions is not guaranteed."
       },
       {
         "question": "What is problematic about a fictional USAN prefix that means “more effective than all others”?",
         "options": [
-          "It implies therapeutic superiority rather than neutral identification",
           "It accurately describes stereochemistry",
           "Such prefixes are compulsory for USANs",
+          "It implies therapeutic superiority rather than neutral identification",
           "It proves the active ingredient's clinical efficacy"
         ],
-        "answer": 0,
+        "answer": 2,
         "explanation": "USAN guidance rejects prefixes implying better or more effective products."
       }
     ],
@@ -418,12 +418,12 @@ export const NAMING_STUDY_LESSONS = [
       {
         "question": "Two proposed fictional US brands sound almost identical, despite different spelling. What should be assessed?",
         "options": [
-          "Potential sound-alike medication errors",
           "Only whether the logo is unique",
+          "Potential sound-alike medication errors",
           "Only the IUPAC chemical formula",
           "Whether both brands use the same font"
         ],
-        "answer": 0,
+        "answer": 1,
         "explanation": "FDA brand-name evaluation considers phonetic and orthographic confusion risks."
       },
       {
@@ -487,12 +487,12 @@ export const NAMING_STUDY_LESSONS = [
       {
         "question": "Who reviews invented commercial names for centrally authorised human medicines in the EU?",
         "options": [
-          "EMA's Name Review Group",
           "IUPAC's chemical naming committee",
           "The WHO INN expert panel as a trademark office",
+          "EMA's Name Review Group",
           "The medicine's distributor"
         ],
-        "answer": 0,
+        "answer": 2,
         "explanation": "The EMA Name Review Group handles invented-name acceptability in the EU centralised procedure."
       },
       {
@@ -557,23 +557,23 @@ export const NAMING_STUDY_LESSONS = [
       {
         "question": "Which fictional suffix passes the basic FDA four-letter, lowercase, three-distinct-letter format test?",
         "options": [
-          "-qzrt",
           "-aabb",
+          "-qzrt",
           "-Qzrt",
           "-q7rt"
         ],
-        "answer": 0,
+        "answer": 1,
         "explanation": "qzrt contains four lowercase alphabetic characters and at least three different letters. Other conditions must still be checked."
       },
       {
         "question": "A fictional biologic name has a properly formatted suffix. What can you infer?",
         "options": [
-          "Only that it meets some formal format requirements",
           "That the product has FDA marketing approval",
           "That the product is interchangeable with another biologic",
-          "That the suffix describes the dose"
+          "That the suffix describes the dose",
+          "Only that it meets some formal format requirements"
         ],
-        "answer": 0,
+        "answer": 3,
         "explanation": "Format is only one part of naming review; it neither authorises the product nor establishes interchangeability."
       }
     ],
@@ -625,23 +625,23 @@ export const NAMING_STUDY_LESSONS = [
       {
         "question": "In this case, what is “LX-318” before any WHO naming action?",
         "options": [
-          "The fictional development code",
           "A final WHO-recommended INN",
+          "The fictional development code",
           "An EMA-accepted invented name",
           "A US FDA biologic suffix"
         ],
-        "answer": 0,
+        "answer": 1,
         "explanation": "The made-up code is merely the candidate's internal research identifier."
       },
       {
         "question": "Which plan best keeps the responsibilities of the naming systems separate?",
         "options": [
-          "Chemical structure → WHO INN → brand safety by market → product approval",
           "Trademark → automatically becomes a WHO INN → global marketing approval",
           "Sponsor chooses any INN and every country must accept it",
+          "Chemical structure → WHO INN → brand safety by market → product approval",
           "A four-letter suffix alone authorises all biologic products"
         ],
-        "answer": 0,
+        "answer": 2,
         "explanation": "Structure description, shared naming, proprietary-name acceptance and marketing authorisation are different activities, often under different authorities."
       }
     ],
