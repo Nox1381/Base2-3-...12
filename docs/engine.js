@@ -2,6 +2,7 @@ import { QUESTIONS } from './question-bank.js?v=20261011-msx-cargo';
 import { makeCargoQuestion } from './cargo.js?v=20261011-msx-cargo';
 import { makeMathQuestion } from './extra-questions.js?v=20261011-msx-cargo';
 import { MSX_QUESTIONS, makeMsxGeneratedQuestion } from './msx-questions.js?v=20261011-msx-cargo';
+import { makeNamingGeneratedQuestion } from './naming-generated.js?v=20261011-msx-cargo';
 
 export const DIGITS = '0123456789AB';
 export const CATEGORIES = {
@@ -17,8 +18,9 @@ export const CATEGORIES = {
   architecture: { name: 'Computer architecture', short: 'Architecture', description: 'Memory, CPU instructions, and MSX hardware ideas.', mark: '10', color: '#c4a5ff', group: 'computing' },
   fire: { name: 'Fire safety', short: 'Fire safety', description: 'Extinguishers, placement, and safe decisions.', mark: '11', color: '#ffad85', group: 'safety' },
   cargo: { name: 'Cargo-ship dangerous goods', short: 'IMDG cargo', description: 'Class 1 compatibility, container placement, and segregation.', mark: '12', color: '#81ddd0', group: 'safety' },
+  naming: { name: 'Pharmaceutical naming', short: 'Naming rules', description: 'Invented names, INNs, codes, trademarks, and naming safety — no drug facts.', mark: '13', color: '#b9e2b0', group: 'science' },
 };
-export const CATEGORY_GROUPS = { numbers: 'Numbers & logic', circuits: 'Circuits & signals', computing: 'Programming & computers', safety: 'Fire & cargo' };
+export const CATEGORY_GROUPS = { numbers: 'Numbers & logic', circuits: 'Circuits & signals', computing: 'Programming & computers', safety: 'Fire & cargo', science: 'Chemistry & naming' };
 
 export function shuffle(items, rng = Math.random) {
   const copy = [...items];
@@ -195,7 +197,8 @@ export function checkAnswer(question, input) {
 export function eligibleQuestions(category, settings) {
   return (category === 'msx' ? [...QUESTIONS, ...MSX_QUESTIONS] : QUESTIONS).filter(q => q.category === category && q.level <= Number(settings.difficulty)
     && (category !== 'fire' || !settings.fireScope || settings.fireScope === 'all' || (settings.fireScope === 'general' ? q.jurisdiction === 'General practice' : q.jurisdiction.startsWith(settings.fireScope === 'us' ? 'US' : 'UK')))
-    && (category !== 'cargo' || !settings.cargoFocus || settings.cargoFocus === 'all' || (settings.cargoFocus === 'segregation' ? q.focus !== 'labels' : q.focus === settings.cargoFocus)));
+    && (category !== 'cargo' || !settings.cargoFocus || settings.cargoFocus === 'all' || (settings.cargoFocus === 'segregation' ? q.focus !== 'labels' : q.focus === settings.cargoFocus))
+    && (category !== 'naming' || settings.category === 'mixed' || !settings.namingFocus || settings.namingFocus === 'all' || q.focus === settings.namingFocus));
 }
 
 export function makeDeck(settings, count = 10, rng = Math.random, previous = new Set()) {
@@ -212,6 +215,7 @@ export function makeDeck(settings, count = 10, rng = Math.random, previous = new
       else if (category === 'maths' && rng() < 0.55) question = makeMathQuestion(settings.difficulty, rng);
       else if (category === 'cargo' && settings.cargoFocus !== 'labels' && rng() < 0.55) question = prepareChoice(makeCargoQuestion(settings, rng), rng);
       else if (category === 'msx' && rng() < 0.42) question = prepareChoice(makeMsxGeneratedQuestion(settings, rng), rng);
+      else if (category === 'naming' && ((settings.category === 'naming' && settings.namingFocus && settings.namingFocus !== 'all' && cursor[category] >= pools[category].length) || rng() < (settings.category === 'naming' && settings.namingFocus !== 'all' ? 0.48 : 0.27))) question = prepareChoice(makeNamingGeneratedQuestion({ ...settings, namingFocus: settings.category === 'mixed' ? 'all' : settings.namingFocus }, rng), rng);
       else {
         const pool = pools[category];
         if (!pool.length) throw new Error('No questions match this selection.');
