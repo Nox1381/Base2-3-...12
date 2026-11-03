@@ -100,6 +100,39 @@
 @media(max-width:760px){.cargo-game-modes{grid-template-columns:repeat(2,1fr)}.cargo-playfield{grid-template-columns:1fr}.cargo-quay-cards{max-height:220px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.cargo-ship-bays{grid-template-columns:repeat(2,minmax(0,1fr))}.cargo-sorting-board{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.cargo-game-setup{align-items:stretch;flex-direction:column}.cargo-game-setup select{width:100%}.cargo-ship-bays,.cargo-sorting-board{grid-template-columns:1fr}.cargo-quay-cards{grid-template-columns:1fr}.cargo-game-actions .primary-button{flex:1}.cargo-quay,.cargo-vessel-panel{padding:12px}.cargo-game-modes{gap:7px}.cargo-mode{font-size:12px}.lab-selection{flex-wrap:wrap}.lab-selection label{min-width:72px}}
 
+
+.study{max-width:1200px;margin:0 auto;padding-bottom:64px}
+.study-top,.study-meter>div:first-child,.study-check-head,.study-actions{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.study-top{margin-bottom:24px}.study-tag{font-size:10px;letter-spacing:.12em;color:var(--muted)}
+.study-hero,.study-article,.study-nav{border:1px solid var(--border);border-radius:10px;background:var(--surface)}
+.study-hero{padding:26px;margin-bottom:22px}.study-hero h1{font-size:clamp(26px,4vw,42px);margin:9px 0 13px}
+.study-hero>p:not(.eyebrow),.study-lesson-heading>p{color:var(--muted);line-height:1.7}
+.study-meter{max-width:570px;margin-top:22px;font-size:12px}.study-meter .progress-track{height:7px;margin-top:9px}
+.study-layout{display:grid;grid-template-columns:minmax(220px,280px) minmax(0,1fr);gap:22px;align-items:start}
+.study-nav{position:sticky;top:20px;padding:18px 12px}.study-nav>.eyebrow{margin:0 10px 12px}
+.study-nav-item{display:flex;align-items:center;gap:12px;text-align:left;width:100%;padding:12px 9px;border:1px solid transparent;border-radius:6px;color:var(--text);background:transparent;cursor:pointer}
+.study-nav-item:hover{background:rgba(255,255,255,.04)}.study-nav-item.active{border-color:var(--accent);background:rgba(185,226,176,.07)}
+.study-nav-number{font:600 12px monospace;flex:0 0 28px;color:var(--accent)}
+.study-nav-item strong{display:block;font-size:12px;line-height:1.45}.study-nav-item small{display:block;font-size:11px;color:var(--muted);margin-top:3px}
+.study-nav-tip{margin:16px 10px 0;padding-top:14px;border-top:1px solid var(--border);font-size:11px;line-height:1.65;color:var(--muted)}
+.study-article{min-width:0;padding:28px 30px}.study-lesson-heading{padding-bottom:23px;border-bottom:1px solid var(--border)}
+.study-lesson-heading h2{font-size:clamp(24px,3vw,34px);margin:9px 0 12px}
+.study-section{display:flex;gap:17px;padding:22px 0;border-bottom:1px solid var(--border)}
+.study-section-index{font:600 11px monospace;color:var(--accent);flex:0 0 25px;padding-top:5px}
+.study-section h3{font-size:17px;margin:0 0 8px}.study-section p{line-height:1.8;font-size:14px;color:var(--muted);margin:0}
+
+
+.study-check{margin:27px 0;padding:22px;border:1px solid var(--border);border-radius:9px;background:rgba(185,226,176,.045)}
+.study-check-head>span:last-child{font-size:11px;color:var(--muted)}.study-check h3{font-size:17px;line-height:1.5;margin:12px 0 16px}
+.study-check-options{display:grid;gap:9px}.study-answer{width:100%;text-align:left;border:1px solid var(--border);border-radius:6px;padding:12px 15px;background:transparent;color:var(--text);font:inherit;font-size:13px;line-height:1.5;cursor:pointer}
+.study-answer:not(:disabled):hover{border-color:var(--accent)}.study-answer.correct{border-color:#82ce99;background:rgba(130,206,153,.12)}.study-answer.incorrect{border-color:#e3a084;background:rgba(227,160,132,.1)}
+.study-answer:disabled{cursor:default;opacity:.8}.study-feedback{font-size:13px;line-height:1.6;margin:15px 0 0}
+.study-sources{border-top:1px solid var(--border);padding-top:20px}.study-sources>div{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px}
+.study-sources a{font-size:11px;color:var(--accent);border:1px solid var(--border);border-radius:5px;padding:8px 10px;text-decoration:none;line-height:1.5}.study-sources a:hover{text-decoration:underline}
+.study-actions{margin-top:26px}.study-actions button:disabled{opacity:.35;cursor:default}
+@media(max-width:820px){.study-layout{grid-template-columns:1fr}.study-nav{position:static}.study-nav-item{width:calc(50% - 5px);display:inline-flex;vertical-align:top}.study-nav-tip{clear:both}.study-article{padding:22px 20px}.study-hero{padding:22px}}
+@media(max-width:500px){.study-nav-item{width:100%}.study-article{padding:18px 15px}.study-check{padding:15px}.study-section{gap:10px}.study-actions button{font-size:12px;padding:12px}.study-hero{padding:18px}.study-tag{font-size:9px;text-align:right}}
+
 </style>
 
 </head>
@@ -2972,6 +3005,64 @@ function createCargoArcade(container, onExit) {
   return () => { active = false; };
 }
 
+const NAMING_LESSONS = [["The four naming layers","5 min","One substance can have several names for different purposes.",[["Development code","An internal label such as LAB-247 tracks a research candidate. It does not establish a public name or approval."],["Chemical name","A systematic IUPAC-style name describes molecular structure. It can include bond positions and stereochemistry."],["Generic / INN","A WHO International Nonproprietary Name identifies the active substance publicly. It is not a company trademark."],["Commercial brand","A proprietary name identifies a marketed product. Its regulatory assessment is separate from INN selection."]],["A fictional laboratory calls its candidate QX-314. What is that label?","A research development code","A WHO-recommended INN","A regulator-approved brand"],["namingWho","namingIupac"]],["Chemical names and research codes","5 min","A chemical structure descriptor and a laboratory identifier answer different questions.",[["IUPAC conventions","Systematic names use agreed chemical naming rules. Locants identify positions; stereochemical notation can distinguish spatial arrangements."],["Project identifiers","A code such as PROJECT-612 is a convenient research identifier. Its letters and digits do not certify safety, efficacy or approval."],["Compare","A detailed structural descriptor is a chemical name. An alphanumeric laboratory tracking label is a development code."],["Remember","Neither naming layer automatically creates a recommended INN or an authorised commercial medicine."]],["Which type of name is intended to encode molecular structure?","A systematic chemical name","A research project code","A product trademark"],["namingIupac"]],["INNs and common stems","6 min","INN means International Nonproprietary Name. WHO coordinates these public names for pharmaceutical substances.",[["Why common names?","The same substance can be identified across different manufacturers and commercial brands."],["Design principles","WHO favours distinctive pronunciation and spelling, avoiding confusing similarities and therapeutic suggestions."],["Recognized stems","Related pharmacological groups may share a stem. Imagine -vex as a hypothetical stem; this is an invented example, not a real WHO stem."],["Limitations","A shared stem does not prove equal strength, identical structure, one manufacturer or interchangeability."]],["Two fictional generic names share a recognized stem. What might that indicate?","A pharmacological relationship","Identical doses","The same brand owner"],["namingWho","namingPrinciples"]],["How WHO selects an INN","6 min","An applicant can suggest names, but WHO selects and publishes recommended INNs.",[["Application","The applicant requests an INN; WHO experts assess naming principles, existing names and relevant stems."],["Proposed name","WHO publishes a proposed INN with a four-month period for comments and objections."],["Recommended name","WHO can recommend a name when the process permits. An unresolved formal objection prevents recommendation."],["Do not confuse stages","Proposed is not recommended. A recommended INN does not itself grant a medicine marketing authorisation."]],["An unresolved formal objection remains against a proposed INN. What happens?","Recommendation is held","The name is approved after four days","The name becomes a trademark"],["namingWho"]], ["Naming restrictions and safety","7 min","Clear identification matters more than attractive branding.",[["WHO principles","INN candidates should avoid confusing sound/spelling and therapeutic suggestions."],["USAN guidance","Proposed generic-name prefixes should not advertise the developer, imply superior effectiveness or obviously name the condition treated."],["US FDA brands","FDA assesses look-alike and sound-alike errors, misleading claims and potentially confusing numeric or symbolic modifiers."],["Worked example","Fictional brands Veluma and Velluma deserve confusion screening. One extra letter is not automatically enough."]],["Two fictional brands sound nearly identical. What is the concern?","Medication errors from confusion","Whether the logos match","Chemical locant numbering"],["namingPrinciples","namingUsan","namingFda"]],["Generic names versus brands","6 min","A public substance name and a commercial product name have different functions.",[["INN","Identifies an active substance; intended for public nonproprietary use."],["Brand","Identifies a marketed product and may be a protected trademark under applicable law."],["Different checks","Trademark clearance concerns ownership conflicts. Regulatory name acceptability concerns medication safety and misleading implications."],["Protected stems","WHO discourages incorporating recognized INN stems into trademarks. Hypothetical stems in this course are invented."]],["A brand passes a trademark search. What still needs assessment?","Regulatory name safety","Automatic WHO recommendation","Chemical-structure ownership"],["namingWho","namingFda"]],["US biologic-name suffixes","6 min","Some US biological products have a special FDA nonproprietary-name format.",[["Core plus suffix","For products covered by FDA's 2017 guidance, a core name is followed by a hyphen and a four-letter lowercase suffix."],["Distinctness","At least three of the four letters must be distinct. The suffix should be unique and devoid of meaning."],["Format practice","-qzrt passes these basic character checks; -aabb has only two distinct letters; -QZrt contains capitals; -q7rt has a digit."],["Important limit","Passing character checks does not prove FDA acceptance or clinical interchangeability. This is not a worldwide rule for every drug."]],["Which suffix meets the basic FDA four-letter lowercase format?","-qzrt","-aabb","-QZrt"],["namingBio"]],["Authorities and decision workflow","7 min","Different bodies govern different parts of pharmaceutical naming.",[["IUPAC","Recommendations for systematic chemical nomenclature."],["WHO and USAN","WHO selects international nonproprietary names; USAN publishes adopted-name guidance in the US."],["FDA and EMA","FDA reviews US proprietary-name safety. EMA assesses invented names for medicines processed through the EU centralised procedure."],["Your checklist","Identify the name layer, identify the jurisdiction, check confusion and other restrictions, and determine whether formal review is required."]],["Who assesses invented names in the EU centralised procedure?","EMA","IUPAC","WHO as a trademark office"],["namingEma","namingFda","namingWho"]]];
+
+
+
+const escStudy = value => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const STORAGE_KEY = 'radix.naming-study.v1';
+const STUDY_LESSON_COUNT = NAMING_LESSONS.length;
+function studyProgress(storage) {
+  try {
+    const saved = JSON.parse(storage?.getItem(STORAGE_KEY) || '{}');
+    return {completed: Array.isArray(saved.completed) ? [...new Set(saved.completed.filter(x=>Number.isInteger(x) && x>=0 && x<NAMING_LESSONS.length))] : [], current: Number.isInteger(saved.current) && saved.current>=0 && saved.current<NAMING_LESSONS.length ? saved.current : 0};
+  } catch { return {completed:[],current:0}; }
+}
+function createNamingStudy(root, onBack, onQuiz, storage = typeof localStorage === 'undefined' ? null : localStorage) {
+  let state = studyProgress(storage);
+  let index = state.current;
+  let answer = null;
+  function save() { try {storage?.setItem(STORAGE_KEY,JSON.stringify({completed:state.completed,current:index}));} catch {} }
+  function choose(i) {index=Math.max(0,Math.min(NAMING_LESSONS.length-1,i));answer=null;save();render();root.querySelector('h1')?.focus({preventScroll:true});}
+  function render() {
+    const lesson = NAMING_LESSONS[index];
+    const [title,time,intro,sections,check,sources] = lesson;
+    const done = state.completed.includes(index);
+    const progress = Math.round(state.completed.length / NAMING_LESSONS.length * 100);
+    root.innerHTML = `<section class="study">
+      <div class="study-top"><button type="button" class="text-button" id="study-back">← Back to topics</button><span class="study-tag">PHARMACEUTICAL NAMING · STUDY MODE</span></div>
+      <div class="study-hero"><p class="eyebrow">LEARN BEFORE YOU TEST</p><h1 tabindex="-1">Pharmaceutical naming · study guide</h1><p>Start from zero. Learn the naming systems, rules, and authorities with fictional examples, then test yourself. No prior chemistry or medicine knowledge required.</p>
+      <div class="study-meter"><div><strong>${state.completed.length} / ${NAMING_LESSONS.length} lessons completed</strong><span>${progress}%</span></div><div class="progress-track" role="progressbar" aria-label="Study progress" aria-valuenow="${state.completed.length}" aria-valuemin="0" aria-valuemax="${NAMING_LESSONS.length}"><div style="width:${progress}%"></div></div></div></div>
+      <div class="study-layout"><nav class="study-nav" aria-label="Course chapters"><p class="eyebrow">YOUR LEARNING PATH</p>
+      ${NAMING_LESSONS.map((l,i)=>`<button type="button" data-study-lesson="${i}" class="study-nav-item ${i===index?'active':''}" aria-current="${i===index?'step':'false'}"><span class="study-nav-number">${state.completed.includes(i)?'✓':String(i+1).padStart(2,'0')}</span><span><strong>${escStudy(l[0])}</strong><small>${escStudy(l[1])}</small></span></button>`).join('')}
+      <div class="study-nav-tip">Complete the short checkpoint at the end of each lesson to save your progress.</div></nav>
+      <article class="study-article"><div class="study-lesson-heading"><span class="eyebrow">LESSON ${index+1} OF ${NAMING_LESSONS.length} · ${escStudy(time)}</span><h2>${escStudy(title)}</h2><p>${escStudy(intro)}</p></div>
+      ${sections.map(([heading,body],i)=>`<section class="study-section"><span class="study-section-index">${String(i+1).padStart(2,'0')}</span><div><h3>${escStudy(heading)}</h3><p>${escStudy(body)}</p></div></section>`).join('')}
+      <section class="study-check"><div class="study-check-head"><span class="eyebrow">KNOWLEDGE CHECK</span><span>${done?'Completed':'One quick question'}</span></div><h3>${escStudy(check[0])}</h3>
+      <div class="study-check-options">${check.slice(1).map((opt,i)=>`<button type="button" data-study-answer="${i}" class="study-answer ${answer===i?(i===0?'correct':'incorrect'):''}" ${answer!==null?'disabled':''}>${escStudy(opt)}</button>`).join('')}</div>
+      ${answer!==null?`<p class="study-feedback" role="status">${answer===0?'Correct.':'Not quite. '}${answer===0?'You can move to the next lesson.':'The first option is the correct answer. Review the lesson and try again.'}</p>${answer!==0?'<button type="button" class="secondary-button" id="study-retry">Try again</button>':''}`:''}
+      </section>
+      <div class="study-sources"><span class="eyebrow">OFFICIAL SOURCES</span><div>${sources.map(key=>SOURCES[key]?`<a href="${escStudy(SOURCES[key].url)}" target="_blank" rel="noopener noreferrer">${escStudy(SOURCES[key].name)} ↗</a>`:'').join('')}</div></div>
+      <div class="study-actions"><button type="button" class="secondary-button" id="study-prev" ${index===0?'disabled':''}>← Previous</button>${index===NAMING_LESSONS.length-1?`<button type="button" class="primary-button" id="study-quiz">Start Starter quiz →</button>`:`<button type="button" class="primary-button" id="study-next">Next lesson →</button>`}</div>
+      </article></div></section>`;
+    root.querySelector('#study-back').addEventListener('click',onBack);
+    root.querySelectorAll('[data-study-lesson]').forEach(button=>button.addEventListener('click',()=>choose(Number(button.dataset.studyLesson))));
+    root.querySelectorAll('[data-study-answer]').forEach(button=>button.addEventListener('click',()=>{
+      answer=Number(button.dataset.studyAnswer);
+      if(answer===0 && !state.completed.includes(index)){state.completed.push(index);save();}
+      render();
+      root.querySelector('.study-feedback')?.scrollIntoView({block:'nearest'});
+    }));
+    root.querySelector('#study-retry')?.addEventListener('click',()=>{answer=null;render();});
+    root.querySelector('#study-prev')?.addEventListener('click',()=>choose(index-1));
+    root.querySelector('#study-next')?.addEventListener('click',()=>choose(index+1));
+    root.querySelector('#study-quiz')?.addEventListener('click',onQuiz);
+  }
+  render();
+  return ()=>{};
+}
+
+
 
 
 
@@ -3023,6 +3114,7 @@ function home(focusCategory = null) {
         ${settings.category === 'mixed' ? '<p class="scope-note">A mix across 13 topics. Regulatory jurisdictions and IMDG context are shown before you answer. A 20-question round includes every topic.</p>' : namingVisible ? '<p class="scope-note">Naming systems only — no drug indications or real-medicine identification. Fictional examples illustrate WHO INN rules, IUPAC nomenclature, FDA and EMA naming reviews, USAN guidance, and biologic suffixes. Each regulatory scenario identifies its jurisdiction and cites an official source.</p>' : cargoVisible ? '<p class="scope-note">IMDG 42-24: explosives need their compatibility letters. Division numbers alone do not decide whether 1.1 and 1.2 may be stowed together. Each answer links to its table or rule.</p>' : fireVisible ? '<p class="scope-note">Each fire question identifies its rule set. Placement depends on the hazard, local requirements, and the site’s fire plan.</p>' : basesVisible ? '<p class="scope-note">In bases 11 and 12: <strong>A = 10</strong> and <strong>B = 11</strong>. Counting rolls over when you run out of digits.</p>' : '<p class="scope-note">Real situations first. Read code, find faults, and see a worked explanation for every answer.</p>'}
         <div class="start-row"><span class="start-description"><span class="round-marker" aria-hidden="true"></span>${settings.category === 'mixed' ? 'A bit of everything' : esc(CATEGORIES[settings.category].name)}<small>${settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`}</small></span><button class="primary-button" id="start">Start round <span aria-hidden="true">▶</span></button></div>
       </div>
+      ${namingVisible ? `<div class="coding-entry study-entry"><div><strong>New to pharmaceutical naming? Start here.</strong><p>Eight beginner lessons · short examples · quick knowledge checks · saved progress (${studyProgress(typeof localStorage === 'undefined' ? null : localStorage).completed.length}/8 completed).</p></div><button class="secondary-button" id="open-naming-study">Study before quiz →</button></div>` : ''}
       ${cargoVisible && settings.category === 'cargo' ? `<div class="coding-entry"><div><strong>Want to load a cargo ship?</strong><p>Four drag-and-drop IMDG practice games. Pack 2, 4 or 6 pairs and resolve segregation conflicts.</p></div><button class="secondary-button" id="open-cargo">Open cargo games →</button></div>` : ''}
       ${codingVisible ? `<div class="coding-entry"><div><strong>Want to write some code?</strong><p>Fix a short program, run it, and compare its output with the target.</p></div><button class="secondary-button" id="open-coding">Open coding challenges →</button></div>` : ''}
       <div class="home-foot"><span><strong>${QUESTIONS.length}</strong> scenario questions + generated calculations</span><span>Keyboard friendly <kbd>1–4</kbd> <kbd>Enter</kbd></span></div>
@@ -3033,6 +3125,7 @@ function home(focusCategory = null) {
     main.querySelector(`#${id}`)?.addEventListener('change', e => { settings[id] = e.target.value; if (id === 'length') main.querySelector('.start-description small').textContent = settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`; });
   }
   main.querySelector('#start').addEventListener('click', () => start());
+  main.querySelector('#open-naming-study')?.addEventListener('click', () => { screen = 'study'; codingCleanup = createNamingStudy(main, () => { home('naming'); focusHeading(); }, () => { settings.category = 'naming'; settings.difficulty = '1'; settings.namingFocus = 'all'; settings.length = '10'; start(); }); window.scrollTo({top:0, behavior:'instant'}); });
   main.querySelector('#open-coding')?.addEventListener('click', () => { screen = 'coding'; codingCleanup = createCodingLab(main, settings.category, () => { home(); focusHeading(); }, settings.difficulty); window.scrollTo({top:0, behavior:'instant'}); });
   main.querySelector('#open-cargo')?.addEventListener('click', () => { screen = 'cargo'; codingCleanup = createCargoArcade(main, () => { home(); focusHeading(); }); window.scrollTo({top:0, behavior:'instant'}); });
   if (focusCategory) main.querySelector(`[data-category="${focusCategory}"]`).focus({ preventScroll: true });
