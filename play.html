@@ -133,6 +133,13 @@
 @media(max-width:820px){.study-layout{grid-template-columns:1fr}.study-nav{position:static}.study-nav-item{width:calc(50% - 5px);display:inline-flex;vertical-align:top}.study-nav-tip{clear:both}.study-article{padding:22px 20px}.study-hero{padding:22px}}
 @media(max-width:500px){.study-nav-item{width:100%}.study-article{padding:18px 15px}.study-check{padding:15px}.study-section{gap:10px}.study-actions button{font-size:12px;padding:12px}.study-hero{padding:18px}.study-tag{font-size:9px;text-align:right}}
 
+
+/* Prominent beginner study entry on the main page */
+.study-home-shortcut{display:flex;align-items:center;justify-content:space-between;gap:18px;border:1px solid var(--border);border-left:3px solid #b9e2b0;background:var(--surface);border-radius:7px;padding:16px 18px;margin:14px 0 20px}
+.study-home-shortcut strong{font-size:15px}.study-home-shortcut p{color:var(--muted);font-size:13px;margin:3px 0 0}
+.study-home-shortcut button{flex-shrink:0}
+@media(max-width:600px){.study-home-shortcut{align-items:stretch;flex-direction:column}.study-home-shortcut button{width:100%}}
+
 </style>
 
 </head>
@@ -3081,6 +3088,20 @@ const options = (entries, value) => entries.map(([v, text]) => `<option value="$
 const setAccent = category => document.documentElement.style.setProperty('--accent', CATEGORIES[category]?.color || '#d9fc72');
 const focusHeading = () => main.querySelector('h1, h2')?.focus({ preventScroll: true });
 
+function openNamingStudy() {
+  codingCleanup?.(); codingCleanup = null;
+  settings.category = 'naming';
+  setAccent('naming');
+  screen = 'study';
+  codingCleanup = createNamingStudy(main, () => {
+    if (window.location.hash === '#study-naming') history.replaceState(null, '', window.location.pathname + window.location.search);
+    home('naming'); focusHeading();
+  }, () => {
+    if (window.location.hash === '#study-naming') history.replaceState(null, '', window.location.pathname + window.location.search);
+    settings.difficulty = '1'; settings.namingFocus = 'all'; settings.length = '10'; start();
+  });
+  window.scrollTo({top:0,behavior:'instant'});
+}
 function home(focusCategory = null) {
   codingCleanup?.(); codingCleanup = null;
   screen = 'home'; setAccent(settings.category);
@@ -3092,6 +3113,7 @@ function home(focusCategory = null) {
   main.innerHTML = `
     <section class="setup">
       <div class="intro"><p class="eyebrow">YOUR PRACTICE BENCH</p><h1 tabindex="-1">What are we practicing?</h1><p>Pick a topic. Work it out. See why it works.</p></div>
+      <div class="study-home-shortcut"><div><strong>New to pharmaceutical naming?</strong><p>Open the beginner study guide before taking the quiz.</p></div><button type="button" class="secondary-button" id="study-shortcut">Open study guide →</button></div>
       <div class="category-groups" role="group" aria-label="Topic group">${Object.entries({ all: 'All topics', ...CATEGORY_GROUPS }).map(([id, name]) => `<button type="button" data-group="${id}" aria-pressed="${activeGroup === id}" class="group-button ${activeGroup === id ? 'active' : ''}">${name}<span>${id === 'all' ? Object.keys(CATEGORIES).length : Object.values(CATEGORIES).filter(c => c.group === id).length}</span></button>`).join('')}</div>
       <div class="category-grid" role="group" aria-label="Quiz category">
       ${Object.entries(CATEGORIES).filter(([, c]) => activeGroup === 'all' || c.group === activeGroup).map(([id, category]) => `<button type="button" class="category-card ${settings.category === id ? 'is-selected' : ''}" data-category="${id}" aria-pressed="${settings.category === id}" style="--card-accent:${category.color}">
@@ -3125,7 +3147,8 @@ function home(focusCategory = null) {
     main.querySelector(`#${id}`)?.addEventListener('change', e => { settings[id] = e.target.value; if (id === 'length') main.querySelector('.start-description small').textContent = settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`; });
   }
   main.querySelector('#start').addEventListener('click', () => start());
-  main.querySelector('#open-naming-study')?.addEventListener('click', () => { screen = 'study'; codingCleanup = createNamingStudy(main, () => { home('naming'); focusHeading(); }, () => { settings.category = 'naming'; settings.difficulty = '1'; settings.namingFocus = 'all'; settings.length = '10'; start(); }); window.scrollTo({top:0, behavior:'instant'}); });
+  main.querySelector('#open-naming-study')?.addEventListener('click', openNamingStudy);
+  main.querySelector('#study-shortcut')?.addEventListener('click', () => { window.location.hash = 'study-naming'; openNamingStudy(); });
   main.querySelector('#open-coding')?.addEventListener('click', () => { screen = 'coding'; codingCleanup = createCodingLab(main, settings.category, () => { home(); focusHeading(); }, settings.difficulty); window.scrollTo({top:0, behavior:'instant'}); });
   main.querySelector('#open-cargo')?.addEventListener('click', () => { screen = 'cargo'; codingCleanup = createCargoArcade(main, () => { home(); focusHeading(); }); window.scrollTo({top:0, behavior:'instant'}); });
   if (focusCategory) main.querySelector(`[data-category="${focusCategory}"]`).focus({ preventScroll: true });
@@ -3273,6 +3296,7 @@ document.addEventListener('keydown', e => {
 });
 
 home();
+if (window.location.hash === '#study-naming') openNamingStudy();
 
 </script>
 </body>
