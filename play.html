@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101819">
-  <meta name="description" content="Practice 13 topics: number bases, circuits, Python, MSX BASIC 1, digital logic, fire safety, IMDG cargo segregation, and pharmaceutical naming rules. Quizzes and live coding challenges.">
+  <meta name="description" content="Practice 13 topics: number bases, circuits, Python, MSX BASIC 1, digital logic, fire safety, IMDG cargo segregation, and pharmaceutical naming rules, guided beginner lessons and live coding challenges.">
   <title>Radix — Quiz Lab</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23d9fc72'/%3E%3Ctext x='7' y='24' font-family='monospace' font-size='25' font-weight='bold' fill='%23101819'%3E2%3C/text%3E%3C/svg%3E">
   <style>
@@ -99,6 +99,117 @@
 @media(max-width:1050px){.cargo-playfield{grid-template-columns:minmax(210px,0.95fr) minmax(0,1.45fr)}.cargo-ship-bays{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}}
 @media(max-width:760px){.cargo-game-modes{grid-template-columns:repeat(2,1fr)}.cargo-playfield{grid-template-columns:1fr}.cargo-quay-cards{max-height:220px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.cargo-ship-bays{grid-template-columns:repeat(2,minmax(0,1fr))}.cargo-sorting-board{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.cargo-game-setup{align-items:stretch;flex-direction:column}.cargo-game-setup select{width:100%}.cargo-ship-bays,.cargo-sorting-board{grid-template-columns:1fr}.cargo-quay-cards{grid-template-columns:1fr}.cargo-game-actions .primary-button{flex:1}.cargo-quay,.cargo-vessel-panel{padding:12px}.cargo-game-modes{gap:7px}.cargo-mode{font-size:12px}.lab-selection{flex-wrap:wrap}.lab-selection label{min-width:72px}}
+
+
+/* Guided pharmaceutical naming study: visual hierarchy, lesson navigation and checks. */
+.naming-study{padding:28px 0 58px;max-width:1200px;margin:auto}
+.study-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.study-kicker{font-size:11px;letter-spacing:.14em;color:var(--accent);font-weight:700;text-align:right}
+.study-hero{display:flex;align-items:center;justify-content:space-between;gap:32px;padding:31px 36px;border:1px solid #3c5b51;border-radius:13px;background:linear-gradient(120deg,#223c35,#1c2929 64%,#151f21);margin-bottom:24px}
+.study-hero h1{font-size:clamp(30px,4vw,44px);line-height:1.13;margin:0 0 12px}
+.study-hero p:last-child{color:var(--muted);font-size:15px;max-width:630px;margin:0}
+.study-overall{min-width:190px;text-align:right}
+.study-overall>strong{display:block;font-family:'Space Grotesk',sans-serif;font-size:46px;line-height:1;letter-spacing:-.05em}
+.study-overall>strong span{font-size:23px;color:var(--muted)}
+.study-overall>small{display:block;color:var(--muted);font-size:12px;margin:7px 0 14px}
+.study-progress-track{height:7px;background:#3b514a;border-radius:20px;overflow:hidden}
+.study-progress-track span{height:100%;display:block;background:var(--accent);border-radius:20px}
+.study-layout{display:grid;grid-template-columns:270px minmax(0,1fr);gap:24px;align-items:start}
+.study-sidebar{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:18px;position:sticky;top:14px;max-height:calc(100vh - 28px);overflow:auto}
+.study-sidebar-title{font-size:11px;color:var(--muted);letter-spacing:.13em;font-weight:700;margin:2px 0 13px}
+.study-lessons{display:flex;flex-direction:column;gap:5px}
+.study-lessons button{width:100%;display:flex;gap:12px;text-align:left;padding:10px;border-radius:8px;color:var(--muted);background:transparent;border:1px solid transparent}
+.study-lessons button:hover{background:#263333;color:var(--text)}
+.study-lessons button.active{border-color:#58816e;background:#273b34;color:var(--text)}
+.study-lesson-num{min-width:29px;width:29px;height:29px;display:grid;place-items:center;border:1px solid var(--border);border-radius:6px;font-family:monospace;color:var(--muted);font-size:12px}
+.study-lessons button.completed .study-lesson-num{background:#344f3d;border-color:#60876c;color:#c3ecaf}
+.study-lessons button.active .study-lesson-num{color:var(--accent);border-color:var(--accent)}
+.study-lessons strong{display:block;font-size:12px;line-height:1.38;font-weight:600}
+.study-lessons small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.study-sidebar-quiz{width:100%;min-height:44px;font-size:12px;padding:10px 9px;margin:17px 0 4px}
+.study-storage{font-size:11px;line-height:1.5;color:var(--muted);margin:12px 3px 0}
+.study-lesson{min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:29px 30px}
+.study-lesson-head{display:flex;gap:16px;align-items:start;justify-content:space-between;margin-bottom:20px}
+.study-lesson-head h2{font-size:clamp(26px,3.2vw,35px);line-height:1.2;margin:0 0 11px}
+.study-lesson-head p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+.study-level{display:inline-block;border:1px solid #4f7364;border-radius:5px;color:var(--accent);font-size:11px;padding:5px 9px;white-space:nowrap}
+.study-lead{border-left:3px solid var(--accent);padding:10px 0 10px 16px;margin:22px 0;font-size:15px;line-height:1.8;color:#dce9df}
+.study-map{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:22px 0 29px}
+.study-map-three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.study-map>div{padding:16px 12px;border:1px solid #416154;background:#1d302c;border-radius:9px;min-width:0}
+.study-map small,.study-mini-visual small,.study-suffix small{display:block;font-size:10px;color:var(--accent);letter-spacing:.09em;margin-bottom:10px;font-weight:700}
+.study-map strong,.study-mini-visual strong{display:block;font-size:16px;line-height:1.3;margin-bottom:8px;overflow-wrap:anywhere}
+.study-map span,.study-mini-visual span{font-size:12px;line-height:1.45;color:var(--muted)}
+.study-mini-visual{display:flex;align-items:center;justify-content:space-around;gap:18px;padding:20px;background:#172522;border:1px solid #426457;border-radius:9px;margin:22px 0 28px}
+.study-mini-visual>div{flex:1;min-width:0}
+.study-mini-visual>div[aria-hidden]{flex:0;font-family:'Space Grotesk',sans-serif;font-size:25px;color:var(--accent)}
+.study-mini-visual em{color:var(--accent);font-style:normal}
+.study-timeline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:22px 0 29px}
+.study-timeline-four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.study-timeline>div{display:flex;flex-direction:column;gap:8px;padding:14px;background:#1d302a;border:1px solid #426355;border-radius:9px;min-width:0}
+.study-timeline b{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;color:#11251c;background:var(--accent);font-size:12px}
+.study-timeline strong{font-size:14px;line-height:1.2;overflow-wrap:anywhere}
+.study-timeline span{font-size:11px;line-height:1.5;color:var(--muted)}
+.study-suffix{padding:24px;border:1px solid #53715e;border-radius:10px;background:#193028;margin:23px 0 29px;text-align:center}
+.study-suffix>div{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;margin:15px 0}
+.study-suffix>div span{font:600 clamp(16px,2.5vw,25px) ui-monospace,monospace}
+.study-suffix>div b{font-size:25px;color:var(--muted)}
+.study-suffix>div strong{font:700 clamp(20px,3vw,30px) ui-monospace,monospace;letter-spacing:.06em;color:var(--accent)}
+.study-suffix p{font-size:12px;color:var(--muted);margin-bottom:0}
+.study-lesson-sections section{margin:22px 0 27px}
+.study-lesson-sections h3{font-size:18px;line-height:1.4;letter-spacing:-.018em;margin:0 0 10px;color:var(--accent);font-family:'Space Grotesk',sans-serif}
+.study-lesson-sections h3 span{color:var(--text);margin-left:9px}
+.study-lesson-sections p{font-size:14px;line-height:1.85;color:#d4dfdc;margin:0}
+.study-example{background:#1d302a;border:1px solid #3e6553;border-radius:7px;padding:15px 17px;margin:14px 0}
+.study-example strong{font-size:10px;letter-spacing:.12em;color:var(--accent)}
+.study-example p{font-size:13px;margin:6px 0 0}
+.study-takeaways{background:#17261f;border:1px solid #426b48;border-radius:9px;padding:18px 21px;margin:33px 0}
+.study-takeaways h3{font:600 17px 'Space Grotesk',sans-serif;margin:0 0 12px}
+.study-takeaways ul{padding-left:20px;margin:0}
+.study-takeaways li{font-size:13px;line-height:1.72;margin:4px 0;color:#e1e9e3}
+.study-takeaways li::marker{color:var(--accent)}
+.study-terms{padding:0 2px 13px;border-bottom:1px solid var(--border);margin:0 0 28px}
+.study-terms h3{font:600 16px 'Space Grotesk',sans-serif;margin:0 0 10px}
+.study-terms p{font-size:13px;color:var(--muted);line-height:1.7;margin:7px 0}
+.study-terms strong{color:var(--text)}
+.study-checks-head .eyebrow{margin-bottom:6px}
+.study-checks-head h3{font:500 24px 'Space Grotesk',sans-serif;margin:0 0 8px}
+.study-checks-head p:last-child{font-size:13px;line-height:1.55;color:var(--muted);margin:0 0 17px}
+.study-check{padding:19px 18px;margin:13px 0;background:#142123;border:1px solid #3b4e4b;border-radius:9px}
+.study-check-top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
+.study-check-badge{color:var(--accent);letter-spacing:.11em;font-weight:600}
+.study-check h3{font-size:15px;font-weight:600;line-height:1.55;margin:14px 0}
+.study-check-choices{display:grid;gap:8px}
+.study-check-option{width:100%;display:block;text-align:left;padding:12px 14px;border-radius:6px;background:#203032;border:1px solid #41524f;font-size:13px;color:var(--text);line-height:1.5}
+.study-check-option:not(:disabled):hover,.study-check-option:not(:disabled):focus-visible{border-color:var(--accent);background:#293c36}
+.study-check-option:disabled{opacity:.77;cursor:default}
+.study-check-option.is-correct{border-color:#77b786;background:#24452f;color:#e2f8df;opacity:1}
+.study-check-option.is-wrong{border-color:#ae7068;background:#432b2a;color:#ffddd6;opacity:1}
+.study-check-feedback{border-radius:7px;padding:14px;margin-top:13px;background:#23402f;border:1px solid #5a8a60;font-size:13px}
+.study-check-feedback.needs-review{background:#432f28;border-color:#9d7163}
+.study-check-feedback strong{font-weight:700}
+.study-check-feedback p{line-height:1.65;margin:7px 0 0}
+.study-check-feedback .text-button{font-size:12px;color:var(--text);text-decoration:underline;padding:9px 0 2px}
+.study-lesson-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:23px}
+.study-lesson-actions button{font-size:13px;min-height:46px;padding:12px 16px}
+.study-next-hint{font-size:12px;color:var(--muted);margin:10px 0 0}
+.study-finished{border:1px solid #58886b;background:#1f3b2d;border-radius:9px;padding:20px;margin-top:23px}
+.study-finished>strong{font-size:17px}
+.study-finished p{font-size:13px}
+.study-finished .primary-button{font-size:13px}
+.study-lesson-sources{padding:26px 0 10px;margin-top:30px;border-top:1px solid var(--border)}
+.study-lesson-sources h3{font:600 17px 'Space Grotesk',sans-serif;margin:0 0 8px}
+.study-lesson-sources p{font-size:12px;color:var(--muted);line-height:1.65;margin:0 0 12px}
+.study-lesson-sources a{display:block;width:fit-content;color:var(--accent);font-size:12px;line-height:1.65;margin:8px 0;overflow-wrap:anywhere;text-underline-offset:3px}
+.study-bottom-nav{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:20px;border-top:1px solid var(--border);padding-top:12px}
+.study-bottom-nav span{font-size:12px;color:var(--muted)}
+.study-disclaimer{font-size:11px;color:var(--muted);line-height:1.65;margin:22px 0}
+.study-entry{border-color:#4b7160;background:linear-gradient(115deg,#203a30,var(--surface) 75%)}
+.study-entry strong{color:#dcfbd4}
+.study-entry .study-entry-detail{display:block;color:var(--muted);font-size:12px;margin-top:5px}
+@media(max-width:900px){.study-layout{grid-template-columns:220px minmax(0,1fr);gap:15px}.study-lesson{padding:22px}.study-sidebar{padding:12px}.study-hero{padding:26px}}
+@media(max-width:720px){.naming-study{padding:16px 0 35px}.study-kicker{font-size:9px}.study-hero{flex-direction:column;align-items:stretch;gap:20px;padding:23px}.study-hero h1{font-size:32px}.study-overall{width:100%;text-align:left}.study-layout{display:block}.study-sidebar{position:static;max-height:none;margin-bottom:18px}.study-lessons{display:grid;grid-template-columns:1fr 1fr}.study-lesson{padding:19px 16px}.study-map{grid-template-columns:repeat(2,minmax(0,1fr))}.study-map-three{grid-template-columns:1fr}.study-timeline-four{grid-template-columns:repeat(2,minmax(0,1fr))}.study-lesson-head{gap:8px}.study-lesson-head h2{font-size:27px}.study-mini-visual{gap:11px;padding:14px}.study-mini-visual strong{font-size:13px}.study-check{padding:16px 13px}}
+@media(max-width:430px){.study-lessons{grid-template-columns:1fr}.study-timeline{grid-template-columns:1fr}.study-timeline-four{grid-template-columns:repeat(2,minmax(0,1fr))}.study-head{align-items:start}.study-head .text-button{font-size:12px}.study-level{font-size:10px}.study-lesson-actions{flex-direction:column}.study-lesson-actions button{width:100%}.study-bottom-nav .text-button{font-size:12px}.study-mini-visual{flex-direction:column;align-items:stretch}.study-mini-visual>div[aria-hidden]{align-self:center}}
 
 </style>
 
@@ -510,6 +621,664 @@ function inspectCargo(mission, placements = mission.placements) {
   }
   return { placed, total: mission.cards.length, findings, complete: placed === mission.cards.length && findings.length === 0, passed: placed === mission.cards.length && findings.length === 0 && (mission.mode !== 'repair' || Object.keys(placements).some(k => placements[k] !== mission.placements[k])) };
 }
+
+// Teaching content only; hypothetical names are not screened or approved.
+// WHO, IUPAC, USAN, US FDA and EMA source scopes are separated in each lesson.
+const NAMING_STUDY_SOURCES = {
+  "who": {
+    "name": "WHO · Guidance on INN",
+    "url": "https://www.who.int/teams/health-product-and-policy-standards/inn/guidance-on-inn"
+  },
+  "whoSelection": {
+    "name": "WHO · How an INN is selected",
+    "url": "https://www.who.int/teams/health-product-and-policy-standards/inn/selection"
+  },
+  "iupac": {
+    "name": "IUPAC · Nomenclature",
+    "url": "https://iupac.org/what-we-do/nomenclature/"
+  },
+  "usan": {
+    "name": "AMA · USAN naming guidelines",
+    "url": "https://www.ama-assn.org/about/united-states-adopted-names-usan/united-states-adopted-names-naming-guidelines"
+  },
+  "fdaBrand": {
+    "name": "US FDA · Proprietary-name best practices (2020)",
+    "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/best-practices-developing-proprietary-names-human-prescription-drug-products-guidance-industry"
+  },
+  "ema": {
+    "name": "EMA · Acceptability of invented names (revision 7)",
+    "url": "https://www.ema.europa.eu/en/scientific-guidelines/acceptability-names-human-medicinal-products-processed-through-centralised-procedure"
+  },
+  "fdaBio": {
+    "name": "US FDA · Nonproprietary naming of biological products (2017)",
+    "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/nonproprietary-naming-biological-products-guidance-industry"
+  }
+};
+const NAMING_STUDY_LESSONS = [
+  {
+    "id": "map",
+    "title": "Why one substance has different names",
+    "tag": "Start here",
+    "focus": "systems",
+    "duration": "Basics",
+    "objective": "Understand the job of each name before memorizing any naming rule.",
+    "opener": "Imagine a research company has discovered a fictional active substance. Different teams need to talk about it: chemists need a precise identity, researchers need a tracking label, regulators need a shared public name, and customers may see a commercial brand. These are different jobs, not four synonyms.",
+    "visual": "layers",
+    "sections": [
+      {
+        "title": "The four-name map",
+        "body": "A chemical or systematic name describes the substance's molecular structure. An internal development code labels a candidate while it is being studied. A generic or nonproprietary name identifies the active substance across companies. A proprietary or brand name identifies a marketed product. One active substance may have several brands, but its public substance identity is meant to be consistent."
+      },
+      {
+        "title": "Fictional example",
+        "body": "Picture a candidate tracked as QX-204. The structural name would come from its chemistry, not that code. If a WHO International Nonproprietary Name (INN) is later recommended, that name is available to everyone. A company might separately propose a commercial name, such as the invented example “Velmora”. These are teaching labels, not verified available or approved names.",
+        "example": "Research code: QX-204 → substance-level name: WHO INN (only after the WHO process) → commercial product: proposed brand “Velmora”."
+      },
+      {
+        "title": "The key rule",
+        "body": "Do not infer authorisation from a name. Giving a candidate a code, constructing a chemical name, securing a trademark or proposing an INN does not, by itself, authorise a medicinal product to be marketed."
+      }
+    ],
+    "takeaways": [
+      "Chemical name = structure.",
+      "Development code = internal project tracking.",
+      "INN = public identity of the substance.",
+      "Brand = proposed commercial identity; acceptance is a separate step."
+    ],
+    "glossary": [
+      [
+        "INN",
+        "International Nonproprietary Name: a public name selected by WHO for an active substance."
+      ],
+      [
+        "Proprietary",
+        "Owned or controlled commercially, such as a trademark, subject to applicable law."
+      ]
+    ],
+    "checks": [
+      {
+        "question": "A document uses “QX-204” to track a hypothetical compound before official naming. What is it?",
+        "options": [
+          "An internal development code",
+          "A WHO-recommended INN",
+          "A marketed brand approval",
+          "A chemical structure formula"
+        ],
+        "answer": 0,
+        "explanation": "Internal codes track research candidates. They do not become official names or approvals simply by being used."
+      },
+      {
+        "question": "What is the primary purpose of a WHO-recommended INN?",
+        "options": [
+          "Identify an active substance publicly",
+          "Identify the only company permitted to sell it",
+          "Describe every bond in the molecule",
+          "Prove the product is approved"
+        ],
+        "answer": 0,
+        "explanation": "An INN provides a shared public active-substance name; it is neither a trademark nor a marketing authorisation."
+      }
+    ],
+    "sources": [
+      "who",
+      "iupac"
+    ]
+  },
+  {
+    "id": "chemical",
+    "title": "Chemical names and development codes",
+    "tag": "Identity",
+    "focus": "systems",
+    "duration": "Basics",
+    "objective": "Tell a structure-based name from a convenient research label.",
+    "opener": "A chemist cannot rely on a catchy invented word to describe a molecular structure. A systematic name is built from chemical naming conventions; an internal code does not attempt to encode a full structure.",
+    "visual": "chemical",
+    "sections": [
+      {
+        "title": "What systematic nomenclature does",
+        "body": "IUPAC develops recommendations for systematic chemical nomenclature. A systematic name can reflect a parent structure, bond positions, functional groups and—in relevant cases—stereochemistry. It aims to give chemists a precise way to refer to the structure, but the full rules depend on the type of chemical compound."
+      },
+      {
+        "title": "What a development code does",
+        "body": "A fictional code such as “LAB-684” may identify a research candidate in experiments, databases and trial documents. Its letters and digits are a sponsor's internal convention; they do not automatically encode chemistry, dosage, efficacy or legal status.",
+        "example": "“LAB-684” = tracking identifier; “a systematic name based on the actual structure” = chemical identity. The code cannot replace structural verification."
+      },
+      {
+        "title": "Why both exist",
+        "body": "Research codes are compact and convenient when candidate identities or programmes are evolving. A chemical systematic name is based on the compound itself. Neither is the same thing as WHO selecting a public INN or a medicine regulator assessing a product brand."
+      }
+    ],
+    "takeaways": [
+      "IUPAC gives structural naming recommendations.",
+      "Codes help researchers track candidates.",
+      "A code cannot establish a chemical structure or regulatory approval."
+    ],
+    "glossary": [
+      [
+        "IUPAC",
+        "International Union of Pure and Applied Chemistry."
+      ],
+      [
+        "Stereochemistry",
+        "How atoms are arranged in three-dimensional space; relevant in some systematic names."
+      ]
+    ],
+    "checks": [
+      {
+        "question": "Which naming type is constructed from the actual molecule's structure?",
+        "options": [
+          "Systematic chemical name",
+          "Research code",
+          "Advertising slogan",
+          "Trademark search result"
+        ],
+        "answer": 0,
+        "explanation": "Chemical nomenclature expresses structural identity; codes and commercial labels serve different purposes."
+      },
+      {
+        "question": "A fictional candidate's code changes from “LAB-684” to “LAB-685”. What can you conclude?",
+        "options": [
+          "Its internal identifier changed, but little else",
+          "WHO formally recommended a new INN",
+          "Its chemical structure necessarily changed",
+          "A brand was automatically approved"
+        ],
+        "answer": 0,
+        "explanation": "The tracking label alone does not establish any chemical, regulatory or clinical change."
+      }
+    ],
+    "sources": [
+      "iupac",
+      "who"
+    ]
+  },
+  {
+    "id": "inn",
+    "title": "Generic names, INNs and protected stems",
+    "tag": "WHO",
+    "focus": "inn",
+    "duration": "Core",
+    "objective": "Understand why generic names are shared and why common stems need protection.",
+    "opener": "A generic name should not work like a private brand. WHO's INN system is designed to provide a shared, recognizable name for active substances, even when different companies market products containing them.",
+    "visual": "stems",
+    "sections": [
+      {
+        "title": "What WHO selects",
+        "body": "The World Health Organization selects International Nonproprietary Names for pharmaceutical substances. A recommended INN is in the public domain and is intended for common use; it should not be claimed as an exclusive trademark. INNs are normally devised for individual, well-defined substances."
+      },
+      {
+        "title": "The purpose of common stems",
+        "body": "Some INNs contain shared word elements, called stems, that signal pharmacological relationships. The distinction is important: a stem communicates a family relationship, not identical dosage, strength, efficacy or interchangeable products. Stem placement and meanings are governed by WHO rules, rather than made up by a manufacturer."
+      },
+      {
+        "title": "What to avoid in trademarks",
+        "body": "WHO urges applicants not to derive trademarks from INNs or incorporate established common INN stems. Why? Turning a shared nomenclature element into a commercial brand can confuse product identities and restrict naming future related substances.",
+        "example": "Teaching rule only: pretend “-vex” is a protected stem. A proposed brand ending in “-vex” would be a bad choice under that hypothetical rule. “-vex” is NOT presented as a real WHO stem."
+      }
+    ],
+    "takeaways": [
+      "INNs are public substance names, not private brands.",
+      "Common stems indicate pharmacological relationships.",
+      "WHO discourages using INNs and their common stems in trademarks.",
+      "Never treat a fictional example stem as an official WHO stem."
+    ],
+    "glossary": [
+      [
+        "Stem",
+        "A shared naming element used for a pharmacological group."
+      ],
+      [
+        "Nonproprietary",
+        "Not exclusive to a company as a product trademark."
+      ]
+    ],
+    "checks": [
+      {
+        "question": "Why do some INNs share a stem?",
+        "options": [
+          "To indicate a pharmacological relationship",
+          "To declare the same marketing owner",
+          "To guarantee an identical dose",
+          "To encode a package size"
+        ],
+        "answer": 0,
+        "explanation": "Shared stems help relate substance names by pharmacological class. They do not imply matching doses or owners."
+      },
+      {
+        "question": "In a fictional classroom example, “-vex” is declared a protected INN stem. What should a company do with a proposed brand “Solvex”?",
+        "options": [
+          "Reconsider the brand because it uses the protected stem",
+          "Register the shared stem as exclusive property",
+          "Assume a capital V makes the stem available",
+          "Use the stem to advertise superior efficacy"
+        ],
+        "answer": 0,
+        "explanation": "WHO advises against incorporating established INN stems in proprietary names. The stem in this exercise is hypothetical."
+      }
+    ],
+    "sources": [
+      "who",
+      "whoSelection"
+    ]
+  },
+  {
+    "id": "process",
+    "title": "How WHO selects an INN",
+    "tag": "WHO",
+    "focus": "inn",
+    "duration": "Core",
+    "objective": "Recognise proposed versus recommended INNs and the formal objection stage.",
+    "opener": "Applicants do not award themselves an official INN. They request one; WHO's expert-led procedure selects and publishes names in stages.",
+    "visual": "timeline",
+    "sections": [
+      {
+        "title": "Step 1 — Request and expert review",
+        "body": "A manufacturer or inventor requests an INN and may suggest candidate names. WHO reviews them against naming principles, existing names and possible conflicts. An expert review process selects a candidate; the sponsor cannot simply declare a suggestion official."
+      },
+      {
+        "title": "Step 2 — Proposed INN",
+        "body": "The selected candidate is published as a proposed INN. Interested parties have a four-month period to comment or lodge a formal objection—for example because of a conflicting trademark. WHO advises against premature reliance on a proposed name because it may change.",
+        "example": "“Proposed” is a real procedural status, not a synonym for “recommended”."
+      },
+      {
+        "title": "Step 3 — Recommended INN",
+        "body": "If no unresolved objection remains, WHO publishes a recommended INN. A maintained formal objection prevents that recommendation until it is resolved. Once recommended, the name is available in the public domain for shared substance identification."
+      }
+    ],
+    "takeaways": [
+      "Applicant requests; WHO selects.",
+      "Proposed INN → four-month objection period → recommended INN.",
+      "An unresolved formal objection blocks recommendation.",
+      "An INN does not itself approve a medicine for sale."
+    ],
+    "glossary": [
+      [
+        "Proposed INN",
+        "A WHO-selected candidate published for objections."
+      ],
+      [
+        "Recommended INN",
+        "The final published INN, normally stable and in public use."
+      ]
+    ],
+    "checks": [
+      {
+        "question": "A name has just appeared on WHO's proposed-INN list. Which statement is accurate?",
+        "options": [
+          "It is open to a four-month comment/objection period",
+          "It is already a privately owned registered trademark",
+          "A product is automatically approved for sale",
+          "There is no further WHO naming stage"
+        ],
+        "answer": 0,
+        "explanation": "WHO publishes a proposed name before the recommendation stage and allows four months for comment and objection."
+      },
+      {
+        "question": "A formal trademark objection remains unresolved. Can WHO publish that proposed name as recommended?",
+        "options": [
+          "No; it remains unresolved until a suitable outcome",
+          "Yes; every proposal becomes recommended automatically",
+          "Yes; if the sponsor likes the name",
+          "Only if the candidate name is uppercase"
+        ],
+        "answer": 0,
+        "explanation": "WHO will not publish a recommended INN while a formal objection is maintained."
+      }
+    ],
+    "sources": [
+      "who",
+      "whoSelection"
+    ]
+  },
+  {
+    "id": "usan",
+    "title": "USAN and the design of generic names",
+    "tag": "United States",
+    "focus": "inn",
+    "duration": "Core",
+    "objective": "Know the difference between WHO INN and USAN, and recognise common prefix pitfalls.",
+    "opener": "The US has a national adopted-name programme called USAN. It works closely with the global nonproprietary naming system; a national adopted name is not the same as an invented brand.",
+    "visual": "usan",
+    "sections": [
+      {
+        "title": "USAN versus INN",
+        "body": "USAN means United States Adopted Names. It names drug substances within the US nomenclature system and cooperates closely with WHO. National adopted names and INNs are usually aligned, although rare differences exist. USAN is not a commercial brand licensing agency."
+      },
+      {
+        "title": "What a proposed prefix should not imply",
+        "body": "USAN's naming guidelines discourage or reject prefixes that claim better effectiveness, suggest a particular medical condition or refer to the developer's company. These are naming-design criteria: a word element should support neutral identification rather than function as an advertisement."
+      },
+      {
+        "title": "A naming design test",
+        "body": "Consider three fictional prefix ideas: “Best-” (suggests superiority), “CompanyX-” (suggests the owner) and “Cure-” (suggests a therapeutic promise). Each raises concerns for a nonproprietary name. A neutral, distinctive prefix still needs expert examination; there is no automatic acceptance based on this example.",
+        "example": "A neutral-sounding invented prefix is not automatically an acceptable USAN: experts must still assess conflicts, common stems and the exact substance."
+      }
+    ],
+    "takeaways": [
+      "USAN = US national nonproprietary naming system.",
+      "WHO INNs and USAN names usually align, but not always.",
+      "Avoid sponsor references, unsupported superiority and indication suggestions in proposed generic names."
+    ],
+    "glossary": [
+      [
+        "USAN",
+        "United States Adopted Names programme."
+      ],
+      [
+        "Prefix",
+        "The initial part of a compound word/name, whose choice can affect clarity and neutrality."
+      ]
+    ],
+    "checks": [
+      {
+        "question": "How do USAN and WHO INN generally relate?",
+        "options": [
+          "They are separate but coordinated nonproprietary naming systems",
+          "USAN is a trademark register for commercial brands",
+          "Every WHO INN is always identical in every country without exception",
+          "USAN only assigns laboratory project codes"
+        ],
+        "answer": 0,
+        "explanation": "USAN is a national nomenclature programme that works closely with WHO; exact identity across all jurisdictions is not guaranteed."
+      },
+      {
+        "question": "What is problematic about a fictional USAN prefix that means “more effective than all others”?",
+        "options": [
+          "It implies therapeutic superiority rather than neutral identification",
+          "It accurately describes stereochemistry",
+          "Such prefixes are compulsory for USANs",
+          "It proves the active ingredient's clinical efficacy"
+        ],
+        "answer": 0,
+        "explanation": "USAN guidance rejects prefixes implying better or more effective products."
+      }
+    ],
+    "sources": [
+      "usan",
+      "who"
+    ]
+  },
+  {
+    "id": "brands",
+    "title": "Commercial names: what is safe to propose?",
+    "tag": "United States",
+    "focus": "brand",
+    "duration": "Core",
+    "objective": "Screen a fictional brand for confusion and misleading messages.",
+    "opener": "Brand names are not chosen solely for memorability. In US prescription medicines, the FDA evaluates proposed proprietary names for risks such as prescribing errors and misleading messages. Trademark availability is a different check.",
+    "visual": "brand",
+    "sections": [
+      {
+        "title": "Look-alike and sound-alike",
+        "body": "Two imaginary names may differ by only one letter yet be difficult to distinguish when spoken, typed or handwritten. That may lead to a patient receiving the wrong product. FDA encourages sponsors to evaluate both spelling and pronunciation, not just exact matches."
+      },
+      {
+        "title": "Misleading claims and modifiers",
+        "body": "A proposed brand should not imply unsupported superiority, guaranteed cures or broader use than the evidence supports. FDA also flags error-prone numerals, symbols and abbreviations that might be confused with product strength or instructions. These are guidance-based risk factors, not a claim that every symbol is universally illegal.",
+        "example": "“Vemora” versus “Vemoro” in a fictional exercise: the similarity calls for closer examination. An available trademark or a changed logo does not settle the medication-error question."
+      },
+      {
+        "title": "A practical pre-screening sequence",
+        "body": "First brainstorm names without protected INN stems. Next check possible meanings, look-alike and sound-alike candidates, potential confusion with dose or route, and trademark conflicts. Then submit the proposed name through the relevant product regulatory process. A marketing team cannot grant drug-name approval."
+      }
+    ],
+    "takeaways": [
+      "Brand name ≠ INN.",
+      "Sound and appearance both matter.",
+      "No unsupported benefit or safety promises.",
+      "A trademark search does not replace FDA name review."
+    ],
+    "glossary": [
+      [
+        "Look-alike/sound-alike",
+        "Names that could be confused in writing or speech."
+      ],
+      [
+        "Misbranding",
+        "Misleading presentation of a medicinal product under applicable regulatory law."
+      ]
+    ],
+    "checks": [
+      {
+        "question": "Two proposed fictional US brands sound almost identical, despite different spelling. What should be assessed?",
+        "options": [
+          "Potential sound-alike medication errors",
+          "Only whether the logo is unique",
+          "Only the IUPAC chemical formula",
+          "Whether both brands use the same font"
+        ],
+        "answer": 0,
+        "explanation": "FDA brand-name evaluation considers phonetic and orthographic confusion risks."
+      },
+      {
+        "question": "A sponsor has secured a trademark for a US prescription brand. What does that establish about FDA name acceptance?",
+        "options": [
+          "Nothing conclusive; the FDA review is separate",
+          "The FDA must accept the brand",
+          "The name has become a WHO-recommended INN",
+          "The drug is approved for marketing"
+        ],
+        "answer": 0,
+        "explanation": "Trademark rights and drug-regulatory name screening serve different purposes."
+      }
+    ],
+    "sources": [
+      "fdaBrand",
+      "who"
+    ]
+  },
+  {
+    "id": "eu",
+    "title": "EU versus US: who reviews the brand?",
+    "tag": "Regional rules",
+    "focus": "rules",
+    "duration": "Core",
+    "objective": "Separate WHO, FDA and EMA responsibilities when a company wants to market in different regions.",
+    "opener": "The same proposed invented brand does not automatically pass review worldwide. Regulators use their own criteria, and the European Medicines Agency has a specific name-review procedure for centrally authorised medicines.",
+    "visual": "regions",
+    "sections": [
+      {
+        "title": "EU centrally authorised names",
+        "body": "For human medicines using the EU centralised procedure, the European Medicines Agency (EMA) assesses invented names through its Name Review Group (NRG). It considers confusion with existing product names, misleading therapeutic or promotional messages, and other public-health issues. EMA's published guideline is revision 7."
+      },
+      {
+        "title": "US proposed proprietary names",
+        "body": "The US Food and Drug Administration (FDA) evaluates proposed proprietary names in its applicable product review context. Its guidance specifically aims to reduce medication errors and misleading names. FDA review of brands is different from WHO/USAN selection of nonproprietary names."
+      },
+      {
+        "title": "What a multinational naming team does",
+        "body": "For a fictional substance, identify the public INN/USAN naming route separately from the desired brand names. Assess trademark and regulatory name acceptability in each intended market, not just the headquarters country. An EMA centralised procedure is not automatically the naming procedure for every national EU application.",
+        "example": "A brand candidate suitable to one review framework may still raise a sound-alike or promotional-name issue under another. Never assume a single global brand approval."
+      }
+    ],
+    "takeaways": [
+      "WHO handles international nonproprietary naming.",
+      "USAN addresses US adopted nonproprietary names.",
+      "FDA reviews US proprietary prescription names.",
+      "EMA's NRG reviews invented names in the EU centralised procedure."
+    ],
+    "glossary": [
+      [
+        "EMA",
+        "European Medicines Agency."
+      ],
+      [
+        "NRG",
+        "Name Review Group, the EMA body reviewing invented names in the centralised procedure."
+      ]
+    ],
+    "checks": [
+      {
+        "question": "Who reviews invented commercial names for centrally authorised human medicines in the EU?",
+        "options": [
+          "EMA's Name Review Group",
+          "IUPAC's chemical naming committee",
+          "The WHO INN expert panel as a trademark office",
+          "The medicine's distributor"
+        ],
+        "answer": 0,
+        "explanation": "The EMA Name Review Group handles invented-name acceptability in the EU centralised procedure."
+      },
+      {
+        "question": "A fictional product will seek marketing approval in both the US and EU. How should its proposed brand be assessed?",
+        "options": [
+          "Against each relevant regulator's name-acceptability criteria",
+          "Once globally by filing a WHO INN",
+          "Only by checking domain-name availability",
+          "By treating US trademark registration as EU acceptance"
+        ],
+        "answer": 0,
+        "explanation": "National/regional medication-safety, trademark and product naming assessments have separate scopes."
+      }
+    ],
+    "sources": [
+      "ema",
+      "fdaBrand",
+      "who"
+    ]
+  },
+  {
+    "id": "biologics",
+    "title": "Special case: US biologic suffixes",
+    "tag": "Biologics",
+    "focus": "bio",
+    "duration": "Core",
+    "objective": "Read the US FDA suffix format without mistaking it for a universal naming rule.",
+    "opener": "Some biological products have a different naming convention under US FDA guidance. It is important to understand both the rule and its limited scope.",
+    "visual": "suffix",
+    "sections": [
+      {
+        "title": "The shape of a covered name",
+        "body": "For products within the scope of FDA's 2017 guidance, the nonproprietary name uses a core name, a hyphen and an FDA-designated four-letter lowercase suffix. At least three of those four letters should be different. The suffix is intended to be distinctive and devoid of meaning.",
+        "example": "Fictional format demonstration: “core-name-qzrt”. The suffix “qzrt” has four lowercase letters and four distinct letters. This illustrates format, NOT an actual FDA-designated name."
+      },
+      {
+        "title": "Which suffixes fail the first filter?",
+        "body": "“-aabb” has four lowercase letters but only two distinct letters. “-Qzrt” contains uppercase. “-q7rt” includes a digit. FDA also advises avoiding suffixes that suggest the licence holder, a drug name or a clinical abbreviation, or that resemble another assigned suffix."
+      },
+      {
+        "title": "What the suffix does NOT prove",
+        "body": "The suffix helps distinguish nonproprietary names of biological products within this US convention. It does not tell you the dose, efficacy, manufacturer or clinical interchangeability. Not every medicine is a biologic; do not apply this convention to every generic drug or outside its US regulatory scope."
+      }
+    ],
+    "takeaways": [
+      "US-specific guidance for covered biological products.",
+      "Format: core name + hyphen + four lowercase letters.",
+      "At least three distinct letters; no intended meaning.",
+      "Passing the format test is not FDA acceptance."
+    ],
+    "glossary": [
+      [
+        "Biologic",
+        "A biological medical product; the naming guidance applies to specified products regulated under US law."
+      ],
+      [
+        "Core name",
+        "The shared part of the nonproprietary name before the identifying suffix."
+      ]
+    ],
+    "checks": [
+      {
+        "question": "Which fictional suffix passes the basic FDA four-letter, lowercase, three-distinct-letter format test?",
+        "options": [
+          "-qzrt",
+          "-aabb",
+          "-Qzrt",
+          "-q7rt"
+        ],
+        "answer": 0,
+        "explanation": "qzrt contains four lowercase alphabetic characters and at least three different letters. Other conditions must still be checked."
+      },
+      {
+        "question": "A fictional biologic name has a properly formatted suffix. What can you infer?",
+        "options": [
+          "Only that it meets some formal format requirements",
+          "That the product has FDA marketing approval",
+          "That the product is interchangeable with another biologic",
+          "That the suffix describes the dose"
+        ],
+        "answer": 0,
+        "explanation": "Format is only one part of naming review; it neither authorises the product nor establishes interchangeability."
+      }
+    ],
+    "sources": [
+      "fdaBio"
+    ]
+  },
+  {
+    "id": "capstone",
+    "title": "Build a naming plan from scratch",
+    "tag": "Practice",
+    "focus": "rules",
+    "duration": "Apply",
+    "objective": "Use all the naming layers and regional checks in a complete imaginary case.",
+    "opener": "You are part of the naming team for an entirely fictional active substance, currently called “LX-318”. It is being studied in the US and EU. The team wants a public substance name, a commercial brand and possibly a US biologic suffix if the product falls within the relevant FDA guidance.",
+    "visual": "workflow",
+    "sections": [
+      {
+        "title": "First: separate the identities",
+        "body": "Keep “LX-318” as the development code. Chemists document its true structure using appropriate chemical nomenclature. Request an INN through WHO's process; do not treat a proposed INN as final or use a brand as a substitute."
+      },
+      {
+        "title": "Second: design without stealing a common name",
+        "body": "Review WHO stems and USAN principles for an INN proposal. The commercial brand should be distinct, neutral in its claims and screened for confusing similarity, including pronunciation. A fictional name that resembles an existing one or promises a guaranteed cure deserves redesign."
+      },
+      {
+        "title": "Third: route by market and product type",
+        "body": "For a US prescription brand, apply FDA brand guidance. For a centrally authorised EU invented name, apply EMA review. If this is a biologic covered by FDA's suffix convention, evaluate the separate suffix criteria. Keep the marketing authorisation decision separate from whether a name looks or sounds acceptable.",
+        "example": "Decision order: What am I naming? → Which type of name? → Is there a protected element or confusion risk? → Which authority reviews it? → Has the relevant name and product actually been accepted?"
+      }
+    ],
+    "takeaways": [
+      "Identify the naming layer before applying a rule.",
+      "Screen names against stems, misleading claims and confusion.",
+      "Use the appropriate WHO, national and regional processes.",
+      "After this lesson, start with Starter difficulty and broaden to Standard and Advanced."
+    ],
+    "glossary": [
+      [
+        "Naming clearance",
+        "The process of reviewing a proposed name for conflicts and acceptability, not the same thing as product approval."
+      ],
+      [
+        "Marketing authorisation",
+        "A regulator's permission to market a medicinal product; separate from naming design."
+      ]
+    ],
+    "checks": [
+      {
+        "question": "In this case, what is “LX-318” before any WHO naming action?",
+        "options": [
+          "The fictional development code",
+          "A final WHO-recommended INN",
+          "An EMA-accepted invented name",
+          "A US FDA biologic suffix"
+        ],
+        "answer": 0,
+        "explanation": "The made-up code is merely the candidate's internal research identifier."
+      },
+      {
+        "question": "Which plan best keeps the responsibilities of the naming systems separate?",
+        "options": [
+          "Chemical structure → WHO INN → brand safety by market → product approval",
+          "Trademark → automatically becomes a WHO INN → global marketing approval",
+          "Sponsor chooses any INN and every country must accept it",
+          "A four-letter suffix alone authorises all biologic products"
+        ],
+        "answer": 0,
+        "explanation": "Structure description, shared naming, proprietary-name acceptance and marketing authorisation are different activities, often under different authorities."
+      }
+    ],
+    "sources": [
+      "who",
+      "usan",
+      "fdaBrand",
+      "ema",
+      "fdaBio",
+      "iupac"
+    ]
+  }
+];
 
 // Pharmaceutical naming-systems quiz. No names of actual medicines are tested.
 // Each choice and explanation concerns the naming process, not treatment advice.
@@ -2973,6 +3742,150 @@ function createCargoArcade(container, onExit) {
 }
 
 
+const STORAGE_KEY = 'radix.study.pharma-naming.v1';
+const validId = id => LESSONS.some(l => l.id === id);
+const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const element = (selector, root) => root.querySelector(selector);
+const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'instant' });
+
+function normalizeNamingProgress(raw) {
+  const completed = Array.isArray(raw?.completed) ? [...new Set(raw.completed.filter(validId))] : [];
+  const checks = {};
+  for (const lesson of LESSONS) {
+    const responses = raw?.checks?.[lesson.id];
+    if (Array.isArray(responses)) checks[lesson.id] = lesson.checks.map((question, i) =>
+      Number.isInteger(responses[i]) && responses[i] >= 0 && responses[i] < question.options.length ? responses[i] : null);
+  }
+  return { completed, checks, current: validId(raw?.current) ? raw.current : LESSONS[0].id };
+}
+function readNamingStudyProgress(storage = typeof localStorage !== 'undefined' ? localStorage : null) {
+  try { return normalizeNamingProgress(storage ? JSON.parse(storage.getItem(STORAGE_KEY)) : {}); }
+  catch { return normalizeNamingProgress({}); }
+}
+function writeProgress(state, storage) {
+  try { storage?.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  catch { /* Browsing can continue without persistent storage. */ }
+}
+
+const lessonArt = {
+  layers: '<div class="study-map" aria-label="Four naming layers"><div><small>01 · Chemical</small><strong>Molecular structure</strong><span>IUPAC naming rules</span></div><div><small>02 · Research</small><strong>LAB-684</strong><span>Internal tracking code</span></div><div><small>03 · Generic</small><strong>INN / USAN</strong><span>Public substance name</span></div><div><small>04 · Commercial</small><strong>Proposed brand</strong><span>Market-specific review</span></div></div>',
+  chemical: '<div class="study-mini-visual"><div><small>RESEARCH LABEL</small><strong>LAB-684</strong><span>Tracks a candidate</span></div><div aria-hidden="true">≠</div><div><small>CHEMICAL NAME</small><strong>Structural description</strong><span>Based on the actual chemistry</span></div></div>',
+  stems: '<div class="study-mini-visual"><div><small>GENERIC NAME</small><strong>Distinctive part <em>+ common stem</em></strong><span>Shared element helps signal a pharmacological family</span></div><div><small>BRAND</small><strong>Distinct commercial name</strong><span>Do not appropriate protected INN stems</span></div></div>',
+  timeline: '<div class="study-timeline" aria-label="WHO naming procedure"><div><b>1</b><strong>Apply</strong><span>WHO expert review</span></div><div><b>2</b><strong>Proposed INN</strong><span>Four-month objection period</span></div><div><b>3</b><strong>Recommended</strong><span>Public nonproprietary name</span></div></div>',
+  usan: '<div class="study-mini-visual"><div><small>INTERNATIONAL</small><strong>WHO · INN</strong><span>Worldwide public substance identity</span></div><div aria-hidden="true">↔</div><div><small>UNITED STATES</small><strong>USAN</strong><span>Coordinated adopted names</span></div></div>',
+  brand: '<div class="study-map study-map-three"><div><small>SAFETY CHECK 01</small><strong>Sounds alike?</strong><span>Say it aloud</span></div><div><small>SAFETY CHECK 02</small><strong>Looks alike?</strong><span>Read and handwrite it</span></div><div><small>SAFETY CHECK 03</small><strong>Misleading?</strong><span>Avoid unsupported claims</span></div></div>',
+  regions: '<div class="study-map study-map-three"><div><small>WHO</small><strong>INN</strong><span>International generic naming</span></div><div><small>US · FDA</small><strong>Brand review</strong><span>Medication errors + misleading names</span></div><div><small>EU · EMA</small><strong>Invented names</strong><span>Centralised procedure · NRG</span></div></div>',
+  suffix: '<div class="study-suffix"><small>US BIOLOGIC NAMING FORMAT · FICTIONAL EXAMPLE</small><div><span>core-name</span><b>-</b><strong>q z r t</strong></div><p>Core name + hyphen + four lowercase letters; at least three letters must be distinct.</p></div>',
+  workflow: '<div class="study-timeline study-timeline-four" aria-label="Naming workflow"><div><b>1</b><strong>Identify</strong><span>Structure and code</span></div><div><b>2</b><strong>Design</strong><span>WHO INN / USAN</span></div><div><b>3</b><strong>Screen</strong><span>Stems, claims, confusion</span></div><div><b>4</b><strong>Review</strong><span>Authority and market</span></div></div>'
+};
+
+function createNamingStudy(container, { onExit, onPractice, storage = typeof localStorage !== 'undefined' ? localStorage : null } = {}) {
+  let progress = readNamingStudyProgress(storage);
+  let activeId = progress.current;
+  let disposed = false;
+  const persist = () => writeProgress(progress, storage);
+  const activeLesson = () => LESSONS.find(l => l.id === activeId) || LESSONS[0];
+  const answered = lesson => {
+    const a = progress.checks[lesson.id] || [];
+    return lesson.checks.every((q, i) => Number.isInteger(a[i]) && a[i] >= 0 && a[i] < q.options.length);
+  };
+
+  function chooseLesson(id) {
+    if (!validId(id) || disposed) return;
+    activeId = id;
+    progress.current = id;
+    persist();
+    render();
+    scrollToTop();
+  }
+  function answer(index, selected) {
+    const lesson = activeLesson(), q = lesson.checks[index];
+    if (!q || !Number.isInteger(selected) || selected < 0 || selected >= q.options.length) return;
+    if (!progress.checks[lesson.id]) progress.checks[lesson.id] = new Array(lesson.checks.length).fill(null);
+    if (progress.checks[lesson.id][index] !== null) return; // Freeze after first answer for honest feedback.
+    progress.checks[lesson.id][index] = selected;
+    persist();
+    render();
+    element('#check-' + index + '-feedback', container)?.focus({preventScroll:true});
+  }
+  function retry(index) {
+    const lesson = activeLesson();
+    if (!progress.checks[lesson.id] || !Number.isInteger(index)) return;
+    progress.checks[lesson.id][index] = null;
+    if (progress.completed.includes(lesson.id)) progress.completed = progress.completed.filter(id => id !== lesson.id);
+    persist();
+    render();
+    element('#check-' + index, container)?.focus({preventScroll:true});
+  }
+  function complete() {
+    const lesson = activeLesson();
+    if (!answered(lesson)) return;
+    if (!progress.completed.includes(lesson.id)) progress.completed.push(lesson.id);
+    const next = LESSONS[LESSONS.findIndex(l => l.id === lesson.id) + 1];
+    if (next) { activeId = next.id; progress.current = next.id; }
+    persist(); render(); scrollToTop();
+  }
+  function renderCheck(q, i, lesson) {
+    const selection = progress.checks[lesson.id]?.[i], locked = Number.isInteger(selection);
+    const correct = locked && selection === q.answer;
+    return `<section class="study-check" aria-labelledby="check-label-${i}">
+      <div class="study-check-top"><span class="study-check-badge">CHECK ${i + 1} OF ${lesson.checks.length}</span>${locked ? `<span class="study-check-state">${correct ? '✓ Understood' : 'Review the explanation'}</span>` : '<span class="study-check-state">Choose one answer</span>'}</div>
+      <h3 id="check-label-${i}">${escapeHtml(q.question)}</h3>
+      <div class="study-check-choices" role="group" aria-label="Answer choices">${q.options.map((choice, j) =>
+        `<button type="button" data-answer="${i}:${j}" id="${j === 0 ? 'check-' + i : ''}" class="study-check-option ${locked && j === q.answer ? 'is-correct' : ''} ${locked && j === selection && j !== q.answer ? 'is-wrong' : ''}" ${locked ? 'disabled' : ''}>${escapeHtml(choice)}</button>`).join('')}</div>
+      ${locked ? `<div class="study-check-feedback ${correct ? 'passed' : 'needs-review'}" id="check-${i}-feedback" role="status" tabindex="-1"><strong>${correct ? 'Correct.' : 'Not quite.'}</strong><p>${escapeHtml(q.explanation)}</p>${correct ? '' : `<p class="study-correction">Correct answer: <strong>${escapeHtml(q.options[q.answer])}</strong></p><button type="button" class="text-button" data-retry="${i}">Try again</button>`}</div>` : ''}
+    </section>`;
+  }
+  function render() {
+    if (disposed) return;
+    const lesson = activeLesson(), index = LESSONS.findIndex(l => l.id === lesson.id);
+    const completeCount = progress.completed.length;
+    const allFinished = completeCount === LESSONS.length;
+    container.innerHTML = `<section class="naming-study" aria-label="Pharmaceutical naming study course">
+      <div class="study-head"><button class="text-button" id="study-exit" type="button">← Back to topics</button><span class="study-kicker">PHARMACEUTICAL NAMING · STUDY MODE</span></div>
+      <div class="study-hero"><div><p class="eyebrow">LEARN BEFORE YOU QUIZ</p><h1 tabindex="-1">From zero to naming rules.</h1><p>Nine short lessons. Fictional examples. Real regulatory sources. No chemistry degree or medical background needed.</p></div><div class="study-overall"><strong>${completeCount}<span>/${LESSONS.length}</span></strong><small>Lessons finished</small><div class="study-progress-track" role="progressbar" aria-label="Lessons completed" aria-valuemin="0" aria-valuemax="${LESSONS.length}" aria-valuenow="${completeCount}"><span style="width:${Math.round(100 * completeCount / LESSONS.length)}%"></span></div></div></div>
+      <div class="study-layout">
+        <aside class="study-sidebar" aria-label="Course lessons">
+          <p class="study-sidebar-title">YOUR LEARNING PATH</p>
+          <nav class="study-lessons" aria-label="Jump to a lesson">${LESSONS.map((l,i)=>`<button type="button" data-lesson="${l.id}" aria-current="${l.id === activeId ? 'step' : 'false'}" class="${l.id === activeId ? 'active' : ''} ${progress.completed.includes(l.id) ? 'completed' : ''}"><span class="study-lesson-num">${progress.completed.includes(l.id) ? '✓' : String(i + 1).padStart(2,'0')}</span><span><strong>${escapeHtml(l.title)}</strong><small>${escapeHtml(l.tag)}</small></span></button>`).join('')}</nav>
+          <button type="button" class="secondary-button study-sidebar-quiz" id="study-quiz-all">Practice all naming topics →</button>
+          <p class="study-storage">Progress is kept in this browser when local storage is available.</p>
+        </aside>
+        <article class="study-lesson" aria-labelledby="lesson-title">
+          <div class="study-lesson-head"><div><span class="eyebrow">LESSON ${String(index + 1).padStart(2, '0')} / ${String(LESSONS.length).padStart(2,'0')} · ${escapeHtml(lesson.tag)}</span><h2 id="lesson-title">${escapeHtml(lesson.title)}</h2><p>${escapeHtml(lesson.objective)}</p></div><span class="study-level">${escapeHtml(lesson.duration)}</span></div>
+          <div class="study-lead">${escapeHtml(lesson.opener)}</div>
+          ${lessonArt[lesson.visual] || ''}
+          <div class="study-lesson-sections">${lesson.sections.map((s,i) => `<section><h3>${String(i+1).padStart(2,'0')} <span>${escapeHtml(s.title)}</span></h3><p>${escapeHtml(s.body)}</p>${s.example ? `<div class="study-example"><strong>WORKED EXAMPLE</strong><p>${escapeHtml(s.example)}</p></div>` : ''}</section>`).join('')}</div>
+          <section class="study-takeaways" aria-label="Key things to remember"><h3>Remember these</h3><ul>${lesson.takeaways.map(t=>`<li>${escapeHtml(t)}</li>`).join('')}</ul></section>
+          <section class="study-terms" aria-label="New terms"><h3>New words</h3><div>${lesson.glossary.map(([term,definition])=>`<p><strong>${escapeHtml(term)}</strong> — ${escapeHtml(definition)}</p>`).join('')}</div></section>
+          <section class="study-checks" aria-label="Knowledge checks"><div class="study-checks-head"><p class="eyebrow">CHECK YOUR UNDERSTANDING</p><h3>Make sure it clicked.</h3><p>Answer both questions. You can review the lesson and retry before moving on.</p></div>${lesson.checks.map((q,i) => renderCheck(q,i,lesson)).join('')}</section>
+          <div class="study-lesson-actions"><button class="primary-button" id="study-complete" type="button" ${answered(lesson) ? '' : 'disabled'}>${progress.completed.includes(lesson.id) ? 'Review complete ✓' : (index === LESSONS.length - 1 ? 'Finish course ✓' : 'Complete & next lesson →')}</button><button class="secondary-button" id="study-practice" type="button">Quiz this topic →</button></div>
+          ${!answered(lesson) ? '<p class="study-next-hint">Both knowledge checks unlock the next lesson. Lessons can also be opened from the sidebar at any time.</p>' : ''}
+          ${allFinished ? '<div class="study-finished"><strong>All nine lessons finished.</strong><p>You can now test yourself with Starter difficulty, then move to Standard and Advanced.</p><button type="button" id="study-final-quiz" class="primary-button">Start the Starter quiz →</button></div>' : ''}
+          <div class="study-lesson-sources"><h3>Official references</h3><p>These sources describe naming guidance or regulatory procedures; not every recommendation is a universal legal prohibition.</p>${lesson.sources.map(k=>`<a target="_blank" rel="noopener noreferrer" href="${escapeHtml(SOURCES[k].url)}">${escapeHtml(SOURCES[k].name)} <span aria-hidden="true">↗</span></a>`).join('')}</div>
+          <div class="study-bottom-nav"><button type="button" class="text-button" id="study-prev" ${index ? '' : 'disabled'}>← Previous lesson</button><span>${index + 1} of ${LESSONS.length}</span><button type="button" class="text-button" id="study-next" ${index < LESSONS.length - 1 ? '' : 'disabled'}>Next lesson →</button></div>
+        </article>
+      </div>
+      <p class="study-disclaimer">Educational guide, not medicine naming approval or legal advice. All example drug candidates and hypothetical INN stems are invented for teaching and have not been checked for trademark clearance.</p>
+    </section>`;
+    container.querySelectorAll('[data-lesson]').forEach(b=>b.addEventListener('click',()=>chooseLesson(b.dataset.lesson)));
+    container.querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>{const [i,j]=b.dataset.answer.split(':').map(Number);answer(i,j);}));
+    container.querySelectorAll('[data-retry]').forEach(b=>b.addEventListener('click',()=>retry(Number(b.dataset.retry))));
+    element('#study-complete',container).addEventListener('click',()=>{if(progress.completed.includes(lesson.id)){const next=LESSONS[index+1];if(next)chooseLesson(next.id);else render();}else complete();});
+    element('#study-prev',container).addEventListener('click',()=>{if(index>0)chooseLesson(LESSONS[index-1].id)});
+    element('#study-next',container).addEventListener('click',()=>{if(index<LESSONS.length-1)chooseLesson(LESSONS[index+1].id)});
+    element('#study-exit',container).addEventListener('click',()=>onExit?.());
+    element('#study-practice',container).addEventListener('click',()=>onPractice?.(lesson.focus));
+    element('#study-quiz-all',container).addEventListener('click',()=>onPractice?.('all'));
+    element('#study-final-quiz',container)?.addEventListener('click',()=>onPractice?.('all'));
+  }
+  render();
+  container.querySelector('h1')?.focus({preventScroll:true});
+  return () => { disposed = true; };
+}
+
+
+
 
 
 
@@ -2998,6 +3911,7 @@ function home(focusCategory = null) {
   const cargoVisible = ['cargo', 'mixed'].includes(settings.category);
   const codingVisible = CATEGORIES[settings.category]?.coding;
   const namingVisible = settings.category === 'naming';
+  const namingProgress = namingVisible ? readNamingStudyProgress().completed.length : 0;
   main.innerHTML = `
     <section class="setup">
       <div class="intro"><p class="eyebrow">YOUR PRACTICE BENCH</p><h1 tabindex="-1">What are we practicing?</h1><p>Pick a topic. Work it out. See why it works.</p></div>
@@ -3010,6 +3924,7 @@ function home(focusCategory = null) {
       </button>`).join('')}
       </div>
       <button type="button" class="mixed-toggle ${settings.category === 'mixed' ? 'active' : ''}" data-category="mixed" aria-pressed="${settings.category === 'mixed'}"><span aria-hidden="true">◈</span> Mix all ${Object.keys(CATEGORIES).length} topics <span class="mixed-check">${settings.category === 'mixed' ? '✓' : '+'}</span></button>
+      ${namingVisible ? `<div class="coding-entry study-entry"><div><strong>New to pharmaceutical naming? Learn it first.</strong><p>Start from zero with 9 guided lessons, 18 quick checks, diagrams and official sources.</p><span class="study-entry-detail">${namingProgress}/9 lessons finished · Progress saved in this browser</span></div><button class="primary-button" id="open-naming-study" type="button">${namingProgress ? "Continue studying →" : "Start learning →"}</button></div>` : ""}
       <div class="setup-panel">
         <div class="panel-label"><span class="eyebrow">SET YOUR ROUND</span><span class="panel-note">No timer. Take your time.</span></div>
         <div class="controls-row">
@@ -3035,7 +3950,27 @@ function home(focusCategory = null) {
   main.querySelector('#start').addEventListener('click', () => start());
   main.querySelector('#open-coding')?.addEventListener('click', () => { screen = 'coding'; codingCleanup = createCodingLab(main, settings.category, () => { home(); focusHeading(); }, settings.difficulty); window.scrollTo({top:0, behavior:'instant'}); });
   main.querySelector('#open-cargo')?.addEventListener('click', () => { screen = 'cargo'; codingCleanup = createCargoArcade(main, () => { home(); focusHeading(); }); window.scrollTo({top:0, behavior:'instant'}); });
+  main.querySelector('#open-naming-study')?.addEventListener('click', openNamingStudy);
   if (focusCategory) main.querySelector(`[data-category="${focusCategory}"]`).focus({ preventScroll: true });
+}
+
+function clearNamingStudyHash() {
+  if (window.location.hash === '#naming-study') {
+    try { window.history.replaceState(null, '', window.location.pathname + window.location.search); } catch { /* Deep links are optional. */ }
+  }
+}
+
+function openNamingStudy() {
+  codingCleanup?.(); codingCleanup = null;
+  screen = 'study';
+  settings.category = 'naming';
+  setAccent('naming');
+  try { window.history.replaceState(null, '', window.location.pathname + window.location.search + '#naming-study'); } catch { /* The course still opens. */ }
+  codingCleanup = createNamingStudy(main, {
+    onExit: () => { clearNamingStudyHash(); home('naming'); focusHeading(); },
+    onPractice: focus => { clearNamingStudyHash(); settings.namingFocus = focus || 'all'; settings.difficulty = '1'; start(); },
+  });
+  window.scrollTo({top:0, behavior:'instant'});
 }
 
 function start(reviewDeck = null) {
@@ -3168,7 +4103,7 @@ function finish() {
   focusHeading(); window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
-document.querySelector('.brand').addEventListener('click', e => { e.preventDefault(); session = null; home(); focusHeading(); });
+document.querySelector('.brand').addEventListener('click', e => { e.preventDefault(); clearNamingStudyHash(); session = null; home(); focusHeading(); });
 
 document.addEventListener('keydown', e => {
   if (screen !== 'quiz' || e.altKey || e.ctrlKey || e.metaKey || e.repeat) return;
@@ -3179,7 +4114,7 @@ document.addEventListener('keydown', e => {
   }
 });
 
-home();
+if (window.location.hash === '#naming-study') openNamingStudy(); else home();
 
 </script>
 </body>
