@@ -1,7 +1,7 @@
-import { CATEGORIES, CATEGORY_GROUPS, makeDeck, checkAnswer, shuffle, formatNumber } from './engine.js?v=20261103-pharma-naming';
-import { QUESTIONS, SOURCES } from './question-bank.js?v=20261103-pharma-naming';
-import { createCodingLab } from './coding.js?v=20261103-pharma-naming';
-import { createCargoArcade } from './cargo-games.js?v=20261103-pharma-naming';
+import { CATEGORIES, CATEGORY_GROUPS, makeDeck, checkAnswer, shuffle, formatNumber } from './engine.js?v=20261103-naming-study';
+import { QUESTIONS, SOURCES } from './question-bank.js?v=20261103-naming-study';
+import { createCodingLab } from './coding.js?v=20261103-naming-study';
+import { createCargoArcade } from './cargo-games.js?v=20261103-naming-study';
 import { createNamingStudy, studyProgress } from './naming-study.js?v=20261103-naming-study';
 
 const main = document.querySelector('#main');
