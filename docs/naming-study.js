@@ -32,7 +32,7 @@ export function createNamingStudy(root, onBack, onQuiz, storage = typeof localSt
       ${sections.map(([heading,body],i)=>`<section class="study-section"><span class="study-section-index">${String(i+1).padStart(2,'0')}</span><div><h3>${escStudy(heading)}</h3><p>${escStudy(body)}</p></div></section>`).join('')}
       <section class="study-check"><div class="study-check-head"><span class="eyebrow">KNOWLEDGE CHECK</span><span>${done?'Completed':'One quick question'}</span></div><h3>${escStudy(check[0])}</h3>
       <div class="study-check-options">${check.slice(1).map((opt,i)=>`<button type="button" data-study-answer="${i}" class="study-answer ${answer===i?(i===0?'correct':'incorrect'):''}" ${answer!==null?'disabled':''}>${escStudy(opt)}</button>`).join('')}</div>
-      ${answer!==null?`<p class="study-feedback" role="status">${answer===0?'Correct.':'Not quite. '}${answer===0?'You can move to the next lesson.':'The first option is the correct answer. Review the lesson and try again.'}</p>`:''}
+      ${answer!==null?`<p class="study-feedback" role="status">${answer===0?'Correct.':'Not quite. '}${answer===0?'You can move to the next lesson.':'The first option is the correct answer. Review the lesson and try again.'}</p>${answer!==0?'<button type="button" class="secondary-button" id="study-retry">Try again</button>':''}`:''}
       </section>
       <div class="study-sources"><span class="eyebrow">OFFICIAL SOURCES</span><div>${sources.map(key=>SOURCES[key]?`<a href="${escStudy(SOURCES[key].url)}" target="_blank" rel="noopener noreferrer">${escStudy(SOURCES[key].name)} ↗</a>`:'').join('')}</div></div>
       <div class="study-actions"><button type="button" class="secondary-button" id="study-prev" ${index===0?'disabled':''}>← Previous</button>${index===NAMING_LESSONS.length-1?`<button type="button" class="primary-button" id="study-quiz">Start Starter quiz →</button>`:`<button type="button" class="primary-button" id="study-next">Next lesson →</button>`}</div>
@@ -45,6 +45,7 @@ export function createNamingStudy(root, onBack, onQuiz, storage = typeof localSt
       render();
       root.querySelector('.study-feedback')?.scrollIntoView({block:'nearest'});
     }));
+    root.querySelector('#study-retry')?.addEventListener('click',()=>{answer=null;render();});
     root.querySelector('#study-prev')?.addEventListener('click',()=>choose(index-1));
     root.querySelector('#study-next')?.addEventListener('click',()=>choose(index+1));
     root.querySelector('#study-quiz')?.addEventListener('click',onQuiz);
