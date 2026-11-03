@@ -1,8 +1,8 @@
-import { QUESTIONS } from './question-bank.js?v=20261011-msx-cargo';
-import { makeCargoQuestion } from './cargo.js?v=20261011-msx-cargo';
-import { makeMathQuestion } from './extra-questions.js?v=20261011-msx-cargo';
-import { MSX_QUESTIONS, makeMsxGeneratedQuestion } from './msx-questions.js?v=20261011-msx-cargo';
-import { makeNamingGeneratedQuestion } from './naming-generated.js?v=20261011-msx-cargo';
+import { QUESTIONS } from './question-bank.js?v=20261103-pharma-naming';
+import { makeCargoQuestion } from './cargo.js?v=20261103-pharma-naming';
+import { makeMathQuestion } from './extra-questions.js?v=20261103-pharma-naming';
+import { MSX_QUESTIONS, makeMsxGeneratedQuestion } from './msx-questions.js?v=20261103-pharma-naming';
+import { makeNamingGeneratedQuestion } from './naming-generated.js?v=20261103-pharma-naming';
 
 export const DIGITS = '0123456789AB';
 export const CATEGORIES = {
