@@ -1,85 +1,55 @@
-// Procedural naming-only exercises. All product names and stems are fictional teaching labels.
-const pickNaming = (items, rng) => items[Math.min(items.length - 1, Math.floor(rng() * items.length))];
-const TOPICS = ['systems', 'inn', 'brand', 'bio', 'rules'];
-const LABELS = {
-  systems: ['Name-system decisions', 'IUPAC · chemical nomenclature', 'namingIupac'],
-  inn: ['WHO INN design', 'WHO · hypothetical training stems', 'namingWho'],
-  brand: ['Proprietary-name screening', 'US · FDA proprietary-name guidance', 'namingFda'],
-  bio: ['US biologic-name suffixes', 'US · FDA 2017 suffix guidance', 'namingBio'],
-  rules: ['Regulatory naming workflow', 'US FDA / EU EMA / WHO / IUPAC', 'namingEma'],
-};
-const VOWELS = ['luma', 'tori', 'meva', 'kora', 'seni', 'zala', 'viro', 'neza', 'mira', 'feno'];
-const STEMS = ['vex', 'lun', 'mox', 'zun', 'qar', 'ren', 'til', 'pav'];
-const SUFFIXES = ['qzrt', 'vpkm', 'nqrs', 'fbxr', 'twqn', 'bdvz', 'mkqp', 'qxvz'];
-export function makeNamingGeneratedQuestion(settings, rng = Math.random) {
-  const focus = settings.namingFocus && settings.namingFocus !== 'all' ? settings.namingFocus : pickNaming(TOPICS, rng);
-  if (!LABELS[focus]) throw new RangeError('Unknown naming focus');
-  const level = Number(settings.difficulty) || 1;
-  const variant = Math.floor(rng() * 4);
-  const root = pickNaming(VOWELS, rng);
-  const serial = 100 + Math.floor(rng() * 800);
-  let prompt, options, explanation;
-  if (focus === 'systems') {
-    if (variant % 2 === 0) {
-      prompt = 'A fictitious substance is labelled DEVELOPMENT-' + serial + ' in a research notebook. Which naming role does that identifier play?';
-      options = ['Internal development code', 'WHO-recommended INN', 'IUPAC systematic chemical name', 'Approved commercial brand'];
-      explanation = 'A company tracking code is a research identifier. Neither its format nor its use grants WHO naming status or marketing approval.';
-    } else {
-      prompt = 'A scientist describes an imaginary compound by a systematic structural descriptor including bond positions and stereochemistry. Which naming objective is being served?';
-      options = ['Precise chemical identity', 'Exclusive product branding', 'Manufacturer identification', 'Retail trademark clearance'];
-      explanation = 'IUPAC nomenclature encodes information about molecular structure rather than commercial rights.';
-    }
-  } else if (focus === 'inn') {
-    const stem = pickNaming(STEMS, rng);
-    const candidates = [root + stem, root + 'ta', root + 'mi', root + 'no'];
-    if (variant % 2 === 0) {
-      prompt = 'Training scenario: assume the fictional suffix -' + stem + ' is a protected WHO INN stem. Which proposed fictional brand should be rejected for using that stem?';
-      options = candidates;
-      explanation = 'The first option contains the hypothetical protected stem -' + stem + '. WHO discourages appropriating common INN stems in trademarks. The stem and all names here are invented teaching examples.';
-    } else {
-      prompt = 'A proposed WHO INN for fictional candidate ' + root.toUpperCase() + '-' + serial + ' faces an unresolved formal trademark objection. Which step is appropriate?';
-      options = ['Hold recommended publication until the objection is resolved', 'Automatically approve the INN on the objection deadline', 'Register the name as a private commercial trademark', 'Treat the development code as a chemical name'];
-      explanation = 'WHO does not publish a proposed INN as recommended while a formal objection is maintained.';
-    }
-  } else if (focus === 'brand') {
-    const first = root + 'ma';
-    const confusing = root + 'mma';
-    if (variant % 2 === 0) {
-      prompt = 'A fictional US brand candidate "' + confusing + '" is proposed while a different product uses "' + first + '". Their written and spoken forms are very close. What should the naming team do?';
-      options = ['Investigate look-alike/sound-alike risk and redesign if needed', 'Assume one extra letter is adequate clearance', 'Check only the logo and typography', 'Treat the candidate as an automatically assigned INN'];
-      explanation = 'FDA proprietary-name review considers spelling and pronunciation similarity as medication-error risks. Both examples are invented.';
-    } else {
-      prompt = 'A US sponsor proposes adding a digit "' + (serial % 9 + 1) + '" to a made-up prescription brand to imply dosage frequency. What is the prudent review decision?';
-      options = ['Investigate potential prescribing confusion from the modifier', 'Assume every numeral is universally prohibited without exceptions', 'Replace the chemical identity with the digit', 'Approve the modifier because it is memorable'];
-      explanation = 'FDA generally advises against error-prone numeric modifiers that can be confused with dosing, though established class conventions may be treated differently.';
-    }
-  } else if (focus === 'bio') {
-    const suffix = pickNaming(SUFFIXES, rng);
-    if (variant % 2 === 0) {
-      prompt = 'FDA 2017 guidance formatting exercise: which fictional suffix could satisfy the four-lowercase-letter and at-least-three-distinct-letter conditions, before other checks?';
-      options = ['-' + suffix, '-aabb', '-QZrt', '-ab' + String(serial % 9)];
-      explanation = 'A format-compliant suffix uses four lowercase letters, with at least three distinct characters, preceded by a hyphen. A unique meaningless suffix still needs regulatory assessment.';
-    } else {
-      prompt = 'A proposed US biologic suffix is "' + suffix.toUpperCase() + '". Which change is needed to satisfy the lowercase-letter element of the FDA 2017 format?';
-      options = ['Use lowercase "' + suffix + '" after a hyphen', 'Add two digits to the uppercase suffix', 'Convert the suffix into a marketing slogan', 'Include the full manufacturer name in the suffix'];
-      explanation = 'For products covered by the guidance, the suffix must be four lowercase letters attached to the core name with a hyphen; additional distinctness, uniqueness and meaning criteria apply.';
-    }
-  } else {
-    const eu = variant % 2 === 0;
-    prompt = eu
-      ? 'A fictional medicinal product "' + root + serial + '" seeks an invented commercial name for an EU centralised marketing-authorisation application. Which naming review applies?'
-      : 'A fictional prescription product "' + root + serial + '" seeks an invented commercial name for US FDA review. Which naming review applies?';
-    options = eu
-      ? ['EMA centralised invented-name acceptability review', 'IUPAC structure-name designation', 'WHO recommendation of an INN as the commercial mark', 'A local shipping code verification']
-      : ['FDA proprietary-name medication-safety and misleading-name review', 'EMA centralised procedure as the sole US authority', 'IUPAC organic nomenclature review of its trademark', 'Automatic WHO trademark assignment'];
-    explanation = eu
-      ? 'EMA reviews proposed invented names for centrally processed EU medicines, including public-health and confusion concerns.'
-      : 'FDA screens proprietary prescription names for look-alike/sound-alike errors and misleading implications.';
-  }
-  if (new Set(options).size !== 4) throw new Error('Duplicate generated naming options');
-  const [topic, jurisdiction, source] = LABELS[focus];
-  const fingerprint = prompt.replace(/\W/g, '').slice(-100);
-  return { id: 'naming-generated-' + focus + '-' + variant + '-' + serial + '-' + root + '-' + fingerprint,
-    category: 'naming', level: Math.min(level, variant < 2 ? 1 : 2), topic, focus, prompt, options,
-    explanation, jurisdiction, source, hint: 'Identify which naming layer and authority the scenario describes; do not assume one rule applies to every jurisdiction.' };
+// Random structure-naming and drug-family stem exercises. No procedural or approval questions.
+const ROOTS=['','meth','eth','prop','but','pent','hex','hept','oct'];
+const pick=(a,rng)=>a[Math.floor(rng()*a.length)];
+const integer=(min,max,rng)=>min+Math.floor(rng()*(max-min+1));
+const STEMS=[['-pril','ACE inhibitors'],['-sartan','angiotensin II receptor blockers'],['-olol','beta blockers'],['-prazole','proton-pump inhibitors'],['-cillin','penicillin antibiotics'],['-gliflozin','SGLT2 inhibitors'],['-vastatin','HMG-CoA reductase inhibitors (statins)']];
+export function makeNamingGeneratedQuestion(settings,rng=Math.random){
+ const focusOptions=['chains','groups','positions','complex','stems'];
+ const focus=settings.namingFocus&&settings.namingFocus!=='all'?settings.namingFocus:pick(focusOptions,rng);
+ if(!focusOptions.includes(focus))throw new RangeError('Unknown naming focus');
+ const difficulty=Number(settings.difficulty)||1,randomKey=[0,1,2].map(()=>Math.floor(rng()*1000000000)).join('-');
+ let prompt,options,explanation,level,topic,source,jurisdiction;
+ if(focus==='chains'){
+  const n=integer(4,8,rng),root=ROOTS[n],alkene=difficulty>1&&rng()<0.5;
+  const formula=alkene?'CH₂=CH'+'CH₂'.repeat(n-3)+'CH₃':'CH₃'+'CH₂'.repeat(n-2)+'CH₃';
+  const answer=alkene?root+'-1-ene':root+'ane';
+  prompt='Name the condensed structure: '+formula+'.';
+  options=alkene?[answer,root+'ane',root+'-1-yne',ROOTS[n-1]+'-1-ene']:[answer,root+'ene',root+'yne',ROOTS[n-1]+'ane'];
+  explanation='Count '+n+' carbons and '+(alkene?'a double bond starting at C1':'only single carbon-carbon bonds')+'. The name is '+answer+'.';
+  level=alkene?2:1;topic='Chains and unsaturation';source='namingChemGuide';jurisdiction='IUPAC · chain naming';
+ }else if(focus==='groups'){
+  const n=integer(3,6,rng),root=ROOTS[n],kind=pick(difficulty===1?['alcohol','aldehyde','acid']:['alcohol','aldehyde','acid','ketone'],rng);
+  let formula,name;
+  if(kind==='alcohol'){formula='CH₃'+'CH₂'.repeat(n-1)+'OH';name=root+'an-1-ol';}
+  if(kind==='aldehyde'){formula='CH₃'+'CH₂'.repeat(n-2)+'CHO';name=root+'anal';}
+  if(kind==='acid'){formula='CH₃'+'CH₂'.repeat(n-2)+'COOH';name=root+'anoic acid';}
+  if(kind==='ketone'){formula='CH₃CO'+'CH₂'.repeat(n-3)+'CH₃';name=n===3?'propanone':root+'an-2-one';}
+  prompt='Identify the functional group and name '+formula+'.';
+  options=[name,root+'anal',root+'an-1-ol',root+'anoic acid'].filter((x,i,a)=>a.indexOf(x)===i);
+  for(const c of [root+'an-2-one',ROOTS[n-1]+'anoic acid',ROOTS[n-1]+'an-1-ol'])if(options.length<4&&!options.includes(c))options.push(c);
+  explanation='The main functional group is '+kind+' and the parent contains '+n+' carbons, giving '+name+'.';
+  level=kind==='ketone'?2:1;topic='Functional groups';source='namingChemGuide';jurisdiction='IUPAC · functional groups';
+ }else if(focus==='positions'){
+  const n=integer(5,8,rng),root=ROOTS[n],formula='CH₃CH(CH₃)'+'CH₂'.repeat(n-3)+'CH₃',correct='2-methyl'+root+'ane';
+  prompt='Name the branched condensed structure '+formula+'.';
+  options=[correct,'3-methyl'+root+'ane','2-ethyl'+root+'ane',n===8?'octane':ROOTS[n+1]+'ane'];
+  explanation='The main chain contains '+n+' carbons. The methyl group is on carbon 2, giving '+correct+'.';
+  level=2;topic='Branches and locants';source='namingOrgChem';jurisdiction='IUPAC · locants';
+ }else if(focus==='complex'){
+  const n=integer(2,5,rng),acid=ROOTS[n]+'anoate',alkyl=pick(['methyl','ethyl'],rng);
+  const formula='CH₃'+'CH₂'.repeat(n-2)+'C(=O)O'+(alkyl==='methyl'?'CH₃':'CH₂CH₃');
+  const alt=alkyl==='methyl'?'ethyl':'methyl',otherAcid=ROOTS[n+1]+'anoate',answer=alkyl+' '+acid;
+  prompt='Name the ester structure '+formula+'.';
+  options=[answer,alt+' '+acid,alkyl+' '+otherAcid,alt+' '+otherAcid];
+  explanation='The oxygen-side group is '+alkyl+'; the acid-side name is '+acid+'. Hence '+answer+'.';
+  level=2;topic='Ester naming';source='namingOrgChem';jurisdiction='IUPAC · esters';
+ }else{
+  const i=integer(0,STEMS.length-1,rng),stem=STEMS[i][0],family=STEMS[i][1],invented=pick(['tore','luma','zela','nivo','femi','riva','xeno','kavi'],rng)+stem.slice(1);
+  prompt='In the invented training name "'+invented+'", which family does the shared ending '+stem+' suggest?';
+  options=[family,...[1,2,3].map(j=>STEMS[(i+j)%STEMS.length][1])];
+  explanation='The shared stem '+stem+' corresponds to '+family+'. This fictional name is only a pattern-recognition exercise.';
+  level=1;topic='Pharmacological name stems';source='namingStems';jurisdiction='WHO · INN stems';
+ }
+ if(options.length!==4||new Set(options).size!==4)throw new Error('Duplicate naming choices: '+prompt);
+ return {id:'naming-generated-'+focus+'-'+randomKey,category:'naming',focus,level:Math.min(level,difficulty),topic,prompt,options,explanation,source,jurisdiction,hint:'Count the parent-chain atoms, check the highest-priority functional group and its position, or identify the exact shared drug-name stem.'};
 }
