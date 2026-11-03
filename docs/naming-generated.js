@@ -78,7 +78,7 @@ export function makeNamingGeneratedQuestion(settings, rng = Math.random) {
   }
   if (new Set(options).size !== 4) throw new Error('Duplicate generated naming options');
   const [topic, jurisdiction, source] = LABELS[focus];
-  const fingerprint = prompt.replace(/\\W/g, '').slice(-100);
+  const fingerprint = prompt.replace(/\W/g, '').slice(-100);
   return { id: 'naming-generated-' + focus + '-' + variant + '-' + serial + '-' + root + '-' + fingerprint,
     category: 'naming', level: Math.min(level, variant < 2 ? 1 : 2), topic, focus, prompt, options,
     explanation, jurisdiction, source, hint: 'Identify which naming layer and authority the scenario describes; do not assume one rule applies to every jurisdiction.' };
