@@ -1,5 +1,5 @@
-import { NAMING_LESSONS } from './naming-lessons.js?v=20261103-naming-study';
-import { SOURCES } from './question-bank.js?v=20261103-naming-study';
+import { NAMING_LESSONS } from './naming-lessons.js?v=20261103-chemical-names';
+import { SOURCES } from './question-bank.js?v=20261103-chemical-names';
 
 const escStudy = value => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const STORAGE_KEY = 'radix.naming-study.chemistry.v2';
