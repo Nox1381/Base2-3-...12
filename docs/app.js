@@ -1,7 +1,7 @@
-import { CATEGORIES, CATEGORY_GROUPS, makeDeck, checkAnswer, shuffle, formatNumber } from './engine.js?v=20261011-msx-cargo';
-import { QUESTIONS, SOURCES } from './question-bank.js?v=20261011-msx-cargo';
-import { createCodingLab } from './coding.js?v=20261011-msx-cargo';
-import { createCargoArcade } from './cargo-games.js?v=20261011-msx-cargo';
+import { CATEGORIES, CATEGORY_GROUPS, makeDeck, checkAnswer, shuffle, formatNumber } from './engine.js?v=20261103-pharma-naming';
+import { QUESTIONS, SOURCES } from './question-bank.js?v=20261103-pharma-naming';
+import { createCodingLab } from './coding.js?v=20261103-pharma-naming';
+import { createCargoArcade } from './cargo-games.js?v=20261103-pharma-naming';
 
 const main = document.querySelector('#main');
 const settings = { category: 'bases', difficulty: '2', length: '10', base: 'any', baseMode: 'mixed', fireScope: 'all', cargoFocus: 'segregation', namingFocus: 'all' };
