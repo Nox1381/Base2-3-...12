@@ -7,6 +7,9 @@ import { NAMING_QUESTIONS } from './naming-questions.js?v=20261103-pharma-naming
 export const SOURCES = {
   imdg: IMDG_SOURCE,
   namingIupac: { name: 'IUPAC · Chemical nomenclature', url: 'https://iupac.org/what-we-do/nomenclature/' },
+  namingChemGuide: { name: 'IUPAC · Brief guide to organic nomenclature', url: 'https://iupac.qmul.ac.uk/BriefGuide/organic.html' },
+  namingOrgChem: { name: 'OpenStax · Polyfunctional organic nomenclature', url: 'https://openstax.org/books/organic-chemistry/pages/a-nomenclature-of-polyfunctional-organic-compounds' },
+  namingStems: { name: 'WHO · INN Stem Book (2024)', url: 'https://www.who.int/publications/i/item/9789240099388' },
   namingWho: { name: 'WHO · Guidance on INN', url: 'https://www.who.int/teams/health-product-and-policy-standards/inn/guidance-on-inn' },
   namingPrinciples: { name: 'WHO · General principles for INN', url: 'https://www.who.int/publications/m/item/who-edm-qsm-2004-5-en' },
   namingFda: { name: 'US FDA · Proprietary-name best practices (2020)', url: 'https://www.fda.gov/regulatory-information/search-fda-guidance-documents/best-practices-developing-proprietary-names-human-prescription-drug-products-guidance-industry' },
