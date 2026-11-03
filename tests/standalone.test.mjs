@@ -9,4 +9,7 @@ test('the standalone package has a valid executable script with no duplicate glo
   assert.doesNotThrow(() => new vm.Script(match[1], {filename:'play.html inline script'}));
   assert.match(match[1],/createCargoArcade/);
   assert.match(match[1],/ADDITIONAL_MSX_CHALLENGES/);
+  assert.match(match[1],/createNamingStudy/);
+  assert.match(match[1],/NAMING_STUDY_LESSONS/);
+  assert.match(match[1],/openNamingStudy/);
 });

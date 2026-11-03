@@ -2,6 +2,7 @@ import { CATEGORIES, CATEGORY_GROUPS, makeDeck, checkAnswer, shuffle, formatNumb
 import { QUESTIONS, SOURCES } from './question-bank.js?v=20261103-pharma-naming';
 import { createCodingLab } from './coding.js?v=20261103-pharma-naming';
 import { createCargoArcade } from './cargo-games.js?v=20261103-pharma-naming';
+import { createNamingStudy, readNamingStudyProgress } from './naming-study.js?v=20261103-pharma-naming';
 
 const main = document.querySelector('#main');
 const settings = { category: 'bases', difficulty: '2', length: '10', base: 'any', baseMode: 'mixed', fireScope: 'all', cargoFocus: 'segregation', namingFocus: 'all' };
@@ -25,6 +26,7 @@ function home(focusCategory = null) {
   const cargoVisible = ['cargo', 'mixed'].includes(settings.category);
   const codingVisible = CATEGORIES[settings.category]?.coding;
   const namingVisible = settings.category === 'naming';
+  const namingProgress = namingVisible ? readNamingStudyProgress().completed.length : 0;
   main.innerHTML = `
     <section class="setup">
       <div class="intro"><p class="eyebrow">YOUR PRACTICE BENCH</p><h1 tabindex="-1">What are we practicing?</h1><p>Pick a topic. Work it out. See why it works.</p></div>
@@ -37,6 +39,7 @@ function home(focusCategory = null) {
       </button>`).join('')}
       </div>
       <button type="button" class="mixed-toggle ${settings.category === 'mixed' ? 'active' : ''}" data-category="mixed" aria-pressed="${settings.category === 'mixed'}"><span aria-hidden="true">◈</span> Mix all ${Object.keys(CATEGORIES).length} topics <span class="mixed-check">${settings.category === 'mixed' ? '✓' : '+'}</span></button>
+      ${namingVisible ? `<div class="coding-entry study-entry"><div><strong>New to pharmaceutical naming? Learn it first.</strong><p>Start from zero with 9 guided lessons, 18 quick checks, diagrams and official sources.</p><span class="study-entry-detail">${namingProgress}/9 lessons finished · Progress saved in this browser</span></div><button class="primary-button" id="open-naming-study" type="button">${namingProgress ? "Continue studying →" : "Start learning →"}</button></div>` : ""}
       <div class="setup-panel">
         <div class="panel-label"><span class="eyebrow">SET YOUR ROUND</span><span class="panel-note">No timer. Take your time.</span></div>
         <div class="controls-row">
@@ -62,7 +65,27 @@ function home(focusCategory = null) {
   main.querySelector('#start').addEventListener('click', () => start());
   main.querySelector('#open-coding')?.addEventListener('click', () => { screen = 'coding'; codingCleanup = createCodingLab(main, settings.category, () => { home(); focusHeading(); }, settings.difficulty); window.scrollTo({top:0, behavior:'instant'}); });
   main.querySelector('#open-cargo')?.addEventListener('click', () => { screen = 'cargo'; codingCleanup = createCargoArcade(main, () => { home(); focusHeading(); }); window.scrollTo({top:0, behavior:'instant'}); });
+  main.querySelector('#open-naming-study')?.addEventListener('click', openNamingStudy);
   if (focusCategory) main.querySelector(`[data-category="${focusCategory}"]`).focus({ preventScroll: true });
+}
+
+function clearNamingStudyHash() {
+  if (window.location.hash === '#naming-study') {
+    try { window.history.replaceState(null, '', window.location.pathname + window.location.search); } catch { /* Deep links are optional. */ }
+  }
+}
+
+function openNamingStudy() {
+  codingCleanup?.(); codingCleanup = null;
+  screen = 'study';
+  settings.category = 'naming';
+  setAccent('naming');
+  try { window.history.replaceState(null, '', window.location.pathname + window.location.search + '#naming-study'); } catch { /* The course still opens. */ }
+  codingCleanup = createNamingStudy(main, {
+    onExit: () => { clearNamingStudyHash(); home('naming'); focusHeading(); },
+    onPractice: focus => { clearNamingStudyHash(); settings.namingFocus = focus || 'all'; settings.difficulty = '1'; start(); },
+  });
+  window.scrollTo({top:0, behavior:'instant'});
 }
 
 function start(reviewDeck = null) {
@@ -195,7 +218,7 @@ function finish() {
   focusHeading(); window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
-document.querySelector('.brand').addEventListener('click', e => { e.preventDefault(); session = null; home(); focusHeading(); });
+document.querySelector('.brand').addEventListener('click', e => { e.preventDefault(); clearNamingStudyHash(); session = null; home(); focusHeading(); });
 
 document.addEventListener('keydown', e => {
   if (screen !== 'quiz' || e.altKey || e.ctrlKey || e.metaKey || e.repeat) return;
@@ -206,4 +229,4 @@ document.addEventListener('keydown', e => {
   }
 });
 
-home();
+if (window.location.hash === '#naming-study') openNamingStudy(); else home();

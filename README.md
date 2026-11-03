@@ -29,13 +29,52 @@ The URL is only playable after GitHub Pages is enabled and its deployment comple
 - **MSX BASIC 1:** 50+ new curated quiz examples plus procedurally varied questions at three difficulties; numbered programs, FOR/NEXT, GOTO, GOSUB/RETURN, DATA/READ/RESTORE, string handling, arrays, operators, sprites, and MSX1 screen modes.
 - **Embedded systems:** GPIO, ADC, PWM, sensor scaling, responsive loops, interrupts, watchdogs, and rollover.
 - **Computer architecture:** RAM/ROM, registers, address spaces, byte order, stacks, integer limits, and memory banking.
-- **Pharmaceutical naming systems:** 93 curated questions plus randomized scenarios on IUPAC chemical nomenclature, internal development codes, WHO INN selection and protected stems, USAN generic-name design rules, US FDA proprietary names and biologic suffixes, and EU EMA invented-name assessment. No real medicines or their indications are tested.\n- **Cargo-ship dangerous goods:** IMDG general segregation lookup, full explosive classifications, compatibility groups, closed-CTU placement, subsidiary hazards, and loading-plan checks.
+- **Pharmaceutical naming systems:** 93 curated questions plus randomized scenarios on IUPAC chemical nomenclature, internal development codes, WHO INN selection and protected stems, USAN generic-name design rules, US FDA proprietary names and biologic suffixes, and EU EMA invented-name assessment. No real medicines or their indications are tested.
+- **Cargo-ship dangerous goods:** IMDG general segregation lookup, full explosive classifications, compatibility groups, closed-CTU placement, subsidiary hazards, and loading-plan checks.
 
-Choose from all 12 visible topic cards, narrow them using the four topic groups, or mix all 12. A mixed 20-question round includes every category; a mixed 10-question round samples 10 categories. Use Starter, Standard, or Advanced difficulty. Choose 10 questions, 20 questions, or continuous practice. Every answer has an explanation; calculations show working. Missed questions can be retried at the end. The game uses multiple-choice and written numerical answers, with points and streaks. Questions repeat once a selected finite bank is exhausted.
+Choose from all 13 visible topic cards, narrow them using the five topic groups, or mix all 13. A mixed 20-question round includes every category; a mixed 10-question round samples 10 categories. Use Starter, Standard, or Advanced difficulty. Choose 10 questions, 20 questions, or continuous practice. Every answer has an explanation; calculations show working. Missed questions can be retried at the end. The game uses multiple-choice and written numerical answers, with points and streaks. Questions repeat once a selected finite bank is exhausted.
 
 **Keyboard:** 1–4 selects an option; Enter checks an answer or continues. Numerical engineering answers must use the displayed unit; a 2% rounding tolerance is allowed. Units are shown beside the input, so type just the number.
 
-## Pharmaceutical naming: classification, constraints and review\n\nSelect **Pharmaceutical naming** to practice the naming process without studying real medicines. Choose Starter, Standard, Advanced or continuous rounds, and optionally narrow the **Naming focus** to chemical names/research codes, WHO INN, commercial brand names, US biologic suffixes, or US/EU regulatory decisions. Questions are scenario-based and use fictional names and hypothetical protected stems, with explanations and links to primary guidance. A focused round automatically expands with new procedural examples when its finite question pool is exhausted.\n\nThe naming layers are deliberately distinguished: **systematic chemical nomenclature** (IUPAC) describes chemical identity, a **development code** tracks research, a **nonproprietary name (INN)** publicly identifies an active substance, and a **proprietary or brand name** identifies a commercial product. FDA's four-letter suffix practice is a **US-specific guidance convention for covered biological products**, not a worldwide rule for all medicines. Brand-name and nonproprietary-name standards are different, and names remain subject to regulator-specific assessment.\n\nPrimary sources:\n\n- [IUPAC nomenclature recommendations](https://iupac.org/what-we-do/nomenclature/)\n- [WHO guidance on INN selection, usage, objections and stem protection](https://www.who.int/teams/health-product-and-policy-standards/inn/guidance-on-inn)\n- [WHO general principles for devising INNs](https://www.who.int/publications/m/item/who-edm-qsm-2004-5-en)\n- [AMA USAN naming guidelines](https://www.ama-assn.org/about/united-states-adopted-names-usan/united-states-adopted-names-naming-guidelines)\n- [US FDA best practices for proprietary prescription names (2020)](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/best-practices-developing-proprietary-names-human-prescription-drug-products-guidance-industry)\n- [US FDA biologics nonproprietary naming guidance (2017)](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/nonproprietary-naming-biological-products-guidance-industry)\n- [EMA acceptability of invented names, revision 7](https://www.ema.europa.eu/en/scientific-guidelines/acceptability-names-human-medicinal-products-processed-through-centralised-procedure)\n\nThis is an educational naming-rules quiz, not a product-naming approval service or legal opinion.\n\n## Cargo segregation: divisions are not compatibility groups
+## Study first: pharmaceutical naming from zero
+
+Open the [beginner study course on GitHub Pages](https://nox1381.github.io/Base2-3-...12/#naming-study) or the [standalone RawGitHack study screen](https://raw.githack.com/Nox1381/Base2-3-...12/main/play.html#naming-study). You can also select **Pharmaceutical naming** and click **Start learning**.
+
+The course is embedded in the browser app and has nine progressive, beginner-level lessons:
+
+1. Why one substance has different names
+2. Chemical names and development codes
+3. Generic names, INNs and protected stems
+4. How WHO selects an INN
+5. USAN and the design of generic names
+6. Commercial names: what is safe to propose?
+7. EU versus US: who reviews the brand?
+8. Special case: US biologic suffixes
+9. Build a naming plan from scratch
+
+Each lesson provides an objective, plain-English explanations, a visual diagram, fictional examples, key takeaways, definitions, **two interactive knowledge checks** and links to official sources. All nine lessons and 18 checks are accessible in any order. Complete the two checks to mark a lesson done and move to the next; previous lessons remain reviewable. Progress is stored locally in the browser when storage is available, with no account required.
+
+The **Quiz this topic** button starts a Starter-difficulty round on the lesson's relevant naming focus. After completing all nine lessons, use **Practice all naming topics** to test the entire category. No fictional examples or stems are claimed to be regulatory-approved names.
+
+## Pharmaceutical naming: classification, constraints and review
+
+Select **Pharmaceutical naming** to practice the naming process without studying real medicines. Choose Starter, Standard, Advanced or continuous rounds, and optionally narrow the **Naming focus** to chemical names/research codes, WHO INN, commercial brand names, US biologic suffixes, or US/EU regulatory decisions. Questions are scenario-based and use fictional names and hypothetical protected stems, with explanations and links to primary guidance. A focused round automatically expands with new procedural examples when its finite question pool is exhausted.
+
+The naming layers are deliberately distinguished: **systematic chemical nomenclature** (IUPAC) describes chemical identity, a **development code** tracks research, a **nonproprietary name (INN)** publicly identifies an active substance, and a **proprietary or brand name** identifies a commercial product. FDA's four-letter suffix practice is a **US-specific guidance convention for covered biological products**, not a worldwide rule for all medicines. Brand-name and nonproprietary-name standards are different, and names remain subject to regulator-specific assessment.
+
+Primary sources:
+
+- [IUPAC nomenclature recommendations](https://iupac.org/what-we-do/nomenclature/)
+- [WHO guidance on INN selection, usage, objections and stem protection](https://www.who.int/teams/health-product-and-policy-standards/inn/guidance-on-inn)
+- [WHO general principles for devising INNs](https://www.who.int/publications/m/item/who-edm-qsm-2004-5-en)
+- [AMA USAN naming guidelines](https://www.ama-assn.org/about/united-states-adopted-names-usan/united-states-adopted-names-naming-guidelines)
+- [US FDA best practices for proprietary prescription names (2020)](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/best-practices-developing-proprietary-names-human-prescription-drug-products-guidance-industry)
+- [US FDA biologics nonproprietary naming guidance (2017)](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/nonproprietary-naming-biological-products-guidance-industry)
+- [EMA acceptability of invented names, revision 7](https://www.ema.europa.eu/en/scientific-guidelines/acceptability-names-human-medicinal-products-processed-through-centralised-procedure)
+
+This is an educational naming-rules quiz, not a product-naming approval service or legal opinion.
+
+## Cargo segregation: divisions are not compatibility groups
 
 The cargo category uses **IMDG Amendment 42-24**, mandatory from 1 January 2026, with the December 2025 errata checked. It focuses on packaged dangerous goods, not bulk cargo codes.
 
