@@ -23,6 +23,10 @@ test('beginner course has nine ordered, fully explained lessons', () => {
     }
   }
 });
+test('knowledge-check correct answers vary across options rather than always being first',()=>{
+  const answers=lessons.flatMap(l=>l.checks.map(q=>q.answer));
+  for(const index of [0,1,2,3])assert.ok(answers.filter(i=>i===index).length>=4,'position '+index);
+});
 test('sources identify WHO, IUPAC, FDA, EMA and USAN explicitly',()=>{
   assert.ok(Object.keys(sources).length>=7);
   for(const name of ['who','whoSelection','iupac','usan','fdaBrand','ema','fdaBio']) {
