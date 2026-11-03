@@ -1,10 +1,10 @@
-import { CATEGORIES, CATEGORY_GROUPS, makeDeck, checkAnswer, shuffle, formatNumber } from './engine.js?v=20261011-msx-cargo';
-import { QUESTIONS, SOURCES } from './question-bank.js?v=20261011-msx-cargo';
-import { createCodingLab } from './coding.js?v=20261011-msx-cargo';
-import { createCargoArcade } from './cargo-games.js?v=20261011-msx-cargo';
+import { CATEGORIES, CATEGORY_GROUPS, makeDeck, checkAnswer, shuffle, formatNumber } from './engine.js?v=20261103-pharma-naming';
+import { QUESTIONS, SOURCES } from './question-bank.js?v=20261103-pharma-naming';
+import { createCodingLab } from './coding.js?v=20261103-pharma-naming';
+import { createCargoArcade } from './cargo-games.js?v=20261103-pharma-naming';
 
 const main = document.querySelector('#main');
-const settings = { category: 'bases', difficulty: '2', length: '10', base: 'any', baseMode: 'mixed', fireScope: 'all', cargoFocus: 'segregation' };
+const settings = { category: 'bases', difficulty: '2', length: '10', base: 'any', baseMode: 'mixed', fireScope: 'all', cargoFocus: 'segregation', namingFocus: 'all' };
 let activeGroup = 'all';
 let codingCleanup = null;
 let session = null;
@@ -24,6 +24,7 @@ function home(focusCategory = null) {
   const fireVisible = ['fire', 'mixed'].includes(settings.category);
   const cargoVisible = ['cargo', 'mixed'].includes(settings.category);
   const codingVisible = CATEGORIES[settings.category]?.coding;
+  const namingVisible = settings.category === 'naming';
   main.innerHTML = `
     <section class="setup">
       <div class="intro"><p class="eyebrow">YOUR PRACTICE BENCH</p><h1 tabindex="-1">What are we practicing?</h1><p>Pick a topic. Work it out. See why it works.</p></div>
@@ -32,7 +33,7 @@ function home(focusCategory = null) {
       ${Object.entries(CATEGORIES).filter(([, c]) => activeGroup === 'all' || c.group === activeGroup).map(([id, category]) => `<button type="button" class="category-card ${settings.category === id ? 'is-selected' : ''}" data-category="${id}" aria-pressed="${settings.category === id}" style="--card-accent:${category.color}">
         <span class="category-top"><span class="category-index">${category.mark}</span><span class="selection-dot" aria-hidden="true">${settings.category === id ? '✓' : ''}</span></span>
         <span class="category-name">${category.name}</span><span class="category-description">${category.description}</span>
-        <span class="category-foot">${id === 'bases' ? '2  3  4  5  6  7  8  9  10  11  12' : id === 'fire' ? 'SCENARIOS + LABELLED RULES' : id === 'cargo' ? 'IMDG 42-24 · STOWAGE + SEGREGATION' : category.coding ? 'CODE QUIZZES + CODING CHALLENGES' : 'REAL EXAMPLES + FIND THE FAULT'}</span>
+        <span class="category-foot">${id === 'bases' ? '2  3  4  5  6  7  8  9  10  11  12' : id === 'fire' ? 'SCENARIOS + LABELLED RULES' : id === 'cargo' ? 'IMDG 42-24 · STOWAGE + SEGREGATION' : id === 'naming' ? 'WHO INN · FDA · EMA · IUPAC · USAN' : category.coding ? 'CODE QUIZZES + CODING CHALLENGES' : 'REAL EXAMPLES + FIND THE FAULT'}</span>
       </button>`).join('')}
       </div>
       <button type="button" class="mixed-toggle ${settings.category === 'mixed' ? 'active' : ''}" data-category="mixed" aria-pressed="${settings.category === 'mixed'}"><span aria-hidden="true">◈</span> Mix all ${Object.keys(CATEGORIES).length} topics <span class="mixed-check">${settings.category === 'mixed' ? '✓' : '+'}</span></button>
@@ -44,8 +45,9 @@ function home(focusCategory = null) {
           ${basesVisible ? `<label>Base<select id="base">${options([['any', 'All bases · 2–12'], ...Array.from({ length: 11 }, (_, i) => [String(i + 2), `Base ${i + 2}`])], settings.base)}</select></label><label>Practice<select id="baseMode">${options([['mixed', 'Counting + conversions + arithmetic'], ['count', 'Counting sequences'], ['convert', 'Conversions'], ['arithmetic', 'Addition and subtraction']], settings.baseMode)}</select></label>` : ''}
           ${fireVisible ? `<label>Fire safety focus<select id="fireScope">${options([['all', 'International · labelled US + UK'], ['general', 'Practical safety'], ['us', 'US · OSHA'], ['uk', 'UK · Home Office']], settings.fireScope)}</select></label>` : ''}
           ${cargoVisible ? `<label>Cargo focus<select id="cargoFocus">${options([['segregation', 'Stowage + segregation'], ['class1', 'Class 1 · explosives compatibility'], ['general', 'General table + loading decisions'], ['all', 'All cargo · including hazard classes']], settings.cargoFocus)}</select></label>` : ''}
+          ${namingVisible ? `<label>Naming focus<select id="namingFocus">${options([['all', 'All naming systems'], ['systems', 'Chemical names + research codes'], ['inn', 'WHO INN + protected stems'], ['brand', 'Brand naming + safety'], ['bio', 'US biologic suffixes'], ['rules', 'US/EU regulatory decisions']], settings.namingFocus)}</select></label>` : ''}
         </div>
-        ${settings.category === 'mixed' ? '<p class="scope-note">A mix across 12 topics. Fire rule sets and IMDG context are shown before you answer. A 20-question round includes every topic.</p>' : cargoVisible ? '<p class="scope-note">IMDG 42-24: explosives need their compatibility letters. Division numbers alone do not decide whether 1.1 and 1.2 may be stowed together. Each answer links to its table or rule.</p>' : fireVisible ? '<p class="scope-note">Each fire question identifies its rule set. Placement depends on the hazard, local requirements, and the site’s fire plan.</p>' : basesVisible ? '<p class="scope-note">In bases 11 and 12: <strong>A = 10</strong> and <strong>B = 11</strong>. Counting rolls over when you run out of digits.</p>' : '<p class="scope-note">Real situations first. Read code, find faults, and see a worked explanation for every answer.</p>'}
+        ${settings.category === 'mixed' ? '<p class="scope-note">A mix across 13 topics. Regulatory jurisdictions and IMDG context are shown before you answer. A 20-question round includes every topic.</p>' : namingVisible ? '<p class="scope-note">Naming systems only — no drug indications or real-medicine identification. Fictional examples illustrate WHO INN rules, IUPAC nomenclature, FDA and EMA naming reviews, USAN guidance, and biologic suffixes. Each regulatory scenario identifies its jurisdiction and cites an official source.</p>' : cargoVisible ? '<p class="scope-note">IMDG 42-24: explosives need their compatibility letters. Division numbers alone do not decide whether 1.1 and 1.2 may be stowed together. Each answer links to its table or rule.</p>' : fireVisible ? '<p class="scope-note">Each fire question identifies its rule set. Placement depends on the hazard, local requirements, and the site’s fire plan.</p>' : basesVisible ? '<p class="scope-note">In bases 11 and 12: <strong>A = 10</strong> and <strong>B = 11</strong>. Counting rolls over when you run out of digits.</p>' : '<p class="scope-note">Real situations first. Read code, find faults, and see a worked explanation for every answer.</p>'}
         <div class="start-row"><span class="start-description"><span class="round-marker" aria-hidden="true"></span>${settings.category === 'mixed' ? 'A bit of everything' : esc(CATEGORIES[settings.category].name)}<small>${settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`}</small></span><button class="primary-button" id="start">Start round <span aria-hidden="true">▶</span></button></div>
       </div>
       ${cargoVisible && settings.category === 'cargo' ? `<div class="coding-entry"><div><strong>Want to load a cargo ship?</strong><p>Four drag-and-drop IMDG practice games. Pack 2, 4 or 6 pairs and resolve segregation conflicts.</p></div><button class="secondary-button" id="open-cargo">Open cargo games →</button></div>` : ''}
@@ -54,7 +56,7 @@ function home(focusCategory = null) {
     </section>`;
   main.querySelectorAll('[data-category]').forEach(button => button.addEventListener('click', () => { settings.category = button.dataset.category; home(settings.category); }));
   main.querySelectorAll('[data-group]').forEach(button => button.addEventListener('click', () => { activeGroup = button.dataset.group; if (activeGroup !== 'all') settings.category = Object.keys(CATEGORIES).find(id => CATEGORIES[id].group === activeGroup); home(); main.querySelector(`[data-group="${activeGroup}"]`).focus({preventScroll:true}); }));
-  for (const id of ['difficulty', 'length', 'base', 'baseMode', 'fireScope', 'cargoFocus']) {
+  for (const id of ['difficulty', 'length', 'base', 'baseMode', 'fireScope', 'cargoFocus', 'namingFocus']) {
     main.querySelector(`#${id}`)?.addEventListener('change', e => { settings[id] = e.target.value; if (id === 'length') main.querySelector('.start-description small').textContent = settings.length === 'endless' ? 'Stop whenever you like' : `${settings.length} questions · answers explained`; });
   }
   main.querySelector('#start').addEventListener('click', () => start());
