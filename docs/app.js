@@ -1,8 +1,8 @@
-import { CATEGORIES, CATEGORY_GROUPS, makeDeck, checkAnswer, shuffle, formatNumber } from './engine.js?v=20261103-chemical-names';
-import { QUESTIONS, SOURCES } from './question-bank.js?v=20261103-chemical-names';
-import { createCodingLab } from './coding.js?v=20261103-chemical-names';
-import { createCargoArcade } from './cargo-games.js?v=20261103-chemical-names';
-import { createNamingStudy, studyProgress, STUDY_LESSON_COUNT } from './naming-study.js?v=20261103-chemical-names';
+import { CATEGORIES, CATEGORY_GROUPS, makeDeck, checkAnswer, shuffle, formatNumber } from './engine.js?v=20261104-labels';
+import { QUESTIONS, SOURCES } from './question-bank.js?v=20261104-labels';
+import { createCodingLab } from './coding.js?v=20261104-labels';
+import { createCargoArcade } from './cargo-games.js?v=20261104-labels';
+import { createNamingStudy, studyProgress, STUDY_LESSON_COUNT } from './naming-study.js?v=20261104-labels';
 
 const main = document.querySelector('#main');
 const settings = { category: 'bases', difficulty: '2', length: '10', base: 'any', baseMode: 'mixed', fireScope: 'all', cargoFocus: 'segregation', namingFocus: 'all' };
