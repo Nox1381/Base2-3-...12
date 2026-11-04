@@ -1,5 +1,5 @@
-import { NAMING_LESSONS } from './naming-lessons.js?v=20261103-chemical-names';
-import { SOURCES } from './question-bank.js?v=20261103-chemical-names';
+import { NAMING_LESSONS } from './naming-lessons.js?v=20261104-labels';
+import { SOURCES } from './question-bank.js?v=20261104-labels';
 
 const escStudy = value => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const STORAGE_KEY = 'radix.pharmaceutical-label-study.v3';
