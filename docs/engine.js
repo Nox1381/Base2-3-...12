@@ -18,7 +18,7 @@ export const CATEGORIES = {
   architecture: { name: 'Computer architecture', short: 'Architecture', description: 'Memory, CPU instructions, and MSX hardware ideas.', mark: '10', color: '#c4a5ff', group: 'computing' },
   fire: { name: 'Fire safety', short: 'Fire safety', description: 'Extinguishers, placement, and safe decisions.', mark: '11', color: '#ffad85', group: 'safety' },
   cargo: { name: 'Cargo-ship dangerous goods', short: 'IMDG cargo', description: 'Class 1 compatibility, container placement, and segregation.', mark: '12', color: '#81ddd0', group: 'safety' },
-  naming: { name: 'Pharmaceutical naming', short: 'Naming rules', description: 'Name molecules from their formulas, decode functional groups and drug-name stems.', mark: '13', color: '#b9e2b0', group: 'science' },
+  naming: { name: 'Pharmaceutical naming', short: 'Naming rules', description: 'Read medicine labels: drug-family stems, chemical/generic/brand names, strengths and claims.', mark: '13', color: '#b9e2b0', group: 'science' },
 };
 export const CATEGORY_GROUPS = { numbers: 'Numbers & logic', circuits: 'Circuits & signals', computing: 'Programming & computers', safety: 'Fire & cargo', science: 'Chemistry & naming' };
 
