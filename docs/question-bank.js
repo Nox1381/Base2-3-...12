@@ -1,6 +1,6 @@
-import { EXTRA_QUESTIONS } from './extra-questions.js?v=20261103-chemical-names';
-import { CARGO_QUESTIONS, IMDG_SOURCE } from './cargo.js?v=20261103-chemical-names';
-import { NAMING_QUESTIONS } from './naming-questions.js?v=20261103-chemical-names';
+import { EXTRA_QUESTIONS } from './extra-questions.js?v=20261104-labels';
+import { CARGO_QUESTIONS, IMDG_SOURCE } from './cargo.js?v=20261104-labels';
+import { NAMING_QUESTIONS } from './naming-questions.js?v=20261104-labels';
 
 // Correct answers are always options[0] here; the engine shuffles choices for play.
 // Numeric placement guidance is labelled by jurisdiction, never presented as worldwide law.
