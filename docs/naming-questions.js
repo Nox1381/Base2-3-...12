@@ -12,8 +12,8 @@ const PHARMA_STEMS = [
  ['-floxacin','Fluoroquinolone antibiotics','ciprofloxacin',2],
  ['-cycline','Tetracycline-family antibiotics','doxycycline',2],
  ['-xaban','Factor Xa inhibitors','apixaban',2],
- ['-mab (older names)','Many earlier monoclonal antibodies','adalimumab',2],
- ['-vir (broad)','Various antiviral names, without a single implied mechanism','acyclovir',2]
+ ['-mab','Many earlier monoclonal antibodies','adalimumab',2],
+ ['-vir','Various antiviral names, without a single implied mechanism','acyclovir',2]
 ];
 const PHARMA_BRANDS = [
  ['Panadol','paracetamol','The named plain paracetamol product',1],
