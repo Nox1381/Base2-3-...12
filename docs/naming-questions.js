@@ -98,3 +98,117 @@ pharmaAdd('stem-statin-warning','stems',3,'Precise stem recognition',
  'Which more specific ending identifies the HMG-CoA reductase inhibitor statin family?',
  ['-vastatin','-statin as any possible word fragment','-sartan','-olol'],
  'The specific stem is -vastatin. The fragment -statin in an unrelated word is not sufficient alone.','namingStems');
+
+
+const PHARMA_LABELS=[
+ ['LIPITOR','atorvastatin calcium','40 mg per tablet','tablets','-vastatin / statin family'],
+ ['COZAAR','losartan potassium','50 mg per tablet','tablets','-sartan / ARB family'],
+ ['PANADOL','paracetamol','500 mg per tablet','tablets','Paracetamol is the generic name'],
+ ['TYLENOL','acetaminophen','325 mg per tablet','tablets','Acetaminophen is the US name for paracetamol'],
+ ['PRILOSEC','omeprazole','20 mg per capsule','delayed-release capsules','-prazole / proton-pump inhibitors'],
+ ['JARDIANCE','empagliflozin','10 mg per tablet','tablets','-gliflozin / SGLT2 inhibitors'],
+ ['ZESTRIL','lisinopril','5 mg per tablet','tablets','-pril / ACE inhibitors'],
+ ['ADVIL','ibuprofen','200 mg per tablet','tablets','The brand does not identify a stem by itself'],
+ ['ZOVIRAX','acyclovir','400 mg per tablet','tablets','-vir is a broad antiviral naming clue'],
+ ['AMOXIL','amoxicillin','250 mg per 5 mL','oral suspension','-cillin / penicillin family'],
+ ['GLUCOPHAGE','metformin','850 mg per tablet','tablets','Do not infer a class from the brand spelling'],
+ ['ELIQUIS','apixaban','2.5 mg per tablet','tablets','-xaban / factor Xa inhibitors']
+];
+for(let i=0;i<PHARMA_LABELS.length;i++){
+ const [brand,active,strength,form,clue]=PHARMA_LABELS[i];
+ const sample='ILLUSTRATIVE TRAINING LABEL: '+brand+' / '+active+' / '+strength+' / '+form+'.';
+ const otherActives=[...new Set(PHARMA_LABELS.filter((x,j)=>j!==i).map(x=>x[1]))].slice(0,3);
+ const otherBrands=[...new Set(PHARMA_LABELS.filter((x,j)=>j!==i).map(x=>x[0]))].slice(0,3);
+ pharmaAdd('label-api-'+i,'labels',1,'Find active ingredients',sample+' Which text names the active ingredient?',
+  [active,...otherActives],
+  'The active ingredient is '+active+'. A brand may have different variants; this is a teaching example.','namingFDAFacts');
+ pharmaAdd('label-brand-'+i,'labels',1,'Separate brand from generic',sample+' Which is the commercial brand?',
+  [brand,...otherBrands],
+  brand+' is the brand; '+active+' is the generic ingredient.','namingFDAFacts');
+ pharmaAdd('label-strength-'+i,'labels',2,'Decode strength correctly',sample+' Which strength statement is printed?',
+  [strength,'5 mL per tablet','20 tablets per dose','Every patient must take '+strength],
+  'The label states '+strength+'. This is not a patient-specific dosage instruction.','namingFDAFacts');
+ pharmaAdd('label-noninference-'+i,'labels',3,'What can a label prove?',sample+' What CANNOT be concluded from these fields alone?',
+  ['That this is the correct dose and medicine for every patient','The brand shown is '+brand,'The listed ingredient is '+active,'The labeled strength is '+strength],
+  'A product label identifies a product. Individual suitability and treatment directions require appropriate assessment.','namingFDAFacts');
+}
+const PHARMA_MODIFIERS=[
+ ['hydrochloride','A salt form involving a chloride counterion','That it is guaranteed to act faster'],
+ ['sodium','A sodium salt form of the stated substance','That it is a sodium supplement'],
+ ['potassium','A potassium salt form of the stated substance','That it always has the same mass as its sodium salt'],
+ ['calcium','A calcium salt where indicated','That the product is a calcium supplement'],
+ ['monohydrate','A form containing defined water of crystallization','That the ingredient is more clinically effective'],
+ ['anhydrous','A material with no crystal water in that specified form','That all batches are chemically identical in every respect'],
+ ['ER / XR','An extended-release formulation abbreviation in relevant markets','That a tablet can safely be crushed'],
+ ['SR','A sustained-release modifier in some product systems','That the product acts instantaneously'],
+ ['delayed release','A dosage form with delayed release behaviour','That the active molecule has changed'],
+ ['enteric-coated','A coating designed for a particular release environment','That the product has no risks'],
+ ['oral suspension','A liquid dosage form intended for oral administration','That every 5 mL contains the same mass as a tablet'],
+ ['topical cream','A dosage form intended for application to the skin','That it is safe to inject'],
+ ['Rx only','A prescription-only designation where required','That an ingredient name determines suitability'],
+ ['EXP','A product expiration marking','A drug’s pharmacological class'],
+ ['LOT / batch','A manufacturing traceability identifier','The molecular structure of an active ingredient'],
+ ['inactive ingredient','An excipient rather than a listed active drug substance','That it can never matter to allergies']
+];
+for(let i=0;i<PHARMA_MODIFIERS.length;i++){
+ const [term,meaning,unsupported]=PHARMA_MODIFIERS[i];
+ const others=[1,2,3].map(d=>PHARMA_MODIFIERS[(i+d)%PHARMA_MODIFIERS.length][1]);
+ pharmaAdd('modifier-meaning-'+i,'forms',i<6?1:2,'Identify a package modifier',
+  'A real medicine label includes "'+term+'". What is the best interpretation?',
+  [meaning,...others],
+  'On a product label, '+term+' generally indicates '+meaning.toLowerCase()+'. Check the exact product description.','namingFDAFacts');
+ pharmaAdd('modifier-not-proof-'+i,'forms',i<7?2:3,'Avoid false label inferences',
+  'A label mentions "'+term+'". What would be an unjustified inference?',
+  [unsupported,meaning,'It is a field that should be interpreted in context','The exact product labeling matters'],
+  'The modifier tells you about '+meaning.toLowerCase()+', not the unsupported implication.','namingFDAFacts');
+}
+const PHARMA_CLAIMS=[
+ ['"100% safe with no side effects"','Unqualified safety guarantee without evidence','Clinical safety claims require adequate support and appropriate qualifications'],
+ ['"cures every infection"','Sweeping, unsubstantiated efficacy claim','Therapeutic claims must be limited to supported indications'],
+ ['"works faster because it is hydrochloride"','Salt identity alone cannot prove onset','Clinical onset requires suitable product evidence'],
+ ['"stronger because it is a calcium salt"','Counterion does not automatically prove higher efficacy','Strength and clinical comparison are separate issues'],
+ ['"non-drowsy" without supporting data','An unverified safety/tolerability claim','A claim must be supported and comply with local requirements'],
+ ['"sugar-free" without a validated composition','An unverified ingredient/composition claim','Definitions and substantiation depend on jurisdiction and dosage form'],
+ ['"guaranteed pain relief for everyone"','A universal efficacy promise','Individuals and outcomes vary'],
+ ['"the world’s safest medicine"','An unsubstantiated superiority claim','Comparative claims require defensible evidence'],
+ ['"zero risk"','An absolute safety assertion','No product name alone establishes the absence of risk'],
+ ['"new chemical structure because it is XR"','Confusing release technology with molecular identity','XR typically describes formulation rather than a new active moiety'],
+ ['"same brand, so identical ingredient list"','Brand variants may have differing components','Read the exact active ingredient list'],
+ ['"more effective because it dissolves faster in a lab"','In-vitro dissolution alone does not prove clinical superiority','Clinical outcomes need appropriate evidence'],
+ ['"a bigger mg number is always the better medicine"','Different substances and strengths are not interchangeable','Strength does not by itself prove comparative clinical efficacy'],
+ ['"a -pril name guarantees a safe dose"','An INN stem indicates family, not patient dose','Dose and suitability are independent questions'],
+ ['"monohydrate means faster acting"','Crystal water does not automatically establish clinical onset','Physical form is not a clinical efficacy claim'],
+ ['"all products ending in -vir use the same mechanism"','The ending is too broad for that conclusion','Antiviral families can differ']
+];
+for(let i=0;i<PHARMA_CLAIMS.length;i++){
+ const [claim,problem,better]=PHARMA_CLAIMS[i];
+ pharmaAdd('claim-risk-'+i,'claims',i<8?2:3,'Check a medicine claim',
+  'A product name or label suggests '+claim+'. What is the main problem?',
+  [problem,'The name must include the manufacturer’s address','The active ingredient should be written as a chemical equation','Every generic medicine must have a short brand'],
+  problem+'. '+better+'.','namingFDAClaims');
+ pharmaAdd('claim-better-'+i,'claims',3,'Evidence versus implication',
+  'For the statement '+claim+', which approach is defensible?',
+  [better,'Assume every claim is true because it appears in a brand','Infer the same benefit for every formulation','Skip checking the active ingredient and dosage form'],
+  'Avoid unsupported wording. '+better+'.','namingEMAClaims');
+}
+pharmaAdd('liquid-concentration','labels',2,'Strength per volume',
+ 'A liquid medicine says 250 mg per 5 mL. What is the concentration?',
+ ['50 mg/mL','250 mg/mL','5 mg/mL','1250 mg/mL'],
+ 'Divide 250 mg by 5 mL to get 50 mg per mL. This is a unit conversion, not a dosing recommendation.','namingFDAFacts');
+pharmaAdd('lot-vs-exp','labels',1,'Batch versus expiry',
+ 'On a medicine carton, what does LOT typically mean?',
+ ['Production batch identifier','The generic active ingredient','The expiry date','The recommended daily dose'],
+ 'LOT supports batch traceability. EXP usually identifies the expiration date.','namingFDAFacts');
+pharmaAdd('exp-vs-lot','labels',1,'Batch versus expiry',
+ 'On a medicine carton, what does EXP typically mean?',
+ ['Expiration date','Manufacturer’s pharmacological class','INN naming stem','Chemical molecular formula'],
+ 'EXP is an expiration marker; LOT is a batch code. Local date conventions can differ.','namingFDAFacts');
+pharmaAdd('dual-actives','labels',2,'Combination products',
+ 'ILLUSTRATIVE: a tablet says paracetamol 500 mg + caffeine 65 mg. What is the active-ingredient count?',
+ ['Two distinct active ingredients','One active ingredient because it is one tablet','Zero active ingredients because caffeine is not part of the brand','Three active ingredients because mg is a third item'],
+ 'The printed formulation identifies paracetamol and caffeine as two actives, with separate strengths.','namingFDAFacts');
+pharmaAdd('salt-lipitor','forms',3,'Equivalent strength and salt forms',
+ 'Official Lipitor labeling: 40 mg atorvastatin is provided as atorvastatin calcium. What does 40 mg refer to?',
+ ['The atorvastatin-equivalent declared strength','40 mg elemental calcium','40 mg of all inactive ingredients combined','40 mg taken by every patient each day'],
+ 'The label specifies atorvastatin-equivalent strength, with atorvastatin calcium as the substance form.','namingDailyMedLipitor');
+export const NAMING_QUESTIONS = PHARMA_NAME_QUESTIONS;
