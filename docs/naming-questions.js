@@ -1,65 +1,100 @@
-// Structure-to-name practice and common pharmacological stems; no approval-policy trivia.
-const NAMING_STRUCTURE_DATA = {"chains":[["CH₄","methane",1,"One carbon, single bonds → meth- + -ane."],["CH₃CH₃","ethane",1,"Two carbon atoms and only single bonds → ethane."],["CH₃CH₂CH₃","propane",1,"Three-carbon saturated chain → propane."],["CH₃CH₂CH₂CH₃","butane",1,"Four-carbon saturated chain → butane."],["CH₃CH₂CH₂CH₂CH₃","pentane",1,"Five-carbon saturated chain → pentane."],["CH₃(CH₂)₄CH₃","hexane",1,"Two terminal CH₃ groups and four CH₂ groups make six carbons."],["CH₂=CH₂","ethene",1,"Two carbons with one double bond → ethene."],["CH₂=CHCH₃","propene",1,"Three carbons and one double bond → propene."],["HC≡CH","ethyne",1,"Two carbons joined by a triple bond → ethyne."],["CH₂=CHCH₂CH₃","but-1-ene",2,"Four-carbon chain, double bond starts at carbon 1."],["CH₃CH=CHCH₃","but-2-ene",2,"Four-carbon chain, double bond starts at carbon 2."],["HC≡CCH₃","propyne",2,"Three carbons with a triple bond → propyne."],["HC≡CCH₂CH₃","but-1-yne",2,"Triple bond begins at carbon 1 of four-carbon chain."],["CH₃C≡CCH₃","but-2-yne",2,"Triple bond begins at carbon 2 of four-carbon chain."],["CH₂=CHCH₂CH₂CH₃","pent-1-ene",2,"Five carbons, C=C at carbon 1."],["CH₃CH=CHCH₂CH₃","pent-2-ene",2,"Five carbons, C=C at carbon 2."],["HC≡CCH₂CH₂CH₃","pent-1-yne",3,"Five-carbon chain with triple bond beginning at carbon 1."],["CH₃C≡CCH₂CH₃","pent-2-yne",3,"Five-carbon chain with triple bond beginning at carbon 2."]],"groups":[["CH₃OH","methanol",1,"One-carbon alcohol (–OH) → methanol."],["CH₃CH₂OH","ethanol",1,"Two-carbon alcohol → ethanol."],["CH₃CH₂CH₂OH","propan-1-ol",1,"Three-carbon alcohol; OH on carbon 1."],["CH₃CH(OH)CH₃","propan-2-ol",1,"Three-carbon alcohol; OH on carbon 2."],["CH₃CHO","ethanal",1,"Two-carbon aldehyde with terminal –CHO → ethanal."],["CH₃CH₂CHO","propanal",1,"Three-carbon terminal aldehyde → propanal."],["CH₃COCH₃","propanone",1,"Three-carbon ketone with internal C=O → propanone."],["HCOOH","methanoic acid",1,"One-carbon carboxylic acid → methanoic acid."],["CH₃COOH","ethanoic acid",1,"Two-carbon carboxylic acid → ethanoic acid."],["CH₃CH₂COOH","propanoic acid",2,"Three-carbon carboxylic acid → propanoic acid."],["CH₃COCH₂CH₃","butan-2-one",2,"Four-carbon ketone with C=O at carbon 2."],["CH₃NH₂","methanamine",2,"One-carbon primary amine → methanamine."],["CH₃CH₂NH₂","ethanamine",2,"Two-carbon primary amine → ethanamine."],["CH₃CH₂Cl","chloroethane",2,"Two-carbon parent with chloro substituent."],["CH₃CH₂Br","bromoethane",2,"Two-carbon parent with bromo substituent."],["CH₃OCH₃","methoxymethane",3,"An ether of two methyl groups → methoxymethane."],["CH₃OCH₂CH₃","methoxyethane",3,"Ether with a methoxy substituent on ethane."],["CH₃CH₂CH₂NH₂","propan-1-amine",3,"Three-carbon chain with terminal amino principal group."],["CH₃CH(NH₂)CH₃","propan-2-amine",3,"Three-carbon chain with amino group on carbon 2."]],"positions":[["CH₃CH(CH₃)CH₃","2-methylpropane",1,"Longest chain is propane; methyl branch on carbon 2."],["CH₃CH(CH₃)CH₂CH₃","2-methylbutane",1,"Four-carbon parent; methyl at position 2."],["CH₃CH₂CH(CH₃)CH₂CH₃","3-methylpentane",1,"Five-carbon parent; methyl on carbon 3."],["CH₃C(CH₃)₂CH₃","2,2-dimethylpropane",1,"Three-carbon parent; two methyl substituents on carbon 2."],["CH₃CH(CH₃)CH(CH₃)CH₃","2,3-dimethylbutane",1,"Four-carbon parent; methyl at 2 and 3."],["CH₃CH₂CH(CH₂CH₃)CH₂CH₃","3-ethylpentane",2,"Five-carbon parent; ethyl substituent at carbon 3."],["CH₃CH₂CH(CH₃)CH₂CH₂CH₃","3-methylhexane",2,"Six-carbon parent; methyl at carbon 3."],["CH₃CH(OH)CH₂CH₃","butan-2-ol",2,"Four-carbon chain and alcohol group at carbon 2."],["CH₃CH₂CH(OH)CH₂CH₃","pentan-3-ol",2,"Five-carbon chain; central carbon 3 carries OH."],["CH₃CH(CH₃)CH₂OH","2-methylpropan-1-ol",2,"Parent containing OH is propan-1-ol, methyl on carbon 2."],["HOCH₂CH₂CH₂CH₃","butan-1-ol",2,"Four carbons with OH at an end."],["CH₃CH(Cl)CH₂CH₃","2-chlorobutane",2,"Chloro at carbon 2 of butane."],["CH₃CH₂CH(Br)CH₃","2-bromobutane",2,"Bromo at carbon 2 of butane."],["CH₃CH(CH₃)COOH","2-methylpropanoic acid",3,"Acid carbon is carbon 1; methyl at carbon 2."],["CH₃CH₂CH(CH₃)COOH","2-methylbutanoic acid",3,"Count carboxyl carbon as C1; methyl at C2."],["CH₃CH₂CH₂CH(CH₃)COOH","2-methylpentanoic acid",3,"Acid-bearing five-carbon chain with methyl at C2."],["CH₃CH₂CH(CH₃)CH₂COOH","3-methylpentanoic acid",3,"Number acid carbon as C1; branch methyl is C3."]],"complex":[["CH₃C(=O)OCH₃","methyl ethanoate",1,"Methyl attached to ester oxygen; acid part is ethanoate."],["CH₃C(=O)OCH₂CH₃","ethyl ethanoate",1,"Ethyl group is on oxygen, ethanoate is acid-derived part."],["CH₃CH₂C(=O)OCH₃","methyl propanoate",1,"Methyl on oxygen, three-carbon acid part."],["CH₃CH₂C(=O)OCH₂CH₃","ethyl propanoate",1,"Ethyl on oxygen, propanoate is acid-derived part."],["CH₃C(=O)NH₂","ethanamide",1,"Two-carbon acyl chain with –CONH₂ → ethanamide."],["CH₃CH₂C(=O)NH₂","propanamide",1,"Three-carbon acyl chain with –CONH₂ → propanamide."],["CH₃CH₂CH₂C(=O)NH₂","butanamide",2,"Four-carbon parent with amide group."],["CH₃C≡N","ethanenitrile",2,"The nitrile carbon counts as carbon 2 of the parent."],["CH₃CH₂C≡N","propanenitrile",2,"Three-carbon chain including nitrile carbon."],["CH₃CH₂CH₂C≡N","butanenitrile",2,"Four-carbon parent including nitrile carbon."],["HOCH₂COOH","2-hydroxyethanoic acid",2,"Acid outranks OH; hydroxy on carbon 2."],["CH₃CH(OH)COOH","2-hydroxypropanoic acid",2,"Carboxyl carbon C1; OH at C2 becomes hydroxy prefix."],["CH₃CH₂CH(OH)COOH","2-hydroxybutanoic acid",3,"Four-carbon acid, hydroxy at carbon 2."],["CH₃COCH₂COOH","3-oxobutanoic acid",3,"Carboxylic acid is principal; ketone carbonyl becomes oxo- at carbon 3."],["CH₃COCH₂CH₂COOH","4-oxopentanoic acid",3,"Carboxylic acid C1; ketone carbonyl at C4."],["CH₃COONa","sodium ethanoate",2,"Carboxylate anion plus sodium cation."],["CH₃CH₂COONa","sodium propanoate",2,"Propanoate anion plus sodium."],["CH₃CH₂CH₂COONa","sodium butanoate",3,"Butanoate anion plus sodium."],["C₆H₅OH","phenol",2,"Benzene ring bearing –OH; retained name phenol."],["C₆H₅Cl","chlorobenzene",2,"Chlorine substituent attached to benzene."]],"stems":[["-pril","ACE inhibitors","enalapril",1],["-sartan","angiotensin II receptor blockers","losartan",1],["-olol","beta blockers","propranolol",1],["-prazole","proton-pump inhibitors","omeprazole",1],["-cillin","penicillin antibiotics","amoxicillin",1],["-gliflozin","SGLT2 inhibitors","empagliflozin",2],["-vastatin","HMG-CoA reductase inhibitors (statins)","atorvastatin",2]]};
-const NAMING_FOCUS_SOURCES={chains:'namingChemGuide',groups:'namingChemGuide',positions:'namingOrgChem',complex:'namingOrgChem',stems:'namingStems'};
-const NAMING_TOPIC_LABELS={chains:'Chain and bond names',groups:'Functional groups',positions:'Substituents and locants',complex:'Combined structures',stems:'Generic drug-name stems'};
-const NAMING_SCOPE_LABELS={chains:'IUPAC · carbon skeletons',groups:'IUPAC · functional groups',positions:'IUPAC · chain numbering',complex:'IUPAC · multi-group naming',stems:'WHO · recognized name stems'};
-const NAMING_CURATED_ITEMS=[];
-function addNamingItem(id,focus,level,prompt,options,explanation) {
-  if(options.length!==4||new Set(options).size!==4)throw Error('Nonunique answer choices '+id);
-  NAMING_CURATED_ITEMS.push({id:'naming-'+id,category:'naming',focus,level,topic:NAMING_TOPIC_LABELS[focus],prompt,options,explanation,source:NAMING_FOCUS_SOURCES[focus],jurisdiction:NAMING_SCOPE_LABELS[focus]});
-}
-for(const focus of ['chains','groups','positions','complex']){
-  const rows=NAMING_STRUCTURE_DATA[focus];
-  for(let i=0;i<rows.length;i++){
-    const [formula,name,level,why]=rows[i];
-    const alternatives=[1,2,3].map(d=>rows[(i+d)%rows.length]);
-    addNamingItem(focus+'-from-structure-'+i,focus,level,
-      'Give the systematic name of the structure: '+formula,
-      [name,...alternatives.map(x=>x[1])],
-      why+' A name must account for every carbon, group and relevant position.');
-    addNamingItem(focus+'-from-name-'+i,focus,Math.min(level+1,3),
-      'Which condensed chemical structure corresponds to '+name+'?',
-      [formula,...alternatives.map(x=>x[0])],
-      why+' Reconstruct the parent chain and attached groups from the name.');
-  }
-}
-for(let i=0;i<NAMING_STRUCTURE_DATA.stems.length;i++){
-  const [stem,group,example,level]=NAMING_STRUCTURE_DATA.stems[i];
-  const other=[1,2,3].map(d=>NAMING_STRUCTURE_DATA.stems[(i+d)%NAMING_STRUCTURE_DATA.stems.length]);
-  addNamingItem('stem-class-'+i,'stems',level,
-    'In generic pharmaceutical names, which drug family does the shared stem '+stem+' generally indicate?',
-    [group,...other.map(x=>x[1])],
-    stem+' is associated with '+group+'. A common stem usually signals pharmacological class, not an IUPAC chemical structure.');
-  addNamingItem('stem-suffix-'+i,'stems',Math.min(level+1,3),
-    'Which generic-name stem is used for the family '+group+'?',
-    [stem,...other.map(x=>x[0])],
-    'The recognized stem is '+stem+'. It helps identify members of the '+group+' family.');
-  addNamingItem('stem-example-'+i,'stems',Math.min(level+1,3),
-    'Which real generic-name example contains the family stem '+stem+'?',
-    [example,...other.map(x=>x[2])],
-    example+' visibly contains '+stem+'. This asks only about the name pattern; it is not a question about dosage or treatment.');
-}
-// Additional concepts that require reading rather than memorizing a specific structural example.
-const NAMING_SPECIAL_ITEMS=[
-['chains',1,'What does -yne mean in the name of an unsaturated hydrocarbon?',['A carbon–carbon triple bond','A carbon–carbon double bond','An alcohol group','A carboxylic acid group'],'The -yne ending marks a carbon–carbon triple bond.'],
-['chains',2,'For simple but-1-ene, what does the number 1 locate?',['The first carbon of the double bond','The total number of carbon atoms','The first alcohol group','The methyl branch position'],'A locant before -ene identifies where the double bond begins.'],
-['chains',3,'Does CH₃CH=CHCH₃, without geometric data, tell you whether the structure is (E) or (Z)?',['No; the spatial arrangement is not specified','Yes; it must be (E)','Yes; it must be (Z)','Yes; both labels must be used together'],'The condensed formula fixes connectivity, not double-bond geometry.'],
-['groups',1,'Which characteristic group is indicated by -COOH?',['Carboxylic acid','Ketone','Ether','Amine'],'-COOH is the carboxyl group; it gives -oic acid in simple acyclic names.'],
-['groups',1,'Which characteristic group is indicated by -CHO at the end of a chain?',['Aldehyde','Ketone','Carboxylic acid','Nitrile'],'A terminal -CHO is an aldehyde, normally using the suffix -al.'],
-['groups',2,'What is the distinction between CH₃CHO and CH₃COCH₃?',['The first is an aldehyde; the second is a ketone','Both are alcohols','The first is an ester; the second is an amide','Both are carboxylic acids'],'CH₃CHO contains terminal -CHO; CH₃COCH₃ has an internal carbonyl.'],
-['groups',2,'When is a group represented by the suffix -ol?',['When an alcohol -OH group is principal','Whenever an oxygen appears anywhere','Only if the compound has no carbon','Whenever a carbonyl is present'],'The -ol suffix normally names the principal hydroxyl group of an alcohol.'],
-['positions',1,'What does the 2 in 2-methylbutane tell you?',['A methyl branch is attached at carbon 2','The entire molecule has two carbons','The main chain is two carbons long','There are two oxygen atoms'],'The locant 2 identifies the position of the methyl substituent.'],
-['positions',2,'When a simple acid is named as an alkanoic acid, what is normally carbon 1?',['The carboxylic acid carbon','The most distant methyl carbon','The first carbon in an alphabetically ordered branch','The carbon bearing the fewest hydrogens'],'The carbon of -COOH belongs to the acid parent chain and is numbered 1.'],
-['positions',3,'Which factor determines whether a substituted simple alcohol is propan-1-ol or propan-2-ol?',['Where the hydroxyl group is attached','Whether the product is a drug','The number of oxygen atoms in the periodic table','The manufacturer’s choice'],'The locant tells which parent-chain carbon carries the -OH group.'],
-['complex',1,'In the ester name methyl ethanoate, what does methyl identify?',['The group attached to the ester oxygen','The carbonyl carbon of the acid','The number of ester oxygen atoms','The presence of a nitrile'],'Esters are named as alkyl (from oxygen side) + carboxylate (acid side).'],
-['complex',2,'Which difference distinguishes an amide from a simple amine?',['An amide has N attached to a carbonyl carbon','An amide never contains nitrogen','An amine always contains a carbonyl','An amide must contain a triple bond'],'-C(=O)NH₂ is an amide; a simple amine can contain -NH₂ without that neighboring carbonyl.'],
-['complex',2,'In HOCH₂COOH, why is the suffix an acid rather than an alcohol?',['The carboxylic acid group has higher suffix priority','The formula contains no hydroxyl groups','The carbon chain has more than ten carbons','Both groups must share one suffix'],'The acid supplies -oic acid; the other -OH is cited as hydroxy-.'],
-['complex',3,'What does the prefix oxo- signify in 3-oxobutanoic acid?',['A carbonyl oxygen on a nonprincipal group','An extra sodium ion','A terminal amine group','A triple carbon-carbon bond'],'The carboxylic acid is principal; the ketone-like carbonyl is named oxo-.'],
-['complex',3,'What information must be known to assign R or S to a stereogenic centre?',['The 3D arrangement and substituent priorities','Only the overall molecular formula','Only a drug-family suffix','Only the number of carbons'],'R/S descriptors require geometry and priority rules; an unmarked condensed structure may not suffice.'],
-['stems',1,'A fictional generic name ends in -pril. What can that ending help you infer?',['Its pharmacological family','Its exact molecular formula','Its IUPAC systematic name','Its exact dose in milligrams'],'-pril is a pharmacological-class stem, not a chemical formula or dose.'],
-['stems',2,'Why is -vastatin more precise than just -statin when recognizing statin-class generic names?',['-vastatin is the specific INN stem for HMG-CoA reductase inhibitors','-statin means all possible chemical functional groups','-vastatin identifies the number of carbon atoms','-statin always proves the compound is a beta blocker'],'-vastatin denotes the HMG-CoA reductase inhibitor class; other unrelated names can contain -statin as a fragment.'],
-['stems',2,'What can the ending -vir alone determine most safely?',['A broad antiviral naming association, not one exact mechanism','An exact molecular structure','A required four-letter biologic suffix','An identical dosage for all drugs'],'The broad ending -vir occurs in multiple antiviral naming groups and does not identify a single specific mechanism.'],
-['stems',3,'Can the IUPAC name of a molecule be derived uniquely from its generic drug-family ending -sartan?',['No; the stem describes class, not full molecular connectivity','Yes; all -sartan names have one identical IUPAC name','Yes; the stem alone specifies all atoms and bond positions','Yes; every such compound is a simple alkane'],'Pharmacological stems do not encode all atoms, branches, bond locations or stereochemistry.']
+// Questions teach practical drug-name and carton reading, not regulatory paperwork.
+// Correct answer always appears first here; the game shuffles displayed options.
+const PHARMA_STEMS = [
+ ['-pril','ACE inhibitors','enalapril',1],
+ ['-sartan','Angiotensin II receptor blockers (ARBs)','losartan',1],
+ ['-vastatin','HMG-CoA reductase inhibitors (statins)','atorvastatin',1],
+ ['-olol','Beta blockers','propranolol',1],
+ ['-prazole','Proton-pump inhibitors','omeprazole',1],
+ ['-cillin','Penicillin antibiotics','amoxicillin',1],
+ ['-gliflozin','SGLT2 inhibitors','empagliflozin',1],
+ ['-gliptin','DPP-4 inhibitors','sitagliptin',2],
+ ['-floxacin','Fluoroquinolone antibiotics','ciprofloxacin',2],
+ ['-cycline','Tetracycline-family antibiotics','doxycycline',2],
+ ['-xaban','Factor Xa inhibitors','apixaban',2],
+ ['-mab (older names)','Many earlier monoclonal antibodies','adalimumab',2],
+ ['-vir (broad)','Various antiviral names, without a single implied mechanism','acyclovir',2]
 ];
-for(let i=0;i<NAMING_SPECIAL_ITEMS.length;i++){const [focus,level,prompt,options,explanation]=NAMING_SPECIAL_ITEMS[i];addNamingItem('concept-'+i,focus,level,prompt,options,explanation);}
-export const NAMING_QUESTIONS=NAMING_CURATED_ITEMS;
+const PHARMA_BRANDS = [
+ ['Panadol','paracetamol','The named plain paracetamol product',1],
+ ['Tylenol','acetaminophen','A US product with the same substance as paracetamol',1],
+ ['Advil','ibuprofen','The named plain ibuprofen product',1],
+ ['Lipitor','atorvastatin','Commonly supplied as atorvastatin calcium',1],
+ ['Cozaar','losartan','The potassium salt of losartan',2],
+ ['Zestril','lisinopril','An ACE inhibitor example',2],
+ ['Prilosec','omeprazole','A proton-pump inhibitor example',2],
+ ['Jardiance','empagliflozin','An SGLT2 inhibitor example',2]
+];
+const PHARMA_NAME_QUESTIONS=[];
+function pharmaAdd(id,focus,level,topic,prompt,options,explanation,source) {
+ if(options.length!==4 || new Set(options).size!==4) throw new Error('Bad pharmaceutical question '+id);
+ PHARMA_NAME_QUESTIONS.push({id:'naming-label-'+id,category:'naming',focus,level,topic,prompt,options,explanation,source,
+  jurisdiction:source==='namingStems'?'WHO · naming stems':source==='namingFDAFacts'?'US · OTC label guidance':'Medicine names · learning example'});
+}
+const pharmaMixWrong=(rows,i,field)=>[1,2,3].map(j=>rows[(i+j)%rows.length][field]);
+for(let i=0;i<PHARMA_STEMS.length;i++){
+ const [stem,family,example,level]=PHARMA_STEMS[i],others=pharmaMixWrong(PHARMA_STEMS,i,1);
+ pharmaAdd('stem-class-'+i,'stems',level,'Recognize a generic-name stem',
+  'In generic pharmaceutical naming, what family is suggested by '+stem+'?',
+  [family,...others],
+  'The shared ending '+stem+' is associated with '+family+'. It cannot by itself tell you dose, route or full chemical structure.','namingStems');
+ pharmaAdd('stem-example-'+i,'stems',Math.min(3,level+1),'Find the stem in a name',
+  'Which real generic-name example contains the pattern '+stem+'?',
+  [example,...pharmaMixWrong(PHARMA_STEMS,i,2)],
+  example+' is a recognized example of the ending '+stem+'. Confirm the full ingredient name on the product label.','namingStems');
+ pharmaAdd('stem-reverse-'+i,'stems',Math.min(3,level+1),'Decode a family name',
+  'Which shared naming stem would you expect in a generic name from the family '+family+'?',
+  [stem,...pharmaMixWrong(PHARMA_STEMS,i,0)],
+  'The stem '+stem+' is the class clue. Brand names do not need to contain it.','namingStems');
+}
+for(let i=0;i<PHARMA_BRANDS.length;i++){
+ const [brand,generic,comment,level]=PHARMA_BRANDS[i];
+ pharmaAdd('brand-to-generic-'+i,'types',level,'Brand versus generic',
+  'For the named plain '+brand+' example, which is the generic active ingredient?',
+  [generic,...pharmaMixWrong(PHARMA_BRANDS,i,1)],
+  brand+' is the brand. '+generic+' is the generic active ingredient for this example. '+comment+'. Always check the exact product variant.','namingWho');
+ pharmaAdd('generic-to-brand-'+i,'types',Math.min(3,level+1),'Recognize a brand',
+  'Which is a commercial brand associated with '+generic+' in the corresponding named product?',
+  [brand,...pharmaMixWrong(PHARMA_BRANDS,i,0)],
+  brand+' is a commercial brand. '+generic+' is the generic ingredient for the named example.','namingWho');
+ pharmaAdd('ingredient-check-'+i,'labels',level,'Verify a carton',
+  'You recognize the brand '+brand+' on a box. What is the safest way to identify its pharmaceutical ingredient?',
+  ['Read the exact active ingredient list on this product','Assume every brand variant contains the same substance','Infer ingredients from package colour','Use the batch code as a chemical name'],
+  'Recognizing '+brand+' can help, but the active ingredient(s) printed for that particular product are the decisive identifier.','namingFDAFacts');
+}
+pharmaAdd('paracetamol-chemical','types',1,'Chemical, generic and brand names',
+ 'Which of the following is a systematic chemical name for paracetamol?',
+ ['N-(4-hydroxyphenyl)acetamide','Paracetamol','Panadol','500 mg tablets'],
+ 'N-(4-hydroxyphenyl)acetamide describes the structure of paracetamol. The brand and dose are different fields.','namingPubChemParacetamol');
+pharmaAdd('paracetamol-generic','types',1,'Chemical, generic and brand names',
+ 'In the trio N-(4-hydroxyphenyl)acetamide / paracetamol / Panadol, which is the generic (INN) name?',
+ ['paracetamol','Panadol','N-(4-hydroxyphenyl)acetamide','500 mg'],
+ 'Paracetamol is the nonproprietary ingredient name. Panadol is a brand and the longer descriptor is structural.','namingWho');
+pharmaAdd('paracetamol-brand','types',1,'Chemical, generic and brand names',
+ 'In the trio N-(4-hydroxyphenyl)acetamide / paracetamol / Panadol, which is the brand name?',
+ ['Panadol','Paracetamol','N-(4-hydroxyphenyl)acetamide','Acetamide'],
+ 'Panadol is the commercial brand name in this example.','namingWho');
+pharmaAdd('paracetamol-synonym','types',1,'International and US names',
+ 'Which US-established generic name is used for the substance named paracetamol internationally?',
+ ['Acetaminophen','Atorvastatin','Acyclovir','Amoxicillin'],
+ 'Paracetamol and acetaminophen refer to the same molecule; the naming varies by market.','namingPubChemParacetamol');
+pharmaAdd('chemical-formula','types',2,'Molecular identity',
+ 'What does the molecular formula C₈H₉NO₂ tell you about paracetamol?',
+ ['The elemental atom counts in its molecule','The name of its exclusive manufacturer','That it is a 500 mg tablet','That it is always safe'],
+ 'A molecular formula counts atoms; it does not give a brand, strength or complete product information.','namingPubChemParacetamol');
+pharmaAdd('chemical-not-class','types',2,'Systematic versus nonproprietary',
+ 'Can you derive a molecule’s complete systematic chemical name from its generic-name ending -sartan alone?',
+ ['No; -sartan suggests a drug family, not every bond in the structure','Yes; every -sartan has the same molecular formula','Yes; the stem identifies brand and strength','Yes; all members are the same exact molecule'],
+ 'A shared pharmacological stem is not a complete chemical-structure description.','namingWho');
+pharmaAdd('brand-not-invariant','types',2,'Recognize real brands',
+ 'Can a familiar brand name guarantee every product variation contains exactly the same ingredients?',
+ ['No; read each specific variant’s active ingredient list','Yes; brand names are chemical structures','Yes; the packaging colour guarantees composition','Yes; a brand always contains one active'],
+ 'A range of products can use variants of a commercial name; use the specific active ingredient list.','namingFDAFacts');
+pharmaAdd('stem-vir-warning','stems',3,'Avoid overinterpreting a stem',
+ 'Does the broad ending -vir establish one exact antiviral mechanism for every name containing it?',
+ ['No; different antivirals use more specific patterns','Yes; -vir determines the entire molecule','Yes; -vir establishes an identical dose','Yes; -vir means all products have the same brand'],
+ 'The ending -vir is broad. A specific mechanism needs more than this fragment.','namingStems');
+pharmaAdd('stem-statin-warning','stems',3,'Precise stem recognition',
+ 'Which more specific ending identifies the HMG-CoA reductase inhibitor statin family?',
+ ['-vastatin','-statin as any possible word fragment','-sartan','-olol'],
+ 'The specific stem is -vastatin. The fragment -statin in an unrelated word is not sufficient alone.','namingStems');
