@@ -29,36 +29,33 @@ The URL is only playable after GitHub Pages is enabled and its deployment comple
 - **MSX BASIC 1:** 50+ new curated quiz examples plus procedurally varied questions at three difficulties; numbered programs, FOR/NEXT, GOTO, GOSUB/RETURN, DATA/READ/RESTORE, string handling, arrays, operators, sprites, and MSX1 screen modes.
 - **Embedded systems:** GPIO, ADC, PWM, sensor scaling, responsive loops, interrupts, watchdogs, and rollover.
 - **Computer architecture:** RAM/ROM, registers, address spaces, byte order, stacks, integer limits, and memory banking.
-- **Chemical and pharmaceutical naming:** read condensed molecular formulas, construct IUPAC-style names, identify functional groups and decode recognized generic drug-family stems. Includes a 12-lesson study guide and naming-only quizzes.
+- **Pharmaceutical label literacy:** identify chemical/generic/brand names, decode INN drug-family stems, read strengths and dosage forms, and assess claims through real-world label exercises.
 
 Choose from all 12 visible topic cards, narrow them using the four topic groups, or mix all 12. A mixed 20-question round includes every category; a mixed 10-question round samples 10 categories. Use Starter, Standard, or Advanced difficulty. Choose 10 questions, 20 questions, or continuous practice. Every answer has an explanation; calculations show working. Missed questions can be retried at the end. The game uses multiple-choice and written numerical answers, with points and streaks. Questions repeat once a selected finite bank is exhausted.
 
 **Keyboard:** 1–4 selects an option; Enter checks an answer or continues. Numerical engineering answers must use the displayed unit; a 2% rounding tolerance is allowed. Units are shown beside the input, so type just the number.
 
-## Pharmaceutical naming: build and decode chemical names
+## Pharmaceutical naming: recognize real labels
 
-Choose **Pharmaceutical naming** and select **Open study guide** (or use the `#study-naming` URL). The previous name-approval and trademark curriculum has been **replaced** by a real chemical-nomenclature course with **12 worked lessons**:
+**Study:** Select **Pharmaceutical naming → Study before quiz**, use the homepage shortcut, or open the direct `play.html#study-naming` link. This is a **nine-lesson, table-first guide** to recognizing what is written on real medicine packages:
 
-1. Reading condensed structural formulas and atom symbols
-2. Carbon-chain roots: meth-, eth-, prop-, but-, pent-, hex-, hept-, oct-
-3. C=C and C≡C bonds; -ane, -ene, -yne and bond locants
-4. Alcohol, aldehyde, ketone and carboxylic-acid groups
-5. Amines, amides, esters and nitriles
-6. Branches, numbering, methyl/ethyl and multiple substituents
-7. Functional-group priority and mixed-group naming
-8. Ethers, carboxylate salts and ester alkyl/acid portions
-9. Benzene, phenol and simple aromatic substituents
-10. Limits of flat formulas for E/Z and R/S stereochemistry
-11. Generic pharmaceutical stems and families (-pril, -sartan, -olol, -prazole, -cillin, -gliflozin, -vastatin)
-12. Integrated structure-to-name and name-to-structure exercises
+1. Chemical name versus generic name versus brand — e.g. N-(4-hydroxyphenyl)acetamide / paracetamol / Panadol
+2. Recognize common drug-family stems: -pril, -sartan, -vastatin, -olol, -prazole, -cillin, -vir and -gliflozin
+3. Further stems, historical patterns and exceptions: -gliptin, -floxacin, -cycline, -xaban and older -mab names
+4. Real-world brand/generic examples, including Lipitor/atorvastatin and Cozaar/losartan
+5. Read fields on a medicine box: active ingredient, strength, dosage form, route, lot, expiry and manufacturer
+6. Recognize a chemical name, generic name and molecular formula for the same active ingredient
+7. Salt/hydrate and dosage-form modifiers, and their limits: hydrochloride, calcium, sodium, extended release
+8. Distinguish supported claims from misleading implications (e.g., “100% safe”, guaranteed onset or unsupported cure promises)
+9. Work through sample real-life label descriptions for Lipitor, Cozaar and paracetamol products
 
-The study material has step-by-step examples such as `CH₃CH(OH)CH₃ → propan-2-ol`, `CH₃COOCH₃ → methyl ethanoate` and `CH₃CH(OH)COOH → 2-hydroxypropanoic acid`. A knowledge check follows each chapter; browser-local progress is tracked under a new version, independently of the old unrelated course.
+Each lesson includes an accessible **three-column comparison table**, explanations, worked examples, **three interactive checks** and linked official sources. Progress is saved in the browser under a new key (the previous chemistry course's completed progress is not reused).
 
-**Quizzes:** The former procedural questions have been replaced by **180+ curated structure/naming and drug-stem questions**, plus randomized formula challenges. Choose one focus: **Chains and bonds**, **Functional groups**, **Branches and numbering**, **Esters and combined structures**, or **Drug-name stems**. Tests ask you to name an actual condensed formula, reverse a name into its formula, or infer a pharmacological family from an established suffix. Real generic examples are used to teach stem recognition. No FDA/EMA review-process trivia is tested.
+**Quiz:** The old organic-structure worksheets and regulatory administration questions have been removed from the live category. The replacement bank contains questions exclusively about **name types, drug-family stems, real labels, ingredient modifiers and claims**. Five filters match the course: Chemical/generic/brand; Drug-family stems; Read medicine labels; Salts/strength/forms; Claims. Multiple-choice answers are shuffled; explanations and sources appear after answering. The 13-category mixed mode still includes this topic.
 
-**Two separate systems:** A systematic **chemical name** follows the structure; it depends on carbon chains, functional groups, bond types and positions. A **generic drug stem** indicates a pharmacological class and cannot uniquely determine a chemical formula. A fragment like `-vir` is broader than a single mechanism, and the specific INN stem for HMG-CoA reductase inhibitor statins is `-vastatin` (not every name containing the substring `-statin` belongs to that class).
+**Important distinctions:** INN stems signal a pharmacological family, not a full chemical structure or patient-specific recommendation. The precise HMG-CoA reductase inhibitor stem is `-vastatin`; `-vir` is a broad antiviral name pattern. Brand variants may have different active ingredients, and salt and release modifiers do not guarantee greater clinical effectiveness.
 
-References: [IUPAC Brief Guide](https://iupac.qmul.ac.uk/BriefGuide/organic.html), [OpenStax: polyfunctional nomenclature](https://openstax.org/books/organic-chemistry/pages/a-nomenclature-of-polyfunctional-organic-compounds), and [WHO INN Stem Book (2024)](https://www.who.int/publications/i/item/9789240099388).
+Official references: [WHO INN Guidance](https://www.who.int/teams/health-product-and-policy-standards/inn/guidance-on-inn), [WHO Stem Book](https://www.who.int/publications/i/item/9789240099388), [PubChem paracetamol](https://pubchem.ncbi.nlm.nih.gov/compound/1983), [FDA Drug Facts label](https://www.fda.gov/drugs/understanding-over-counter-medicines/over-counter-drug-facts-label), [DailyMed Lipitor](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a60cc18b-0631-4cf0-b021-9f52224ece65), [DailyMed Cozaar](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=9949448f-c3b9-44ee-94ed-c1aca8c90f39), [FDA brand-name guidance](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/best-practices-developing-proprietary-names-human-prescription-drug-products-guidance-industry) and [EMA Name Review Group](https://www.ema.europa.eu/en/committees/working-parties-other-groups/chmp-working-parties-other-groups/invented-name-review-group).
 
 ## Cargo segregation: divisions are not compatibility groups
 

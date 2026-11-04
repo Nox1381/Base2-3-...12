@@ -1,6 +1,6 @@
-import { EXTRA_QUESTIONS } from './extra-questions.js?v=20261103-chemical-names';
-import { CARGO_QUESTIONS, IMDG_SOURCE } from './cargo.js?v=20261103-chemical-names';
-import { NAMING_QUESTIONS } from './naming-questions.js?v=20261103-chemical-names';
+import { EXTRA_QUESTIONS } from './extra-questions.js?v=20261104-labels';
+import { CARGO_QUESTIONS, IMDG_SOURCE } from './cargo.js?v=20261104-labels';
+import { NAMING_QUESTIONS } from './naming-questions.js?v=20261104-labels';
 
 // Correct answers are always options[0] here; the engine shuffles choices for play.
 // Numeric placement guidance is labelled by jurisdiction, never presented as worldwide law.
@@ -10,6 +10,14 @@ export const SOURCES = {
   namingChemGuide: { name: 'IUPAC · Brief guide to organic nomenclature', url: 'https://iupac.qmul.ac.uk/BriefGuide/organic.html' },
   namingOrgChem: { name: 'OpenStax · Polyfunctional organic nomenclature', url: 'https://openstax.org/books/organic-chemistry/pages/a-nomenclature-of-polyfunctional-organic-compounds' },
   namingStems: { name: 'WHO · INN Stem Book (2024)', url: 'https://www.who.int/publications/i/item/9789240099388' },
+  namingPubChemParacetamol: { name: 'NIH PubChem · Paracetamol: chemical names and formula', url: 'https://pubchem.ncbi.nlm.nih.gov/compound/1983' },
+  namingFDAFacts: { name: 'US FDA · How to read a Drug Facts label', url: 'https://www.fda.gov/drugs/understanding-over-counter-medicines/over-counter-drug-facts-label' },
+  namingDailyMedLipitor: { name: 'DailyMed · Lipitor atorvastatin calcium label', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a60cc18b-0631-4cf0-b021-9f52224ece65' },
+  namingDailyMedCozaar: { name: 'DailyMed · Cozaar losartan potassium label', url: 'https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=9949448f-c3b9-44ee-94ed-c1aca8c90f39' },
+  namingFDAClaims: { name: 'US FDA · Proprietary drug-name safety and claim guidance', url: 'https://www.fda.gov/regulatory-information/search-fda-guidance-documents/best-practices-developing-proprietary-names-human-prescription-drug-products-guidance-industry' },
+  namingEMAClaims: { name: 'EU EMA · Invented-name review and misleading claims', url: 'https://www.ema.europa.eu/en/committees/working-parties-other-groups/chmp-working-parties-other-groups/invented-name-review-group' },
+  namingFDAIngredient: { name: 'US FDA · National Drug Code product definitions', url: 'https://www.fda.gov/drugs/drug-approvals-and-databases/ndc-product-file-definitions' },
+
   namingWho: { name: 'WHO · Guidance on INN', url: 'https://www.who.int/teams/health-product-and-policy-standards/inn/guidance-on-inn' },
   namingPrinciples: { name: 'WHO · General principles for INN', url: 'https://www.who.int/publications/m/item/who-edm-qsm-2004-5-en' },
   namingFda: { name: 'US FDA · Proprietary-name best practices (2020)', url: 'https://www.fda.gov/regulatory-information/search-fda-guidance-documents/best-practices-developing-proprietary-names-human-prescription-drug-products-guidance-industry' },

@@ -135,3 +135,15 @@
 .study-worked>.eyebrow{font-size:10px;margin-bottom:4px}
 .study-worked code{display:block;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--text)}
 .study-section>div{min-width:0;width:100%}
+
+
+.study-data-table{padding:16px 0 22px;border-bottom:1px solid var(--border)}
+.study-data-table h3{font-size:18px;margin:0 0 12px}
+.study-table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--border);border-radius:8px}
+.study-table-scroll table{border-collapse:collapse;width:100%;min-width:560px;font-size:13px;line-height:1.65}
+.study-table-scroll th,.study-table-scroll td{padding:12px 14px;vertical-align:top;border-bottom:1px solid var(--border);text-align:left}
+.study-table-scroll thead th{background:rgba(185,226,176,.1);font-size:12px;color:var(--text);font-weight:700}
+.study-table-scroll tbody th{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:650;color:var(--accent);white-space:normal;min-width:140px}
+.study-table-scroll tbody tr:nth-child(2n){background:rgba(255,255,255,.025)}
+.study-table-scroll tbody tr:last-child th,.study-table-scroll tbody tr:last-child td{border-bottom:0}
+#study-next-check{margin-top:16px}
