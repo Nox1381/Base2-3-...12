@@ -182,7 +182,7 @@ const PHARMA_CLAIMS=[
 ];
 for(let i=0;i<PHARMA_CLAIMS.length;i++){
  const [claim,problem,better]=PHARMA_CLAIMS[i];
- pharmaAdd('claim-risk-'+i,'claims',i<8?2:3,'Check a medicine claim',
+ pharmaAdd('claim-risk-'+i,'claims',i<8?1:2,'Check a medicine claim',
   'A product name or label suggests '+claim+'. What is the main problem?',
   [problem,'The name must include the manufacturer’s address','The active ingredient should be written as a chemical equation','Every generic medicine must have a short brand'],
   problem+'. '+better+'.','namingFDAClaims');
